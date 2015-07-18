@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view_021"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout_022"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvDescriptionAux2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/frame_round"
+                    android:gravity="center"
+                    android:text="4,5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar2"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvDescriptionAux2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="12dp"
+                    android:layout_marginBottom="12dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvDescriptionAux"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/frame_round"
+                    android:gravity="center"
+                    android:text="4,5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvDescriptionAux"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="12dp"
+                    android:layout_marginBottom="12dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            card_view:cardCornerRadius="4dp"
+            card_view:cardElevation="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout_02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/icon_address"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="12dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_location_on_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/local_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/icon_address"
+                        android:layout_toRightOf="@+id/icon_address"
+                        android:text="Rua afonso pena, 125"
+                        android:textAppearance="?android:attr/textAppearance"
+                        android:textColor="@color/secondary_text" />
+                </RelativeLayout>
+
+
+                <View
+                    android:id="@+id/view_02"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/relativeLayout_02"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginStart="62dp"
+                    android:background="@color/divider" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout_03"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/view_02">
+
+                    <ImageView
+                        android:id="@+id/icon_phone"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="12dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_call_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/local_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/icon_phone"
+                        android:layout_toRightOf="@+id/icon_phone"
+                        android:text="+55 35 3525-1020"
+                        android:textAppearance="?android:attr/textAppearance"
+                        android:textColor="@color/secondary_text" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view_03"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/relativeLayout_03"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginStart="62dp"
+                    android:background="@color/divider" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout_04"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/view_03">
+
+                    <ImageView
+                        android:id="@+id/icon_site"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="12dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_public_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/local_site"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/icon_site"
+                        android:layout_toRightOf="@+id/icon_site"
+                        android:text="Http://www.test.com.br"
+                        android:textAppearance="?android:attr/textAppearance"
+                        android:textColor="@color/secondary_text" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view_04"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/relativeLayout_04"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginStart="62dp"
+                    android:background="@color/divider" />
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout_05"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/view_04">
+
+                    <ImageView
+                        android:id="@+id/icon_description"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="12dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_description_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/local_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/icon_description"
+                        android:layout_toRightOf="@+id/icon_description"
+                        android:text="Http://www.test.com.br"
+                        android:textAppearance="?android:attr/textAppearance"
+                        android:textColor="@color/secondary_text" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</merge>

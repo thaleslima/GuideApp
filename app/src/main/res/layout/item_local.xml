@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:id="@+id/local_photo"
+        android:src="@drawable/gruta"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="12dp"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/local_favorite"
+        android:src="@drawable/ic_favorite_border_black_24dp"
+        android:scaleType="centerCrop"
+        android:layout_alignTop="@+id/local_description"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="12dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearance"
+        android:text="Cachoeira da Gruta"
+        android:id="@+id/local_description"
+        android:layout_alignTop="@+id/local_photo"
+        android:layout_toRightOf="@+id/local_photo"
+        android:layout_toEndOf="@+id/local_photo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Complexo do claro"
+        android:id="@+id/local_address"
+        android:layout_below="@+id/local_description"
+        android:layout_alignLeft="@+id/local_description"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.5"
+        android:id="@+id/textView"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearance"
+        android:layout_alignBottom="@+id/local_photo"
+        android:layout_alignLeft="@+id/local_address"
+        android:layout_alignStart="@+id/local_address"
+        android:background="@drawable/frame_rate"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp" />
+</RelativeLayout>
