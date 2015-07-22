@@ -2,6 +2,7 @@ package com.guideapp.guideapp.UI.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,8 +45,8 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
 
         public LocalViewHolder(View view) {
             super(view);
-            photoView = (ImageView) view.findViewById(R.id.local_photo);
-            descriptionView = (TextView) view.findViewById(R.id.local_description);
+            photoView = (ImageView) view.findViewById(R.id.local_ico);
+            descriptionView = (TextView) view.findViewById(R.id.local_text);
             addressView = (TextView) view.findViewById(R.id.local_address);
             view.setOnClickListener(this);
         }
@@ -69,9 +70,13 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         }
 
         @Override
-        public void onClick(View view) {
-            if(mListener != null){
-                mListener.onItemClick(view, getLayoutPosition());
+        public void onClick(final View view) {
+            if (mListener != null) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override public void run() {
+                        mListener.onItemClick(view, getLayoutPosition());
+                    }
+                }, 200);
             }
         }
     }

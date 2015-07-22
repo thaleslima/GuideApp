@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.fragments.LocalFragment;
@@ -53,7 +52,7 @@ public class MainActivity extends BaseActivity {
         mViewPager.setAdapter(new SectionsAdapter(getSupportFragmentManager()));
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
 
-        setSupportActionBar(mToolbar);
+        //setSupportActionBar(mToolbar);
     }
 
     @Override
@@ -75,7 +74,7 @@ public class MainActivity extends BaseActivity {
     private void setFindViewById() {
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
     }
 

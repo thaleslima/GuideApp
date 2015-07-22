@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/local_ico"
+        android:src="@drawable/ic_location_on_black_24dp"
+        android:scaleType="centerCrop"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textAppearance="?android:attr/textAppearance"
+        android:text="Cachoeira da Gruta"
+        android:id="@+id/local_text"
+        android:textColor="@color/primary_text"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/local_ico"
+        android:layout_toEndOf="@+id/local_ico"
+        android:gravity="center|left"
+        android:fontFamily="sans-serif"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:id="@+id/local_divider"
+        android:background="@color/divider"
+        android:layout_below="@+id/local_text"
+        android:layout_alignLeft="@+id/local_text"
+        android:layout_alignStart="@+id/local_text" />
+
+</RelativeLayout>

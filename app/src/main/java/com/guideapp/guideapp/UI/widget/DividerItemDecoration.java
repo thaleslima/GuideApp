@@ -28,6 +28,7 @@ import android.view.View;
     private int dividerColor;
     private DividerStyle dividerStyle = DividerStyle.Dark;
     private int dividerHeight;
+    private int mMarginLeft;
 
     public DividerItemDecoration(Context context, int orientation, DividerStyle dividerStyle) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
@@ -43,6 +44,11 @@ import android.view.View;
         this.dividerStyle = DividerStyle.Dark;
         a.recycle();
         setOrientation(orientation);
+    }
+
+    public DividerItemDecoration(Context context, int orientation, int marginLeft) {
+        this(context, orientation);
+        this.mMarginLeft = marginLeft;
     }
 
     public enum DividerStyle {
@@ -84,7 +90,7 @@ import android.view.View;
     }
 
     public void drawVertical(Canvas c, RecyclerView parent) {
-        final int left = parent.getPaddingLeft();
+        final int left = parent.getPaddingLeft() + mMarginLeft;
         final int right = parent.getWidth() - parent.getPaddingRight();
 
         if (dividerStyle != DividerStyle.Default) {
