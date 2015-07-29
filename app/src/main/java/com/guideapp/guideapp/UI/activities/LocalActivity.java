@@ -33,9 +33,6 @@ public class LocalActivity extends BaseActivity implements RecyclerViewItemClick
 
     public static void navigate(Context context) {
         Intent intent = new Intent(context, LocalActivity.class);
-        //intent.putExtra(EXTRA_IMAGE, viewModel.getImage());
-        //intent.putExtra(EXTRA_TITLE, viewModel.getText());
-
         context.startActivity(intent);
     }
 

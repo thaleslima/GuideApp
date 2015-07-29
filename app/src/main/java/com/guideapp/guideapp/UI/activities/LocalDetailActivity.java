@@ -1,5 +1,6 @@
 package com.guideapp.guideapp.UI.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -36,11 +37,8 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
     private ImageView mImage;
     private static final String EXTRA_IMAGE = "teste";
 
-    public static void navigate(AppCompatActivity activity, View transitionImage) {
+    public static void navigate(Activity activity, View transitionImage) {
         Intent intent = new Intent(activity, LocalDetailActivity.class);
-        //intent.putExtra(EXTRA_IMAGE, viewModel.getImage());
-        //intent.putExtra(EXTRA_TITLE, viewModel.getText());
-
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, transitionImage, EXTRA_IMAGE);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }

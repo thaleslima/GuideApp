@@ -1,33 +1,37 @@
 package com.guideapp.guideapp.UI.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.fragments.LocalFragment;
+import com.guideapp.guideapp.UI.fragments.MainActivityFragment;
+import com.guideapp.guideapp.UI.fragments.UserFragment;
+import com.guideapp.guideapp.UI.infrastructure.CommonUtils;
 
 public class MainActivity extends BaseActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-    private Toolbar mToolbar;
+    private FloatingActionButton mFabView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initToolbar();
         setFindViewById();
         setViewProperties();
         setListener();
-
-        //getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
     }
 
     private void setListener() {
@@ -35,6 +39,15 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition(), true);
+
+                if(tab.getPosition() == 2)
+                {
+                    CommonUtils.dismissViewLayout(MainActivity.this, mFabView);
+                }
+                else
+                {
+                    CommonUtils.showViewLayout(MainActivity.this, mFabView);
+                }
             }
 
             @Override
@@ -45,14 +58,16 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    private void initToolbar() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
     private void setViewProperties() {
-        mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_terrain_white_24dp));
-        mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_restaurant_menu_white_24dp));
-        mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_local_hotel_white_24dp));
+        mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_menu_white_24dp));
+        mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_favorite_white_24dp));
+        mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_person_white_24dp));
         mViewPager.setAdapter(new SectionsAdapter(getSupportFragmentManager()));
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-
-        //setSupportActionBar(mToolbar);
     }
 
     @Override
@@ -74,8 +89,7 @@ public class MainActivity extends BaseActivity {
     private void setFindViewById() {
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
+        mFabView = (FloatingActionButton) findViewById(R.id.fab);
     }
 
     private class SectionsAdapter extends FragmentPagerAdapter {
@@ -89,13 +103,13 @@ public class MainActivity extends BaseActivity {
 
             switch (position) {
                 case 0:
-                    fragment = new LocalFragment();
+                    fragment = new MainActivityFragment();
                     break;
                 case 1:
                     fragment = new LocalFragment();
                     break;
                 case 2:
-                    fragment = new LocalFragment();
+                    fragment = new UserFragment();
                     break;
             }
 

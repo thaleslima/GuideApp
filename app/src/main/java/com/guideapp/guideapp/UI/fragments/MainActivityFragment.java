@@ -1,7 +1,8 @@
 package com.guideapp.guideapp.UI.fragments;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.activities.LocalActivity;
+import com.guideapp.guideapp.UI.activities.MapActivity;
 import com.guideapp.guideapp.UI.adapters.RecyclerViewAdapter;
 import com.guideapp.guideapp.UI.widget.GridSpacingItemDecoration;
 import com.guideapp.guideapp.model.ViewModel;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivityFragment extends Fragment implements RecyclerViewAdapter.OnItemClickListener {
-    private static List<ViewModel> items = new ArrayList<>();
+    private static List<ViewModel> items;
 
     public MainActivityFragment() {
     }
@@ -42,21 +44,30 @@ public class MainActivityFragment extends Fragment implements RecyclerViewAdapte
         adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
 
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 16, false));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 16, true));
     }
 
     private void initMenu()
     {
-        items.add(new ViewModel(1, R.string.menu_alimentation, R.drawable.ic_local_dining_white_24dp, R.color.blue_500));
-        items.add(new ViewModel(1, R.string.menu_alimentation, R.drawable.ic_local_dining_white_24dp, R.color.green_500));
-        items.add(new ViewModel(1, R.string.menu_alimentation, R.drawable.ic_local_dining_white_24dp, R.color.red_500));
-        items.add(new ViewModel(1, R.string.menu_alimentation, R.drawable.ic_local_dining_white_24dp, R.color.purple_500));
-        items.add(new ViewModel(1, R.string.menu_alimentation, R.drawable.ic_local_dining_white_24dp, R.color.pink_500));
-        items.add(new ViewModel(1, R.string.menu_alimentation, R.drawable.ic_local_dining_white_24dp, R.color.cyan_500));
+        if(items == null)
+        {
+            items = new ArrayList<>();
+            items.add(new ViewModel(1, R.string.menu_local, R.drawable.ic_map_white_36dp, R.color.orange_500));
+            items.add(new ViewModel(2, R.string.menu_alimentation, R.drawable.ic_local_dining_white_36dp, R.color.blue_500));
+            items.add(new ViewModel(3, R.string.menu_attractive, R.drawable.ic_terrain_white_36dp, R.color.cyan_500));
+            items.add(new ViewModel(4, R.string.menu_accommodation, R.drawable.ic_local_hotel_white_36dp, R.color.purple_500));
+        }
     }
 
     @Override
     public void onItemClick(View view, ViewModel viewModel) {
-        LocalActivity.navigate(this.getActivity());
+        if(viewModel.getId() == 1)
+        {
+            MapActivity.navigate(this.getActivity());
+        }
+        else
+        {
+            LocalActivity.navigate(this.getActivity());
+        }
     }
 }

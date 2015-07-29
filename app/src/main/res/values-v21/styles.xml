@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="AppTheme" parent="BaseTheme">
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
         <item name="android:colorControlHighlight">@color/accent_translucent</item> 
-        <item name="android:windowSharedElementsUseOverlay">false</item>
+        <item name="android:windowSharedElementsUseOverlay">true</item>
     </style>
 
     <style name="AppThemeLocal" parent="BaseTheme">
         <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+
+    <style name="AppThemeLocalDetail" parent="BaseTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorPrimaryDark">@color/accent_translucent</item> 
     </style>
 </resources>

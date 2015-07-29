@@ -1,6 +1,5 @@
 package com.guideapp.guideapp.UI.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -32,15 +31,14 @@ public class LocalFragment extends Fragment implements RecyclerViewItemClickList
                              @Nullable Bundle savedInstanceState) {
 
         View layoutView = inflater.inflate(R.layout.fragment_local, container, false);
-
-        setFindViewById(layoutView);
-        setViewProperties();
-
+        initRecyclerView(layoutView);
         return layoutView;
     }
 
-    private void setViewProperties() {
-        mDataSet = new ArrayList<Local>();
+    private void initRecyclerView(View layoutView) {
+        mRecyclerView = (RecyclerView) layoutView.findViewById(R.id.local_list);
+
+        mDataSet = new ArrayList<>();
         mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
         mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
         mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
@@ -51,16 +49,11 @@ public class LocalFragment extends Fragment implements RecyclerViewItemClickList
         mAdapter = new LocalAdapter(this.getActivity(), this, mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST));
-    }
-
-    private void setFindViewById(View layoutView) {
-        mRecyclerView = (RecyclerView) layoutView.findViewById(R.id.local_list);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST, 310));
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        Intent it = new Intent(this.getActivity(), LocalDetailActivity.class);
-        startActivity(it);
+        LocalDetailActivity.navigate(this.getActivity(), view.findViewById(R.id.local_ico));
     }
 }
