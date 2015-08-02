@@ -4,27 +4,36 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="300dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@color/primary">
+            android:background="@color/primary"
+            android:id="@+id/relativeLayout">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/background4"
+                android:scaleType="centerCrop"
+                android:alpha="0.1" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageView"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="40dp"
                 android:src="@drawable/gruta"
-                app:border_color="@color/white_light"
-                app:border_width="3dp" />
+                app:border_color="@color/white"
+                app:border_width="2dp"
+                />
 
             <TextView
                 android:id="@+id/textView9"
@@ -32,12 +41,13 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-thin"
                 android:text="Large Text"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -48,27 +58,24 @@
                 android:layout_alignParentTop="true"
                 android:layout_margin="16dp"
                 android:src="@drawable/ic_settings_white_24dp" />
-        </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="280dp"
-            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/frame_menu"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/frame_round_stroke"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/linearLayout"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/imageView"
+                android:layout_toStartOf="@+id/imageView"
+                android:layout_marginBottom="20dp">
 
                 <ImageView
                     android:id="@+id/imageView90"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/ic_favorite_white_48dp" />
 
                 <TextView
@@ -77,27 +84,20 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="30"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearance"
                     android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-thin"
-                    android:text="@string/menu_favorites"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_margin="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/frame_menu"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/frame_round_stroke"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_alignTop="@+id/linearLayout"
+                android:layout_toRightOf="@+id/imageView"
+                android:layout_toEndOf="@+id/imageView">
 
                 <ImageView
                     android:id="@+id/imageView0"
@@ -111,18 +111,10 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:text="30"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-thin"
-                    android:text="@string/menu_opinion"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textAppearance="?android:attr/textAppearance"
                     android:textColor="@color/white" />
             </LinearLayout>
-        </LinearLayout>
+
+        </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

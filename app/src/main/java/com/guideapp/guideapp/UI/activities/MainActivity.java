@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.fragments.LocalFragment;
@@ -68,6 +69,13 @@ public class MainActivity extends BaseActivity {
         mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_person_white_24dp));
         mViewPager.setAdapter(new SectionsAdapter(getSupportFragmentManager()));
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+
+        mFabView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchActivity.navigate(MainActivity.this);
+            }
+        });
     }
 
     @Override

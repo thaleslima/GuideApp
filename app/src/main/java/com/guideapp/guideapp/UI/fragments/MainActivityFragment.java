@@ -52,7 +52,7 @@ public class MainActivityFragment extends Fragment implements RecyclerViewAdapte
         if(items == null)
         {
             items = new ArrayList<>();
-            items.add(new ViewModel(1, R.string.menu_local, R.drawable.ic_map_white_36dp, R.color.orange_500));
+            items.add(new ViewModel(1, R.string.menu_local, R.drawable.ic_map_white_36dp, R.color.green_500));
             items.add(new ViewModel(2, R.string.menu_alimentation, R.drawable.ic_local_dining_white_36dp, R.color.blue_500));
             items.add(new ViewModel(3, R.string.menu_attractive, R.drawable.ic_terrain_white_36dp, R.color.cyan_500));
             items.add(new ViewModel(4, R.string.menu_accommodation, R.drawable.ic_local_hotel_white_36dp, R.color.purple_500));

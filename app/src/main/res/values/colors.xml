@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
-
-    <color name="primary">#4CAF50</color>
-    <color name="primary_dark">#1B5E20</color>
+    <color name="primary">#FF9800</color>
+    <color name="primary_dark">#E65100</color>
     <color name="primary_text">#424242</color>
     <color name="secondary_text">#9E9E9E</color>
     <color name="secondary_text_light">#E0E0E0</color>
@@ -14,7 +14,7 @@
     <color name="divider_title">#FAFAFA</color>
     <color name="primary_star">#FFC107</color>
     <color name="secondary_star">#FAFAFA</color>
-    <color name="card_user">#43A047</color>
+    <color name="card_user">#00ACC1</color>
 
     <color name="primary_red">#F44336</color>
 

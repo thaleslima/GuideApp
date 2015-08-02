@@ -18,23 +18,29 @@ package com.guideapp.guideapp.model;
 
 public class ViewModel {
     private int id;
-    private int text;
+    private int idText;
+    private String text;
     private int image;
     private int color;
 
-    public int getText() {
-        return text;
+    public int getIdText() {
+        return idText;
     }
 
-    public ViewModel(int id, int text, int image, int color) {
+    public ViewModel(int id, String text) {
         this.id = id;
         this.text = text;
+    }
+
+    public ViewModel(int id, int idText, int image, int color) {
+        this.id = id;
+        this.idText = idText;
         this.image = image;
         this.color = color;
     }
 
-    public void setText(int text) {
-        this.text = text;
+    public void setIdText(int idText) {
+        this.idText = idText;
     }
 
     public int getImage() {
@@ -60,5 +66,13 @@ public class ViewModel {
 
     public void setColor(int color) {
         this.color = color;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
