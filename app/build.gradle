@@ -33,7 +33,10 @@ dependencies {
     compile 'com.google.android.gms:play-services-location:7.5.0'
     compile 'com.google.android.gms:play-services-maps:7.5.0'
 
+    compile 'com.android.support:support-v13:22.2.0'
+
     compile 'de.hdodenhof:circleimageview:1.2.1'
+    compile 'it.sephiroth.android.library.imagezoom:imagezoom:1.0.5'
 
     compile 'com.google.maps.android:android-maps-utils:0.3.4'
 }

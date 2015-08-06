@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ImageView;
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.adapters.LocalDetailAdapter;
+import com.guideapp.guideapp.UI.adapters.RecyclerViewAdapter;
 import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.model.LocalDetail;
 import com.squareup.picasso.Picasso;
@@ -42,7 +43,6 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, transitionImage, EXTRA_IMAGE);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,6 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
         mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", true, LocalDetailAdapter.LOCAL_DETAIL_OPINION));
         mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", true, LocalDetailAdapter.LOCAL_DETAIL_OPINION));
 
-
         mCollapsingToolbarLayout.setTitle(getString(R.string.app_name));
         mCollapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
@@ -100,6 +99,12 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
         mRecyclerView.setAdapter(mAdapter);
         //mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
+        mImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocalPhotoActivity.navigate(LocalDetailActivity.this);
+            }
+        });
 
         Picasso.with(this).load("http://lorempixel.com/500/500/animals/1").into(mImage, new Callback() {
             @Override public void onSuccess() {

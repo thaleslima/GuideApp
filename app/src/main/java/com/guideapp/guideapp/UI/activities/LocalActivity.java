@@ -30,7 +30,6 @@ public class LocalActivity extends BaseActivity implements RecyclerViewItemClick
     private List<Local> mDataSet;
     private SupportMapFragment mMapFragment;
 
-
     public static void navigate(Context context) {
         Intent intent = new Intent(context, LocalActivity.class);
         context.startActivity(intent);
@@ -62,13 +61,10 @@ public class LocalActivity extends BaseActivity implements RecyclerViewItemClick
         mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
         mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
 
-
         mAdapter = new LocalAdapter(this, this, mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, 310));
-
         mMapFragment.getMapAsync(this);
     }
 

@@ -69,6 +69,7 @@ public class MainActivity extends BaseActivity {
         mTabLayout.addTab(mTabLayout.newTab().setIcon(R.drawable.ic_person_white_24dp));
         mViewPager.setAdapter(new SectionsAdapter(getSupportFragmentManager()));
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
+        mViewPager.setPageMargin(16);
 
         mFabView.setOnClickListener(new View.OnClickListener() {
             @Override

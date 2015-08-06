@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.activities.LocalActivity;
+import com.guideapp.guideapp.UI.activities.LocalPhotoActivity;
 import com.guideapp.guideapp.UI.activities.MapActivity;
+import com.guideapp.guideapp.UI.activities.PhotoViewerActivity;
 import com.guideapp.guideapp.UI.adapters.RecyclerViewAdapter;
 import com.guideapp.guideapp.UI.widget.GridSpacingItemDecoration;
 import com.guideapp.guideapp.model.ViewModel;
