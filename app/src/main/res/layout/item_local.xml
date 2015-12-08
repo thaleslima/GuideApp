@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:id="@+id/local_ico"
+        android:id="@+id/local_picture"
         android:src="@drawable/gruta"
         android:scaleType="centerCrop"
         android:layout_alignParentTop="true"
@@ -16,15 +16,17 @@
         android:layout_margin="16dp" />
 
     <ImageView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/local_favorite"
-        android:src="@drawable/ic_favorite_border_black_24dp"
+        android:src="@drawable/ic_more_vert_black_24dp"
         android:scaleType="centerCrop"
         android:layout_alignTop="@+id/local_text"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="16dp" />
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,9 +35,9 @@
         android:text="Cachoeira da Gruta"
         android:textColor="@color/primary_text"
         android:id="@+id/local_text"
-        android:layout_alignTop="@+id/local_ico"
-        android:layout_toRightOf="@+id/local_ico"
-        android:layout_toEndOf="@+id/local_ico"
+        android:layout_alignTop="@+id/local_picture"
+        android:layout_toRightOf="@+id/local_picture"
+        android:layout_toEndOf="@+id/local_picture"
         android:typeface="sans"
         android:fontFamily="sans-serif" />
 
@@ -75,7 +77,7 @@
         android:id="@+id/local_divider"
         android:visibility="gone"
         android:background="@color/divider_dark"
-        android:layout_below="@+id/local_ico"
+        android:layout_below="@+id/local_picture"
         android:layout_alignLeft="@+id/local_address"
         android:layout_alignStart="@+id/local_address" />
 
@@ -88,8 +90,8 @@
         android:id="@+id/textView7"
         android:fontFamily="sans-serif-light"
         android:layout_below="@+id/local_address"
-        android:layout_toRightOf="@+id/local_ico"
-        android:layout_toEndOf="@+id/local_ico"
+        android:layout_toRightOf="@+id/local_picture"
+        android:layout_toEndOf="@+id/local_picture"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="16dp" />
 

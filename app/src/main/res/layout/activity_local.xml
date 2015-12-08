@@ -1,39 +1,68 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-
-    <FrameLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="@dimen/elevation">
+        android:layout_height="wrap_content">
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/map"
-            tools:context=".MapsActivity"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_gravity="center_horizontal|top"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:popupTheme="@style/popupTheme"
+            app:theme="@style/toolbarTheme"
+            android:elevation="@dimen/elevation"
+            app:layout_scrollFlags="scroll|enterAlways"/>
 
-        <include
-            layout="@layout/toolbar_transparent"/>
-
-    </FrameLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="@color/white"
-        android:elevation="@dimen/elevation"
-        />
-
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"/>
-</LinearLayout>
+        android:background="@color/white"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/divider"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="end|bottom"
+        android:id="@+id/linearLayout2"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:divider="?android:listDivider"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        android:dividerPadding="2.5dp"
+        app:layout_behavior="com.guideapp.guideapp.UI.widget.ScrollingButtonsBehavior"
+        android:background="@drawable/border_top">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:clickable="true"
+            android:layout_weight="1"
+            android:src="@drawable/button_map"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton2"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:src="@drawable/button_filter_list"/>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+

@@ -58,7 +58,7 @@ public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.
 
         public LocalViewHolder(View view) {
             super(view);
-            icoView = (ImageView) view.findViewById(R.id.local_ico);
+            icoView = (ImageView) view.findViewById(R.id.local_picture);
             textView = (TextView) view.findViewById(R.id.local_text);
             dividerView = view.findViewById(R.id.local_divider);
             map = (MapView) view.findViewById(R.id.mapImageView);

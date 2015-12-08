@@ -1,6 +1,7 @@
 package com.guideapp.guideapp.UI.infrastructure;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -27,5 +28,14 @@ public class CommonUtils {
             view.startAnimation(animation);
             view.setVisibility(View.VISIBLE);
         }
+    }
+
+    public static int getToolbarHeight(Context context) {
+        final TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(
+                new int[]{R.attr.actionBarSize});
+        int toolbarHeight = (int) styledAttributes.getDimension(0, 0);
+        styledAttributes.recycle();
+
+        return toolbarHeight;
     }
 }

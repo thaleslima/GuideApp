@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:id="@+id/local_ico"
+        android:id="@+id/local_picture"
         android:src="@drawable/ic_location_on_black_24dp"
         android:scaleType="centerCrop"
         android:layout_centerVertical="true"
@@ -26,8 +26,8 @@
         android:id="@+id/local_text"
         android:textColor="@color/primary_text"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/local_ico"
-        android:layout_toEndOf="@+id/local_ico"
+        android:layout_toRightOf="@+id/local_picture"
+        android:layout_toEndOf="@+id/local_picture"
         android:gravity="center|left"
         android:fontFamily="sans-serif"/>
 

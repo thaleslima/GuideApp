@@ -7,7 +7,7 @@
     </style>
 
     <style name="AppThemeLocal" parent="BaseTheme">
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
     </style>
 
 

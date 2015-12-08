@@ -26,6 +26,11 @@
         <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
+    <style name="toolbarThemeDark" parent="Theme.AppCompat.Light">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/black</item>
+    </style>
+
     <style name="toolbarThemeTransparent" parent="Theme.AppCompat.Light">
         <item name="android:textColorPrimary">@android:color/transparent</item>
         <item name="android:textColorSecondary">@android:color/white</item>

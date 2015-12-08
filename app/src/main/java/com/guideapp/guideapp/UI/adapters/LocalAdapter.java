@@ -3,12 +3,15 @@ package com.guideapp.guideapp.UI.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Handler;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.guideapp.guideapp.R;
@@ -41,14 +44,41 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         public final ImageView photoView;
         public final TextView descriptionView;
         public final TextView addressView;
-
+        public final ImageView favoriteView;
 
         public LocalViewHolder(View view) {
             super(view);
-            photoView = (ImageView) view.findViewById(R.id.local_ico);
+            photoView = (ImageView) view.findViewById(R.id.local_picture);
             descriptionView = (TextView) view.findViewById(R.id.local_text);
             addressView = (TextView) view.findViewById(R.id.local_address);
+            favoriteView = (ImageView) view.findViewById(R.id.local_favorite);
             view.setOnClickListener(this);
+
+            favoriteView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showFilterPopup(v);
+                }
+            });
+        }
+
+        private void showFilterPopup(View v) {
+            PopupMenu popup = new PopupMenu(mContext, v);
+            popup.getMenuInflater().inflate(R.menu.menu_local, popup.getMenu());
+
+
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.action_remove:
+                            Toast.makeText(mContext, "action_add", Toast.LENGTH_SHORT).show();
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+            });
+            popup.show();
         }
 
         public void populate(Cursor data) {

@@ -54,6 +54,6 @@ public class LocalFragment extends Fragment implements RecyclerViewItemClickList
 
     @Override
     public void onItemClick(View view, int position) {
-        LocalDetailActivity.navigate(this.getActivity(), view.findViewById(R.id.local_ico));
+        LocalDetailActivity.navigate(this.getActivity(), view.findViewById(R.id.local_picture));
     }
 }

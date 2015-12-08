@@ -92,12 +92,11 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
         mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", true, LocalDetailAdapter.LOCAL_DETAIL_OPINION));
 
         mCollapsingToolbarLayout.setTitle(getString(R.string.app_name));
-        mCollapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
+        mCollapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.white));
 
         mAdapter = new LocalDetailAdapter(this, this, mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        //mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 
         mImage.setOnClickListener(new View.OnClickListener() {
             @Override

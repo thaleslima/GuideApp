@@ -31,7 +31,8 @@
         android:gravity="center|left"
         android:layout_toLeftOf="@+id/textView3"
         android:layout_toStartOf="@+id/textView3"
-        android:fontFamily="sans-serif-light"/>
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/secondary_text" />
 
     <TextView
         android:layout_width="wrap_content"
