@@ -26,7 +26,8 @@ import java.util.List;
 /**
  * Created by thales on 6/13/15.
  */
-public class SearchFragment extends Fragment implements SearchAdapter.OnItemClickListener, RecyclerViewItemClickListener {
+public class SearchFragment extends Fragment implements SearchAdapter.OnItemClickListener,
+        RecyclerViewItemClickListener {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
     private List<ViewModel> mDataSet;
@@ -85,7 +86,8 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
     private void initRecyclerView(View layoutView) {
         mRecyclerView = (RecyclerView) layoutView.findViewById(R.id.recycler_View);
         mDataSet = new ArrayList<>();
-        mDividerItemDecoration = new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST, 310);
+        mDividerItemDecoration = new DividerItemDecoration(this.getActivity(),
+                DividerItemDecoration.VERTICAL_LIST, 310);
         showSearchRecent();
     }
 
@@ -130,20 +132,18 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
         showResult(viewModel.getText());
     }
 
-    public void showSearchRecent()
-    {
+    public void showSearchRecent() {
         showSearchRecent("");
     }
-    public void showSearchRecent(String query)
-    {
+
+    public void showSearchRecent(String query) {
         setQuery(query);
         setShowResult(false);
         initSearchDataSet();
     }
 
-    public void showResult(String query)
-    {
-        if(query != null && !query.isEmpty()) {
+    public void showResult(String query) {
+        if (query != null && !query.isEmpty()) {
             setQuery(query);
             mCallbacks.setQuery(query);
             setShowResult(true);
@@ -159,11 +159,10 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
         }
     }
 
-    private void cleanRecyclerView()
-    {
-        if(mDataSetResult != null)
+    private void cleanRecyclerView() {
+        if (mDataSetResult != null)
             mDataSetResult.clear();
-        if(mDataSet != null)
+        if (mDataSet != null)
             mDataSet.clear();
 
         mRecyclerView.getAdapter().notifyDataSetChanged();
@@ -178,7 +177,7 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
         /**
          * Callback for when an item has been selected.
          */
-        public void setQuery(String query);
+        void setQuery(String query);
     }
 
     private SearchFragment setShowResult(boolean showResult) {
@@ -186,11 +185,11 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
         return this;
     }
 
-    private void hideProgressBar(){
+    private void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
     }
 
-    private void showProgressBar(){
+    private void showProgressBar() {
         mProgressBar.setVisibility(View.VISIBLE);
     }
 }

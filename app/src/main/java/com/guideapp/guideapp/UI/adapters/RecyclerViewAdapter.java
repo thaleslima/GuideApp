@@ -29,7 +29,9 @@ import com.guideapp.guideapp.model.ViewModel;
 import java.util.List;
 
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements View.OnClickListener {
+public class RecyclerViewAdapter
+        extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
+        implements View.OnClickListener {
     private List<ViewModel> items;
     private OnItemClickListener onItemClickListener;
     private Context mContext;
@@ -44,7 +46,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.item_recycler, parent, false);
         v.setOnClickListener(this);
         return new ViewHolder(v);
     }

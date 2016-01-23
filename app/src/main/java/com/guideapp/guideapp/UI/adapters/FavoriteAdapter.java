@@ -5,9 +5,7 @@ import android.database.Cursor;
 import android.os.Handler;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,18 +29,21 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.LocalV
     private RecyclerViewItemClickListener mListener;
     private List<Local> mDataSet;
 
-    public FavoriteAdapter(Context context, RecyclerViewItemClickListener mListener) {
+    public FavoriteAdapter(Context context,
+                           RecyclerViewItemClickListener mListener) {
         mContext = context;
         this.mListener = mListener;
     }
 
-    public FavoriteAdapter(Context context, RecyclerViewItemClickListener mListener, List<Local> dataSet) {
+    public FavoriteAdapter(Context context,
+                           RecyclerViewItemClickListener mListener,
+                           List<Local> dataSet) {
         mContext = context;
         this.mListener = mListener;
         this.mDataSet = dataSet;
     }
 
-    class LocalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class LocalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final ImageView photoView;
         public final TextView descriptionView;
         public final TextView addressView;
@@ -106,7 +107,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.LocalV
         public void onClick(final View view) {
             if (mListener != null) {
                 new Handler().postDelayed(new Runnable() {
-                    @Override public void run() {
+                    @Override
+                    public void run() {
                         mListener.onItemClick(view, getLayoutPosition());
                     }
                 }, 200);
@@ -117,7 +119,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.LocalV
 
     @Override
     public LocalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favorite, parent, false);
+        View v = LayoutInflater.from(
+                parent.getContext()).inflate(R.layout.item_favorite, parent, false);
         return new LocalViewHolder(v);
     }
 
@@ -139,8 +142,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.LocalV
         notifyDataSetChanged();
     }
 
-    public Cursor getCursor()
-    {
+    public Cursor getCursor() {
         return this.data;
     }
 }

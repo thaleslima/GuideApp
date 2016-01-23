@@ -14,7 +14,8 @@ import com.guideapp.guideapp.R;
 public class CommonUtils {
     public static void dismissViewLayout(Context context, View view) {
         if (view.getVisibility() == View.VISIBLE) {
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.abc_slide_out_bottom);
+            Animation animation = AnimationUtils.loadAnimation(
+                    context, R.anim.abc_slide_out_bottom);
             animation.setDuration(600);
             view.startAnimation(animation);
             view.setVisibility(View.GONE);
@@ -24,7 +25,8 @@ public class CommonUtils {
     public static void showViewLayout(Context context, View view) {
         //if (view.getVisibility() == View.GONE) {
 
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.abc_slide_out_bottom);
+            Animation animation = AnimationUtils.loadAnimation(
+                    context, R.anim.abc_slide_out_bottom);
             animation.setDuration(200);
             view.startAnimation(animation);
             view.setVisibility(View.GONE);

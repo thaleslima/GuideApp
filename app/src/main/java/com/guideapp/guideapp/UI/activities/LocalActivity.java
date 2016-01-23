@@ -4,11 +4,9 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,6 +17,7 @@ import com.guideapp.guideapp.UI.fragments.FilterDialogFragment;
 import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.UI.widget.DividerItemDecoration;
 import com.guideapp.guideapp.model.Local;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +63,8 @@ public class LocalActivity extends BaseActivity implements RecyclerViewItemClick
         mAdapter = new LocalAdapter(this, this, mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST, 310));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL_LIST, 310));
 
         mButtonFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +77,7 @@ public class LocalActivity extends BaseActivity implements RecyclerViewItemClick
 
     @Override
     public void onItemClick(View view, int position) {
-       // LocalDetailActivity.navigate(this, view.findViewById(R.id.local_picture));
+        // LocalDetailActivity.navigate(this, view.findViewById(R.id.local_picture));
         LocalDetailActivity.navigate(this);
     }
 }

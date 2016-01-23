@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.activities.LocalDetailActivity;
 import com.guideapp.guideapp.UI.activities.PhotoViewerActivity;
 import com.guideapp.guideapp.UI.adapters.PhotoAdapter;
 import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;

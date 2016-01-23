@@ -6,10 +6,9 @@ import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-
 import com.guideapp.guideapp.UI.infrastructure.CommonUtils;
 
-public class ScrollingButtonsBehavior extends CoordinatorLayout.Behavior<LinearLayout>{
+public class ScrollingButtonsBehavior extends CoordinatorLayout.Behavior<LinearLayout> {
     private int toolbarHeight;
 
     private int mToolbarHeight;
@@ -25,15 +24,19 @@ public class ScrollingButtonsBehavior extends CoordinatorLayout.Behavior<LinearL
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, LinearLayout child, View dependency) {
+    public boolean onDependentViewChanged(CoordinatorLayout parent, LinearLayout child,
+                                          View dependency) {
         if (dependency instanceof AppBarLayout) {
-            CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) child.getLayoutParams();
+            CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams)
+                    child.getLayoutParams();
             int fabBottomMargin = lp.bottomMargin;
             int distanceToScroll = child.getHeight() + fabBottomMargin;
-            float ratio = dependency.getY()/(float)mToolbarHeight;
+            float ratio = dependency.getY() / (float) mToolbarHeight;
             child.setTranslationY(-distanceToScroll * ratio);
         }
 
         return true;
     }
 }
+
+

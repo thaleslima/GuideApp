@@ -35,9 +35,7 @@ public class SearchActivity extends BaseActivity implements Callbacks {
             Intent intent = new Intent(activity, SearchActivity.class);
             ActivityOptions opts = ActivityOptions.makeSceneTransitionAnimation(activity);
             activity.startActivity(intent, opts.toBundle());
-        }
-        else
-        {
+        } else {
             Intent intent = new Intent(activity, SearchActivity.class);
             activity.startActivity(intent);
         }
@@ -56,22 +54,24 @@ public class SearchActivity extends BaseActivity implements Callbacks {
     private void setViewProperties() {
         mToolbarSearchView.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String search = s.toString();
-                if(search.isEmpty())
+                if (search.isEmpty())
                     mSearchClearButton.setVisibility(View.GONE);
                 else
                     mSearchClearButton.setVisibility(View.VISIBLE);
 
-                if(mSearchFragment != null)
+                if (mSearchFragment != null)
                     mSearchFragment.showSearchRecent(search);
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         mToolbarSearchView.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +114,7 @@ public class SearchActivity extends BaseActivity implements Callbacks {
     private void initToolbar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null)
+        if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -127,13 +127,16 @@ public class SearchActivity extends BaseActivity implements Callbacks {
     public void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            InputMethodManager inputManager = (InputMethodManager)
+                    this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 
     public void showKeyboard() {
-        InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager keyboard = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
         keyboard.showSoftInput(mToolbarSearchView, 0);
     }
 }

@@ -18,7 +18,8 @@ public class CommentDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflator = getActivity().getLayoutInflater().cloneInContext(getActivity());
         View view = inflator.inflate(R.layout.fragment_comment_dialog, null);
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity());
+        android.app.AlertDialog.Builder builder =
+                new android.app.AlertDialog.Builder(getActivity());
         builder.setView(view);
 
         builder.setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {

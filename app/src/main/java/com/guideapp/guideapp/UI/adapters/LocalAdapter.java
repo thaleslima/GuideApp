@@ -37,13 +37,14 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         this.mListener = mListener;
     }
 
-    public LocalAdapter(Context context, RecyclerViewItemClickListener mListener, List<Local> dataSet) {
+    public LocalAdapter(Context context, RecyclerViewItemClickListener mListener,
+                        List<Local> dataSet) {
         mContext = context;
         this.mListener = mListener;
         this.mDataSet = dataSet;
     }
 
-    class LocalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class LocalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final ImageView photoView;
         public final TextView descriptionView;
         public final TextView addressView;
@@ -107,16 +108,23 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
             ratingView.setRating(4.3f);
 
             LayerDrawable stars = (LayerDrawable) ratingView.getProgressDrawable();
-            stars.getDrawable(2).setColorFilter(mContext.getResources().getColor(R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
-            stars.getDrawable(1).setColorFilter(mContext.getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
-            stars.getDrawable(0).setColorFilter(mContext.getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+            stars.getDrawable(2).setColorFilter(
+                    mContext.getResources().getColor(
+                            R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
+            stars.getDrawable(1).setColorFilter(
+                    mContext.getResources().getColor(
+                            R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+            stars.getDrawable(0).setColorFilter(
+                    mContext.getResources().getColor(
+                            R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
         }
 
         @Override
         public void onClick(final View view) {
             if (mListener != null) {
                 new Handler().postDelayed(new Runnable() {
-                    @Override public void run() {
+                    @Override
+                    public void run() {
                         mListener.onItemClick(view, getLayoutPosition());
                     }
                 }, 200);
@@ -126,7 +134,8 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
 
     @Override
     public LocalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_local, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_local,
+                parent, false);
         return new LocalViewHolder(v);
     }
 
@@ -148,8 +157,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         notifyDataSetChanged();
     }
 
-    public Cursor getCursor()
-    {
+    public Cursor getCursor() {
         return this.data;
     }
 }

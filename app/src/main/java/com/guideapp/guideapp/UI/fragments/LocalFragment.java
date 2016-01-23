@@ -49,7 +49,8 @@ public class LocalFragment extends Fragment implements RecyclerViewItemClickList
         mAdapter = new LocalAdapter(this.getActivity(), this, mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST, 310));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(),
+                DividerItemDecoration.VERTICAL_LIST, 310));
     }
 
     @Override

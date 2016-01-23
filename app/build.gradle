@@ -1,4 +1,7 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.f2prateek.checkstyle'
+
+check.dependsOn 'checkstyle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion

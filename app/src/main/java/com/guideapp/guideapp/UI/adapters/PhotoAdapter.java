@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.model.ViewModel;
@@ -14,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 
-public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder>  {
+public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
     private List<ViewModel> items;
     private RecyclerViewItemClickListener mListener;
     private Context mContext;
@@ -28,12 +29,15 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         this.mListener = listener;
     }
 
-    @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photo, parent, false);
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.item_photo, parent, false);
         return new ViewHolder(v);
     }
 
-    @Override public void onBindViewHolder(ViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
         ViewModel item = items.get(position);
         Picasso.with(mContext)
                 .load(item.getText())
@@ -43,11 +47,12 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         holder.itemView.setTag(item);
     }
 
-    @Override public int getItemCount() {
+    @Override
+    public int getItemCount() {
         return items.size();
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView image;
 
         public ViewHolder(View itemView) {
@@ -56,7 +61,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
             itemView.setOnClickListener(this);
         }
 
-        @Override public void onClick(final View v) {
+        @Override
+        public void onClick(final View v) {
             mListener.onItemClick(v, getLayoutPosition());
         }
     }

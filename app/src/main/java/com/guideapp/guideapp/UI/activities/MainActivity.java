@@ -1,14 +1,12 @@
 package com.guideapp.guideapp.UI.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -17,20 +15,19 @@ import com.guideapp.guideapp.UI.fragments.FavoriteFragment;
 import com.guideapp.guideapp.UI.fragments.MainActivityFragment;
 import com.guideapp.guideapp.UI.fragments.UserFragment;
 import com.guideapp.guideapp.UI.fragments.WhatsHotFragment;
-import com.guideapp.guideapp.UI.infrastructure.CommonUtils;
 
 public class MainActivity extends BaseActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
 
-    private int[] mIconTabBlack= {
+    private int[] mIconTabBlack = {
             R.drawable.ic_apps_black_24dp,
             R.drawable.ic_favorite_black_24dp,
             R.drawable.ic_whatshot_black_24dp,
             R.drawable.ic_person_black_24dp
     };
 
-    private int[] mIconTabWhite= {
+    private int[] mIconTabWhite = {
             R.drawable.ic_apps_white_24dp,
             R.drawable.ic_favorite_white_24dp,
             R.drawable.ic_whatshot_white_24dp,
@@ -64,7 +61,8 @@ public class MainActivity extends BaseActivity {
             }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) { }
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
         });
     }
 
@@ -72,9 +70,10 @@ public class MainActivity extends BaseActivity {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
+
     private void setViewProperties() {
         for (int i = 0; i < mTotalTabs; i++) {
-            if(i == 0)
+            if (i == 0)
                 mTabLayout.addTab(mTabLayout.newTab().setIcon(mIconTabWhite[i]));
             else
                 mTabLayout.addTab(mTabLayout.newTab().setIcon(mIconTabBlack[i]));
@@ -96,7 +95,7 @@ public class MainActivity extends BaseActivity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
-        } else if (id == R.id.action_search){
+        } else if (id == R.id.action_search) {
             SearchActivity.navigate(this);
         }
 
@@ -115,7 +114,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-            Fragment fragment = null;
+            Fragment fragment;
 
             switch (position) {
                 case 0:
@@ -127,7 +126,7 @@ public class MainActivity extends BaseActivity {
                 case 2:
                     fragment = new WhatsHotFragment();
                     break;
-                case 3:
+                default:
                     fragment = new UserFragment();
                     break;
             }

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -59,9 +58,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private void setViewProperties() {
         LayerDrawable stars = (LayerDrawable) mRatingBar.getProgressDrawable();
-        stars.getDrawable(2).setColorFilter(getResources().getColor(R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
-        stars.getDrawable(1).setColorFilter(getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
-        stars.getDrawable(0).setColorFilter(getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(2).setColorFilter(getResources().getColor(R.color.primary_star),
+                PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(1).setColorFilter(getResources().getColor(R.color.secondary_star),
+                PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(0).setColorFilter(getResources().getColor(R.color.secondary_star),
+                PorterDuff.Mode.SRC_ATOP);
 
         mRatingBar.setRating(4.5f);
     }
@@ -81,8 +83,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-        LatLng sydney = new LatLng(-20.3449802,-46.8551188);
-        LatLng sydney2 = new LatLng(-20.448558,-46.8564977);
+        LatLng sydney = new LatLng(-20.3449802, -46.8551188);
+        LatLng sydney2 = new LatLng(-20.448558, -46.8564977);
 
         mMarkersId = new HashMap<>();
 
@@ -95,7 +97,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                mMap.setPadding(0,0,0,250);
+                mMap.setPadding(0, 0, 0, 250);
                 CommonUtils.showViewLayout(getContext(), mLocalView);
 
                 return false;

@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.activities.LocalDetailActivity;
 import com.guideapp.guideapp.UI.adapters.FavoriteAdapter;
-import com.guideapp.guideapp.UI.adapters.LocalAdapter;
 import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.UI.widget.DividerItemDecoration;
 import com.guideapp.guideapp.model.Local;
@@ -51,7 +50,8 @@ public class FavoriteFragment extends Fragment implements RecyclerViewItemClickL
         mAdapter = new FavoriteAdapter(this.getActivity(), this, mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST, 310));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(),
+                DividerItemDecoration.VERTICAL_LIST, 310));
     }
 
     @Override

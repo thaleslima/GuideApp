@@ -32,7 +32,9 @@ import com.guideapp.guideapp.model.Opinion;
 import java.util.List;
 
 
-public class WhatsHotAdapter extends RecyclerView.Adapter<WhatsHotAdapter.ViewHolder> implements View.OnClickListener {
+public class WhatsHotAdapter
+        extends RecyclerView.Adapter<WhatsHotAdapter.ViewHolder>
+        implements View.OnClickListener {
     private List<Opinion> items;
     private OnItemClickListener onItemClickListener;
     private Context mContext;
@@ -47,7 +49,8 @@ public class WhatsHotAdapter extends RecyclerView.Adapter<WhatsHotAdapter.ViewHo
     }
 
     @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_whatshot_opinion, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.item_whatshot_opinion, parent, false);
         v.setOnClickListener(this);
         return new ViewHolder(v);
     }
@@ -59,9 +62,12 @@ public class WhatsHotAdapter extends RecyclerView.Adapter<WhatsHotAdapter.ViewHo
         holder.ratingView.setRating(item.getRating());
 
         LayerDrawable stars = (LayerDrawable) holder.ratingView.getProgressDrawable();
-        stars.getDrawable(2).setColorFilter(mContext.getResources().getColor(R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
-        stars.getDrawable(1).setColorFilter(mContext.getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
-        stars.getDrawable(0).setColorFilter(mContext.getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(2).setColorFilter(mContext.getResources().getColor(
+                R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(1).setColorFilter(mContext.getResources().getColor(
+                R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+        stars.getDrawable(0).setColorFilter(mContext.getResources().getColor(
+                R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
 
         holder.itemView.setTag(item);
     }

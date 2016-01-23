@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.activities.LocalDetailActivity;
-import com.guideapp.guideapp.UI.adapters.LocalAdapter;
 import com.guideapp.guideapp.UI.adapters.WhatsHotAdapter;
 import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.UI.widget.DividerItemDecoration;
@@ -52,7 +51,8 @@ public class WhatsHotFragment extends Fragment implements RecyclerViewItemClickL
         mAdapter = new WhatsHotAdapter(this.getActivity(), mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(),
+                DividerItemDecoration.VERTICAL_LIST));
     }
 
     @Override
