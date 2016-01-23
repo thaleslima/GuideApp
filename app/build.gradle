@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.f2prateek.checkstyle'
 
-check.dependsOn 'checkstyle'
+check.dependsOn 'checkstyle', 'findbugs', 'pmd'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -40,4 +40,44 @@ dependencies {
 
     compile "it.sephiroth.android.library.imagezoom:imagezoom:$rootProject.imageZoomVersion"
     compile "com.google.maps.android:android-maps-utils:$rootProject.mapsUtilsVersion"
+}
+
+task findbugs(type: FindBugs, dependsOn: assembleDebug) {
+    ignoreFailures = false
+    effort = 'max'
+    reportLevel = 'high'
+    excludeFilter = new File("${project.rootDir}/app/config/findbugs-filter.xml")
+    classes = files("${project.rootDir}/app/build/intermediates/classes")
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html {
+            destination "$project.buildDir/gradle/reports/findbugs/findbugs.html"
+        }
+    }
+
+    classpath = files()
+}
+
+task pmd(type: Pmd) {
+    ignoreFailures = false
+    ruleSetFiles = files("${project.rootDir}/app/config/pmd-ruleset.xml")
+    ruleSets = []
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html {
+            destination "$project.buildDir/gradle/reports/findbugs/findbugs.html"
+        }
+    }
 }

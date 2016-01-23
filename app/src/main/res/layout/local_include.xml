@@ -77,7 +77,7 @@
                     android:textStyle="bold" />
 
                 <RatingBar
-                    android:id="@+id/ratingBar"
+                    android:id="@+id/ratingBar2"
                     style="?android:attr/ratingBarStyleSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

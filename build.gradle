@@ -19,9 +19,11 @@ allprojects {
     }
 
     apply plugin: 'checkstyle'
+    apply plugin: 'findbugs'
+    apply plugin: 'pmd'
 
     task checkstyle(type: Checkstyle) {
-        configFile file("${project.rootDir}/gradle/checkstyle.xml")
+        configFile file("${project.rootDir}/app/config/checkstyle/checkstyle.xml")
         source 'src'
         include '**/*.java'
         exclude '**/gen/**'
