@@ -57,6 +57,7 @@ public class WhatsHotFragment extends Fragment implements RecyclerViewItemClickL
 
     @Override
     public void onItemClick(View view, int position) {
-        LocalDetailActivity.navigate(this.getActivity(), view.findViewById(R.id.local_picture));
+        //LocalDetailActivity.navigate(this.getActivity(), view.findViewById(R.id.local_picture));
+        LocalDetailActivity.navigate(this.getActivity());
     }
 }

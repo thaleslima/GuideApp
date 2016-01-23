@@ -10,6 +10,9 @@
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
+    <style name="AppThemeMap" parent="BaseTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 
     <style name="AppThemeLocalDetail" parent="BaseTheme">
         <item name="android:windowTranslucentStatus">true</item>

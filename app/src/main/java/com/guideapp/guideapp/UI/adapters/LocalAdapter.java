@@ -2,6 +2,8 @@ package com.guideapp.guideapp.UI.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Handler;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +48,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         public final TextView descriptionView;
         public final TextView addressView;
         public final ImageView favoriteView;
+        public RatingBar ratingView;
 
         public LocalViewHolder(View view) {
             super(view);
@@ -52,6 +56,8 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
             descriptionView = (TextView) view.findViewById(R.id.local_text);
             addressView = (TextView) view.findViewById(R.id.local_address);
             favoriteView = (ImageView) view.findViewById(R.id.local_favorite);
+            ratingView = (RatingBar) itemView.findViewById(R.id.ratingBar);
+
             view.setOnClickListener(this);
 
             favoriteView.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +103,13 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         public void populate(Local data) {
             descriptionView.setText(data.getDescription());
             addressView.setText(data.getAddress());
+
+            ratingView.setRating(4.3f);
+
+            LayerDrawable stars = (LayerDrawable) ratingView.getProgressDrawable();
+            stars.getDrawable(2).setColorFilter(mContext.getResources().getColor(R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
+            stars.getDrawable(1).setColorFilter(mContext.getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+            stars.getDrawable(0).setColorFilter(mContext.getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
         }
 
         @Override

@@ -1,6 +1,7 @@
 package com.guideapp.guideapp.UI.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -44,6 +45,11 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
+    public static void navigate(Context context) {
+        Intent intent = new Intent(context, LocalDetailActivity.class);
+        context.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +57,19 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
         //initActivityTransitions();
         setContentView(R.layout.activity_local_detail);
 
-        ViewCompat.setTransitionName(findViewById(R.id.app_bar_layout), EXTRA_IMAGE);
-        supportPostponeEnterTransition();
+        //ViewCompat.setTransitionName(findViewById(R.id.appBarLayout), EXTRA_IMAGE);
+        //supportPostponeEnterTransition();
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        initToolbar();
         setFindViewById();
         setViewProperties();
+    }
+
+    private void initToolbar() {
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initActivityTransitions() {
@@ -79,10 +90,13 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
 
     private void setViewProperties() {
         mDataSet = new ArrayList<>();
-        mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", true, LocalDetailAdapter.LOCAL_DETAIL));
-        mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", true, LocalDetailAdapter.LOCAL_DETAIL));
-        mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", true, LocalDetailAdapter.LOCAL_DETAIL));
-        mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", false, LocalDetailAdapter.LOCAL_DETAIL));
+        mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante Urbano", true, LocalDetailAdapter.LOCAL_DETAIL));
+        mDataSet.add(new LocalDetail(R.drawable.ic_language_black_24dp, "http://www.pousadariogrande.com.br", true, LocalDetailAdapter.LOCAL_DETAIL));
+        mDataSet.add(new LocalDetail(R.drawable.ic_call_black_24dp, "35 3525-1256", true, LocalDetailAdapter.LOCAL_DETAIL));
+        mDataSet.add(new LocalDetail(R.drawable.ic_apps_black_24dp, "Wifi, Ar condicionado", true, LocalDetailAdapter.LOCAL_DETAIL));
+        mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Av. Torquato José de Almeida, 790 - Centro", false, LocalDetailAdapter.LOCAL_DETAIL));
+
+
         mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", true, LocalDetailAdapter.LOCAL_DETAIL_MAP));
         mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", true, LocalDetailAdapter.LOCAL_DETAIL_TITLE_OPINION));
 
@@ -92,11 +106,13 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
         mDataSet.add(new LocalDetail(R.drawable.ic_location_on_black_24dp, "Restarautante", true, LocalDetailAdapter.LOCAL_DETAIL_OPINION));
 
         mCollapsingToolbarLayout.setTitle(getString(R.string.app_name));
-        mCollapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.white));
+        //mCollapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.white));
 
         mAdapter = new LocalDetailAdapter(this, this, mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+
+        //supportStartPostponedEnterTransition();
 
         mImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,7 +142,7 @@ public class LocalDetailActivity extends BaseActivity implements RecyclerViewIte
         int primary = getResources().getColor(R.color.primary);
         mCollapsingToolbarLayout.setContentScrimColor(palette.getMutedColor(primary));
         mCollapsingToolbarLayout.setStatusBarScrimColor(palette.getDarkMutedColor(primaryDark));
-        supportStartPostponedEnterTransition();
+        //supportStartPostponedEnterTransition();
     }
 
     @Override

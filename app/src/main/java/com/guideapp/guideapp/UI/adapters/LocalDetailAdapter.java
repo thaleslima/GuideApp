@@ -1,5 +1,6 @@
 package com.guideapp.guideapp.UI.adapters;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -19,6 +20,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.guideapp.guideapp.R;
+import com.guideapp.guideapp.UI.activities.BaseActivity;
+import com.guideapp.guideapp.UI.fragments.CommentDialogFragment;
+import com.guideapp.guideapp.UI.fragments.FilterDialogFragment;
 import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.model.LocalDetail;
 
@@ -28,22 +32,21 @@ import java.util.List;
  * Created by thales on 6/13/15.
  */
 public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalViewHolder> {
-    private Context mContext;
+    private BaseActivity mContext;
     private RecyclerViewItemClickListener mListener;
     private List<LocalDetail> mDataSet;
-
 
     public static final int LOCAL_DETAIL = 1;
     public static final int LOCAL_DETAIL_MAP = 2;
     public static final int LOCAL_DETAIL_TITLE_OPINION = 3;
     public static final int LOCAL_DETAIL_OPINION = 4;
 
-    public LocalDetailAdapter(Context context, RecyclerViewItemClickListener mListener) {
+    public LocalDetailAdapter(BaseActivity context, RecyclerViewItemClickListener mListener) {
         mContext = context;
         this.mListener = mListener;
     }
 
-    public LocalDetailAdapter(Context context, RecyclerViewItemClickListener mListener, List<LocalDetail> dataSet) {
+    public LocalDetailAdapter(BaseActivity context, RecyclerViewItemClickListener mListener, List<LocalDetail> dataSet) {
         mContext = context;
         this.mListener = mListener;
         this.mDataSet = dataSet;
@@ -95,7 +98,25 @@ public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.
                 stars.getDrawable(0).setColorFilter(mContext.getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
 
                 ratingView.setRating(4.5f);
+            }
 
+            if(data.getViewType() == LOCAL_DETAIL_TITLE_OPINION)
+            {
+                LayerDrawable stars = (LayerDrawable) ratingView.getProgressDrawable();
+                stars.getDrawable(2).setColorFilter(mContext.getResources().getColor(R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
+                stars.getDrawable(1).setColorFilter(mContext.getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+                //stars.getDrawable(0).setColorFilter(mContext.getResources().getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+
+                ratingView.setRating(4.5f);
+
+                ratingView.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                    @Override
+                    public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+
+                        DialogFragment newFragment = new CommentDialogFragment();
+                        newFragment.show(mContext.getFragmentManager(), "missiles");
+                    }
+                });
             }
         }
 

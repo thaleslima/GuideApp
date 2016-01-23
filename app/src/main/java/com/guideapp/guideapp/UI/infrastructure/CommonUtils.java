@@ -22,12 +22,19 @@ public class CommonUtils {
     }
 
     public static void showViewLayout(Context context, View view) {
-        if (view.getVisibility() == View.GONE) {
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.abc_slide_in_bottom);
-            animation.setDuration(600);
+        //if (view.getVisibility() == View.GONE) {
+
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.abc_slide_out_bottom);
+            animation.setDuration(200);
+            view.startAnimation(animation);
+            view.setVisibility(View.GONE);
+
+
+            animation = AnimationUtils.loadAnimation(context, R.anim.abc_slide_in_bottom);
+            animation.setDuration(400);
             view.startAnimation(animation);
             view.setVisibility(View.VISIBLE);
-        }
+        //}
     }
 
     public static int getToolbarHeight(Context context) {

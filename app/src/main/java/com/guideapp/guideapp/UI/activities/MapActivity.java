@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import com.guideapp.guideapp.R;
 
 public class MapActivity extends BaseActivity {
-
     public static void navigate(Context context) {
         Intent intent = new Intent(context, MapActivity.class);
         context.startActivity(intent);
@@ -31,7 +30,7 @@ public class MapActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_map, menu);
         return true;
     }
 

@@ -49,37 +49,22 @@
         android:textColor="@color/secondary_text"
         android:id="@+id/local_address"
         android:fontFamily="sans-serif-light"
-        android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/ratingBar"
+        android:layout_alignLeft="@+id/ratingBar"
+        android:layout_alignStart="@+id/ratingBar"
         android:layout_marginTop="5dp" />
 
-    <TextView
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4.5"
-        android:id="@+id/textView"
-        android:textColor="@color/white"
-        android:background="@drawable/frame_rate"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:textAppearance="?android:attr/textAppearance"
         android:layout_below="@+id/local_text"
         android:layout_alignLeft="@+id/local_text"
         android:layout_alignStart="@+id/local_text"
         android:layout_marginTop="5dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:id="@+id/local_divider"
-        android:visibility="gone"
-        android:background="@color/divider_dark"
-        android:layout_below="@+id/local_picture"
-        android:layout_alignLeft="@+id/local_address"
-        android:layout_alignStart="@+id/local_address" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -103,9 +88,9 @@
         android:textColor="@color/secondary_text_light"
         android:id="@+id/textView8"
         android:fontFamily="sans-serif-light"
-        android:layout_alignTop="@+id/textView"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView"
+        android:layout_alignTop="@+id/ratingBar"
+        android:layout_toRightOf="@+id/ratingBar"
+        android:layout_toEndOf="@+id/ratingBar"
         android:layout_marginTop="3dp"
         android:layout_marginLeft="5dp" />
 </RelativeLayout>

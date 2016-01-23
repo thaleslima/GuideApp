@@ -96,6 +96,8 @@ public class MainActivity extends BaseActivity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_search){
+            SearchActivity.navigate(this);
         }
 
         return super.onOptionsItemSelected(item);

@@ -2,8 +2,31 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/divider_title">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Avaliar este local"
+        android:textColor="@color/primary_text"
+        android:id="@+id/textView5"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
 
 
     <TextView
@@ -16,38 +39,40 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="72dp"
+        android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="44 Opiniões"
         android:id="@+id/textView2"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/tvDescriptionAux2"
         android:gravity="center|left"
-        android:layout_toLeftOf="@+id/textView3"
-        android:layout_toStartOf="@+id/textView3"
         android:fontFamily="sans-serif-light"
-        android:textColor="@color/secondary_text" />
+        android:textColor="@color/secondary_text"
+        android:layout_below="@+id/ratingBar"
+        android:layout_toRightOf="@+id/tvDescriptionAux2"
+        android:layout_toEndOf="@+id/tvDescriptionAux2"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="VER TODAS"
         android:textColor="@color/primary_text_link"
         android:id="@+id/textView3"
-        android:layout_centerVertical="true"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:layout_alignTop="@+id/textView2"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="16dp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif"/>
-
+        android:gravity="center"
+        android:layout_marginRight="16dp" />
 
     <View
         android:layout_width="match_parent"
@@ -56,6 +81,7 @@
         android:background="@color/divider_dark"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
 
 </RelativeLayout>

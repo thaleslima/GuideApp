@@ -36,32 +36,38 @@
         android:layout_width="match_parent"
         android:layout_gravity="end|bottom"
         android:id="@+id/linearLayout2"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:weightSum="2"
-        android:divider="?android:listDivider"
         android:orientation="horizontal"
-        android:showDividers="middle"
-        android:dividerPadding="2.5dp"
         app:layout_behavior="com.guideapp.guideapp.UI.widget.ScrollingButtonsBehavior"
         android:background="@drawable/border_top">
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/imageButton"
             android:clickable="true"
             android:layout_weight="1"
-            android:src="@drawable/button_map"/>
+            android:src="@drawable/button_map"
+            android:layout_gravity="center_vertical"
+            android:scaleType="center" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="14dp"
+            android:layout_height="match_parent"
+            android:background="?android:listDivider"/>
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton2"
+            android:layout_height="match_parent"
+            android:id="@+id/button_filter"
             android:layout_weight="1"
             android:clickable="true"
-            android:src="@drawable/button_filter_list"/>
+            android:src="@drawable/button_filter_list"
+            android:layout_gravity="center_vertical"
+            android:scaleType="center"/>
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

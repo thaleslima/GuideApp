@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/gruta"
+        android:src="@null"
         android:id="@+id/image"
         android:scaleType="center">
     </ImageView>
