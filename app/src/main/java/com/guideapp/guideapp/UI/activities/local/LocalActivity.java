@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.activities;
+package com.guideapp.guideapp.UI.activities.local;
 
 import android.app.DialogFragment;
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.guideapp.guideapp.R;
+import com.guideapp.guideapp.UI.activities.BaseActivity;
+import com.guideapp.guideapp.UI.activities.LocalDetailActivity;
 import com.guideapp.guideapp.UI.adapters.LocalAdapter;
 import com.guideapp.guideapp.UI.fragments.FilterDialogFragment;
 import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;

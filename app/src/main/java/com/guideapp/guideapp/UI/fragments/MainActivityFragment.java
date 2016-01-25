@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.activities.LocalActivity;
+import com.guideapp.guideapp.UI.activities.local.LocalActivity;
 import com.guideapp.guideapp.UI.activities.MapActivity;
 import com.guideapp.guideapp.UI.adapters.RecyclerViewAdapter;
 import com.guideapp.guideapp.UI.widget.GridSpacingItemDecoration;

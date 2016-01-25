@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.fragments;
+package com.guideapp.guideapp.UI.activities.local;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
