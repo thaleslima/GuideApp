@@ -22,6 +22,36 @@
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancel</string>
 
+    <string name="view_my_account">Ver minha conta</string>
+    <string name="hello_visitor">Olá visitante!</string>
+    <string name="login">Fazer login</string>
+
+    <string name="action_my_reviews">Minhas Avaliações</string>
+    <string name="action_about">Sobre</string>
+    <string name="action_logout">Sair</string>
+
+    <string name="login_or">ou</string>
+    <string name="login_email">e-mail</string>
+    <string name="login_password">senha</string>
+    <string name="login_enter">Entrar</string>
+    <string name="login_forgot_password">Esqueci minha senha</string>
+    <string name="login_no_register">Não tem cadastro?</string>
+    <string name="login_register">Cadastrar</string>
+
+    <string name="register_first_name">Primeiro nome</string>
+    <string name="register_last_name">Sobrenome</string>
+    <string name="register_email">E-mail</string>
+    <string name="register_password">Senha</string>
+    <string name="register_ddd">DDD</string>
+    <string name="register_register">Cadastro</string>
+    <string name="register_phone">Celular</string>
+
+
+
+
+
+    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_register">Cadastrar</string>
 
 
 </resources>

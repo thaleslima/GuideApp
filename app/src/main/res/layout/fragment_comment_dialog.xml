@@ -46,7 +46,7 @@
         android:hint="O que você achou deste lugar?"
         android:layout_height="120dp"
         android:background="@android:color/transparent"
-        android:textColorHint="@color/divider_dark"
+        android:textColorHint="@color/secondary_text_light"
         android:inputType="textMultiLine"/>
 
     <View

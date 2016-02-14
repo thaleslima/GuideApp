@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/divider_title">
+    android:background="@color/background_title_opinion">
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,8 +26,6 @@
         android:layout_below="@+id/textView5"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp" />
-
-
 
     <TextView
         android:id="@+id/tvDescriptionAux2"
@@ -64,7 +62,7 @@
         android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="VER TODAS"
-        android:textColor="@color/primary_text_link"
+        android:textColor="@color/accent"
         android:id="@+id/textView3"
         android:textStyle="bold"
         android:fontFamily="sans-serif"

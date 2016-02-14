@@ -5,27 +5,29 @@
     <color name="black_light">#212121</color>
 
     <color name="primary">#FF9800</color>
-    <color name="primary_dark">#E65100</color>
-    <color name="primary_text">#424242</color>
-    <color name="secondary_text">#333333</color>
-    <color name="secondary_text_light">#cccccc</color>
-    <color name="primary_text_link">#2196F3</color>
+    <color name="primary_dark">#F57C00</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="secondary_text_light">#CCCCCC</color>
+
     <color name="divider">#F5F5F5</color>
     <color name="divider_dark">#E0E0E0</color>
-    <color name="divider_title">#FAFAFA</color>
+
     <color name="primary_star">#FFC107</color>
     <color name="secondary_star">#FAFAFA</color>
-    <color name="card_user">#00ACC1</color>
 
-    <color name="primary_red">#F44336</color>
+    <color name="background_title_opinion">#FAFAFA</color>
 
-    <color name="action_top">#55000000</color>
-    <color name="white_light">#80FFFFFF</color>
-    <color name="action_bottom">#00000000</color>
+    <color name="button_white_pressed">#CCCCCC</color>
+    <color name="button_black_pressed">#212121</color>
 
-    <color name="accent">#C62828</color>
+    <color name="gradient_top">#55000000</color>
+    <color name="gradient_bottom">#00000000</color>
+
+    <color name="accent">#536DFE</color>
     <color name="accent_translucent">#EEEEEE</color>
 
+    <color name="grey_50">#FAFAFA</color>
     <color name="green_500">#4CAF50</color>
     <color name="blue_500">#2196F3</color>
     <color name="red_500">#F44336</color>
@@ -33,6 +35,10 @@
     <color name="pink_500">#E91E63</color>
     <color name="cyan_500">#00BCD4</color>
     <color name="orange_500">#EF6C00</color>
-    <color name="menu_buttons">#f7f7f7</color>
 
+    <color name="button_google">#db4437</color>
+    <color name="button_google_pressed">#ba382d</color>
+
+    <color name="button_facebook">#3a5795</color>
+    <color name="button_facebook_pressed">#253d6f</color>
 </resources>

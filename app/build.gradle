@@ -40,6 +40,9 @@ dependencies {
 
     compile "it.sephiroth.android.library.imagezoom:imagezoom:$rootProject.imageZoomVersion"
     compile "com.google.maps.android:android-maps-utils:$rootProject.mapsUtilsVersion"
+
+    compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
+
     compile project(path: ':backend', configuration: 'android-endpoints')
 }
 

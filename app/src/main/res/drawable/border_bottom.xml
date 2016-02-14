@@ -7,7 +7,7 @@
         </shape>
     </item>
     <!-- This is the line -->
-    <item android:bottom="1.5dp" android:top="1.5dp">
+    <item android:bottom="1.5dp">
         <shape>
             <solid android:color="@color/grey_50" />
         </shape>

@@ -14,9 +14,6 @@
         android:orientation="vertical"
         android:background="@drawable/frame_gradient"
         android:padding="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_gravity="center_horizontal|bottom">
 
         <TextView
@@ -38,6 +35,5 @@
             android:fontFamily="sans-serif"
             android:textColor="@color/white"
             android:id="@+id/date_view" />
-
     </LinearLayout>
 </FrameLayout>

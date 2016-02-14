@@ -51,6 +51,14 @@
             android:theme="@style/AppThemeGallery" >
         </activity>
 
+        <activity
+            android:name=".UI.login.LoginActivity"
+            android:label="@string/title_activity_login" />
+
+        <activity
+            android:name=".UI.register.RegisterActivity"
+            android:label="@string/title_activity_register" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
