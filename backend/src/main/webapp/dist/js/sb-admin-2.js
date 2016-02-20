@@ -1,3 +1,28 @@
+var auth2;
+
+function initAuth() {
+    gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: '904382967622-sl60lsln4f5fmnqac53n2medldl6nt40.apps.googleusercontent.com',
+          fetch_basic_profile: true,
+          scope: 'profile'
+        });
+
+        auth2.then(function () {
+          if (!auth2.isSignedIn.get()) {
+            console.log("not logged!");
+            window.location.href = "/pages/login.html";
+          } else {
+            console.log("logged!");
+            var profile = auth2.currentUser.get().getBasicProfile();
+
+            document.getElementById("user").innerHTML = profile.getName();
+            document.getElementById("image-user").src = profile.getImageUrl();
+          }
+        });
+      });
+}
+
 function init() {
       var apiName = 'guideAppApi';
       var apiVersion = 'v1';
@@ -20,132 +45,153 @@ $(function() {
 });
 
 var getCities = function(success, error){
-     gapi.client.guideAppApi.getCities().execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    gapi.client.guideAppApi.getCities().execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var getCity = function(id, success, error){
-     gapi.client.guideAppApi.getCity({'id': id}).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.getCity({'id': id}).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var insertCity = function(city, success, error){
-     gapi.client.guideAppApi.insertCity(city).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.insertCity(city).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var updateCity = function(city, success, error){
-     gapi.client.guideAppApi.updateCity(city).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.updateCity(city).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var removeCity = function(id, success, error){
-     gapi.client.guideAppApi.removeCity({'id': id}).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.removeCity({'id': id}).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 
 
 
 var getCategories = function(success, error){
-     gapi.client.guideAppApi.getCategories().execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    gapi.client.guideAppApi.getCategories().execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var getCategory = function(id, success, error){
-     gapi.client.guideAppApi.getCategory({'id': id}).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+
+    isAuthenticatedEndReturnLogin();
+
+    gapi.client.guideAppApi.getCategory({'id': id}).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var insertCategory = function(category, success, error){
-     gapi.client.guideAppApi.insertCategory(category).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+
+    gapi.client.guideAppApi.insertCategory(category).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var updateCategory = function(category, success, error){
-     gapi.client.guideAppApi.updateCategory(category).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+
+    gapi.client.guideAppApi.updateCategory(category).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var removeCategory = function(id, success, error){
-     gapi.client.guideAppApi.removeCategory({'id': id}).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+
+    gapi.client.guideAppApi.removeCategory({'id': id}).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 
 
 
 var getSubCategories = function(success, error){
-     gapi.client.guideAppApi.getSubCategories().execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    gapi.client.guideAppApi.getSubCategories().execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var getSubCategory = function(id, success, error){
-     gapi.client.guideAppApi.getSubCategory({'id': id}).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.getSubCategory({'id': id}).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var insertSubCategory = function(subCategory, success, error){
-     gapi.client.guideAppApi.insertSubCategory(subCategory).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.insertSubCategory(subCategory).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var updateSubCategory = function(subCategory, success, error){
-     gapi.client.guideAppApi.updateSubCategory(subCategory).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.updateSubCategory(subCategory).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var removeSubCategory = function(id, success, error){
-     gapi.client.guideAppApi.removeSubCategory({'id': id}).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.removeSubCategory({'id': id}).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 
 
 
 var getLocals = function(success, error){
-     gapi.client.guideAppApi.getLocals().execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    gapi.client.guideAppApi.getLocals().execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var getLocal = function(id, success, error){
-     gapi.client.guideAppApi.getLocal({'id': id}).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.getLocal({'id': id}).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var insertLocal = function(local, success, error){
-     gapi.client.guideAppApi.insertLocal(local).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.insertLocal(local).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var updateLocal = function(local, success, error){
-     gapi.client.guideAppApi.updateLocal(local).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.updateLocal(local).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 var removeLocal = function(id, success, error){
-     gapi.client.guideAppApi.removeLocal({'id': id}).execute(function(resp) {
-          responseService(resp, success, error);
-     });
+    isAuthenticatedEndReturnLogin();
+    gapi.client.guideAppApi.removeLocal({'id': id}).execute(function(resp) {
+      responseService(resp, success, error);
+    });
 }
 
 
@@ -227,3 +273,58 @@ $(function() {
         element.addClass('active');
     }
 });
+
+
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+
+  window.location.href = "/pages/index.html";
+}
+
+
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+}
+
+function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+}
+
+function onFailure(error) {
+  console.log(error);
+}
+
+
+function isAuthenticated() {
+    return auth2.isSignedIn.get();
+}
+
+function isAuthenticatedEndReturnLogin() {
+    if(auth2 && !isAuthenticated()){
+        window.location.href = "/pages/login.html";
+    }
+}
+
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+        window.location.href = "/pages/login.html";
+    });
+}
+
+function disassociate() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.disconnect().then(function () {
+        console.log('User disconnected from association with app.');
+        window.location.href = "/pages/login.html";
+    });
+}
+
