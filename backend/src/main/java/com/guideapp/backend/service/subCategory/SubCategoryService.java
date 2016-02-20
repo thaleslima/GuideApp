@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface SubCategoryService {
     List<SubCategory> list();
-    List<SubCategory> list(String search) throws NotFoundException;
+    List<SubCategory> list(Long idCategory) throws NotFoundException;
     SubCategory getById(Long id) throws NotFoundException;
     void insert(SubCategory subCategory) throws ConflictException, NotFoundException;
     void update(SubCategory subCategory) throws ConflictException, NotFoundException;

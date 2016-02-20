@@ -17,10 +17,6 @@
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-    <!-- DataTables Responsive CSS -->
-    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css"
-          rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -92,6 +88,9 @@
                         <a href="subcategories.html"><i class="fa fa-edit fa-fw"></i> Sub-Categorias</a>
                     </li>
 
+                    <li>
+                        <a href="locals.html"><i class="fa fa-edit fa-fw"></i> Locais</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
@@ -167,26 +166,50 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="modal-entity-label">Inserir sub-categoria</h4>
             </div>
-            <div class="modal-body">
 
-                <div class="form-group">
-                    <label for="modal-entity-description">Descrição:</label>
-                    <input type="text" class="form-control" id="modal-entity-description">
+            <form id="form-registration" class="form-registration" novalidate>
+                <div class="modal-body form-horizontal">
+
+                    <div class="alert alert-danger" id="alert-registration" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only" >Error:</span>
+                        <span id="alert-registration-message"></span>
+                    </div>
+
                     <input type="hidden" class="form-control" id="modal-entity-id">
-                </div>
 
-                <div class="form-group">
-                    <label for="modal-entity-id-category">Categoria:</label>
-                    <select name="estado" class="form-control" id="modal-entity-id-category">
-                        <option value="">Selecione o estado</option>
-                    </select>
-                </div>
+                    <div class="form-group control-group">
+                        <label class="col-sm-3 control-label" for="modal-entity-id-category">Categoria:</label>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="modal-entity-save">Salvar</button>
-            </div>
+                        <div class="col-sm-9">
+                            <select name="estado" class="form-control" id="modal-entity-id-category"
+                                    required
+                                    data-validation-required-message="Entre com a categoria">
+                                <option value="">Selecione</option>
+                            </select>
+
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group control-group">
+                        <label class="col-sm-3 control-label" for="modal-entity-description">Descrição:</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="modal-entity-description"
+                                   required
+                                   data-validation-required-message="Entre com a descrição">
+
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="modal-entity-save">Salvar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -196,6 +219,8 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../dist/js/jqBootstrapValidation.js"></script>
+
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>

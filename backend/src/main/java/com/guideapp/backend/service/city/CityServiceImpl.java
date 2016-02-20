@@ -6,6 +6,7 @@ import com.guideapp.backend.dao.city.CityDAO;
 import com.guideapp.backend.dao.city.CityDAOImpl;
 import com.guideapp.backend.entity.City;
 import com.guideapp.backend.entity.Local;
+import com.guideapp.backend.util.ValidationUtil;
 
 import java.util.List;
 
@@ -43,17 +44,57 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public void insert(City city) throws ConflictException, NotFoundException {
+        if(city == null) {
+            throw new ConflictException("Cidade não informada.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(city.getName())){
+            throw new ConflictException("Nome da cidade não informado.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(city.getUf())){
+            throw new ConflictException("Estado não informado.");
+        }
+
         cityDAO.insert(city);
     }
 
     @Override
     public void update(City city) throws ConflictException, NotFoundException {
+
+        if(city == null) {
+            throw new ConflictException("Cidade não informada.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(city.getName())){
+            throw new ConflictException("Nome da cidade não informado.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(city.getUf())){
+            throw new ConflictException("Estado não informado.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(city.getId())){
+            throw new ConflictException("Id não informado.");
+        }
+
+        City c = cityDAO.getByKey(city.getId());
+
+        if(c == null){
+            throw new NotFoundException("Cidade não encontrada.");
+        }
+
         cityDAO.insert(city);
     }
 
     @Override
     public void remove(Long id) throws ConflictException, NotFoundException {
         City city = cityDAO.getByKey(id);
+
+        if(city == null){
+            throw new NotFoundException("Cidade não encontrada.");
+        }
+
         cityDAO.delete(city);
     }
 }

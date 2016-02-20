@@ -3,11 +3,31 @@ var init = function () {
 };
 
 var initBind = function(){
-    $('#modal-city-save').click(saveNewCity);
     $('#dataTables-example').DataTable({responsive: true});
+
+    $(".form-registration").find("input,textarea,select").jqBootstrapValidation({
+          preventSubmit: true,
+
+          submitSuccess: function($form, event) {
+              clearTextErrors();
+              saveNewEntity();
+              event.preventDefault();
+          }
+      }
+    );
 };
 
-var saveNewCity = function(){
+var initPage = function() {
+    var btnNewCity = $('#new-city');
+    btnNewCity.click(openModalNewCity);
+    btnNewCity.removeClass('disabled');
+
+    getCities(getCitiesSuccess, getCitiesError);
+};
+
+
+
+var saveNewEntity = function(){
     var name = document.getElementById("modal-city-name").value;
     var e = document.getElementById("modal-city-uf");
     var uf = e.options[e.selectedIndex].value;
@@ -32,7 +52,14 @@ var saveNewCitySuccess = function(data){
 
 var saveNewCityError = function(data){
     console.log("error");
+
+    showMessageRegistration(data.error.message);
 };
+
+
+
+
+
 
 var openModalNewCity = function (){
     document.getElementById("modal-city-name").value = "";
@@ -40,12 +67,18 @@ var openModalNewCity = function (){
     document.getElementById("modal-city-id").value = "";
 
     $('#modal-city-label').text = "Inserir cidade";
+
+    clearTextErrors();
+
 	$('#modal-city').modal("show");
 };
 
-var openModalEditCity = function (id){
-    getCity(id, getCitySuccess, getCityError);
-};
+
+
+
+
+
+
 
 var deleteCityById = function (id){
     removeCity(id, deleteCitySuccess, deleteCityError);
@@ -63,12 +96,20 @@ var deleteCityError = function(data){
     console.log(data);
 };
 
+
+
+var openModalEditCity = function (id){
+    getCity(id, getCitySuccess, getCityError);
+};
+
 var getCitySuccess = function(data){
     $('#modal-city-label').text = "Atualizar cidade";
 
     document.getElementById("modal-city-name").value = data.name;
     document.getElementById("modal-city-uf").value = data.uf;
     document.getElementById("modal-city-id").value = data.id;
+
+    clearTextErrors();
 
     $('#modal-city').modal("show");
 };
@@ -79,13 +120,11 @@ var getCityError = function(data){
 };
 
 
-var initPage = function() {
-    var btnNewCity = $('#new-city');
-    btnNewCity.click(openModalNewCity);
-    btnNewCity.removeClass('disabled');
 
-    getCities(getCitiesSuccess, getCitiesError);
-};
+
+
+
+
 
 var getCitiesSuccess = function(data){
     console.log("ok");
@@ -112,10 +151,6 @@ var getCitiesSuccess = function(data){
 
     document.getElementById("body-table-cities").innerHTML = items;
 
-    //var dataTable = $("#dataTables-example");
-    //dataTable.dataTable().fnDestroy();
-    //dataTable.dataTable({responsive: true});
-
     $t(".open-edit").forEach(function(element, index) {
         element.onclick = function(){openModalEditCity(this.dataset.id)};
     });
@@ -131,4 +166,26 @@ var getCitiesError = function(data){
 };
 
 
-$(document).ready(init);
+
+
+
+var showMessageRegistration = function(message){
+    document.getElementById("alert-registration").style.display = "block";
+    document.getElementById("alert-registration-message").innerHTML = message;
+}
+
+var hideMessageRegistration = function(){
+    document.getElementById("alert-registration").style.display = "none";
+}
+
+
+var clearTextErrors = function(){
+    $t(".help-block").forEach(function(element, index) {
+          element.innerText= "";
+    });
+
+    hideMessageRegistration();
+}
+
+
+document.addEventListener("DOMContentLoaded", init, false);

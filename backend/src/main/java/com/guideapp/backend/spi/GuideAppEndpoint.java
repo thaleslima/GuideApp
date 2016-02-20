@@ -152,11 +152,11 @@ public class GuideAppEndpoint {
 
 
     @ApiMethod(name = "getSubCategories", path = "subcategory", httpMethod = "GET")
-    public List<SubCategory> getSubCategories(@Nullable @Named("search") String search) throws NotFoundException {
-        if(search == null || search.isEmpty())
+    public List<SubCategory> getSubCategories(@Nullable @Named("idCategory") Long idCategory) throws NotFoundException {
+        if(idCategory == null || idCategory == 0)
             return subCategoryService.list();
         else
-            return subCategoryService.list(search);
+            return subCategoryService.list(idCategory);
     }
 
     @ApiMethod(name = "getSubCategory", path = "subcategory/{id}", httpMethod = ApiMethod.HttpMethod.GET)

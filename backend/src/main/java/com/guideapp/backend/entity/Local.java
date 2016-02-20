@@ -2,6 +2,7 @@ package com.guideapp.backend.entity;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.guideapp.backend.util.StringUtil;
 
 /**
  * Created by thales on 1/24/16.
@@ -38,7 +39,7 @@ public class Local {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = StringUtil.removeSpaceWhite(description);
     }
 
     public String getSite() {
@@ -46,7 +47,7 @@ public class Local {
     }
 
     public void setSite(String site) {
-        this.site = site;
+        this.site = StringUtil.removeSpaceWhite(site);
     }
 
     public String getPhone() {
@@ -54,7 +55,7 @@ public class Local {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = StringUtil.removeSpaceWhite(phone);
     }
 
     public String getAddress() {
@@ -62,7 +63,7 @@ public class Local {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = StringUtil.removeSpaceWhite(address);
     }
 
     public boolean isWifi() {
@@ -78,7 +79,7 @@ public class Local {
     }
 
     public void setDetail(String detail) {
-        this.detail = detail;
+        this.detail = StringUtil.removeSpaceWhite(detail);
     }
 
     public double getLatitude() {

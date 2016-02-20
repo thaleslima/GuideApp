@@ -3,10 +3,27 @@ var init = function () {
 };
 
 var initBind = function(){
-    $('#modal-entity-save').click(saveNewEntity);
     $('#dataTables-example').DataTable({responsive: true});
+
+    $(".form-registration").find("input,textarea,select").jqBootstrapValidation({
+          preventSubmit: true,
+
+          submitSuccess: function($form, event) {
+              clearTextErrors();
+              saveNewEntity();
+              event.preventDefault();
+          }
+      }
+    );
 };
 
+var initPage = function() {
+    var btnNewEntity = $('#new-entity');
+    btnNewEntity.click(openModalNewEntity);
+    btnNewEntity.removeClass('disabled');
+
+    getCategories(getEntitiesSuccess, getEntitiesError);
+};
 
 
 
@@ -33,6 +50,8 @@ var saveNewEntitySuccess = function(data){
 
 var saveNewEntityError = function(data){
     console.log("error");
+
+    showMessageRegistration(data.error.message);
 };
 
 
@@ -45,6 +64,8 @@ var openModalNewEntity = function (){
     document.getElementById("modal-entity-id").value = "";
 
     $('#modal-entity-label').text = "Inserir categoria";
+
+    clearTextErrors();
 	$('#modal-entity').modal("show");
 };
 
@@ -62,6 +83,7 @@ var getEntitySuccess = function(data){
     document.getElementById("modal-entity-description").value = data.description;
     document.getElementById("modal-entity-id").value = data.id;
 
+    clearTextErrors();
     $('#modal-entity').modal("show");
 };
 
@@ -75,7 +97,7 @@ var getEntityError = function(data){
 
 
 var deleteEntityById = function (id){
-    removeEntity(id, deleteEntitySuccess, deleteEntityError);
+    removeCategory(id, deleteEntitySuccess, deleteEntityError);
 };
 
 var deleteEntitySuccess = function(data){
@@ -93,13 +115,7 @@ var deleteEntityError = function(data){
 
 
 
-var initPage = function() {
-    var btnNewEntity = $('#new-entity');
-    btnNewEntity.click(openModalNewEntity);
-    btnNewEntity.removeClass('disabled');
 
-    getCategories(getEntitiesSuccess, getEntitiesError);
-};
 
 var getEntitiesSuccess = function(data){
     console.log("ok");
@@ -125,10 +141,6 @@ var getEntitiesSuccess = function(data){
 
     document.getElementById("body-table-entity").innerHTML = items;
 
-    //var dataTable = $("#dataTables-example");
-    //dataTable.dataTable().fnDestroy();
-    //dataTable.dataTable({responsive: true});
-
     $t(".open-edit").forEach(function(element, index) {
         element.onclick = function(){openModalEditEntity(this.dataset.id)};
     });
@@ -143,5 +155,23 @@ var getEntitiesError = function(data){
     console.log(data);
 };
 
+
+var showMessageRegistration = function(message){
+    document.getElementById("alert-registration").style.display = "block";
+    document.getElementById("alert-registration-message").innerHTML = message;
+}
+
+var hideMessageRegistration = function(){
+    document.getElementById("alert-registration").style.display = "none";
+}
+
+
+var clearTextErrors = function(){
+    $t(".help-block").forEach(function(element, index) {
+          element.innerText= "";
+    });
+
+    hideMessageRegistration();
+}
 
 $(document).ready(init);

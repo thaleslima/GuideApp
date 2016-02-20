@@ -6,7 +6,8 @@ function init() {
           || window.location.hostname == '127.0.0.1'
           || ((window.location.port != "") && (window.location.port > 1023))) {
             // We're probably running against the DevAppServer
-            apiRoot = 'http://' + window.location.host + '/_ah/api';
+            //apiRoot = 'http://' + window.location.host + '/_ah/api';
+            apiRoot = 'https://guideapp-br.appspot.com/_ah/api';
       }
 
       gapi.client.load(apiName, apiVersion, initPage, apiRoot);
@@ -117,6 +118,40 @@ var removeSubCategory = function(id, success, error){
 
 
 
+var getLocals = function(success, error){
+     gapi.client.guideAppApi.getLocals().execute(function(resp) {
+          responseService(resp, success, error);
+     });
+}
+
+var getLocal = function(id, success, error){
+     gapi.client.guideAppApi.getLocal({'id': id}).execute(function(resp) {
+          responseService(resp, success, error);
+     });
+}
+
+var insertLocal = function(local, success, error){
+     gapi.client.guideAppApi.insertLocal(local).execute(function(resp) {
+          responseService(resp, success, error);
+     });
+}
+
+var updateLocal = function(local, success, error){
+     gapi.client.guideAppApi.updateLocal(local).execute(function(resp) {
+          responseService(resp, success, error);
+     });
+}
+
+var removeLocal = function(id, success, error){
+     gapi.client.guideAppApi.removeLocal({'id': id}).execute(function(resp) {
+          responseService(resp, success, error);
+     });
+}
+
+
+
+
+
 
 
 var responseService = function(resp, success, error){
@@ -141,7 +176,20 @@ function SubCategory(description, idCategory) {
   this.idCategory = idCategory;
 }
 
-
+function Local(description, site, phone, address, wifi, detail, latitude, longitude, idCity,
+                idCategory, idSubCategory) {
+  this.description = description;
+  this.site = site;
+  this.phone = phone;
+  this.address = address;
+  this.wifi = wifi;
+  this.detail = detail;
+  this.latitude = latitude;
+  this.longitude = longitude;
+  this.idCity = idCity;
+  this.idCategory = idCategory;
+  this.idSubCategory = idSubCategory;
+}
 
 
 

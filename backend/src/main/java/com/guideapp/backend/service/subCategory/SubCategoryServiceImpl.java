@@ -9,6 +9,7 @@ import com.guideapp.backend.dao.subCategory.SubCategoryDAOImpl;
 import com.guideapp.backend.entity.Category;
 import com.guideapp.backend.entity.SubCategory;
 import com.guideapp.backend.service.category.CategoryService;
+import com.guideapp.backend.util.ValidationUtil;
 
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     }
 
     @Override
-    public List<SubCategory> list(String search) throws NotFoundException {
-        return subCategoryDAO.listByProperty("name", search);
+    public List<SubCategory> list(Long idCategory) throws NotFoundException {
+        return subCategoryDAO.listByProperty("idCategory", idCategory);
     }
 
     @Override
@@ -46,17 +47,56 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
     @Override
     public void insert(SubCategory subCategory) throws ConflictException, NotFoundException {
+        if(subCategory == null) {
+            throw new ConflictException("Sub-Categoria não informada.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(subCategory.getDescription())){
+            throw new ConflictException("Descrição não informada.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(subCategory.getIdCategory())){
+            throw new ConflictException("Categoria não informada.");
+        }
+
         subCategoryDAO.insert(subCategory);
     }
 
     @Override
     public void update(SubCategory subCategory) throws ConflictException, NotFoundException {
+        if(subCategory == null) {
+            throw new ConflictException("Sub-Categoria não informada.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(subCategory.getDescription())){
+            throw new ConflictException("Descrição não informada.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(subCategory.getIdCategory())){
+            throw new ConflictException("Categoria não informada.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(subCategory.getId())){
+            throw new ConflictException("Id não informado.");
+        }
+
+        SubCategory s = subCategoryDAO.getByKey(subCategory.getId());
+
+        if(s == null){
+            throw new NotFoundException("Sub-Categoria não encontrada.");
+        }
+
         subCategoryDAO.insert(subCategory);
     }
 
     @Override
     public void remove(Long id) throws ConflictException, NotFoundException {
-        SubCategory city = subCategoryDAO.getByKey(id);
-        subCategoryDAO.delete(city);
+        SubCategory s = subCategoryDAO.getByKey(id);
+
+        if(s == null){
+            throw new NotFoundException("Sub-Categoria não encontrada.");
+        }
+
+        subCategoryDAO.delete(s);
     }
 }

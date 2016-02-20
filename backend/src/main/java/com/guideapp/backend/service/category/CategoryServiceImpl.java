@@ -5,6 +5,7 @@ import com.google.api.server.spi.response.NotFoundException;
 import com.guideapp.backend.dao.category.CategoryDAO;
 import com.guideapp.backend.dao.category.CategoryDAOImpl;
 import com.guideapp.backend.entity.Category;
+import com.guideapp.backend.util.ValidationUtil;
 
 import java.util.List;
 
@@ -42,17 +43,49 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void insert(Category category) throws ConflictException, NotFoundException {
+
+        if(category == null) {
+            throw new ConflictException("Categoria não informada.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(category.getDescription())){
+            throw new ConflictException("Descrição não informada.");
+        }
+
         categoryDAO.insert(category);
     }
 
     @Override
     public void update(Category category) throws ConflictException, NotFoundException {
+        if(category == null) {
+            throw new ConflictException("Categoria não informada.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(category.getId())){
+            throw new ConflictException("Id não informado.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(category.getDescription())){
+            throw new ConflictException("Descrição não informada.");
+        }
+
+        Category c = categoryDAO.getByKey(category.getId());
+
+        if(c == null){
+            throw new NotFoundException("Categoria não encontrada.");
+        }
+
         categoryDAO.insert(category);
     }
 
     @Override
     public void remove(Long id) throws ConflictException, NotFoundException {
         Category city = categoryDAO.getByKey(id);
+
+        if(city == null){
+            throw new NotFoundException("Categoria não encontrada.");
+        }
+
         categoryDAO.delete(city);
     }
 }

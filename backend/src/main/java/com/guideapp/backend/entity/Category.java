@@ -2,6 +2,7 @@ package com.guideapp.backend.entity;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.guideapp.backend.util.StringUtil;
 
 /**
  * Created by thales on 1/24/16.
@@ -25,6 +26,6 @@ public class Category {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = StringUtil.removeSpaceWhite(description);
     }
 }
