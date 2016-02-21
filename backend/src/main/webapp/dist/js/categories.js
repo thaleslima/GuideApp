@@ -3,8 +3,6 @@ var init = function () {
 };
 
 var initBind = function(){
-    $('#dataTables-example').DataTable({responsive: true});
-
     $(".form-registration").find("input,textarea,select").jqBootstrapValidation({
           preventSubmit: true,
 

@@ -3,8 +3,6 @@ var init = function () {
 };
 
 var initBind = function(){
-    $('#dataTables-example').DataTable({responsive: true});
-
      $(".form-registration").find("input,textarea,select").jqBootstrapValidation({
           preventSubmit: true,
 
@@ -183,9 +181,6 @@ var getEntitiesSuccess = function(data){
 var getEntitiesError = function(data){
     console.log("error");
     console.log(data.error.message);
-
-
-
 };
 
 

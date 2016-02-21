@@ -56,7 +56,8 @@
             <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <img class="image-user" id="image-user"/> <span id="user"></span> <i class="fa fa-caret-down"></i>
+                    <img class="image-user" id="image-user"/> <span id="user"></span> <i
+                        class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-messages">
                     <li><a href="#" onclick="signOut();"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -163,25 +164,27 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="modal-entity-label">Inserir local</h4>
             </div>
-            
+
             <form id="form-registration" class="form-registration" novalidate>
                 <div class="modal-body">
                     <div class="form-horizontal">
 
                         <div class="alert alert-danger" id="alert-registration" role="alert">
-                          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                          <span class="sr-only" >Error:</span>
-                          <span id="alert-registration-message"></span>
+                            <span class="glyphicon glyphicon-exclamation-sign"
+                                  aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            <span id="alert-registration-message"></span>
                         </div>
 
                         <input type="hidden" class="form-control" id="modal-entity-id"/>
 
                         <div class="form-group control-group">
-                            <label class="col-sm-3 control-label" for="modal-entity-id-city">Cidade*</label>
+                            <label class="col-sm-3 control-label"
+                                   for="modal-entity-id-city">Cidade*</label>
                             <div class="col-sm-9">
 
                                 <select class="form-control" id="modal-entity-id-city" required
-                                    data-validation-required-message="Entre com a cidade">
+                                        data-validation-required-message="Entre com a cidade">
                                     <option value="">Selecione</option>
                                 </select>
 
@@ -194,7 +197,7 @@
                             <div class="col-sm-9">
 
                                 <select class="form-control" id="modal-entity-id-category" required
-                                    data-validation-required-message="Entre com a categoria">
+                                        data-validation-required-message="Entre com a categoria">
                                     <option value="">Selecione</option>
                                 </select>
 
@@ -203,11 +206,13 @@
                         </div>
 
                         <div class="form-group control-group">
-                            <label class="col-sm-3 control-label" for="modal-entity-id-sub-category">Sub-Categoria*</label>
+                            <label class="col-sm-3 control-label"
+                                   for="modal-entity-id-sub-category">Sub-Categoria*</label>
 
                             <div class="col-sm-9">
-                                <select class="form-control" id="modal-entity-id-sub-category" required
-                                    data-validation-required-message="Entre com a sub-categoria">
+                                <select class="form-control" id="modal-entity-id-sub-category"
+                                        required
+                                        data-validation-required-message="Entre com a sub-categoria">
                                     <option value="">Selecione</option>
                                 </select>
                                 <p class="help-block text-danger"></p>
@@ -218,8 +223,10 @@
                             <label class="col-sm-3 control-label" for="modal-entity-description">Descrição*</label>
 
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="modal-entity-description"
-                                    required data-validation-required-message="Entre com a descrição">
+                                <input type="text" class="form-control"
+                                       id="modal-entity-description"
+                                       required
+                                       data-validation-required-message="Entre com a descrição">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -228,7 +235,7 @@
                             <label class="col-sm-3 control-label" for="modal-entity-description">Imagem*</label>
 
                             <div class="col-md-9">
-                                <input name="file" type="file" id="file" />
+                                <input name="file" type="file" id="file"/>
                             </div>
                         </div>
 
@@ -243,17 +250,20 @@
                                     <span class="text-upload-file image-legend">Resolução: 1024 (largura) x 500 (altura)</span>
                                     <span class="glyphicon glyphicon-picture image-legend"></span>
 
-                                    <img id="image-local" src="" alt="Image local " class="hide" width="275" />
+                                    <img id="image-local" src="" alt="Image local " class="hide"
+                                         width="275"/>
                                 </div>
 
                                 <input type="hidden" id="modal-entity-image-path"
-                                       required data-validation-required-message="Entre com a imagem"/>
+                                       required
+                                       data-validation-required-message="Entre com a imagem"/>
                                 <p class="help-block text-danger"></p>
 
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="modal-entity-site">Site</label>
+                            <label class="col-sm-3 control-label"
+                                   for="modal-entity-site">Site</label>
 
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="modal-entity-site">
@@ -293,10 +303,12 @@
 
                             <div class="col-sm-9">
                                 <label class="radio-inline">
-                                    <input type="radio" name="wifi" id="modal-entity-yes" value="yes"> Sim
+                                    <input type="radio" name="wifi" id="modal-entity-yes"
+                                           value="yes"> Sim
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="wifi" id="modal-entity-no" value="no" checked> Não
+                                    <input type="radio" name="wifi" id="modal-entity-no" value="no"
+                                           checked> Não
                                 </label>
                             </div>
                         </div>
@@ -306,7 +318,8 @@
                                    class="col-sm-3 control-label">Latitude*</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="modal-entity-latitude"
-                                       required disabled data-validation-required-message="Selecione o posição pelo mapa">
+                                       required disabled
+                                       data-validation-required-message="Selecione o posição pelo mapa">
                                 <p class="help-block text-danger text-map"></p>
                             </div>
                         </div>
@@ -316,7 +329,8 @@
                                    class="col-sm-3 control-label">Longitude*</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="modal-entity-longitude"
-                                       required disabled data-validation-required-message="Selecione o posição pelo mapa">
+                                       required disabled
+                                       data-validation-required-message="Selecione o posição pelo mapa">
                                 <p class="help-block text-danger text-map"></p>
                             </div>
                         </div>
@@ -330,8 +344,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="modal-entity-save">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="modal-entity-save">Salvar
+                    </button>
                 </div>
             </form>
         </div>
@@ -347,10 +363,6 @@
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
-<!-- DataTables JavaScript -->
-<script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
 <!-- Google Maps -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCB31f3Iz9ire66xfdSLP8Wrvm2iVKhctE"></script>

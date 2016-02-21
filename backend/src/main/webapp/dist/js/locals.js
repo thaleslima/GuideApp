@@ -10,7 +10,6 @@ var init = function () {
 };
 
 var initBind = function(){
-    $('#dataTables-example').DataTable({responsive: true});
     $('#modal-entity').on('show.bs.modal', resizeMap);
     $('#modal-entity-id-category').on('change', comboCategoryChange);
 
