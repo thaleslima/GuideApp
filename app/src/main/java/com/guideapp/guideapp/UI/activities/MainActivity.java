@@ -1,6 +1,7 @@
 package com.guideapp.guideapp.UI.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +20,7 @@ import com.guideapp.guideapp.UI.fragments.WhatsHotFragment;
 public class MainActivity extends BaseActivity {
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private AppBarLayout mAppBarLayout;
 
     private int[] mIconTabBlack = {
             R.drawable.ic_apps_black_24dp,
@@ -53,6 +55,7 @@ public class MainActivity extends BaseActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition(), true);
                 tab.setIcon(mIconTabWhite[tab.getPosition()]);
+                mAppBarLayout.setExpanded(true);
             }
 
             @Override
@@ -105,6 +108,7 @@ public class MainActivity extends BaseActivity {
     private void setFindViewById() {
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mAppBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
     }
 
     private class SectionsAdapter extends FragmentPagerAdapter {

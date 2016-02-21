@@ -23,19 +23,17 @@ import com.guideapp.guideapp.model.Local;
 
 import java.util.List;
 
+import butterknife.Bind;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Created by thales on 6/13/15.
  */
 public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHolder> {
     private Context mContext;
-    private Cursor data;
     private RecyclerViewItemClickListener mListener;
     private List<Local> mDataSet;
-
-    public LocalAdapter(Context context, RecyclerViewItemClickListener mListener) {
-        mContext = context;
-        this.mListener = mListener;
-    }
 
     public LocalAdapter(Context context, RecyclerViewItemClickListener mListener,
                         List<Local> dataSet) {
@@ -45,22 +43,15 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
     }
 
     class LocalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public final ImageView photoView;
-        public final TextView descriptionView;
-        public final TextView addressView;
-        public final ImageView favoriteView;
-        public RatingBar ratingView;
+        @Bind(R.id.local_picture) ImageView photoView;
+        @Bind(R.id.local_text) TextView descriptionView;
+        @Bind(R.id.local_address) TextView addressView;
+        @Bind(R.id.local_favorite) ImageView favoriteView;
+        @Bind(R.id.ratingBar) RatingBar ratingView;
 
         public LocalViewHolder(View view) {
             super(view);
-            photoView = (ImageView) view.findViewById(R.id.local_picture);
-            descriptionView = (TextView) view.findViewById(R.id.local_text);
-            addressView = (TextView) view.findViewById(R.id.local_address);
-            favoriteView = (ImageView) view.findViewById(R.id.local_favorite);
-            ratingView = (RatingBar) itemView.findViewById(R.id.ratingBar);
-
             view.setOnClickListener(this);
-
             favoriteView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -86,19 +77,6 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
                 }
             });
             popup.show();
-        }
-
-        public void populate(Cursor data) {
-            String description = data.getString(0);
-            String photo = data.getString(1);
-            String address = data.getString(2);
-
-            descriptionView.setText(description);
-            addressView.setText(address);
-
-            Glide.with(mContext.getApplicationContext())
-                    .load(photo)
-                    .into(photoView);
         }
 
         public void populate(Local data) {
@@ -146,18 +124,15 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
 
     @Override
     public int getItemCount() {
-        if (data != null) {
-            return data.getCount();
-        }
         return mDataSet.size();
     }
 
-    public void swapCursor(Cursor data) {
-        this.data = data;
+    public void replaceData(List<Local> dataSet) {
+        setList(dataSet);
         notifyDataSetChanged();
     }
 
-    public Cursor getCursor() {
-        return this.data;
+    private void setList(List<Local> dataSet) {
+        mDataSet = checkNotNull(dataSet);
     }
 }

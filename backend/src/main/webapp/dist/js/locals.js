@@ -13,7 +13,7 @@ var initBind = function(){
     $('#modal-entity').on('show.bs.modal', resizeMap);
     $('#modal-entity-id-category').on('change', comboCategoryChange);
 
-    $(".form-registration").find("input,textarea,select").not("[type=submit]").jqBootstrapValidation({
+    $(".form-registration").find("input,textarea").not("[type=submit]").jqBootstrapValidation({
           preventSubmit: true,
 
           submitSuccess: function($form, event) {
@@ -123,14 +123,16 @@ var hideImageLoading = function(){
 
 
 
-var getSubCategoriesByIdCategory = function (idCategory){
+var getSubCategoriesByIdCategory = function (idCategories){
     var subCategories = [];
 
-    if(mSubCategories && mSubCategories.items){
-        mSubCategories.items.forEach(function(element, index) {
-            if(element.idCategory == idCategory){
-                subCategories.push(element);
-            }
+    if(mSubCategories && mSubCategories.items && idCategories){
+        idCategories.forEach(function(element1, index1) {
+            mSubCategories.items.forEach(function(element, index) {
+                if(element.idCategory == element1){
+                    subCategories.push(element);
+                }
+            });
         });
     }
 
@@ -142,15 +144,15 @@ var getSubCategoriesByIdCategorySuccess = function(data){
     console.log("ok");
     console.log(data);
 
+    var items = "<option value=\"\" class=\"hide\">Selecione</option>";
+
     if(data){
-        var items = "<option value=\"\">Selecione</option>";
         data.forEach(function(element, index) {
             items += "<option value='" + element.id + "'>" + element.description + "</option>";
         });
-
-        document.getElementById("modal-entity-id-sub-category").innerHTML = items;
     }
 
+    document.getElementById("modal-entity-id-sub-category").innerHTML = items;
 };
 
 
@@ -164,15 +166,15 @@ var getCitiesSuccess = function(data){
     console.log("ok");
     console.log(data);
 
+    var items = "<option value=\"\">Selecione</option>";
+
     if(data && data.items){
-        var items = "<option value=\"\">Selecione</option>";
         data.items.forEach(function(element, index) {
             items += "<option value='" + element.id + "'>" + element.name + "</option>";
         });
+    }
 
-        document.getElementById("modal-entity-id-city").innerHTML = items;
-     }
-
+    document.getElementById("modal-entity-id-city").innerHTML = items;
 };
 
 var getCitiesError = function(data){
@@ -207,19 +209,18 @@ var getCategoriesSuccess = function(data){
     console.log("ok");
     console.log(data);
 
-    if(data && data.items){
-        var title1 = "<option value=\"\">Selecione</option>";
-        var title2 = "<option value=\"\">Categoria</option>";
-        var items = "";
+    var title1 = "<option value=\"\" class=\"hide\">Selecione</option>";
+    var title2 = "<option value=\"\">Categoria</option>";
+    var items = "";
 
+    if(data && data.items){
         data.items.forEach(function(element, index) {
             items += "<option value='" + element.id + "'>" + element.description + "</option>";
         });
-
-        document.getElementById("modal-entity-id-category").innerHTML = title1 + items;
-        document.getElementById("search-id-category").innerHTML = title2 + items;
-
     }
+
+    document.getElementById("modal-entity-id-category").innerHTML =  title1 + items;
+    document.getElementById("search-id-category").innerHTML = title2 + items;
 };
 
 var getCategoriesError = function(data){
@@ -249,17 +250,8 @@ var saveNewEntity = function(){
     var imagePath = document.getElementById("modal-entity-image-path").value;
 
     var idCity = document.getElementById("modal-entity-id-city").value;
-    var idCategory = document.getElementById("modal-entity-id-category").value;
-    var idSubCategory = document.getElementById("modal-entity-id-sub-category").value;
-
-
-    var idCategories = [];
-    var idSubCategories = [];
-
-    idCategories.push(5109799364591616);
-    idCategories.push(5162157834502144);
-
-    idSubCategories.push(5069036098420736);
+    var idCategories = $("#modal-entity-id-category").val();
+    var idSubCategories = $("#modal-entity-id-sub-category").val();
 
     var entity = new Local(description,
                            site,
@@ -315,8 +307,12 @@ var openModalNewEntity = function (){
     document.getElementById("modal-entity-latitude").value = "";
     document.getElementById("modal-entity-longitude").value = "";
     document.getElementById("modal-entity-id-city").value = "";
+
     document.getElementById("modal-entity-id-category").value = "";
-    document.getElementById("modal-entity-id-sub-category").value = "";
+
+    var subCategory = document.getElementById("modal-entity-id-sub-category");
+    subCategory.innerHTML = "";
+    subCategory.value = "";
 
     mPosition = undefined;
     clearMarkers();
@@ -337,7 +333,7 @@ var openModalEditEntity = function (id){
 
 var getEntitySuccess = function(data){
     $('#modal-entity-label').text = "Atualizar local";
-    getSubCategoriesByIdCategory(data.idCategory, getSubCategoriesSuccess);
+    getSubCategoriesByIdCategory(data.idCategories, getSubCategoriesSuccess);
 
 
     document.getElementById("modal-entity-description").value = data.description;
@@ -354,8 +350,9 @@ var getEntitySuccess = function(data){
     document.getElementById("modal-entity-latitude").value = data.latitude;
     document.getElementById("modal-entity-longitude").value = data.longitude;
     document.getElementById("modal-entity-id-city").value = data.idCity;
-    document.getElementById("modal-entity-id-category").value = data.idCategory;    
-    document.getElementById("modal-entity-id-sub-category").value = data.idSubCategory;
+
+    $("#modal-entity-id-category").val(data.idCategories);
+    $("#modal-entity-id-sub-category").val(data.idSubCategories);
 
     showImage(data.imagePath);
 
@@ -399,6 +396,7 @@ var getEntitiesSuccess = function(data){
 
     if(data && data.items){
         var items = "";
+
         data.items.forEach(function(element, index) {
             items += "<tr>";
             items += "  <td>" + element.id + "</td>";
@@ -528,12 +526,10 @@ var hideMessageRegistration = function(){
 
 
 var comboCategoryChange = function(){
-    console.log(this.value);
+    var values = $('#modal-entity-id-category').val();
+    console.log(values);
+    getSubCategoriesByIdCategory(values, getSubCategoriesSuccess);
 
-    if(this.value)
-        getSubCategoriesByIdCategory(this.value, getSubCategoriesSuccess);
-    else
-        cleanComboSubCategory();
 };
 
 

@@ -9,8 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.UI.activities.BaseActivity;
 import com.guideapp.guideapp.UI.activities.LocalDetailActivity;
@@ -23,12 +21,16 @@ import com.guideapp.guideapp.model.Local;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalActivity extends BaseActivity implements RecyclerViewItemClickListener {
-    private RecyclerView mRecyclerView;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class LocalActivity extends BaseActivity implements RecyclerViewItemClickListener, LocalContract.View {
     private LocalAdapter mAdapter;
-    private List<Local> mDataSet;
-    private LinearLayout mLinearLayout;
-    private ImageView mButtonFilter;
+    private LocalContract.UserActionsListener mActionsListener;
+
+    @Bind(R.id.toolbar) Toolbar mToolbar;
+    @Bind(R.id.recycler) RecyclerView mRecyclerView;
+    @Bind(R.id.button_filter) ImageView mButtonFilter;
 
     public static void navigate(Context context) {
         Intent intent = new Intent(context, LocalActivity.class);
@@ -39,35 +41,30 @@ public class LocalActivity extends BaseActivity implements RecyclerViewItemClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local);
+        ButterKnife.bind(this);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mActionsListener = new LocalPresenter();
 
-        setFindViewById();
+        initToolbar();
+        initRecyclerView();
         setViewProperties();
     }
 
-    private void setFindViewById() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
-        mLinearLayout = (LinearLayout) findViewById(R.id.linearLayout2);
-        mButtonFilter = (ImageView) findViewById(R.id.button_filter);
+    private void initToolbar() {
+        setSupportActionBar(mToolbar);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setViewProperties() {
-        mDataSet = new ArrayList<>();
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-
-        mAdapter = new LocalAdapter(this, this, mDataSet);
+    private void initRecyclerView() {
+        mAdapter = new LocalAdapter(this, this, new ArrayList<Local>(0));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST, 310));
+    }
 
+    private void setViewProperties() {
         mButtonFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +75,23 @@ public class LocalActivity extends BaseActivity implements RecyclerViewItemClick
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mActionsListener.loadLocals(false);
+    }
+
+    @Override
     public void onItemClick(View view, int position) {
+        mActionsListener.openNoteDetails(new Local("", ""));
+    }
+
+    @Override
+    public void showLocals(List<Local> locals) {
+        mAdapter.replaceData(locals);
+    }
+
+    @Override
+    public void showLocalDetailUi(Local local) {
         // LocalDetailActivity.navigate(this, view.findViewById(R.id.local_picture));
         LocalDetailActivity.navigate(this);
     }
