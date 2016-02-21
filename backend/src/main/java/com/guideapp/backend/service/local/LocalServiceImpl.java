@@ -32,7 +32,7 @@ public class LocalServiceImpl implements LocalService {
 
     @Override
     public List<Local> listByIdCategory(Long idCategory) throws NotFoundException {
-        return localDAO.listByProperty("idCategory", idCategory);
+        return localDAO.listByProperty("idCategories", idCategory);
     }
 
     @Override
@@ -60,11 +60,11 @@ public class LocalServiceImpl implements LocalService {
             throw new ConflictException("Cidade não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdCategory())){
+        if(ValidationUtil.nullOrEmpty(local.getIdSubCategories())){
             throw new ConflictException("Categoria não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdSubCategory())){
+        if(ValidationUtil.nullOrEmpty(local.getIdSubCategories())){
             throw new ConflictException("Sub-Categoria não informado.");
         }
 
@@ -103,11 +103,11 @@ public class LocalServiceImpl implements LocalService {
             throw new ConflictException("Cidade não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdCategory())){
+        if(ValidationUtil.nullOrEmpty(local.getIdSubCategories())){
             throw new ConflictException("Categoria não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdSubCategory())){
+        if(ValidationUtil.nullOrEmpty(local.getIdSubCategories())){
             throw new ConflictException("Sub-Categoria não informado.");
         }
 

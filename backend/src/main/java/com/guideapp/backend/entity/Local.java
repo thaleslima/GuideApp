@@ -6,6 +6,7 @@ import com.googlecode.objectify.annotation.Index;
 import com.guideapp.backend.util.StringUtil;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by thales on 1/24/16.
@@ -28,9 +29,9 @@ public class Local {
     private Long idCity;
 
     @Index
-    private Long idCategory;
+    private List<Long> idCategories;
 
-    private Long idSubCategory;
+    private List<Long> idSubCategories;
 
     private long timestamp;
 
@@ -114,21 +115,6 @@ public class Local {
         this.idCity = idCity;
     }
 
-    public Long getIdCategory() {
-        return idCategory;
-    }
-
-    public void setIdCategory(Long idCategory) {
-        this.idCategory = idCategory;
-    }
-
-    public Long getIdSubCategory() {
-        return idSubCategory;
-    }
-
-    public void setIdSubCategory(Long idSubCategory) {
-        this.idSubCategory = idSubCategory;
-    }
 
     public String getImagePath() {
         return imagePath;
@@ -144,5 +130,21 @@ public class Local {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public List<Long> getIdCategories() {
+        return idCategories;
+    }
+
+    public void setIdCategories(List<Long> idCategories) {
+        this.idCategories = idCategories;
+    }
+
+    public List<Long> getIdSubCategories() {
+        return idSubCategories;
+    }
+
+    public void setIdSubCategories(List<Long> idSubCategories) {
+        this.idSubCategories = idSubCategories;
     }
 }

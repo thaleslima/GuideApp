@@ -252,6 +252,15 @@ var saveNewEntity = function(){
     var idCategory = document.getElementById("modal-entity-id-category").value;
     var idSubCategory = document.getElementById("modal-entity-id-sub-category").value;
 
+
+    var idCategories = [];
+    var idSubCategories = [];
+
+    idCategories.push(5109799364591616);
+    idCategories.push(5162157834502144);
+
+    idSubCategories.push(5069036098420736);
+
     var entity = new Local(description,
                            site,
                            phone,
@@ -262,8 +271,8 @@ var saveNewEntity = function(){
                            longitude,
                            imagePath,
                            idCity,
-                           idCategory,
-                           idSubCategory);
+                           idCategories,
+                           idSubCategories);
 
 
 

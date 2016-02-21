@@ -260,7 +260,7 @@ function SubCategory(description, idCategory) {
 }
 
 function Local(description, site, phone, address, wifi, detail, latitude, longitude, imagePath, idCity,
-                idCategory, idSubCategory) {
+                idCategories, idSubCategories) {
   this.description = description;
   this.site = site;
   this.phone = phone;
@@ -271,8 +271,8 @@ function Local(description, site, phone, address, wifi, detail, latitude, longit
   this.longitude = longitude;
   this.imagePath = imagePath;
   this.idCity = idCity;
-  this.idCategory = idCategory;
-  this.idSubCategory = idSubCategory;
+  this.idCategories = idCategories;
+  this.idSubCategories = idSubCategories;
 }
 
 
