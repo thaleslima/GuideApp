@@ -33,10 +33,23 @@ var initPage = function() {
     btnNewEntity.click(openModalNewEntity);
     btnNewEntity.removeClass('disabled');
 
-    getLocals(getEntitiesSuccess, getEntitiesError);
+    var btnSearchEntity = $('#search-entity');
+    btnSearchEntity.click(searchEntity);
+    btnSearchEntity.removeClass('disabled');
+
     getCities(getCitiesSuccess, getCitiesError);
     getCategories(getCategoriesSuccess, getCategoriesError);
     getSubCategories(getSubCategoriesSuccess, getSubCategoriesError);
+};
+
+
+var searchEntity = function(){
+    var idCategory = document.getElementById("search-id-category").value;
+
+    initDataGrid();
+    
+    if(idCategory)
+        getLocalsByIdCategory(idCategory, getEntitiesSuccess, getEntitiesError);
 };
 
 
@@ -141,7 +154,9 @@ var getSubCategoriesByIdCategorySuccess = function(data){
 };
 
 
-
+var initDataGrid = function(){
+    document.getElementById("body-table-entity").innerHTML = "";
+};
 
 
 
@@ -199,6 +214,8 @@ var getCategoriesSuccess = function(data){
         });
 
         document.getElementById("modal-entity-id-category").innerHTML = items;
+        document.getElementById("search-id-category").innerHTML = items;
+
     }
 };
 
@@ -260,8 +277,7 @@ var saveNewEntity = function(){
 var saveNewEntitySuccess = function(data){
     console.log("success");
     $('#modal-entity').modal("hide");
-
-    getLocals(getEntitiesSuccess, getEntitiesError);
+    initDataGrid();
 };
 
 var saveNewEntityError = function(data){
@@ -354,7 +370,7 @@ var deleteEntitySuccess = function(data){
     console.log("success");
     console.log(data);
 
-    getLocals(getEntitiesSuccess, getEntitiesError);
+    initDataGrid();
 };
 
 var deleteEntityError = function(data){

@@ -56,11 +56,13 @@ public class GuideAppEndpoint {
 
 
     @ApiMethod(name = "getLocals", path = "local", httpMethod = "GET")
-    public List<Local> getLocals(@Nullable @Named("search") String search) throws NotFoundException {
-        if (search == null || search.isEmpty())
-            return localService.list();
-        else
+    public List<Local> getLocals(@Nullable @Named("search") String search, @Nullable @Named("idCategory") Long idCategory) throws NotFoundException {
+        if(search != null && !search.isEmpty())
             return localService.list(search);
+        else if (idCategory != null && idCategory > 0)
+            return localService.listByIdCategory(idCategory);
+        else
+            return localService.list();
     }
 
     @ApiMethod(name = "getLocal", path = "local/{id}", httpMethod = ApiMethod.HttpMethod.GET)

@@ -29,7 +29,7 @@ public class Local {
 
     @Index
     private Long idCategory;
-    
+
     private Long idSubCategory;
 
     private long timestamp;

@@ -31,6 +31,11 @@ public class LocalServiceImpl implements LocalService {
     }
 
     @Override
+    public List<Local> listByIdCategory(Long idCategory) throws NotFoundException {
+        return localDAO.listByProperty("idCategory", idCategory);
+    }
+
+    @Override
     public Local getById(Long id) throws NotFoundException {
         Local local = localDAO.getByKey(id);
 

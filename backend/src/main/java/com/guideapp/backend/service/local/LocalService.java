@@ -12,6 +12,7 @@ import java.util.List;
 public interface LocalService {
     List<Local> list();
     List<Local> list(String search) throws NotFoundException;
+    List<Local> listByIdCategory(Long idCategory) throws NotFoundException;
     Local getById(Long id) throws NotFoundException;
     void insert(Local local) throws ConflictException, NotFoundException;
     void update(Local local) throws ConflictException, NotFoundException;

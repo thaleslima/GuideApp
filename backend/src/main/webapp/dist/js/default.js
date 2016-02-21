@@ -166,6 +166,13 @@ var getLocals = function(success, error){
     });
 }
 
+var getLocalsByIdCategory = function(idCategory, success, error){
+    gapi.client.guideAppApi.getLocals({'idCategory': idCategory}).execute(function(resp) {
+      responseService(resp, success, error);
+    });
+}
+
+
 var getLocal = function(id, success, error){
     isAuthenticatedEndReturnLogin();
     gapi.client.guideAppApi.getLocal({'id': id}).execute(function(resp) {
