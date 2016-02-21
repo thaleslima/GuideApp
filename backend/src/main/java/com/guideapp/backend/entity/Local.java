@@ -2,6 +2,7 @@ package com.guideapp.backend.entity;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import com.guideapp.backend.util.StringUtil;
 
 import java.util.Date;
@@ -25,7 +26,10 @@ public class Local {
     private double longitude;
     private String imagePath;
     private Long idCity;
+
+    @Index
     private Long idCategory;
+    
     private Long idSubCategory;
 
     private long timestamp;
