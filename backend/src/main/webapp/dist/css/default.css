@@ -360,3 +360,17 @@ table.dataTable thead .sorting:after {
     -webkit-border-radius: 150px;
     -moz-border-radius: 150px;
 }
+
+.panel-signin{
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.abcRioButton{
+    width: 100% !important;
+}
+
+.login-panel{
+    width: 400px;
+    margin: 100px auto ;
+}

@@ -23,7 +23,7 @@ function initAuth() {
     });
 }
 
-function init() {
+function initService() {
       var apiName = 'guideAppApi';
       var apiVersion = 'v1';
       var apiRoot = 'https://' + window.location.host + '/_ah/api';
