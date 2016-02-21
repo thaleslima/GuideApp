@@ -70,6 +70,10 @@ public class LocalServiceImpl implements LocalService {
             throw new ConflictException("Longitude não informado.");
         }
 
+        if(ValidationUtil.nullOrEmpty(local.getImagePath())){
+            throw new ConflictException("Imagem não informada.");
+        }
+
         localDAO.insert(local);
     }
 
@@ -106,6 +110,10 @@ public class LocalServiceImpl implements LocalService {
 
         if(ValidationUtil.nullOrEmpty(local.getLatitude())){
             throw new ConflictException("Longitude não informado.");
+        }
+
+        if(ValidationUtil.nullOrEmpty(local.getImagePath())){
+            throw new ConflictException("Imagem não informada.");
         }
 
         Local l = localDAO.getByKey(local.getId());

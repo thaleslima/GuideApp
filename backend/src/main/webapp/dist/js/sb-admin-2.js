@@ -5,13 +5,13 @@ function initAuth() {
         auth2 = gapi.auth2.init({
           client_id: '904382967622-sl60lsln4f5fmnqac53n2medldl6nt40.apps.googleusercontent.com',
           fetch_basic_profile: true,
-          scope: 'profile'
+          scope: 'profile https://www.googleapis.com/auth/devstorage.full_control',
         });
 
         auth2.then(function () {
           if (!auth2.isSignedIn.get()) {
             console.log("not logged!");
-            window.location.href = "/pages/login.html";
+            //window.location.href = "/pages/login.html";
           } else {
             console.log("logged!");
             var profile = auth2.currentUser.get().getBasicProfile();
@@ -20,7 +20,7 @@ function initAuth() {
             document.getElementById("image-user").src = profile.getImageUrl();
           }
         });
-      });
+    });
 }
 
 function init() {
@@ -194,8 +194,38 @@ var removeLocal = function(id, success, error){
     });
 }
 
+var link_storage = "https://storage.googleapis.com/guide-app/";
 
+var uploadFileToCloud = function(file, success, error){
+    var size = file.size;
+    var name = file.name;
 
+    var url = "https://www.googleapis.com/upload/storage/v1/b/guide-app/o?uploadType=media&name=" + name;
+
+    var auth = gapi.auth2.getAuthInstance();
+    var token = auth.currentUser.get().getAuthResponse().access_token;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    xhr.setRequestHeader("Content-Type", "image/jpeg");
+    xhr.setRequestHeader("x-goog-project-id", "904382967622");
+    xhr.setRequestHeader("Authorization", "Bearer " + token);
+
+    xhr.send(file);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+
+            var response = JSON.parse(xhr.responseText);
+
+            if(xhr.status == 200){
+                success(link_storage + response.name)
+            } else {
+                error(response)
+            }
+        }
+    }
+}
 
 
 
@@ -222,7 +252,7 @@ function SubCategory(description, idCategory) {
   this.idCategory = idCategory;
 }
 
-function Local(description, site, phone, address, wifi, detail, latitude, longitude, idCity,
+function Local(description, site, phone, address, wifi, detail, latitude, longitude, imagePath, idCity,
                 idCategory, idSubCategory) {
   this.description = description;
   this.site = site;
@@ -232,6 +262,7 @@ function Local(description, site, phone, address, wifi, detail, latitude, longit
   this.detail = detail;
   this.latitude = latitude;
   this.longitude = longitude;
+  this.imagePath = imagePath;
   this.idCity = idCity;
   this.idCategory = idCategory;
   this.idSubCategory = idSubCategory;
@@ -281,6 +312,9 @@ function onSignIn(googleUser) {
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail());
+
+  var id_token = googleUser.getAuthResponse().id_token;
+  console.log("ID Token: " + id_token);
 
   window.location.href = "/pages/index.html";
 }

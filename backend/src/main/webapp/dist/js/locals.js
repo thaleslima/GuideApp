@@ -24,6 +24,8 @@ var initBind = function(){
           }
       }
     );
+
+    $("#file").change(sendFileToCloud);
 };
 
 
@@ -39,6 +41,71 @@ var initPage = function() {
 };
 
 
+var sendFileToCloud = function(){
+    hideMessageRegistration();
+    var fileInput = document.getElementById('file');
+
+    if(fileInput.files.length > 0){
+        showImageLoading();
+        uploadFileToCloud(fileInput.files[0], sendFileToCloudSuccess, sendFileToCloudError);
+    }
+}
+
+var sendFileToCloudSuccess = function(data){
+    console.log("success");
+    console.log(data);
+
+    showImage(data);
+};
+
+
+var sendFileToCloudError = function(data){
+    console.log("error");
+    console.log(data);
+    hideImageLoading();
+
+    showMessageRegistration("Problema ao enviar imagem. " + data.error.message);
+};
+
+
+
+var showImage = function(data){
+    var imageLocal = $("#image-local");
+    imageLocal.attr("src", data);
+    imageLocal.removeClass("hide");
+
+    $("#modal-entity-image-path").val(data);
+    $("#file").val("");
+
+    $(".image").removeClass("empty");
+    $(".image-legend").addClass("hide");
+    $(".image-loading").addClass("hide");
+}
+
+var hideImage = function(){
+    var imageLocal = $("#image-local");
+    imageLocal.attr("src", "");
+    imageLocal.addClass("hide");
+
+    $("#modal-entity-image-path").val("");
+    $("#file").val("");
+
+    $(".image").addClass("empty");
+    $(".image-legend").removeClass("hide");
+}
+
+var showImageLoading = function(){
+    $(".image-loading").removeClass("hide");
+    $(".image-legend").addClass("hide");
+    $("#image-local").addClass("hide");
+}
+
+
+var hideImageLoading = function(){
+    $(".image-loading").addClass("hide");
+    $(".image-legend").removeClass("hide");
+    $("#image-local").addClass("hide");
+}
 
 
 
@@ -160,6 +227,8 @@ var saveNewEntity = function(){
     var detail = document.getElementById("modal-entity-detail").value;
     var latitude = document.getElementById("modal-entity-latitude").value;
     var longitude = document.getElementById("modal-entity-longitude").value;
+    var imagePath = document.getElementById("modal-entity-image-path").value;
+
     var idCity = document.getElementById("modal-entity-id-city").value;
     var idCategory = document.getElementById("modal-entity-id-category").value;
     var idSubCategory = document.getElementById("modal-entity-id-sub-category").value;
@@ -172,6 +241,7 @@ var saveNewEntity = function(){
                            detail,
                            latitude,
                            longitude,
+                           imagePath,
                            idCity,
                            idCategory,
                            idSubCategory);
@@ -225,6 +295,8 @@ var openModalNewEntity = function (){
     clearMarkers();
     clearTextErrors();
 
+    hideImage();
+
     $('#modal-entity-label').text = "Inserir local";
 	$('#modal-entity').modal("show");
 };
@@ -257,6 +329,8 @@ var getEntitySuccess = function(data){
     document.getElementById("modal-entity-id-city").value = data.idCity;
     document.getElementById("modal-entity-id-category").value = data.idCategory;    
     document.getElementById("modal-entity-id-sub-category").value = data.idSubCategory;
+
+    showImage(data.imagePath);
 
     clearTextErrors();
     mPosition = {latitude: data.latitude, longitude: data.longitude};

@@ -182,7 +182,10 @@ var getEntitiesSuccess = function(data){
 
 var getEntitiesError = function(data){
     console.log("error");
-    console.log(data);
+    console.log(data.error.message);
+
+
+
 };
 
 

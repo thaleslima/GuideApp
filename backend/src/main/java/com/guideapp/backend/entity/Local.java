@@ -21,6 +21,7 @@ public class Local {
     private String detail;
     private double latitude;
     private double longitude;
+    private String imagePath;
     private Long idCity;
     private Long idCategory;
     private Long idSubCategory;
@@ -120,5 +121,13 @@ public class Local {
 
     public void setIdSubCategory(Long idSubCategory) {
         this.idSubCategory = idSubCategory;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = StringUtil.removeSpaceWhite(imagePath);
     }
 }
