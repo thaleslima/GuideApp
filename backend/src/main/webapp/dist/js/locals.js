@@ -47,7 +47,7 @@ var searchEntity = function(){
     var idCategory = document.getElementById("search-id-category").value;
 
     initDataGrid();
-    
+
     if(idCategory)
         getLocalsByIdCategory(idCategory, getEntitiesSuccess, getEntitiesError);
 };
@@ -208,13 +208,16 @@ var getCategoriesSuccess = function(data){
     console.log(data);
 
     if(data && data.items){
-        var items = "<option value=\"\">Selecione</option>";
+        var title1 = "<option value=\"\">Selecione</option>";
+        var title2 = "<option value=\"\">Categoria</option>";
+        var items = "";
+
         data.items.forEach(function(element, index) {
             items += "<option value='" + element.id + "'>" + element.description + "</option>";
         });
 
-        document.getElementById("modal-entity-id-category").innerHTML = items;
-        document.getElementById("search-id-category").innerHTML = items;
+        document.getElementById("modal-entity-id-category").innerHTML = title1 + items;
+        document.getElementById("search-id-category").innerHTML = title2 + items;
 
     }
 };
