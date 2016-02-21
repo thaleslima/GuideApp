@@ -8,6 +8,7 @@ import com.guideapp.backend.entity.City;
 import com.guideapp.backend.entity.Local;
 import com.guideapp.backend.util.ValidationUtil;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,6 +57,7 @@ public class CityServiceImpl implements CityService {
             throw new ConflictException("Estado não informado.");
         }
 
+        city.setTimestamp(new Date().getTime());
         cityDAO.insert(city);
     }
 
@@ -84,6 +86,7 @@ public class CityServiceImpl implements CityService {
             throw new NotFoundException("Cidade não encontrada.");
         }
 
+        city.setTimestamp(new Date().getTime());
         cityDAO.insert(city);
     }
 

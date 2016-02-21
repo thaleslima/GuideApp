@@ -4,6 +4,8 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.guideapp.backend.util.StringUtil;
 
+import java.util.Date;
+
 /**
  * Created by thales on 1/24/16.
  */
@@ -14,6 +16,8 @@ public class City {
     private Long id;
     private String name;
     private String uf;
+
+    private long timestamp;
 
     public Long getId() {
         return id;
@@ -37,5 +41,13 @@ public class City {
 
     public void setUf(String uf) {
         this.uf = StringUtil.removeSpaceWhite(uf);
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

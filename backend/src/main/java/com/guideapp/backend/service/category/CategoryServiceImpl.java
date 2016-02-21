@@ -7,6 +7,7 @@ import com.guideapp.backend.dao.category.CategoryDAOImpl;
 import com.guideapp.backend.entity.Category;
 import com.guideapp.backend.util.ValidationUtil;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,6 +53,7 @@ public class CategoryServiceImpl implements CategoryService {
             throw new ConflictException("Descrição não informada.");
         }
 
+        category.setTimestamp(new Date().getTime());
         categoryDAO.insert(category);
     }
 
@@ -75,6 +77,7 @@ public class CategoryServiceImpl implements CategoryService {
             throw new NotFoundException("Categoria não encontrada.");
         }
 
+        category.setTimestamp(new Date().getTime());
         categoryDAO.insert(category);
     }
 

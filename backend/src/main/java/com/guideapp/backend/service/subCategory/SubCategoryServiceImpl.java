@@ -11,6 +11,7 @@ import com.guideapp.backend.entity.SubCategory;
 import com.guideapp.backend.service.category.CategoryService;
 import com.guideapp.backend.util.ValidationUtil;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,6 +60,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
             throw new ConflictException("Categoria não informada.");
         }
 
+        subCategory.setTimestamp(new Date().getTime());
         subCategoryDAO.insert(subCategory);
     }
 
@@ -86,6 +88,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
             throw new NotFoundException("Sub-Categoria não encontrada.");
         }
 
+        subCategory.setTimestamp(new Date().getTime());
         subCategoryDAO.insert(subCategory);
     }
 

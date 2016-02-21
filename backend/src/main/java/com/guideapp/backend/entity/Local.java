@@ -4,6 +4,8 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.guideapp.backend.util.StringUtil;
 
+import java.util.Date;
+
 /**
  * Created by thales on 1/24/16.
  */
@@ -26,6 +28,7 @@ public class Local {
     private Long idCategory;
     private Long idSubCategory;
 
+    private long timestamp;
 
     public Long getId() {
         return id;
@@ -129,5 +132,13 @@ public class Local {
 
     public void setImagePath(String imagePath) {
         this.imagePath = StringUtil.removeSpaceWhite(imagePath);
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

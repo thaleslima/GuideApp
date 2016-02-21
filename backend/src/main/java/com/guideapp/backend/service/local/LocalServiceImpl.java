@@ -7,6 +7,7 @@ import com.guideapp.backend.dao.local.LocalDAOImpl;
 import com.guideapp.backend.entity.Local;
 import com.guideapp.backend.util.ValidationUtil;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -74,6 +75,7 @@ public class LocalServiceImpl implements LocalService {
             throw new ConflictException("Imagem não informada.");
         }
 
+        local.setTimestamp(new Date().getTime());
         localDAO.insert(local);
     }
 
@@ -122,6 +124,7 @@ public class LocalServiceImpl implements LocalService {
             throw new NotFoundException("Local não encontrado.");
         }
 
+        local.setTimestamp(new Date().getTime());
         localDAO.update(local);
     }
 

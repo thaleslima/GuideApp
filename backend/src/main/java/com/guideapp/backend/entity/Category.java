@@ -13,6 +13,8 @@ public class Category {
     private Long id;
     private String description;
 
+    private long timestamp;
+
     public Long getId() {
         return id;
     }
@@ -27,5 +29,13 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = StringUtil.removeSpaceWhite(description);
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
