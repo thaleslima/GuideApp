@@ -19,7 +19,7 @@
 
     <!-- Custom CSS -->
     <link href="../dist/css/default.css" rel="stylesheet">
-
+    <link href="../dist/css/index.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet"
           type="text/css">
@@ -98,10 +98,12 @@
 
     <!-- Page Content -->
     <div id="page-wrapper">
-        <div class="container-fluid">
 
 
-        </div>
+                    <div id="map-canvas"></div>
+
+
+
         <!-- /.container-fluid -->
     </div>
     <!-- /#page-wrapper -->
@@ -123,10 +125,15 @@
 <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
+<!-- Google Maps -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCB31f3Iz9ire66xfdSLP8Wrvm2iVKhctE"></script>
+
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/default.js"></script>
+<script src="../dist/js/index.js"></script>
 
 <!-- Google APIs -->
+<script src="https://apis.google.com/js/client.js?onload=initService"></script>
 <script src="https://apis.google.com/js/platform.js?onload=initAuth" async defer></script>
 </body>
 

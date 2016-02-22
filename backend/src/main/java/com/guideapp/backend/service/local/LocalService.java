@@ -10,9 +10,8 @@ import java.util.List;
  * Created by thales on 1/24/16.
  */
 public interface LocalService {
-    List<Local> list();
+    List<Local> list(Long idCity, Long idCategory);
     List<Local> list(String search) throws NotFoundException;
-    List<Local> listByIdCategory(Long idCategory) throws NotFoundException;
     Local getById(Long id) throws NotFoundException;
     void insert(Local local) throws ConflictException, NotFoundException;
     void update(Local local) throws ConflictException, NotFoundException;

@@ -4,7 +4,10 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.Query;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import static com.guideapp.backend.util.OfyService.ofy;
 
@@ -69,5 +72,23 @@ public class ObjectifyGenericDAO<T> implements IGenericDAO<T> {
     @Override
     public List<T> listByProperty(String propName, Object propValue) {
         return ofy().load().type(clazz).filter(propName, propValue).list();
+    }
+
+    @Override
+    public List<T> listByProperties(Map<String, Object> filters) {
+        Query<T> query = ofy().load().type(clazz);
+        Collection<com.google.appengine.api.datastore.Query.Filter> filters1 = new ArrayList<>();
+
+        for (Map.Entry<String, Object> entry : filters.entrySet()) {
+            filters1.add(new com.google.appengine.api.datastore.Query.FilterPredicate(
+                    entry.getKey(),
+                    com.google.appengine.api.datastore.Query.FilterOperator.EQUAL,
+                    entry.getValue()));
+        }
+
+        com.google.appengine.api.datastore.Query.Filter filter
+                = com.google.appengine.api.datastore.Query.CompositeFilterOperator.and(filters1);
+
+        return query.filter(filter).list();
     }
 }

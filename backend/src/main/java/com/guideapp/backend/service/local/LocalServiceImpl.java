@@ -9,6 +9,8 @@ import com.guideapp.backend.util.ValidationUtil;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by thales on 1/24/16.
@@ -21,18 +23,24 @@ public class LocalServiceImpl implements LocalService {
     }
 
     @Override
-    public List<Local> list() {
+    public List<Local> list(Long idCity, Long idCategory) {
+        Map<String, Object> filter = new TreeMap<>();
+
+        if(idCity != null)
+            filter.put("idCity", idCity);
+
+        if(idCategory != null)
+            filter.put("idCategories", idCategory);
+
+        if(!filter.isEmpty())
+            return localDAO.listByProperties(filter);
+
         return localDAO.listAll();
     }
 
     @Override
     public List<Local> list(String search) throws NotFoundException {
         return localDAO.listByProperty("description", search);
-    }
-
-    @Override
-    public List<Local> listByIdCategory(Long idCategory) throws NotFoundException {
-        return localDAO.listByProperty("idCategories", idCategory);
     }
 
     @Override

@@ -1,0 +1,23 @@
+#map-canvas {
+    position: absolute;
+    bottom: 0px;
+    top: 60px;
+    width: 100%;
+    margin-right: 100px;
+}
+
+.container-fluid{
+    margin-right: 100px;
+}
+
+#page-wrapper {
+    padding: inherit;
+}
+@media (min-width: 768px){
+    #page-wrapper {
+        padding: 0 30px;
+        position: inherit;
+        margin: 0 0 0 -30px;
+    }
+}
+

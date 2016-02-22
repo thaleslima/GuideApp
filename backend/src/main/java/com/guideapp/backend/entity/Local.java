@@ -26,6 +26,8 @@ public class Local {
     private double latitude;
     private double longitude;
     private String imagePath;
+
+    @Index
     private Long idCity;
 
     @Index

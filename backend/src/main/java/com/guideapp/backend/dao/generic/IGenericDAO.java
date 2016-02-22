@@ -3,6 +3,7 @@ package com.guideapp.backend.dao.generic;
 import com.googlecode.objectify.Key;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by thales on 1/24/16.
@@ -28,4 +29,6 @@ public interface IGenericDAO<T> {
     T getByKey(Long id);
 
     List<T> listByProperty(String propName, Object propValue);
+
+    List<T> listByProperties(Map<String, Object> filters);
 }
