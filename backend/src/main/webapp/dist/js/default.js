@@ -1,6 +1,9 @@
 var auth2;
 var dev = false;
 
+var mLatitude = -14.8835514; //Brazil
+var mLongitude = -57.8335856; //Brazil
+
 function isLocalHost() {
     if (window.location.hostname == 'localhost'
           || window.location.hostname == '127.0.0.1'
@@ -23,7 +26,7 @@ function initAuth() {
         auth2.then(function () {
           if (!auth2.isSignedIn.get()) {
             console.log("not logged!");
-            //window.location.href = "/pages/login.html";
+            window.location.href = "/pages/login.html";
           } else {
             console.log("logged!");
             var profile = auth2.currentUser.get().getBasicProfile();

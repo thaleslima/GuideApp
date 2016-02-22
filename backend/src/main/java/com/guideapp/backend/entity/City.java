@@ -17,6 +17,9 @@ public class City {
     private String name;
     private String uf;
 
+    private double latitude;
+    private double longitude;
+
     private long timestamp;
 
     public Long getId() {
@@ -49,5 +52,21 @@ public class City {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

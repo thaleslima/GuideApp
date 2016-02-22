@@ -1,9 +1,11 @@
 var mSubCategories = {};
+
 var mPosition = {};
-var mCenter = new google.maps.LatLng(-20.3452914,-46.8528537);
+var mCenter = new google.maps.LatLng(mLatitude, mLongitude);
 var mMap = {};
 var mMarkersArray = [];
-var mMarker = new google.maps.Marker({position:mCenter});
+var mZoom = 3;
+var mZoomCity = 16;
 
 var init = function () {
 	initBind();
@@ -11,6 +13,8 @@ var init = function () {
 
 var initBind = function(){
     $('#modal-entity').on('show.bs.modal', resizeMap);
+    $('#modal-entity-id-city').on('change', comboCityChange);
+
     $('#modal-entity-id-category').on('change', comboCategoryChange);
 
     $(".form-registration").find("input,textarea").not("[type=submit]").jqBootstrapValidation({
@@ -42,6 +46,15 @@ var initPage = function() {
     getSubCategories(getSubCategoriesSuccess, getSubCategoriesError);
 };
 
+var comboCityChange = function(){
+
+    var latitude = $(this).find(':selected').data('latitude');
+    var longitude = $(this).find(':selected').data('longitude');
+
+    var position = new google.maps.LatLng(latitude,longitude);
+    mMap.setZoom(mZoomCity);
+    mMap.setCenter(position);
+}
 
 var searchEntity = function(){
     var idCategory = document.getElementById("search-id-category").value;
@@ -172,7 +185,8 @@ var getCitiesSuccess = function(data){
 
     if(data && data.items){
         data.items.forEach(function(element, index) {
-            items += "<option value='" + element.id + "'>" + element.name + "</option>";
+            items += "<option value='" + element.id + "'  data-latitude='" + element.latitude;
+            items += "' data-longitude='" + element.longitude + "'>" + element.name + "</option>";
         });
     }
 
@@ -451,11 +465,6 @@ var initializeMap = function() {
         addMarker(mMap, event.latLng.lat(), event.latLng.lng())
         clearTextErrorsMap();
     });
-
-    google.maps.event.addListener(mMarker, 'click', function() {
-        infowindow.setContent(contentString);
-        infowindow.open(mMap, mMarker);
-    });
 };
 
 var resizeMap = function() {
@@ -467,16 +476,7 @@ var resizingMap = function() {
     if(typeof mMap == "undefined") return;
     google.maps.event.trigger(mMap, "resize");
 
-    mMap.setZoom(14);
-
-    if(mPosition){
-        var position = new google.maps.LatLng(mPosition.latitude, mPosition.longitude);
-        mMap.setCenter(position);
-        addMarker(mMap, mPosition.latitude, mPosition.longitude)
-
-    } else {
-        mMap.setCenter(mCenter);
-    }
+    initPositionMap();
 };
 
 
@@ -504,6 +504,17 @@ var clearTextErrorsMap = function(){
     });
 }
 
+var initPositionMap = function(){
+    if(mPosition){
+        var position = new google.maps.LatLng(mPosition.latitude, mPosition.longitude);
+        mMap.setZoom(mZoomCity);
+        mMap.setCenter(position);
+        addMarker(mMap, mPosition.latitude, mPosition.longitude)
+    } else {
+        mMap.setZoom(mZoom);
+        mMap.setCenter(mCenter);
+    }
+}
 
 
 
