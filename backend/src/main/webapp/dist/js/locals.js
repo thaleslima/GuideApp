@@ -45,11 +45,11 @@ var initPage = function() {
 
 var searchEntity = function(){
     var idCategory = document.getElementById("search-id-category").value;
-
+    var idCity = document.getElementById("search-id-city").value;
     initDataGrid();
 
-    if(idCategory)
-        getLocalsByIdCategory(idCategory, getEntitiesSuccess, getEntitiesError);
+    if(idCategory && idCity)
+        getLocalsByIdCategory(idCity, idCategory, getEntitiesSuccess, getEntitiesError);
 };
 
 
@@ -166,7 +166,9 @@ var getCitiesSuccess = function(data){
     console.log("ok");
     console.log(data);
 
-    var items = "<option value=\"\">Selecione</option>";
+    var title1 = "<option value=\"\">Selecione</option>";
+    var title2 = "<option value=\"\">Cidade</option>";
+    var items = "";
 
     if(data && data.items){
         data.items.forEach(function(element, index) {
@@ -174,7 +176,8 @@ var getCitiesSuccess = function(data){
         });
     }
 
-    document.getElementById("modal-entity-id-city").innerHTML = items;
+    document.getElementById("modal-entity-id-city").innerHTML = title1 + items;
+    document.getElementById("search-id-city").innerHTML = title2 + items;
 };
 
 var getCitiesError = function(data){

@@ -1,4 +1,16 @@
 var auth2;
+var dev = false;
+
+function isLocalHost() {
+    if (window.location.hostname == 'localhost'
+          || window.location.hostname == '127.0.0.1'
+          || ((window.location.port != "") && (window.location.port > 1023))) {
+
+          return true;
+    }
+
+    return false;
+}
 
 function initAuth() {
     gapi.load('auth2', function() {
@@ -27,12 +39,11 @@ function initService() {
       var apiName = 'guideAppApi';
       var apiVersion = 'v1';
       var apiRoot = 'https://' + window.location.host + '/_ah/api';
-      if (window.location.hostname == 'localhost'
-          || window.location.hostname == '127.0.0.1'
-          || ((window.location.port != "") && (window.location.port > 1023))) {
-            // We're probably running against the DevAppServer
-            //apiRoot = 'http://' + window.location.host + '/_ah/api';
-            apiRoot = 'https://guideapp-br.appspot.com/_ah/api';
+      if (isLocalHost()) {
+            if(dev)
+                apiRoot = 'http://' + window.location.host + '/_ah/api';
+            else
+                apiRoot = 'https://guideapp-br.appspot.com/_ah/api';
       }
 
       gapi.client.load(apiName, apiVersion, initPage, apiRoot);
@@ -166,8 +177,8 @@ var getLocals = function(success, error){
     });
 }
 
-var getLocalsByIdCategory = function(idCategory, success, error){
-    gapi.client.guideAppApi.getLocals({'idCategory': idCategory}).execute(function(resp) {
+var getLocalsByIdCategory = function(idCity, idCategory, success, error){
+    gapi.client.guideAppApi.getLocals({'idCity': idCity, 'idCategory': idCategory}).execute(function(resp) {
       responseService(resp, success, error);
     });
 }
@@ -206,8 +217,12 @@ var link_storage = "https://storage.googleapis.com/guide-app/";
 var uploadFileToCloud = function(file, success, error){
     var size = file.size;
     var name = file.name;
+    var url;
 
-    var url = "https://www.googleapis.com/upload/storage/v1/b/guide-app/o?uploadType=media&name=" + name;
+    if (dev)
+        url = "https://www.googleapis.com/upload/storage/v1/b/guide-app-dev/o?uploadType=media&name=" + name;
+    else
+        url = "https://www.googleapis.com/upload/storage/v1/b/guide-app/o?uploadType=media&name=" + name;
 
     var auth = gapi.auth2.getAuthInstance();
     var token = auth.currentUser.get().getAuthResponse().access_token;
