@@ -1,10 +1,9 @@
 var mPosition = {};
-var mCenter = new google.maps.LatLng(-14.8835514,-57.8335856);
+var mCenter = new google.maps.LatLng(mLatitude, mLongitude);
 var mMap = {};
 var mMarkersArray = [];
-var mMarker = new google.maps.Marker({position:mCenter});
 var mZoom = 3;
-var mZoomCity = 14;
+var mZoomCity = 16;
 
 var init = function () {
 	initBind();
@@ -231,11 +230,6 @@ var initializeMap = function() {
     google.maps.event.addListener(mMap, 'click', function(event) {
         addMarker(mMap, event.latLng.lat(), event.latLng.lng())
         clearTextErrorsMap();
-    });
-
-    google.maps.event.addListener(mMarker, 'click', function() {
-        infowindow.setContent(contentString);
-        infowindow.open(mMap, mMarker);
     });
 };
 
