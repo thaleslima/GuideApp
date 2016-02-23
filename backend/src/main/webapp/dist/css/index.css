@@ -2,8 +2,9 @@
     position: absolute;
     bottom: 0px;
     top: 60px;
-    width: 100%;
-    margin-right: 100px;
+    right: 0px;
+    left: 0px;
+    z-index: 100;
 }
 
 .container-fluid{
@@ -12,12 +13,27 @@
 
 #page-wrapper {
     padding: inherit;
+
 }
+
+.filter{
+    z-index: 1000;
+    padding-left: 15px;
+    margin-top: 7px;
+}
+
+
 @media (min-width: 768px){
+    #map-canvas {
+        left: 250px;
+    }
+
     #page-wrapper {
-        padding: 0 30px;
-        position: inherit;
-        margin: 0 0 0 -30px;
+        padding-left: 130px
     }
 }
 
+
+#search-id-city{
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+}

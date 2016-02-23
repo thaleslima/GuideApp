@@ -5,7 +5,7 @@ var mCenter = new google.maps.LatLng(mLatitude, mLongitude);
 var mMap = {};
 var mMarkersArray = [];
 var mZoom = 3;
-var mZoomCity = 16;
+var mZoomCity = 14;
 
 var init = function () {
 	initBind();

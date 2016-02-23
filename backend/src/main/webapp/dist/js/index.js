@@ -1,25 +1,80 @@
 var mPosition = {};
-var mCenter = new google.maps.LatLng(-20.3452914,-46.8528537);
+var mCenter = new google.maps.LatLng(mLatitude,mLongitude);
 var mMap = {};
 var mMarkersArray = [];
 var mMarker = new google.maps.Marker({position:mCenter});
+var mZoom = 4;
+var mZoomCity = 14;
 
 var init = function () {
 	initBind();
 };
 
 var initBind = function(){
+    $('#search-id-city').on('change', comboCityChange);
 };
 
 
 var initPage = function() {
+    getCities(getCitiesSuccess, getCitiesError);
+};
 
+var getCitiesSuccess = function(data){
+    console.log("ok");
+    console.log(data);
+
+    var items = "<option value=\"\">Cidade</option>";
+
+    if(data && data.items){
+        data.items.forEach(function(element, index) {
+            items += "<option value='" + element.id + "'  data-latitude='" + element.latitude;
+            items += "' data-longitude='" + element.longitude + "'>" + element.name + "</option>";
+        });
+    }
+
+    document.getElementById("search-id-city").innerHTML =  items;
+};
+
+var getCitiesError = function(data){
+    console.log("error");
+    console.log(data);
+};
+
+var comboCityChange = function(){
+    var latitude = $(this).find(':selected').data('latitude');
+    var longitude = $(this).find(':selected').data('longitude');
+
+    var position = new google.maps.LatLng(latitude,longitude);
+    mMap.setZoom(mZoomCity);
+    mMap.setCenter(position);
+
+    var idCity = $(this).val();
+
+    getLocalsByIdCategory(idCity, null, getEntitiesSuccess, getEntitiesError);
+}
+
+
+var getEntitiesSuccess = function(data){
+    console.log("ok");
+    console.log(data);
+
+    if(data && data.items){
+        clearMarkers();
+        data.items.forEach(function(element, index) {
+            addMarker(mMap, element.latitude, element.longitude)
+        });
+    }
+};
+
+var getEntitiesError = function(data){
+    console.log("error");
+    console.log(data);
 };
 
 var initializeMap = function() {
     var mapProp = {
         center: mCenter,
-        zoom: 14
+        zoom: mZoom
     };
 
     mMap = new google.maps.Map(document.getElementById("map-canvas"), mapProp);
@@ -35,36 +90,11 @@ var initializeMap = function() {
     //});
 };
 
-var resizeMap = function() {
-    if(typeof mMap =="undefined") return;
-    setTimeout(resizingMap , 400);
-};
-
-var resizingMap = function() {   
-    if(typeof mMap == "undefined") return;
-    google.maps.event.trigger(mMap, "resize");
-
-    mMap.setZoom(14);
-
-    if(mPosition){
-        var position = new google.maps.LatLng(mPosition.latitude, mPosition.longitude);
-        mMap.setCenter(position);
-        addMarker(mMap, mPosition.latitude, mPosition.longitude)
-
-    } else {
-        mMap.setCenter(mCenter);
-    }
-};
-
 
 var addMarker = function(map, lat, lng){
-    clearMarkers();
     var position = new google.maps.LatLng(lat, lng);
     var marker = new google.maps.Marker({position: position, map: map});
     mMarkersArray.push(marker);
-
-    document.getElementById("modal-entity-latitude").value = lat;
-    document.getElementById("modal-entity-longitude").value = lng;
 }
 
 var clearMarkers = function() {
@@ -73,12 +103,6 @@ var clearMarkers = function() {
     }
 
     mMarkersArray.length = 0;
-}
-
-var clearTextErrorsMap = function(){
-    $t(".text-map").forEach(function(element, index) {
-          element.innerText= "";
-    });
 }
 
 document.addEventListener("DOMContentLoaded", init, false);
