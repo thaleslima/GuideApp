@@ -4,7 +4,7 @@
     top: 60px;
     right: 0px;
     left: 0px;
-    z-index: 100;
+    z-index: 90;
 }
 
 .container-fluid{
@@ -17,7 +17,7 @@
 }
 
 .filter{
-    z-index: 1000;
+    z-index: 100;
     padding-left: 15px;
     margin-top: 7px;
 }
@@ -32,7 +32,6 @@
         padding-left: 130px
     }
 }
-
 
 #search-id-city{
     box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
