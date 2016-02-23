@@ -13,14 +13,18 @@ import static com.guideapp.backend.util.OfyService.ofy;
 
 
 /**
- * Created by thales on 1/24/16.
+ * Class generic for access dataStore
+ * @param <T> the T represents a entity of dataStore
  */
 public class ObjectifyGenericDAO<T> implements IGenericDAO<T> {
-    protected Class<T> clazz;
+    protected Class<T> mClazz;
 
+    /**
+     * Constructor
+     */
     @SuppressWarnings("unchecked")
     public ObjectifyGenericDAO() {
-        clazz = ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
+        mClazz = ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
     }
 
     @Override
@@ -50,33 +54,33 @@ public class ObjectifyGenericDAO<T> implements IGenericDAO<T> {
 
     @Override
     public List<T> listAll() {
-        Query<T> query = ofy().load().type(clazz);
+        Query<T> query = ofy().load().type(mClazz);
         return query.list();
     }
 
     @Override
     public T getByProperty(String propName, Object propValue) {
-        return ofy().load().type(clazz).filter(propName, propValue).first().now();
+        return ofy().load().type(mClazz).filter(propName, propValue).first().now();
     }
 
     @Override
     public T getById(Long id) {
-        return ofy().load().type(clazz).id(id).now();
+        return ofy().load().type(mClazz).id(id).now();
     }
 
     @Override
     public T getByKey(Long id) {
-        return ofy().load().key(Key.create(clazz, id)).now();
+        return ofy().load().key(Key.create(mClazz, id)).now();
     }
 
     @Override
     public List<T> listByProperty(String propName, Object propValue) {
-        return ofy().load().type(clazz).filter(propName, propValue).list();
+        return ofy().load().type(mClazz).filter(propName, propValue).list();
     }
 
     @Override
     public List<T> listByProperties(Map<String, Object> filters) {
-        Query<T> query = ofy().load().type(clazz);
+        Query<T> query = ofy().load().type(mClazz);
         Collection<com.google.appengine.api.datastore.Query.Filter> filters1 = new ArrayList<>();
 
         if (filters.size() > 1) {

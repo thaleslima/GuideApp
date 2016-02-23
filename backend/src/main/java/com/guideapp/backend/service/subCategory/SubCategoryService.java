@@ -10,10 +10,52 @@ import java.util.List;
  * Created by thales on 1/24/16.
  */
 public interface SubCategoryService {
+
+    /**
+     * Returns a sub-categories list
+     * @return the sub-categories list
+     */
     List<SubCategory> list();
+
+    /**
+     * Returns a sub-categories list by Category key
+     * @param idCategory the Long representation of the Category Key.
+     * @return the sub-categories list
+     * @throws NotFoundException when the sub-categories is null
+     */
     List<SubCategory> list(Long idCategory) throws NotFoundException;
+
+    /**
+     * Returns a SubCategory object with the given id..
+     * @param id the Long representation of the SubCategory Key.
+     * @return SubCategory object.
+     * @throws NotFoundException when there is no SubCategory with the given id.
+     */
     SubCategory getById(Long id) throws NotFoundException;
+
+    /**
+     * Creates a SubCategory object
+     * @param subCategory A SubCategory object representing user's inputs
+     * @throws ConflictException when there is a error in SubCategory object
+     * @throws NotFoundException when there is no SubCategory with the given id
+     */
     void insert(SubCategory subCategory) throws ConflictException, NotFoundException;
+
+
+    /**
+     * Updates a SubCategory object
+     * @param subCategory A SubCategory object representing user's inputs
+     * @throws ConflictException when there is a error in SubCategory object
+     * @throws NotFoundException when there is no SubCategory with the given id
+     */
     void update(SubCategory subCategory) throws ConflictException, NotFoundException;
+
+
+    /**
+     * Removes a SubCategory object
+     * @param id the Long representation of the SubCategory Key.
+     * @throws NotFoundException when there is a error in SubCategory object
+     * @throws ConflictException when there is a error in SubCategory object
+     */
     void remove(Long id) throws ConflictException, NotFoundException;
 }

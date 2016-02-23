@@ -15,27 +15,30 @@ import java.util.List;
  */
 public class CategoryServiceImpl implements CategoryService {
 
-    CategoryDAO categoryDAO;
+    private CategoryDAO mCategoryDAO;
 
+    /**
+     * Constructor
+     */
     public CategoryServiceImpl() {
-        this.categoryDAO = new CategoryDAOImpl();
+        this.mCategoryDAO = new CategoryDAOImpl();
     }
 
     @Override
     public List<Category> list() {
-        return categoryDAO.listAll();
+        return mCategoryDAO.listAll();
     }
 
     @Override
     public List<Category> list(String search) throws NotFoundException {
-        return categoryDAO.listByProperty("name", search);
+        return mCategoryDAO.listByProperty("name", search);
     }
 
     @Override
     public Category getById(Long id) throws NotFoundException {
-        Category category = categoryDAO.getByKey(id);
+        Category category = mCategoryDAO.getByKey(id);
 
-        if(category == null) {
+        if (category == null) {
             throw new NotFoundException("Category not found");
         }
 
@@ -45,50 +48,50 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void insert(Category category) throws ConflictException, NotFoundException {
 
-        if(category == null) {
+        if (category == null) {
             throw new ConflictException("Categoria não informada.");
         }
 
-        if(ValidationUtil.nullOrEmpty(category.getDescription())){
+        if (ValidationUtil.nullOrEmpty(category.getDescription())) {
             throw new ConflictException("Descrição não informada.");
         }
 
         category.setTimestamp(new Date().getTime());
-        categoryDAO.insert(category);
+        mCategoryDAO.insert(category);
     }
 
     @Override
     public void update(Category category) throws ConflictException, NotFoundException {
-        if(category == null) {
+        if (category == null) {
             throw new ConflictException("Categoria não informada.");
         }
 
-        if(ValidationUtil.nullOrEmpty(category.getId())){
+        if (ValidationUtil.nullOrEmpty(category.getId())) {
             throw new ConflictException("Id não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(category.getDescription())){
+        if (ValidationUtil.nullOrEmpty(category.getDescription())) {
             throw new ConflictException("Descrição não informada.");
         }
 
-        Category c = categoryDAO.getByKey(category.getId());
+        Category c = mCategoryDAO.getByKey(category.getId());
 
-        if(c == null){
+        if (c == null) {
             throw new NotFoundException("Categoria não encontrada.");
         }
 
         category.setTimestamp(new Date().getTime());
-        categoryDAO.insert(category);
+        mCategoryDAO.insert(category);
     }
 
     @Override
     public void remove(Long id) throws ConflictException, NotFoundException {
-        Category city = categoryDAO.getByKey(id);
+        Category city = mCategoryDAO.getByKey(id);
 
-        if(city == null){
+        if (city == null) {
             throw new NotFoundException("Categoria não encontrada.");
         }
 
-        categoryDAO.delete(city);
+        mCategoryDAO.delete(city);
     }
 }

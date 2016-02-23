@@ -5,7 +5,6 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.guideapp.backend.util.StringUtil;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,7 +49,7 @@ public class Local {
     }
 
     public void setDescription(String description) {
-        this.description = StringUtil.removeSpaceWhite(description);
+        this.description = StringUtil.trim(description);
     }
 
     public String getSite() {
@@ -58,7 +57,7 @@ public class Local {
     }
 
     public void setSite(String site) {
-        this.site = StringUtil.removeSpaceWhite(site);
+        this.site = StringUtil.trim(site);
     }
 
     public String getPhone() {
@@ -66,7 +65,7 @@ public class Local {
     }
 
     public void setPhone(String phone) {
-        this.phone = StringUtil.removeSpaceWhite(phone);
+        this.phone = StringUtil.trim(phone);
     }
 
     public String getAddress() {
@@ -74,7 +73,7 @@ public class Local {
     }
 
     public void setAddress(String address) {
-        this.address = StringUtil.removeSpaceWhite(address);
+        this.address = StringUtil.trim(address);
     }
 
     public boolean isWifi() {
@@ -90,7 +89,7 @@ public class Local {
     }
 
     public void setDetail(String detail) {
-        this.detail = StringUtil.removeSpaceWhite(detail);
+        this.detail = StringUtil.trim(detail);
     }
 
     public double getLatitude() {
@@ -123,7 +122,7 @@ public class Local {
     }
 
     public void setImagePath(String imagePath) {
-        this.imagePath = StringUtil.removeSpaceWhite(imagePath);
+        this.imagePath = StringUtil.trim(imagePath);
     }
 
     public long getTimestamp() {

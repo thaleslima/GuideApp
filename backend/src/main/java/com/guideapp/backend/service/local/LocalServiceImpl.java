@@ -16,38 +16,41 @@ import java.util.TreeMap;
  * Created by thales on 1/24/16.
  */
 public class LocalServiceImpl implements LocalService {
-    LocalDAO localDAO;
+    private LocalDAO mLocalDAO;
 
+    /**
+     * Configure the local service.
+     */
     public LocalServiceImpl() {
-        this.localDAO = new LocalDAOImpl();
+        this.mLocalDAO = new LocalDAOImpl();
     }
 
     @Override
     public List<Local> list(Long idCity, Long idCategory) {
         Map<String, Object> filter = new TreeMap<>();
 
-        if(idCity != null)
+        if (idCity != null)
             filter.put("idCity", idCity);
 
-        if(idCategory != null)
+        if (idCategory != null)
             filter.put("idCategories", idCategory);
 
-        if(!filter.isEmpty())
-            return localDAO.listByProperties(filter);
+        if (!filter.isEmpty())
+            return mLocalDAO.listByProperties(filter);
 
-        return localDAO.listAll();
+        return mLocalDAO.listAll();
     }
 
     @Override
     public List<Local> list(String search) throws NotFoundException {
-        return localDAO.listByProperty("description", search);
+        return mLocalDAO.listByProperty("description", search);
     }
 
     @Override
     public Local getById(Long id) throws NotFoundException {
-        Local local = localDAO.getByKey(id);
+        Local local = mLocalDAO.getByKey(id);
 
-        if(local == null) {
+        if (local == null) {
             throw new NotFoundException("Local not found");
         }
 
@@ -56,99 +59,99 @@ public class LocalServiceImpl implements LocalService {
 
     @Override
     public void insert(Local local) throws ConflictException, NotFoundException {
-        if(local == null) {
+        if (local == null) {
             throw new ConflictException("Local não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getDescription())){
+        if (ValidationUtil.nullOrEmpty(local.getDescription())) {
             throw new ConflictException("Descrição não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdCity())){
+        if (ValidationUtil.nullOrEmpty(local.getIdCity())) {
             throw new ConflictException("Cidade não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdSubCategories())){
+        if (ValidationUtil.nullOrEmpty(local.getIdSubCategories())) {
             throw new ConflictException("Categoria não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdSubCategories())){
+        if (ValidationUtil.nullOrEmpty(local.getIdSubCategories())) {
             throw new ConflictException("Sub-Categoria não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getLatitude())){
+        if (ValidationUtil.nullOrEmpty(local.getLatitude())) {
             throw new ConflictException("Latitude não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getLatitude())){
+        if (ValidationUtil.nullOrEmpty(local.getLatitude())) {
             throw new ConflictException("Longitude não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getImagePath())){
+        if (ValidationUtil.nullOrEmpty(local.getImagePath())) {
             throw new ConflictException("Imagem não informada.");
         }
 
         local.setTimestamp(new Date().getTime());
-        localDAO.insert(local);
+        mLocalDAO.insert(local);
     }
 
     @Override
     public void update(Local local) throws ConflictException, NotFoundException {
 
-        if(local == null) {
+        if (local == null) {
             throw new ConflictException("Local não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getId())){
+        if (ValidationUtil.nullOrEmpty(local.getId())) {
             throw new ConflictException("Id não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getDescription())){
+        if (ValidationUtil.nullOrEmpty(local.getDescription())) {
             throw new ConflictException("Descrição não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdCity())){
+        if (ValidationUtil.nullOrEmpty(local.getIdCity())) {
             throw new ConflictException("Cidade não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdSubCategories())){
+        if (ValidationUtil.nullOrEmpty(local.getIdSubCategories())) {
             throw new ConflictException("Categoria não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getIdSubCategories())){
+        if (ValidationUtil.nullOrEmpty(local.getIdSubCategories())) {
             throw new ConflictException("Sub-Categoria não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getLatitude())){
+        if (ValidationUtil.nullOrEmpty(local.getLatitude())) {
             throw new ConflictException("Latitude não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getLatitude())){
+        if (ValidationUtil.nullOrEmpty(local.getLatitude())) {
             throw new ConflictException("Longitude não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(local.getImagePath())){
+        if (ValidationUtil.nullOrEmpty(local.getImagePath())) {
             throw new ConflictException("Imagem não informada.");
         }
 
-        Local l = localDAO.getByKey(local.getId());
+        Local l = mLocalDAO.getByKey(local.getId());
 
-        if(l == null){
+        if (l == null) {
             throw new NotFoundException("Local não encontrado.");
         }
 
         local.setTimestamp(new Date().getTime());
-        localDAO.update(local);
+        mLocalDAO.update(local);
     }
 
     @Override
     public void remove(Long id) throws ConflictException, NotFoundException {
-        Local local = localDAO.getByKey(id);
+        Local local = mLocalDAO.getByKey(id);
 
-        if(local == null){
+        if (local == null) {
             throw new NotFoundException("Local não encontrado.");
         }
 
-        localDAO.delete(local);
+        mLocalDAO.delete(local);
     }
 }

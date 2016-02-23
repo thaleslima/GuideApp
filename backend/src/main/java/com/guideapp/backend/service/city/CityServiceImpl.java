@@ -5,7 +5,6 @@ import com.google.api.server.spi.response.NotFoundException;
 import com.guideapp.backend.dao.city.CityDAO;
 import com.guideapp.backend.dao.city.CityDAOImpl;
 import com.guideapp.backend.entity.City;
-import com.guideapp.backend.entity.Local;
 import com.guideapp.backend.util.ValidationUtil;
 
 import java.util.Date;
@@ -16,27 +15,30 @@ import java.util.List;
  */
 public class CityServiceImpl implements CityService {
 
-    CityDAO cityDAO;
+    private CityDAO mCityDAO;
 
+    /**
+     * Configure the local service.
+     */
     public CityServiceImpl() {
-        this.cityDAO = new CityDAOImpl();
+        this.mCityDAO = new CityDAOImpl();
     }
 
     @Override
     public List<City> list() {
-        return cityDAO.listAll();
+        return mCityDAO.listAll();
     }
 
     @Override
     public List<City> list(String search) throws NotFoundException {
-        return cityDAO.listByProperty("name", search);
+        return mCityDAO.listByProperty("name", search);
     }
 
     @Override
     public City getById(Long id) throws NotFoundException {
-        City city = cityDAO.getByKey(id);
+        City city = mCityDAO.getByKey(id);
 
-        if(city == null) {
+        if (city == null) {
             throw new NotFoundException("City not found");
         }
 
@@ -45,59 +47,59 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public void insert(City city) throws ConflictException, NotFoundException {
-        if(city == null) {
+        if (city == null) {
             throw new ConflictException("Cidade não informada.");
         }
 
-        if(ValidationUtil.nullOrEmpty(city.getName())){
+        if (ValidationUtil.nullOrEmpty(city.getName())) {
             throw new ConflictException("Nome da cidade não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(city.getUf())){
+        if (ValidationUtil.nullOrEmpty(city.getUf())) {
             throw new ConflictException("Estado não informado.");
         }
 
         city.setTimestamp(new Date().getTime());
-        cityDAO.insert(city);
+        mCityDAO.insert(city);
     }
 
     @Override
     public void update(City city) throws ConflictException, NotFoundException {
 
-        if(city == null) {
+        if (city == null) {
             throw new ConflictException("Cidade não informada.");
         }
 
-        if(ValidationUtil.nullOrEmpty(city.getName())){
+        if (ValidationUtil.nullOrEmpty(city.getName())) {
             throw new ConflictException("Nome da cidade não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(city.getUf())){
+        if (ValidationUtil.nullOrEmpty(city.getUf())) {
             throw new ConflictException("Estado não informado.");
         }
 
-        if(ValidationUtil.nullOrEmpty(city.getId())){
+        if (ValidationUtil.nullOrEmpty(city.getId())) {
             throw new ConflictException("Id não informado.");
         }
 
-        City c = cityDAO.getByKey(city.getId());
+        City c = mCityDAO.getByKey(city.getId());
 
-        if(c == null){
+        if (c == null) {
             throw new NotFoundException("Cidade não encontrada.");
         }
 
         city.setTimestamp(new Date().getTime());
-        cityDAO.insert(city);
+        mCityDAO.insert(city);
     }
 
     @Override
     public void remove(Long id) throws ConflictException, NotFoundException {
-        City city = cityDAO.getByKey(id);
+        City city = mCityDAO.getByKey(id);
 
-        if(city == null){
+        if (city == null) {
             throw new NotFoundException("Cidade não encontrada.");
         }
 
-        cityDAO.delete(city);
+        mCityDAO.delete(city);
     }
 }

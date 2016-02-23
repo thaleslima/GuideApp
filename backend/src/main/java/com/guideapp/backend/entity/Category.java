@@ -28,7 +28,7 @@ public class Category {
     }
 
     public void setDescription(String description) {
-        this.description = StringUtil.removeSpaceWhite(description);
+        this.description = StringUtil.trim(description);
     }
 
     public long getTimestamp() {

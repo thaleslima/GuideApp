@@ -5,8 +5,6 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.guideapp.backend.util.StringUtil;
 
-import java.util.Date;
-
 /**
  * Created by thales on 1/24/16.
  */
@@ -35,7 +33,7 @@ public class SubCategory {
     }
 
     public void setDescription(String description) {
-        this.description = StringUtil.removeSpaceWhite(description);
+        this.description = StringUtil.trim(description);
     }
 
     public Long getIdCategory() {
