@@ -79,16 +79,25 @@ public class ObjectifyGenericDAO<T> implements IGenericDAO<T> {
         Query<T> query = ofy().load().type(clazz);
         Collection<com.google.appengine.api.datastore.Query.Filter> filters1 = new ArrayList<>();
 
-        for (Map.Entry<String, Object> entry : filters.entrySet()) {
-            filters1.add(new com.google.appengine.api.datastore.Query.FilterPredicate(
-                    entry.getKey(),
-                    com.google.appengine.api.datastore.Query.FilterOperator.EQUAL,
-                    entry.getValue()));
+        if (filters.size() > 1) {
+            for (Map.Entry<String, Object> entry : filters.entrySet()) {
+                filters1.add(new com.google.appengine.api.datastore.Query.FilterPredicate(
+                        entry.getKey(),
+                        com.google.appengine.api.datastore.Query.FilterOperator.EQUAL,
+                        entry.getValue()));
+            }
+
+            com.google.appengine.api.datastore.Query.Filter filter
+                    = com.google.appengine.api.datastore.Query.CompositeFilterOperator.and(filters1);
+
+            return query.filter(filter).list();
+        } else if (filters.size() == 1) {
+            Map.Entry<String, Object> entry = filters.entrySet().iterator().next();
+            return query.filter(entry.getKey(), entry.getValue()).list();
         }
 
-        com.google.appengine.api.datastore.Query.Filter filter
-                = com.google.appengine.api.datastore.Query.CompositeFilterOperator.and(filters1);
-
-        return query.filter(filter).list();
+        return null;
     }
+
+
 }

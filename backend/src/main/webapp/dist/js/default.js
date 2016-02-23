@@ -263,9 +263,11 @@ var responseService = function(resp, success, error){
     }
 };
 
-function City(name, uf) {
+function City(name, uf, latitude, longitude) {
   this.name = name;
   this.uf = uf;
+  this.latitude = latitude;
+  this.longitude = longitude;
 }
 
 function Category(description) {
