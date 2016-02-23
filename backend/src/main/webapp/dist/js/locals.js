@@ -140,13 +140,13 @@ var getSubCategoriesByIdCategory = function (idCategories){
     var subCategories = [];
 
     if(mSubCategories && mSubCategories.items && idCategories){
-        idCategories.forEach(function(element1, index1) {
+        //idCategories.forEach(function(element1, index1) {
             mSubCategories.items.forEach(function(element, index) {
-                if(element.idCategory == element1){
+                if(element.idCategory == idCategories){
                     subCategories.push(element);
                 }
             });
-        });
+        //});
     }
 
     getSubCategoriesByIdCategorySuccess(subCategories);
@@ -265,9 +265,10 @@ var saveNewEntity = function(){
     var latitude = document.getElementById("modal-entity-latitude").value;
     var longitude = document.getElementById("modal-entity-longitude").value;
     var imagePath = document.getElementById("modal-entity-image-path").value;
+    var idCategory = document.getElementById("modal-entity-id-category").value;
 
     var idCity = document.getElementById("modal-entity-id-city").value;
-    var idCategories = $("#modal-entity-id-category").val();
+    var idCategories = [idCategory];
     var idSubCategories = $("#modal-entity-id-sub-category").val();
 
     var entity = new Local(description,
@@ -368,7 +369,7 @@ var getEntitySuccess = function(data){
     document.getElementById("modal-entity-longitude").value = data.longitude;
     document.getElementById("modal-entity-id-city").value = data.idCity;
 
-    $("#modal-entity-id-category").val(data.idCategories);
+    $("#modal-entity-id-category").val(data.idCategories[0]);
     $("#modal-entity-id-sub-category").val(data.idSubCategories);
 
     showImage(data.imagePath);
@@ -544,13 +545,6 @@ var comboCategoryChange = function(){
     console.log(values);
     getSubCategoriesByIdCategory(values, getSubCategoriesSuccess);
 
-};
-
-
-var cleanComboSubCategory = function(){
-    var modalEntityIdSubCategory = document.getElementById("modal-entity-id-sub-category");
-    modalEntityIdSubCategory.innerHTML = "<option value=\"\">Selecione</option>";
-    modalEntityIdSubCategory.value = "";
 };
 
 document.addEventListener("DOMContentLoaded", init, false);
