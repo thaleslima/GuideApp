@@ -1,4 +1,4 @@
-package com.guideapp.backend.service.subCategory;
+package com.guideapp.backend.service.subcategory;
 
 import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
@@ -21,9 +21,8 @@ public interface SubCategoryService {
      * Returns a sub-categories list by Category key
      * @param idCategory the Long representation of the Category Key.
      * @return the sub-categories list
-     * @throws NotFoundException when the sub-categories is null
      */
-    List<SubCategory> list(Long idCategory) throws NotFoundException;
+    List<SubCategory> list(Long idCategory);
 
     /**
      * Returns a SubCategory object with the given id..
@@ -37,9 +36,8 @@ public interface SubCategoryService {
      * Creates a SubCategory object
      * @param subCategory A SubCategory object representing user's inputs
      * @throws ConflictException when there is a error in SubCategory object
-     * @throws NotFoundException when there is no SubCategory with the given id
      */
-    void insert(SubCategory subCategory) throws ConflictException, NotFoundException;
+    void insert(SubCategory subCategory) throws ConflictException;
 
 
     /**
@@ -55,7 +53,6 @@ public interface SubCategoryService {
      * Removes a SubCategory object
      * @param id the Long representation of the SubCategory Key.
      * @throws NotFoundException when there is a error in SubCategory object
-     * @throws ConflictException when there is a error in SubCategory object
      */
-    void remove(Long id) throws ConflictException, NotFoundException;
+    void remove(Long id) throws NotFoundException;
 }

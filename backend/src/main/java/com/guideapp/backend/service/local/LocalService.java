@@ -23,9 +23,8 @@ public interface LocalService {
      * Returns a locals list by filters
      * @param search generic
      * @return the locals list
-     * @throws NotFoundException when the local is null
      */
-    List<Local> list(String search) throws NotFoundException;
+    List<Local> list(String search);
 
     /**
      * Returns a Local object with the given id.
@@ -39,9 +38,8 @@ public interface LocalService {
      * Creates a Local object
      * @param local A Local object representing user's inputs
      * @throws ConflictException when there is a error in Local object
-     * @throws NotFoundException when there is no Local with the given id
      */
-    void insert(Local local) throws ConflictException, NotFoundException;
+    void insert(Local local) throws ConflictException;
 
     /**
      * Updates a Local object
@@ -56,7 +54,6 @@ public interface LocalService {
      * Removes a Local object
      * @param id the Long representation of the local Key.
      * @throws NotFoundException when there is a error in Local object
-     * @throws ConflictException when there is a error in Local object
      */
-    void remove(Long id) throws ConflictException, NotFoundException;
+    void remove(Long id) throws NotFoundException;
 }

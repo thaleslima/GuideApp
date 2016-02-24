@@ -21,9 +21,8 @@ public interface CityService {
      * Returns a cities list by filters
      * @param search text generic
      * @return the cities list
-     * @throws NotFoundException when the city is null
      */
-    List<City> list(String search) throws NotFoundException;
+    List<City> list(String search);
 
     /**
      * Returns a City object with the given id..
@@ -38,9 +37,8 @@ public interface CityService {
      * Creates a City object
      * @param city A City object representing user's inputs
      * @throws ConflictException when there is a error in City object
-     * @throws NotFoundException when there is no City with the given id
      */
-    void insert(City city) throws ConflictException, NotFoundException;
+    void insert(City city) throws ConflictException;
 
 
     /**
@@ -56,7 +54,6 @@ public interface CityService {
      * Removes a City object
      * @param id the Long representation of the City Key.
      * @throws NotFoundException when there is a error in City object
-     * @throws ConflictException when there is a error in City object
      */
-    void remove(Long id) throws ConflictException, NotFoundException;
+    void remove(Long id) throws NotFoundException;
 }

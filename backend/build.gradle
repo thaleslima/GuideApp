@@ -1,9 +1,6 @@
 // If you would like more information on the gradle-appengine-plugin please refer to the github page
 // https://github.com/GoogleCloudPlatform/gradle-appengine-plugin
 
-//apply from: '../config/quality.gradle'
-
-
 buildscript {
     repositories {
         jcenter()
@@ -21,7 +18,7 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'appengine'
 
-apply from: '../config/quality.gradle'
+apply from: '../config/quality-backend.gradle'
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7

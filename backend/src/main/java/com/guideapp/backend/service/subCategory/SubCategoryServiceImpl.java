@@ -1,9 +1,9 @@
-package com.guideapp.backend.service.subCategory;
+package com.guideapp.backend.service.subcategory;
 
 import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
-import com.guideapp.backend.dao.subCategory.SubCategoryDAO;
-import com.guideapp.backend.dao.subCategory.SubCategoryDAOImpl;
+import com.guideapp.backend.dao.subcategory.SubCategoryDAO;
+import com.guideapp.backend.dao.subcategory.SubCategoryDAOImpl;
 import com.guideapp.backend.entity.SubCategory;
 import com.guideapp.backend.util.ValidationUtil;
 
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class SubCategoryServiceImpl implements SubCategoryService {
 
-    private SubCategoryDAO mSubCategoryDAO;
+    private final SubCategoryDAO mSubCategoryDAO;
 
     /**
      * Configure the sub-category service.
@@ -30,7 +30,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     }
 
     @Override
-    public List<SubCategory> list(Long idCategory) throws NotFoundException {
+    public List<SubCategory> list(Long idCategory) {
         return mSubCategoryDAO.listByProperty("idCategory", idCategory);
     }
 
@@ -46,7 +46,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     }
 
     @Override
-    public void insert(SubCategory subCategory) throws ConflictException, NotFoundException {
+    public void insert(SubCategory subCategory) throws ConflictException {
         if (subCategory == null) {
             throw new ConflictException("Sub-Categoria não informada.");
         }
@@ -92,7 +92,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     }
 
     @Override
-    public void remove(Long id) throws ConflictException, NotFoundException {
+    public void remove(Long id) throws NotFoundException {
         SubCategory s = mSubCategoryDAO.getByKey(id);
 
         if (s == null) {

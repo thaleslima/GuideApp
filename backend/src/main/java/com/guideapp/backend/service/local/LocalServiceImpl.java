@@ -29,20 +29,23 @@ public class LocalServiceImpl implements LocalService {
     public List<Local> list(Long idCity, Long idCategory) {
         Map<String, Object> filter = new TreeMap<>();
 
-        if (idCity != null)
+        if (idCity != null) {
             filter.put("idCity", idCity);
+        }
 
-        if (idCategory != null)
+        if (idCategory != null) {
             filter.put("idCategories", idCategory);
+        }
 
-        if (!filter.isEmpty())
+        if (!filter.isEmpty()) {
             return mLocalDAO.listByProperties(filter);
+        }
 
         return mLocalDAO.listAll();
     }
 
     @Override
-    public List<Local> list(String search) throws NotFoundException {
+    public List<Local> list(String search) {
         return mLocalDAO.listByProperty("description", search);
     }
 
@@ -58,7 +61,7 @@ public class LocalServiceImpl implements LocalService {
     }
 
     @Override
-    public void insert(Local local) throws ConflictException, NotFoundException {
+    public void insert(Local local) throws ConflictException {
         if (local == null) {
             throw new ConflictException("Local não informado.");
         }
@@ -145,7 +148,7 @@ public class LocalServiceImpl implements LocalService {
     }
 
     @Override
-    public void remove(Long id) throws ConflictException, NotFoundException {
+    public void remove(Long id) throws NotFoundException {
         Local local = mLocalDAO.getByKey(id);
 
         if (local == null) {

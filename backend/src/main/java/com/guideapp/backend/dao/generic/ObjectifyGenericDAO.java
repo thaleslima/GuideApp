@@ -17,7 +17,7 @@ import static com.guideapp.backend.util.OfyService.ofy;
  * @param <T> the T represents a entity of dataStore
  */
 public class ObjectifyGenericDAO<T> implements IGenericDAO<T> {
-    protected Class<T> mClazz;
+    protected final Class<T> mClazz;
 
     /**
      * Constructor

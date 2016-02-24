@@ -21,9 +21,8 @@ public interface CategoryService {
      * Returns a Category list by filters
      * @param search text generic
      * @return Category list
-     * @throws NotFoundException when the Category is null
      */
-    List<Category> list(String search) throws NotFoundException;
+    List<Category> list(String search);
 
 
     /**
@@ -38,9 +37,8 @@ public interface CategoryService {
      * Creates a Category object
      * @param category A Category object representing user's inputs
      * @throws ConflictException when there is a error in Category object
-     * @throws NotFoundException when there is no Category with the given id
      */
-    void insert(Category category) throws ConflictException, NotFoundException;
+    void insert(Category category) throws ConflictException;
 
 
     /**
@@ -56,7 +54,6 @@ public interface CategoryService {
      * Removes a Category object
      * @param id the Long representation of the Category Key.
      * @throws NotFoundException when there is a error in Category object
-     * @throws ConflictException when there is a error in Category object
      */
-    void remove(Long id) throws ConflictException, NotFoundException;
+    void remove(Long id) throws NotFoundException;
 }

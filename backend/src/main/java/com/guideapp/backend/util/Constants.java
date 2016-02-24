@@ -31,6 +31,11 @@ public final class Constants {
     public static final String EMAIL_SCOPE = "https://www.googleapis.com/auth/userinfo.email";
 
     /**
+     * AUTHORIZATION_REQUIRED
+     */
+    public static final String AUTHORIZATION_REQUIRED = "Authorization required";
+
+    /**
      * Constructor
      */
     private Constants() {

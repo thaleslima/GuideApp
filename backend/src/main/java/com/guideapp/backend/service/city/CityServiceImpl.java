@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CityServiceImpl implements CityService {
 
-    private CityDAO mCityDAO;
+    private final CityDAO mCityDAO;
 
     /**
      * Configure the local service.
@@ -30,7 +30,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public List<City> list(String search) throws NotFoundException {
+    public List<City> list(String search) {
         return mCityDAO.listByProperty("name", search);
     }
 
@@ -46,7 +46,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public void insert(City city) throws ConflictException, NotFoundException {
+    public void insert(City city) throws ConflictException {
         if (city == null) {
             throw new ConflictException("Cidade não informada.");
         }
@@ -93,7 +93,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public void remove(Long id) throws ConflictException, NotFoundException {
+    public void remove(Long id) throws NotFoundException {
         City city = mCityDAO.getByKey(id);
 
         if (city == null) {

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryDAO mCategoryDAO;
+    private final CategoryDAO mCategoryDAO;
 
     /**
      * Constructor
@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> list(String search) throws NotFoundException {
+    public List<Category> list(String search) {
         return mCategoryDAO.listByProperty("name", search);
     }
 
@@ -46,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void insert(Category category) throws ConflictException, NotFoundException {
+    public void insert(Category category) throws ConflictException {
 
         if (category == null) {
             throw new ConflictException("Categoria não informada.");
@@ -85,7 +85,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void remove(Long id) throws ConflictException, NotFoundException {
+    public void remove(Long id) throws NotFoundException {
         Category city = mCategoryDAO.getByKey(id);
 
         if (city == null) {

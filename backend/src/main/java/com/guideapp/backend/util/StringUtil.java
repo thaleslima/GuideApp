@@ -18,8 +18,10 @@ public final class StringUtil {
      * @return a String without white space
      */
     public static String trim(String s) {
-        if (s == null)
+        if (s == null) {
             return "";
+        }
+
         return s.trim();
     }
 }
