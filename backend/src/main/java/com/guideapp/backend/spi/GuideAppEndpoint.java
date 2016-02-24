@@ -49,7 +49,7 @@ public class GuideAppEndpoint {
 
 
     /**
-     * Confgure the endpoint.
+     * Configure the endpoint.
      */
     public GuideAppEndpoint() {
         mLocalService = new LocalServiceImpl();
