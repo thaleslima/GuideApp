@@ -43,3 +43,10 @@ appengine {
     getDiscoveryDocsOnBuild = true
   }
 }
+
+task grunt(dependsOn: assemble) {
+    exec({
+        commandLine = ["ls"]
+        workingDir = "./src/main/web-angular/"
+    })
+}
