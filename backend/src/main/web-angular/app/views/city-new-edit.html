@@ -1,0 +1,122 @@
+<div class="page-cities-new-edit">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+        
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        {{pageDescription}}
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <i class="fa fa-dashboard"></i>  <a href="#/">Home</a>
+                        </li>
+                        
+                        <li>
+                            <i class="fa fa-dashboard"></i>  <a href="#/cities">Cidades</a>
+                        </li>
+                        
+                        <li class="active">
+                            <i class="fa fa-file"></i> {{page}}
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+            
+            <form id="form-registration" class="form-registration" novalidate>
+                <div class="form-group" >
+                    <div class="alert alert-danger" id="alert-registration" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign"
+                              aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        <span id="alert-registration-message"></span>
+                    </div>
+
+                    <input type="hidden" class="form-control" id="modal-city-id">
+
+                    <div class="form-group control-group">
+                        <label class="control-label" for="modal-city-uf">Estado*</label>
+                        <select class="form-control" id="modal-city-uf" required
+                                data-validation-required-message="Entre com o estado">
+
+                            <option value="">Selecione o estado</option>
+                            <option value="ac">Acre</option>
+                            <option value="al">Alagoas</option>
+                            <option value="am">Amazonas</option>
+                            <option value="ap">Amapá</option>
+                            <option value="ba">Bahia</option>
+                            <option value="ce">Ceará</option>
+                            <option value="df">Distrito Federal</option>
+                            <option value="es">Espírito Santo</option>
+                            <option value="go">Goiás</option>
+                            <option value="ma">Maranhão</option>
+                            <option value="mt">Mato Grosso</option>
+                            <option value="ms">Mato Grosso do Sul</option>
+                            <option value="mg">Minas Gerais</option>
+                            <option value="pa">Pará</option>
+                            <option value="pb">Paraíba</option>
+                            <option value="pr">Paraná</option>
+                            <option value="pe">Pernambuco</option>
+                            <option value="pi">Piauí</option>
+                            <option value="rj">Rio de Janeiro</option>
+                            <option value="rn">Rio Grande do Norte</option>
+                            <option value="ro">Rondônia</option>
+                            <option value="rs">Rio Grande do Sul</option>
+                            <option value="rr">Roraima</option>
+                            <option value="sc">Santa Catarina</option>
+                            <option value="se">Sergipe</option>
+                            <option value="sp">São Paulo</option>
+                            <option value="to">Tocantins</option>
+                        </select>
+                        <p class="help-block text-danger"></p>
+                    </div>
+
+                    <div class="form-group control-group">
+                        <label class="control-label" for="modal-city-name">Cidade*</label>
+
+                        <input name="form-registration" type="text" class="form-control" id="modal-city-name" required
+                               data-validation-required-message="Entre com o nome">
+                        
+                        <p class="help-block text-danger"></p>
+                    </div>
+
+                    <div class="form-group control-group">
+                        <label for="modal-entity-latitude"
+                               class="control-label">Latitude*</label>
+                        <input type="text" class="form-control" id="modal-entity-latitude"
+                               required disabled
+                               data-validation-required-message="Selecione o posição pelo mapa">
+                        <p class="help-block text-danger"></p>
+                    </div>
+
+                    <div class="form-group control-group">
+                        <label for="modal-entity-longitude"
+                               class="control-label">Longitude*</label>
+                        <input type="text" class="form-control" id="modal-entity-longitude"
+                               required disabled
+                               data-validation-required-message="Selecione o posição pelo mapa">
+                        <p class="help-block text-danger"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label"></label>
+                            <div id="map-canvas"></div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#/cities" type="button" class="btn btn-default">Voltar
+                    </a>
+                    <button type="submit" class="btn btn-primary" id="modal-city-save">Salvar
+                    </button>
+                </div>
+            </form>
+               
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrappe -->
+</div>
+<!-- /.page-cities -->

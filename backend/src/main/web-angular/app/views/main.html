@@ -1,0 +1,14 @@
+<div class="page-main">
+    <div id="page-wrapper">
+        <div class="col-sm-12 filter">
+            <select class="form-control" ng-model="selectCity" ng-change="selectCityChange()" ng-options="item as item.name for item in cities">
+                <option value="">Cidade</option>
+            </select>
+        </div>
+
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+            <ui-gmap-markers models="randomMarkers" coords="'self'" icon="'icon'">
+                </ui-gmap-markers>
+        </ui-gmap-google-map>
+    </div>
+</div>

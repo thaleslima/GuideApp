@@ -1,4 +1,9 @@
 .DS_Store
+node_modules/
+dist/
+*.tmp
+*.sass-cache
+bower_components/
 
 # Created by https://www.gitignore.io
 

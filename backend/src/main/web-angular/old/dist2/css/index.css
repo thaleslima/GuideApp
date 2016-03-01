@@ -1,0 +1,37 @@
+#map-canvas {
+    position: absolute;
+    bottom: 0px;
+    top: 60px;
+    right: 0px;
+    left: 0px;
+    z-index: 90;
+}
+
+.container-fluid{
+    margin-right: 100px;
+}
+
+#page-wrapper {
+    padding: inherit;
+}
+
+.filter{
+    z-index: 100;
+    padding-left: 15px;
+    margin-top: 7px;
+}
+
+
+@media (min-width: 768px){
+    #map-canvas {
+        left: 250px;
+    }
+
+    #page-wrapper {
+        padding-left: 130px
+    }
+}
+
+#search-id-city{
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+}

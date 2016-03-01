@@ -1,0 +1,47 @@
+#map-canvas {
+  width:100%;
+  height:300px;
+}
+
+.image {
+    position: relative;
+    text-align: center;
+    border: 1px solid #DDD;
+    background: #FFF;
+    width: 280px;
+    min-height: 180px;
+    padding: 2px;
+    border-radius: 4px;
+    cursor: move;
+}
+
+.image.empty {
+    background: #f8f8f6;
+    border: 1px dashed #CCC;
+    cursor: default;
+}
+
+.image .glyphicon {
+    opacity:0.5;
+	-moz-opacity: 0.65;
+	filter: alpha(opacity=65);
+}
+
+.text-upload-file {
+    font-size: 10px;
+    display: block;
+    margin-top: 70px;
+}
+
+.image-loading{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    position: relative;
+    margin-top: 70px;
+}
+
+.ring-alt{
+    background-image: url('../image/ring-alt.gif');
+    background-size: 30px 30px;
+}

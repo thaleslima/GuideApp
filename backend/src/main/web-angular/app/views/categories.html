@@ -1,0 +1,77 @@
+<div class="page-categories">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+        
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Categorias
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <i class="fa fa-dashboard"></i>  <a href="#/">Home</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-file"></i> Categorias
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+            
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>
+                        <a href="#/categories/new" type="button" ng-click="openModalNewCity()" class="btn btn-primary" id="new-city">
+                            Nova categoria
+                        </a>
+                    </p>
+                    <br>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            
+            
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="dataTable_wrapper">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Descrição</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="body-table-cities">
+
+                                <tr ng-repeat="entity in entities">
+                                    <td>{{entity.id}}</td>
+                                    <td>{{entity.description}}</td>
+                                    <td>
+                                        <a href="#/categories/edit/{{entity.id}}" type="button" class="btn btn-xs btn-info">
+                                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>      
+                                        </a>
+
+                                        <button type="button" class="btn btn-xs btn-danger" ng-click="deleteEntityById([entity.id])">
+                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>      
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->            
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrappe -->
+</div>
+<!-- /.page-cities -->

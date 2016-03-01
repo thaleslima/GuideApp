@@ -1,0 +1,113 @@
+.page-main .angular-google-map-container { 
+    position: absolute;
+    bottom: 0px;
+    top: 50px;
+    right: 0px;
+    left: 0px;
+}
+
+.page-main .filter{
+    z-index: 100;
+    padding-left: 15px;
+    margin-top: 7;
+}
+
+.page-main #page-wrapper {
+    padding-top: 10px;
+}
+
+
+@media (min-width: 768px){
+    .page-main .angular-google-map-container {
+        left: 225px;
+    }
+
+    .page-main #page-wrapper {
+        padding-left: 130px;
+        padding-top: 0px;
+    }
+    
+    .page-main .filter{
+        margin-top: 7px;
+    }
+}
+
+
+.page-cities-new-edit #map-canvas {
+    width: 100%;
+    height: 300px;
+}
+
+
+
+
+
+
+
+.page-locais-new-edit #map-canvas {
+  width:100%;
+  height:300px;
+}
+
+.page-locais-new-edit .image {
+    position: relative;
+    text-align: center;
+    border: 1px solid #DDD;
+    background: #FFF;
+    width: 280px;
+    min-height: 180px;
+    padding: 2px;
+    border-radius: 4px;
+    cursor: move;
+}
+
+.page-locais-new-edit .image.empty {
+    background: #f8f8f6;
+    border: 1px dashed #CCC;
+    cursor: default;
+}
+
+.page-locais-new-edit .image .glyphicon {
+    opacity:0.5;
+	-moz-opacity: 0.65;
+	filter: alpha(opacity=65);
+}
+
+.page-locais-new-edit .text-upload-file {
+    font-size: 10px;
+    display: block;
+    margin-top: 70px;
+}
+
+.page-locais-new-edit .image-loading{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    position: relative;
+    margin-top: 70px;
+}
+
+.page-locais-new-edit .ring-alt{
+    background-image: url('../image/ring-alt.gif');
+    background-size: 30px 30px;
+}
+
+.g-signin-center{
+    width: 100%;
+    position: absolute;
+    bottom: 160px;
+    display: inline-flex;
+}
+
+
+.g-signin-center .g-signin2{
+    margin: 0 auto;
+}
+
+.image-user {
+    width: 20px;
+    height: 20px;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+}
