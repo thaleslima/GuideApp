@@ -8,6 +8,10 @@
  *
  * Main module of the application.
  */
+
+/*jshint unused: false*/
+/*jslint devel: true */
+/*global angular, gapi */
 angular
      .module('guideAppApp', [
         'ngAnimate',
@@ -20,6 +24,7 @@ angular
         'ngTouch',
         'uiGmapgoogle-maps'
     ])
+
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
@@ -33,81 +38,83 @@ angular
                 controllerAs: 'about'
             })
             .when('/cities', {
-              templateUrl: 'views/cities.html',
-              controller: 'CitiesCtrl',
-              controllerAs: 'cities'
+                templateUrl: 'views/cities.html',
+                controller: 'CitiesCtrl',
+                controllerAs: 'cities'
             })
             .when('/categories', {
-              templateUrl: 'views/categories.html',
-              controller: 'CategoriesCtrl',
-              controllerAs: 'categories'
+                templateUrl: 'views/categories.html',
+                controller: 'CategoriesCtrl',
+                controllerAs: 'categories'
             })
             .when('/cities/new', {
-              templateUrl: 'views/city-new-edit.html',
-              controller: 'CityneweditCtrl',
-              controllerAs: 'cityNewEdit'
+                templateUrl: 'views/city-new-edit.html',
+                controller: 'CityneweditCtrl',
+                controllerAs: 'cityNewEdit'
             })
             .when('/cities/edit/:id', {
-              templateUrl: 'views/city-new-edit.html',
-              controller: 'CityneweditCtrl',
-              controllerAs: 'cityNewEdit'
+                templateUrl: 'views/city-new-edit.html',
+                controller: 'CityneweditCtrl',
+                controllerAs: 'cityNewEdit'
             })
             .when('/categories/new', {
-              templateUrl: 'views/category-new-edit.html',
-              controller: 'CategoryNewEditCtrl',
-              controllerAs: 'categoryNewEdit'
+                templateUrl: 'views/category-new-edit.html',
+                controller: 'CategoryNewEditCtrl',
+                controllerAs: 'categoryNewEdit'
             })
             .when('/categories/edit/:id', {
-              templateUrl: 'views/category-new-edit.html',
-              controller: 'CategoryNewEditCtrl',
-              controllerAs: 'categoryNewEdit'
+                templateUrl: 'views/category-new-edit.html',
+                controller: 'CategoryNewEditCtrl',
+                controllerAs: 'categoryNewEdit'
             })
             .when('/sub-categories', {
-              templateUrl: 'views/sub-categories.html',
-              controller: 'SubCategoriesCtrl',
-              controllerAs: 'subCategories'
+                templateUrl: 'views/sub-categories.html',
+                controller: 'SubCategoriesCtrl',
+                controllerAs: 'subCategories'
             })
             .when('/sub-categories/new', {
-              templateUrl: 'views/sub-category-new-edit.html',
-              controller: 'SubCategoryNewEditCtrl',
-              controllerAs: 'subCategoryNewEdit'
+                templateUrl: 'views/sub-category-new-edit.html',
+                controller: 'SubCategoryNewEditCtrl',
+                controllerAs: 'subCategoryNewEdit'
             })
             .when('/sub-categories/edit/:id', {
-              templateUrl: 'views/sub-category-new-edit.html',
-              controller: 'SubCategoryNewEditCtrl',
-              controllerAs: 'subCategoryNewEdit'
+                templateUrl: 'views/sub-category-new-edit.html',
+                controller: 'SubCategoryNewEditCtrl',
+                controllerAs: 'subCategoryNewEdit'
             })
             .when('/locals', {
-              templateUrl: 'views/locals.html',
-              controller: 'LocalsCtrl',
-              controllerAs: 'locals'
+                templateUrl: 'views/locals.html',
+                controller: 'LocalsCtrl',
+                controllerAs: 'locals'
             })
             .when('/locals/new', {
-              templateUrl: 'views/local-new-edit.html',
-              controller: 'LocalNewEditCtrl',
-              controllerAs: 'localNewEdit'
+                templateUrl: 'views/local-new-edit.html',
+                controller: 'LocalNewEditCtrl',
+                controllerAs: 'localNewEdit'
             })
             .when('/locals/edit/:id', {
-              templateUrl: 'views/local-new-edit.html',
-              controller: 'LocalNewEditCtrl',
-              controllerAs: 'localNewEdit'
+                templateUrl: 'views/local-new-edit.html',
+                controller: 'LocalNewEditCtrl',
+                controllerAs: 'localNewEdit'
             })
             .when('/login', {
-              templateUrl: 'views/login.html',
-              controller: 'LoginCtrl',
-              controllerAs: 'login'
+                templateUrl: 'views/login.html',
+                controller: 'LoginCtrl',
+                controllerAs: 'login'
             })
             .otherwise({
                 redirectTo: '/'
             });
-    }).run(function ($rootScope, $window) {
-        $rootScope.is_backend_ready = false;
+    })
+    
+    .run(function ($rootScope, $window) {
+        $rootScope.isBackendReady = false;
         $rootScope.mLatitude = -14.8835514;
         $rootScope.mLongitude = -57.8335856;
 
         $rootScope.init = function (s) {
-            if ($rootScope.is_backend_ready === false) {
-                s.$on('is_backend_ready', function () {
+            if ($rootScope.isBackendReady === false) {
+                s.$on('isBackendReady', function () {
                     s.init();
                 });
             } else {
@@ -115,22 +122,41 @@ angular
             }
         };
 
-        $window.init = function () {
-            $rootScope.$apply($rootScope.load_endpoints);
-        };
+        var isLocalHost = function () {
+            if (window.location.hostname === 'localhost' ||
+                    window.location.hostname === '127.0.0.1' ||
+                    ((window.location.port !== "") && (window.location.port > 1023))) {
 
-        $rootScope.load_endpoints = function () {
-            var apiName = 'guideAppApi', apiVersion = 'v1', API_ROOT = 'https://guideapp-br.appspot.com/_ah/api';
+                return true;
+            }
 
-            gapi.client.load(apiName, apiVersion, function () {
-                $rootScope.is_backend_ready = true;
-                $rootScope.api = gapi.client.guideAppApi;
-                $rootScope.$apply();
-                $rootScope.$broadcast('is_backend_ready');
-            }, API_ROOT);
+            return false;
         };
     
-        var
+        $rootScope.loadEndpoints = function () {
+            var apiName = 'guideAppApi', apiVersion = 'v1',
+                apiRoot = 'https://' + window.location.host + '/_ah/api';
+              
+            if (isLocalHost()) {
+                    //apiRoot = 'http://' + window.location.host + '/_ah/api';
+                apiRoot = 'https://guideapp-br.appspot.com/_ah/api';
+            }
+            
+            gapi.client.load(apiName, apiVersion, function () {
+                $rootScope.isBackendReady = true;
+                $rootScope.api = gapi.client.guideAppApi;
+                $rootScope.$apply();
+                $rootScope.$broadcast('isBackendReady');
+            }, apiRoot);
+        };
+    
+        $window.init = function () {
+            $rootScope.$apply($rootScope.loadEndpoints);
+        };
+    })
+    
+    .factory('$dataFactory', function ($rootScope) {
+        var $dataFactory = {},
             responseService = function (resp, success, error) {
                 if (!resp.error) {
                     success(resp);
@@ -140,187 +166,184 @@ angular
             },
             
             isAuthenticatedEndReturnLogin = function () {
-                
+                var auth2 = gapi.auth2.getAuthInstance();
+            
+                if (auth2 && !auth2.isSignedIn.get()) {
+                    window.location.href = "#/login";
+                }
             };
     
-    
-    
-        $rootScope.getCities = function (success, error) {
+        $dataFactory.getCities = function (success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.getCities().execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
-    
-        $rootScope.getCity = function (id, success, error) {
+
+        $dataFactory.getCity = function (id, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.getCity({'id': id}).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
-    
-        $rootScope.insertCity = function (city, success, error) {
+
+        $dataFactory.insertCity = function (city, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.insertCity(city).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
-    
-        $rootScope.updateCity = function (city, success, error) {
+
+        $dataFactory.updateCity = function (city, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.updateCity(city).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.removeCity = function (id, success, error) {
+        $dataFactory.removeCity = function (id, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.removeCity({'id': id}).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
-    
-    
-    
-    
-    
-    
-    
-        $rootScope.getCategories = function (success, error) {
+
+        $dataFactory.getCategories = function (success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.getCategories().execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.getCategory = function (id, success, error) {
+        $dataFactory.getCategory = function (id, success, error) {
             isAuthenticatedEndReturnLogin();
-
             $rootScope.api.getCategory({'id': id}).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.insertCategory = function (category, success, error) {
+        $dataFactory.insertCategory = function (category, success, error) {
             isAuthenticatedEndReturnLogin();
-
             $rootScope.api.insertCategory(category).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.updateCategory = function (category, success, error) {
+        $dataFactory.updateCategory = function (category, success, error) {
             isAuthenticatedEndReturnLogin();
-
             $rootScope.api.updateCategory(category).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.removeCategory = function (id, success, error) {
+        $dataFactory.removeCategory = function (id, success, error) {
             isAuthenticatedEndReturnLogin();
-
             $rootScope.api.removeCategory({'id': id}).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
-    
-    
-        $rootScope.getSubCategories = function (success, error) {
+
+
+        $dataFactory.getSubCategories = function (success, error) {
             $rootScope.api.getSubCategories().execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.getSubCategory = function (id, success, error) {
+        $dataFactory.getSubCategory = function (id, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.getSubCategory({'id': id}).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.insertSubCategory = function (subCategory, success, error) {
+        $dataFactory.insertSubCategory = function (subCategory, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.insertSubCategory(subCategory).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.updateSubCategory = function (subCategory, success, error) {
+        $dataFactory.updateSubCategory = function (subCategory, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.updateSubCategory(subCategory).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.removeSubCategory = function (id, success, error) {
+        $dataFactory.removeSubCategory = function (id, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.removeSubCategory({'id': id}).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-    
-    
-        $rootScope.getLocals = function (success, error) {
+
+
+        $dataFactory.getLocals = function (success, error) {
+            isAuthenticatedEndReturnLogin();
             $rootScope.api.getLocals().execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.getLocalsByIdCategory = function (idCity, idCategory, success, error) {
+        $dataFactory.getLocalsByIdCategory = function (idCity, idCategory, success, error) {
             $rootScope.api.getLocals({'idCity': idCity, 'idCategory': idCategory}).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
 
-        $rootScope.getLocal = function (id, success, error) {
+        $dataFactory.getLocal = function (id, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.getLocal({'id': id}).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.insertLocal = function (local, success, error) {
+        $dataFactory.insertLocal = function (local, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.insertLocal(local).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.updateLocal = function (local, success, error) {
+        $dataFactory.updateLocal = function (local, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.updateLocal(local).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
 
-        $rootScope.removeLocal = function (id, success, error) {
+        $dataFactory.removeLocal = function (id, success, error) {
             isAuthenticatedEndReturnLogin();
             $rootScope.api.removeLocal({'id': id}).execute(function (resp) {
                 responseService(resp, success, error);
             });
         };
+
+        return $dataFactory;
     });
 
-function hasClass(ele,cls) {
-    return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+function hasClass(ele, cls) {
+    return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
 }
 
-function addClass(ele,cls) {
-    if (!this.hasClass(ele,cls)) ele.className += " "+cls;
+function addClass(ele, cls) {
+    if (!hasClass(ele, cls)) {
+        ele.className += ' ' + cls;
+    }
 }
 
-function removeClass(ele,cls) {
-    if (hasClass(ele,cls)) {
-        var reg = new RegExp('(\\s|^)'+cls+'(\\s|$)');
-        ele.className=ele.className.replace(reg,' ');
+function removeClass(ele, cls) {
+    if (hasClass(ele, cls)) {
+        var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+        ele.className = ele.className.replace(reg, ' ');
     }
 }
 
 function initAuth() {
-    gapi.load('auth2', function() {
+    gapi.load('auth2', function () {
         var auth2 = gapi.auth2.getAuthInstance({
             client_id: '904382967622-sl60lsln4f5fmnqac53n2medldl6nt40.apps.googleusercontent.com',
             fetch_basic_profile: true,
@@ -329,16 +352,17 @@ function initAuth() {
 
         auth2.then(function () {
             if (!auth2.isSignedIn.get()) {
-                console.log("not logged!");
-                window.location.href = "#/login";
+                console.log('not logged!');
+                window.location.href = '#/login';
             } else {
-                console.log("logged!");
-                var profile = auth2.currentUser.get().getBasicProfile();
+                console.log('logged!');
+                var profile = auth2.currentUser.get().getBasicProfile(),
+                    image = document.getElementById('image-user');
                 
-                 document.getElementById("user").innerHTML = profile.getName();
-                 var image = document.getElementById("image-user");
-                 image.src = profile.getImageUrl();
-                 removeClass(image, "hide");
+                document.getElementById('user').innerHTML = profile.getName();
+                 
+                image.src = profile.getImageUrl();
+                removeClass(image, 'hide');
             }
         });
     });
@@ -346,17 +370,17 @@ function initAuth() {
 
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile(),
-        id_token = googleUser.getAuthResponse().id_token;
+        idToken = googleUser.getAuthResponse().id_token,
+        url = window.location.href.toLowerCase();
 
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail());
-    console.log("ID Token: " + id_token);
+    console.log('ID Token: ' + idToken);
     
-    var url = window.location.href.toLowerCase();
-    if (url.indexOf("login") != -1) {
-        window.location.href = "/";
+    if (url.indexOf('login') !== -1) {
+        window.location.href = '/';
     }
 }
 
@@ -368,38 +392,34 @@ function disassociate() {
 }
 
 
-var uploadFileToCloud = function(file, success, error){
-    var size = file.size;
-    var name = file.name;
-    var url;
-
-    url = "https://www.googleapis.com/upload/storage/v1/b/guide-app/o?uploadType=media&name=" + name;
+var uploadFileToCloud = function (file, success, error) {
+    var name = file.name,
+        url = 'https://www.googleapis.com/upload/storage/v1/b/guide-app/o?uploadType=media&name=' + name,
+        linkStorage = 'https://storage.googleapis.com/guide-app/',
+        auth = gapi.auth2.getAuthInstance(),
+        token = auth.currentUser.get().getAuthResponse().access_token,
+        xhr = new XMLHttpRequest();
     
-    var link_storage = "https://storage.googleapis.com/guide-app/";
-    var auth = gapi.auth2.getAuthInstance();
-    var token = auth.currentUser.get().getAuthResponse().access_token;
-
-    var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
-    xhr.setRequestHeader("Content-Type", "image/jpeg");
-    xhr.setRequestHeader("x-goog-project-id", "904382967622");
-    xhr.setRequestHeader("Authorization", "Bearer " + token);
+    xhr.setRequestHeader('Content-Type', 'image/jpeg');
+    xhr.setRequestHeader('x-goog-project-id', '904382967622');
+    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 
     xhr.send(file);
 
     xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
+        if (xhr.readyState === 4) {
 
             var response = JSON.parse(xhr.responseText);
 
-            if(xhr.status == 200){
-                success(link_storage + response.name)
+            if (xhr.status === 200) {
+                success(linkStorage + response.name);
             } else {
-                error(response)
+                error(response);
             }
         }
-    }
-}
+    };
+};
 
 function serviceInit() {
     window.init();
@@ -454,179 +474,5 @@ function disassociate() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.disconnect().then(function () {
         console.log('User disconnected from association with app.');
-        //window.location.href = "/pages/login.html";
     });
 }
-
-/*
-var isAuthenticatedEndReturnLogin = function () {
-
-};
-
-
-var responseService = function (resp, success, error) {
-    if (!resp.error) {
-        success(resp);
-    } else if (resp.error) {
-        error(resp);
-    }
-};
-
-var getCities = function (success, error) {
-    mGapi.getCities().execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var getCity = function (id, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.getCity({'id': id}).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var insertCity = function (city, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.insertCity(city).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var updateCity = function (city, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.updateCity(city).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var removeCity = function (id, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.removeCity({'id': id}).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-
-
-
-var getCategories = function (success, error) {
-    mGapi.getCategories().execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var getCategory = function (id, success, error) {
-
-    isAuthenticatedEndReturnLogin();
-
-    mGapi.getCategory({'id': id}).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var insertCategory = function (category, success, error) {
-    isAuthenticatedEndReturnLogin();
-
-    mGapi.insertCategory(category).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var updateCategory = function (category, success, error) {
-    isAuthenticatedEndReturnLogin();
-
-    mGapi.updateCategory(category).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var removeCategory = function (id, success, error) {
-    isAuthenticatedEndReturnLogin();
-
-    mGapi.removeCategory({'id': id}).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-
-
-
-var getSubCategories = function (success, error) {
-    mGapi.getSubCategories().execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var getSubCategory = function (id, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.getSubCategory({'id': id}).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var insertSubCategory = function (subCategory, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.insertSubCategory(subCategory).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var updateSubCategory = function (subCategory, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.updateSubCategory(subCategory).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var removeSubCategory = function (id, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.removeSubCategory({'id': id}).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-
-
-
-var getLocals = function (success, error) {
-    mGapi.getLocals().execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var getLocalsByIdCategory = function (idCity, idCategory, success, error) {
-    mGapi.getLocals({'idCity': idCity, 'idCategory': idCategory}).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-
-var getLocal = function (id, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.getLocal({'id': id}).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var insertLocal = function (local, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.insertLocal(local).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var updateLocal = function (local, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.updateLocal(local).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-var removeLocal = function (id, success, error) {
-    isAuthenticatedEndReturnLogin();
-    mGapi.removeLocal({'id': id}).execute(function (resp) {
-        responseService(resp, success, error);
-    });
-};
-
-*/

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name guideAppApp.controller:LoginCtrl
@@ -7,8 +5,11 @@
  * # LoginCtrl
  * Controller of the guideAppApp
  */
+
+/*global angular, $ */
 angular.module('guideAppApp')
-    .controller('LoginCtrl', ['$scope', function ($scope) {
-        document.getElementById("nav-bar").style.display = "none";        
-        $(".g-signin-center").removeClass("hide");
+    .controller('LoginCtrl', ['$scope', function () {
+        'use strict';
+        document.getElementById('nav-bar').style.display = 'none';
+        $('.g-signin-center').removeClass('hide');
     }]);

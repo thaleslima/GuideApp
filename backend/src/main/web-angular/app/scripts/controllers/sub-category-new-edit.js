@@ -7,44 +7,47 @@
  * # SubCategoryNewEditCtrl
  * Controller of the guideAppApp
  */
+
+/*jslint devel: true */
+/*global $, angular, $i, $t, SubCategory */
 angular.module('guideAppApp')
-    .controller('SubCategoryNewEditCtrl', ['$scope', '$location', '$rootScope', '$routeParams', function ($scope, $location, $rootScope, $routeParams) {
+    .controller('SubCategoryNewEditCtrl', ['$scope', '$location', '$rootScope', '$routeParams', '$dataFactory', function ($scope, $location, $rootScope, $routeParams, $dataFactory) {
         'use strict';
       
         var mId = null,
-            mIdCategory = "",
+            mIdCategory = '',
             
             hideAlertRegistration = function () {
-                $i("alert-registration").style.display = "none";
+                $i('alert-registration').style.display = 'none';
             },
             
             
             clearTextErrors = function () {
-                $t(".help-block").forEach(function (element) {
-                    element.innerText = "";
+                $t('.help-block').forEach(function (element) {
+                    element.innerText = '';
                 });
                 hideAlertRegistration();
             },
             
             
             cleanEntity = function () {
-                document.getElementById("modal-entity-description").value = "";
-                document.getElementById("modal-entity-id").value = "";
-                document.getElementById("modal-entity-id-category").value = "";
+                document.getElementById('modal-entity-description').value = '';
+                document.getElementById('modal-entity-id').value = '';
+                document.getElementById('modal-entity-id-category').value = '';
             },
             
             
             getEntity = function () {
-                var description = document.getElementById("modal-entity-description").value,
-                    id = document.getElementById("modal-entity-id").value,
-                    idCategory = document.getElementById("modal-entity-id-category").value;
+                var description = document.getElementById('modal-entity-description').value,
+                    id = document.getElementById('modal-entity-id').value,
+                    idCategory = document.getElementById('modal-entity-id-category').value;
 
-                return new SubCategory(description, idCategory);
+                return new SubCategory(id, description, idCategory);
             },
             
             
             saveNewEntitySuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
 
                 cleanEntity();
@@ -52,19 +55,19 @@ angular.module('guideAppApp')
             
             
             saveNewEntityError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
             },
             
             
             saveUpdateEntitySuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
             },
             
             
             saveUpdateEntityError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
             },
             
@@ -73,9 +76,9 @@ angular.module('guideAppApp')
                 var entity = getEntity();
 
                 if (entity.id) {
-                    $rootScope.updateSubCategory(entity, saveUpdateEntitySuccess, saveUpdateEntityError);
+                    $dataFactory.updateSubCategory(entity, saveUpdateEntitySuccess, saveUpdateEntityError);
                 } else {
-                    $rootScope.insertSubCategory(entity, saveNewEntitySuccess, saveNewEntityError);
+                    $dataFactory.insertSubCategory(entity, saveNewEntitySuccess, saveNewEntityError);
                 }
             },
             
@@ -83,21 +86,21 @@ angular.module('guideAppApp')
             
             getEntitySuccess = function (data) {
                 mIdCategory = data.idCategory;
-                document.getElementById("modal-entity-description").value = data.description;
-                document.getElementById("modal-entity-id").value = data.id;
-                document.getElementById("modal-entity-id-category").value = data.idCategory;
+                document.getElementById('modal-entity-description').value = data.description;
+                document.getElementById('modal-entity-id').value = data.id;
+                document.getElementById('modal-entity-id-category').value = data.idCategory;
                 
                 clearTextErrors();
             },
             
             
             getEntityError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
             },
             
             getCategoriesSuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
                 
                 $scope.categories = data.items;
@@ -105,20 +108,20 @@ angular.module('guideAppApp')
                 
                 $scope.$apply();
                 
-                document.getElementById("modal-entity-id-category").removeAttribute("disabled");
+                document.getElementById('modal-entity-id-category').removeAttribute('disabled');
             },
             
             getCategoriesError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
             };
         
         
         $scope.init = function () {
             if (mId) {
-                $rootScope.getSubCategory(mId, getEntitySuccess, getEntityError);
-                $rootScope.getCategories(getCategoriesSuccess, getCategoriesError);
+                $dataFactory.getSubCategory(mId, getEntitySuccess, getEntityError);
             }
+            $dataFactory.getCategories(getCategoriesSuccess, getCategoriesError);
         };
         
         $scope.initPage = function () {
@@ -126,14 +129,14 @@ angular.module('guideAppApp')
             mId = $routeParams.id;
             
             if (mId) {
-                $scope.pageDescription = "Atualizar sub-categoria";
-                $scope.page = "Atualizar";
+                $scope.pageDescription = 'Atualizar sub-categoria';
+                $scope.page = 'Atualizar';
             } else {
-                $scope.pageDescription = "Cadastro de sub0categoria";
-                $scope.page = "Nova";
+                $scope.pageDescription = 'Cadastro de sub-categoria';
+                $scope.page = 'Nova';
             }
             
-            $(".form-registration").find("input,textarea,select").jqBootstrapValidation({
+            $('.form-registration').find('input,textarea,select').jqBootstrapValidation({
                 preventSubmit: true,
 
                 submitSuccess: function () {
@@ -145,6 +148,4 @@ angular.module('guideAppApp')
         
         $scope.initPage();
         $rootScope.init($scope);
-      
-      
     }]);

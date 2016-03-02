@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * @ngdoc function
@@ -7,43 +7,47 @@
  * # CategoriesCtrl
  * Controller of the guideAppApp
  */
+
+/*jslint devel: true */
+/*global angular */
 angular.module('guideAppApp')
-  .controller('CategoriesCtrl', ['$scope', '$location', '$rootScope', function ($scope, $location, $rootScope) {
+    .controller('CategoriesCtrl', ['$scope', '$location', '$rootScope', '$dataFactory', function ($scope, $location, $rootScope, $dataFactory) {
+        'use strict';
       
-      var
+        var
             getEntitiesSuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
                 $scope.entities = data.items;
                 $scope.$apply();
             },
         
             getEntitiesError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
             },
             
             deleteEntitySuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
 
-                $rootScope.getCategories(getEntitiesSuccess, getEntitiesError);
+                $dataFactory.getCategories(getEntitiesSuccess, getEntitiesError);
             },
         
             deleteEntityError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
             };
         
         
         $scope.init = function () {
-            $rootScope.getCategories(getEntitiesSuccess, getEntitiesError);
+            $dataFactory.getCategories(getEntitiesSuccess, getEntitiesError);
         };
         
         $scope.deleteEntityById = function (id) {
-            $rootScope.removeCategory(id, deleteEntitySuccess, deleteEntityError);
+            $dataFactory.removeCategory(id, deleteEntitySuccess, deleteEntityError);
         };
                 
         $rootScope.init($scope);
     
-  }]);
+    }]);

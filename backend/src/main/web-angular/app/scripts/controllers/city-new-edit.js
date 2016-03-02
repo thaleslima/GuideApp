@@ -6,8 +6,11 @@
  * # CityneweditCtrl
  * Controller of the guideAppApp
  */
+
+/*jslint plusplus: true, devel: true*/
+/*global $, angular, $i, $t, google, City */
 angular.module('guideAppApp')
-    .controller('CityneweditCtrl', ['$scope', '$location', '$rootScope', '$routeParams', function ($scope, $location, $rootScope, $routeParams) {
+    .controller('CityneweditCtrl', ['$scope', '$location', '$rootScope', '$routeParams', '$dataFactory', function ($scope, $location, $rootScope, $routeParams, $dataFactory) {
         'use strict';
         
         var mPosition = null,
@@ -36,8 +39,8 @@ angular.module('guideAppApp')
                 
                 mMarkersArray.push(marker);
 
-                document.getElementById("modal-entity-latitude").value = lat;
-                document.getElementById("modal-entity-longitude").value = lng;
+                document.getElementById('modal-entity-latitude').value = lat;
+                document.getElementById('modal-entity-longitude').value = lng;
             },
             
             
@@ -56,48 +59,48 @@ angular.module('guideAppApp')
             
             
             hideAlertRegistration = function () {
-                $i("alert-registration").style.display = "none";
+                $i('alert-registration').style.display = 'none';
             },
             
             
             clearTextErrors = function () {
-                $t(".help-block").forEach(function (element) {
-                    element.innerText = "";
+                $t('.help-block').forEach(function (element) {
+                    element.innerText = '';
                 });
                 hideAlertRegistration();
             },
             
             
             clearTextErrorsMap = function () {
-                $t(".text-map").forEach(function (element) {
-                    element.innerText = "";
+                $t('.text-map').forEach(function (element) {
+                    element.innerText = '';
                 });
             },
             
             
             cleanEntity = function () {
-                document.getElementById("modal-city-name").value = "";
-                document.getElementById("modal-city-uf").value = "";
-                document.getElementById("modal-city-id").value = "";
-                document.getElementById("modal-entity-latitude").value = "";
-                document.getElementById("modal-entity-longitude").value = "";
+                document.getElementById('modal-city-name').value = '';
+                document.getElementById('modal-city-uf').value = '';
+                document.getElementById('modal-city-id').value = '';
+                document.getElementById('modal-entity-latitude').value = '';
+                document.getElementById('modal-entity-longitude').value = '';
             },
             
             
             getEntity = function () {
-                var name = document.getElementById("modal-city-name").value,
-                    e = document.getElementById("modal-city-uf"),
+                var name = document.getElementById('modal-city-name').value,
+                    e = document.getElementById('modal-city-uf'),
                     uf = e.options[e.selectedIndex].value,
-                    id = document.getElementById("modal-city-id").value,
-                    latitude = document.getElementById("modal-entity-latitude").value,
-                    longitude = document.getElementById("modal-entity-longitude").value;
+                    id = document.getElementById('modal-city-id').value,
+                    latitude = document.getElementById('modal-entity-latitude').value,
+                    longitude = document.getElementById('modal-entity-longitude').value;
 
                 return new City(id, name, uf, latitude, longitude);
             },
             
             
             saveNewEntitySuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
 
                 cleanEntity();
@@ -106,17 +109,17 @@ angular.module('guideAppApp')
             
             
             saveNewEntityError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
             },
             
             
             saveUpdateEntitySuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
                 
-                var latitude = document.getElementById("modal-entity-latitude").value,
-                    longitude = document.getElementById("modal-entity-longitude").value;
+                var latitude = document.getElementById('modal-entity-latitude').value,
+                    longitude = document.getElementById('modal-entity-longitude').value;
                 
                 mPosition = {latitude: latitude, longitude: longitude};
                 initPositionMap();
@@ -124,7 +127,7 @@ angular.module('guideAppApp')
             
             
             saveUpdateEntityError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
             },
             
@@ -135,9 +138,9 @@ angular.module('guideAppApp')
                 console.log(city);
 
                 if (city.id) {
-                    $rootScope.updateCity(city, saveUpdateEntitySuccess, saveUpdateEntityError);
+                    $dataFactory.updateCity(city, saveUpdateEntitySuccess, saveUpdateEntityError);
                 } else {
-                    $rootScope.insertCity(city, saveNewEntitySuccess, saveNewEntityError);
+                    $dataFactory.insertCity(city, saveNewEntitySuccess, saveNewEntityError);
                 }
             },
             
@@ -148,7 +151,7 @@ angular.module('guideAppApp')
                     zoom: mZoom
                 };
 
-                mMap = new google.maps.Map(document.getElementById("map-canvas"), mapProp);
+                mMap = new google.maps.Map(document.getElementById('map-canvas'), mapProp);
 
                 google.maps.event.addListener(mMap, 'click', function (event) {
                     addMarker(mMap, event.latLng.lat(), event.latLng.lng());
@@ -157,45 +160,45 @@ angular.module('guideAppApp')
             },
             
             
-            getEntitySuccess = function(data){
-                document.getElementById("modal-city-name").value = data.name;
-                document.getElementById("modal-city-uf").value = data.uf;
-                document.getElementById("modal-city-id").value = data.id;
-                document.getElementById("modal-entity-latitude").value = data.latitude;
-                document.getElementById("modal-entity-longitude").value = data.longitude;
+            getEntitySuccess = function (data) {
+                document.getElementById('modal-city-name').value = data.name;
+                document.getElementById('modal-city-uf').value = data.uf;
+                document.getElementById('modal-city-id').value = data.id;
+                document.getElementById('modal-entity-latitude').value = data.latitude;
+                document.getElementById('modal-entity-longitude').value = data.longitude;
                 clearTextErrors();
                 mPosition = {latitude: data.latitude, longitude: data.longitude};
                 initPositionMap();
             },
             
             
-            getEntityError = function(data){
-                console.log("error");
+            getEntityError = function (data) {
+                console.log('error');
                 console.log(data);
             };
         
         
         $scope.init = function () {
             if (mId) {
-                $rootScope.getCity(mId, getEntitySuccess, getEntityError);
-            }        
+                $dataFactory.getCity(mId, getEntitySuccess, getEntityError);
+            }
         };
         
-        $scope.initPage = function () {        
+        $scope.initPage = function () {
             hideAlertRegistration();
             initializeMap();
             
             mId = $routeParams.id;
             
-            if(mId) {
-                $scope.pageDescription = "Atualizar cidade";
-                $scope.page = "Atualizar";
+            if (mId) {
+                $scope.pageDescription = 'Atualizar cidade';
+                $scope.page = 'Atualizar';
             } else {
-                $scope.pageDescription = "Cadastro de cidade";
-                $scope.page = "Nova";
+                $scope.pageDescription = 'Cadastro de cidade';
+                $scope.page = 'Nova';
             }
             
-            $(".form-registration").find("input,textarea,select").jqBootstrapValidation({
+            $('.form-registration').find('input,textarea,select').jqBootstrapValidation({
                 preventSubmit: true,
 
                 submitSuccess: function () {

@@ -6,8 +6,11 @@
  * # LocalNewEditCtrl
  * Controller of the guideAppApp
  */
+
+/*jslint plusplus: true, devel: true */
+/*global $, angular, $i, $t, google, uploadFileToCloud, Local */
 angular.module('guideAppApp')
-    .controller('LocalNewEditCtrl', ['$scope', '$location', '$rootScope', '$routeParams', function ($scope, $location, $rootScope, $routeParams) {
+    .controller('LocalNewEditCtrl', ['$scope', '$location', '$rootScope', '$routeParams', '$dataFactory', function ($scope, $location, $rootScope, $routeParams, $dataFactory) {
         
         'use strict';
 
@@ -18,63 +21,63 @@ angular.module('guideAppApp')
             mZoom = 3,
             mZoomCity = 16,
             mId = null,
-            mIdCategory = "",
-            mIdCity = "",
-            mIdSubCategory = "",
+            mIdCategory = '',
+            mIdCity = '',
+            mIdSubCategory = '',
             mSubCategories,
             
             hideMessageRegistration = function () {
-                document.getElementById("alert-registration").style.display = "none";
+                document.getElementById('alert-registration').style.display = 'none';
             },
             
             showMessageRegistration = function (message) {
-                document.getElementById("alert-registration").style.display = "block";
-                document.getElementById("alert-registration-message").innerHTML = message;
+                document.getElementById('alert-registration').style.display = 'block';
+                document.getElementById('alert-registration-message').innerHTML = message;
             },
             
             showImage = function (data) {
-                var imageLocal = $("#image-local");
-                imageLocal.attr("src", data);
-                imageLocal.removeClass("hide");
+                var imageLocal = $('#image-local');
+                imageLocal.attr('src', data);
+                imageLocal.removeClass('hide');
 
-                $("#modal-entity-image-path").val(data);
-                $("#file").val("");
+                $('#modal-entity-image-path').val(data);
+                $('#file').val('');
 
-                $(".image").removeClass("empty");
-                $(".image-legend").addClass("hide");
-                $(".image-loading").addClass("hide");
+                $('.image').removeClass('empty');
+                $('.image-legend').addClass('hide');
+                $('.image-loading').addClass('hide');
             },
             
             
             hideImage = function () {
-                var imageLocal = $("#image-local");
-                imageLocal.attr("src", "");
-                imageLocal.addClass("hide");
+                var imageLocal = $('#image-local');
+                imageLocal.attr('src', '');
+                imageLocal.addClass('hide');
 
-                $("#modal-entity-image-path").val("");
-                $("#file").val("");
+                $('#modal-entity-image-path').val('');
+                $('#file').val('');
 
-                $(".image").addClass("empty");
-                $(".image-legend").removeClass("hide");
+                $('.image').addClass('empty');
+                $('.image-legend').removeClass('hide');
             },
 
             
             showImageLoading = function () {
-                $(".image-loading").removeClass("hide");
-                $(".image-legend").addClass("hide");
-                $("#image-local").addClass("hide");
+                $('.image-loading').removeClass('hide');
+                $('.image-legend').addClass('hide');
+                $('#image-local').addClass('hide');
             },
 
 
             hideImageLoading = function () {
-                $(".image-loading").addClass("hide");
-                $(".image-legend").removeClass("hide");
-                $("#image-local").addClass("hide");
+                $('.image-loading').addClass('hide');
+                $('.image-legend').removeClass('hide');
+                $('#image-local').addClass('hide');
             },
             
             
             sendFileToCloudSuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
 
                 showImage(data);
@@ -82,11 +85,11 @@ angular.module('guideAppApp')
 
 
             sendFileToCloudError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
                 hideImageLoading();
 
-                showMessageRegistration("Problema ao enviar imagem. " + data.error.message);
+                showMessageRegistration('Problema ao enviar imagem. ' + data.error.message);
             },
 
             
@@ -118,8 +121,8 @@ angular.module('guideAppApp')
                 
                 mMarkersArray.push(marker);
 
-                document.getElementById("modal-entity-latitude").value = lat;
-                document.getElementById("modal-entity-longitude").value = lng;
+                document.getElementById('modal-entity-latitude').value = lat;
+                document.getElementById('modal-entity-longitude').value = lng;
             },
             
             
@@ -138,68 +141,70 @@ angular.module('guideAppApp')
             
             
             hideAlertRegistration = function () {
-                $i("alert-registration").style.display = "none";
+                $i('alert-registration').style.display = 'none';
             },
             
             
             clearTextErrors = function () {
-                $t(".help-block").forEach(function (element) {
-                    element.innerText = "";
+                $t('.help-block').forEach(function (element) {
+                    element.innerText = '';
                 });
                 hideAlertRegistration();
             },
             
             
             clearTextErrorsMap = function () {
-                $t(".text-map").forEach(function (element) {
-                    element.innerText = "";
+                $t('.text-map').forEach(function (element) {
+                    element.innerText = '';
                 });
             },
             
             
             cleanEntity = function () {
-                document.getElementById("modal-entity-id").value = "";
-                document.getElementById("modal-entity-description").value = "";
-                document.getElementById("modal-entity-site").value = "";
-                document.getElementById("modal-entity-phone").value = "";
-                document.getElementById("modal-entity-address").value = "";
-                document.getElementById("modal-entity-no").checked = true;
-                document.getElementById("modal-entity-detail").value = "";
-                document.getElementById("modal-entity-latitude").value = "";
-                document.getElementById("modal-entity-longitude").value = "";
-                document.getElementById("modal-entity-id-city").value = "";
+                document.getElementById('modal-entity-id').value = '';
+                document.getElementById('modal-entity-description').value = '';
+                document.getElementById('modal-entity-site').value = '';
+                document.getElementById('modal-entity-phone').value = '';
+                document.getElementById('modal-entity-address').value = '';
+                document.getElementById('modal-entity-no').checked = true;
+                document.getElementById('modal-entity-detail').value = '';
+                document.getElementById('modal-entity-latitude').value = '';
+                document.getElementById('modal-entity-longitude').value = '';
+                document.getElementById('modal-entity-id-city').value = '';
 
-                document.getElementById("modal-entity-id-category").value = "";
-
-                var subCategory = document.getElementById("modal-entity-id-sub-category");
-                subCategory.innerHTML = "";
-                subCategory.value = "";
+                document.getElementById('modal-entity-id-category').value = '';
+                
+                var subCategory = document.getElementById('modal-entity-id-sub-category');
+                subCategory.innerHTML = '';
+                subCategory.value = '';
+                
+                hideImage();
             },
             
             
             getEntity = function () {
-                var id = document.getElementById("modal-entity-id").value,
-                    description = document.getElementById("modal-entity-description").value,
-                    site = document.getElementById("modal-entity-site").value,
-                    phone = document.getElementById("modal-entity-phone").value,
-                    address = document.getElementById("modal-entity-address").value,
-                    wifi = document.querySelector('input[name="wifi"]:checked').value,
-                    detail = document.getElementById("modal-entity-detail").value,
-                    latitude = document.getElementById("modal-entity-latitude").value,
-                    longitude = document.getElementById("modal-entity-longitude").value,
-                    imagePath = document.getElementById("modal-entity-image-path").value,
-                    idCategory = document.getElementById("modal-entity-id-category").value,
-                    idCity = document.getElementById("modal-entity-id-city").value,
+                var id = document.getElementById('modal-entity-id').value,
+                    description = document.getElementById('modal-entity-description').value,
+                    site = document.getElementById('modal-entity-site').value,
+                    phone = document.getElementById('modal-entity-phone').value,
+                    address = document.getElementById('modal-entity-address').value,
+                    wifi = document.querySelector('input[name=\'wifi\']:checked').value,
+                    detail = document.getElementById('modal-entity-detail').value,
+                    latitude = document.getElementById('modal-entity-latitude').value,
+                    longitude = document.getElementById('modal-entity-longitude').value,
+                    imagePath = document.getElementById('modal-entity-image-path').value,
+                    idCategory = document.getElementById('modal-entity-id-category').value,
+                    idCity = document.getElementById('modal-entity-id-city').value,
                     idCategories = [idCategory],
-                    idSubCategories = $("#modal-entity-id-sub-category").val();
+                    idSubCategories = $('#modal-entity-id-sub-category').val();
 
-                if (wifi === "no") {
+                if (wifi === 'no') {
                     wifi = false;
                 } else {
                     wifi = true;
                 }
                 
-                var entity = new Local(id,
+                return new Local(id,
                                        description,
                                        site,
                                        phone,
@@ -212,13 +217,11 @@ angular.module('guideAppApp')
                                        idCity,
                                        idCategories,
                                        idSubCategories);
-
-                return entity;
             },
             
             
             saveNewEntitySuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
 
                 cleanEntity();
@@ -227,7 +230,7 @@ angular.module('guideAppApp')
             
             
             saveNewEntityError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
                 
                 showMessageRegistration(data.error.message);
@@ -235,11 +238,11 @@ angular.module('guideAppApp')
             
             
             saveUpdateEntitySuccess = function (data) {
-                console.log("success");
+                console.log('success');
                 console.log(data);
                 
-                var latitude = document.getElementById("modal-entity-latitude").value,
-                    longitude = document.getElementById("modal-entity-longitude").value;
+                var latitude = document.getElementById('modal-entity-latitude').value,
+                    longitude = document.getElementById('modal-entity-longitude').value;
                 
                 mPosition = {latitude: latitude, longitude: longitude};
                 initPositionMap();
@@ -247,7 +250,7 @@ angular.module('guideAppApp')
             
             
             saveUpdateEntityError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
             },
             
@@ -258,9 +261,9 @@ angular.module('guideAppApp')
                 console.log(entity);
 
                 if (entity.id) {
-                    $rootScope.updateLocal(entity, saveUpdateEntitySuccess, saveUpdateEntityError);
+                    $dataFactory.updateLocal(entity, saveUpdateEntitySuccess, saveUpdateEntityError);
                 } else {
-                    $rootScope.insertLocal(entity, saveNewEntitySuccess, saveNewEntityError);
+                    $dataFactory.insertLocal(entity, saveNewEntitySuccess, saveNewEntityError);
                 }
             },
             
@@ -271,12 +274,68 @@ angular.module('guideAppApp')
                     zoom: mZoom
                 };
 
-                mMap = new google.maps.Map(document.getElementById("map-canvas"), mapProp);
+                mMap = new google.maps.Map(document.getElementById('map-canvas'), mapProp);
 
                 google.maps.event.addListener(mMap, 'click', function (event) {
                     addMarker(mMap, event.latLng.lat(), event.latLng.lng());
                     clearTextErrorsMap();
                 });
+            },
+        
+            getCategoriesSuccess = function (data) {
+                console.log('success');
+                console.log(data);
+                
+                $scope.categories = data.items;
+                $scope.$apply();
+                
+                $('#modal-entity-id-category').val(mIdCategory).removeAttr('disabled');
+            },
+            
+            getCategoriesError = function (data) {
+                console.log('error');
+                console.log(data);
+            },
+        
+            getCitiesSuccess = function (data) {
+                console.log('success');
+                console.log(data);
+                
+                $scope.cities = data.items;
+                $scope.selectCity = mIdCity;
+                $scope.$apply();
+                
+                document.getElementById('modal-entity-id-city').removeAttribute('disabled');
+            },
+            
+            getCitiesError = function (data) {
+                console.log('error');
+                console.log(data);
+            },
+        
+            
+            
+            getSubCategoriesByIdCategory = function (idCategories, change) {
+                var subCategories = [];
+                $scope.subCategories = [];
+
+                if (mSubCategories && mSubCategories.items && idCategories) {
+                    mSubCategories.items.forEach(function (element) {
+                        if (element.idCategory === idCategories) {
+                            subCategories.push(element);
+                        }
+                    });
+                    
+                    $scope.subCategories = subCategories;
+                    
+                    if (!change) {
+                        $scope.$apply();
+                    }
+                    
+                    $('#modal-entity-id-sub-category').removeAttr('disabled').val(mIdSubCategory);
+                    
+                    mIdSubCategory = '';
+                }
             },
             
             
@@ -288,19 +347,19 @@ angular.module('guideAppApp')
                 mIdCity = data.idCity;
                 mIdSubCategory = data.idSubCategories;
                 
-                $("#modal-entity-id-category").val(mIdCategory)
-                $("#modal-entity-id-sub-category").val(data.idSubCategories);
-                document.getElementById("modal-entity-description").value = data.description;
-                document.getElementById("modal-entity-id").value = data.id;
-                document.getElementById("modal-entity-site").value = data.site;
-                document.getElementById("modal-entity-phone").value = data.phone;
-                document.getElementById("modal-entity-address").value = data.address;
-                document.getElementById("modal-entity-no").checked = !data.wifi;
-                document.getElementById("modal-entity-yes").checked = data.wifi;
-                document.getElementById("modal-entity-detail").value = data.detail;
-                document.getElementById("modal-entity-latitude").value = data.latitude;
-                document.getElementById("modal-entity-longitude").value = data.longitude;
-                document.getElementById("modal-entity-id-city").value = data.idCity;
+                $('#modal-entity-id-category').val(mIdCategory);
+                $('#modal-entity-id-sub-category').val(data.idSubCategories);
+                document.getElementById('modal-entity-description').value = data.description;
+                document.getElementById('modal-entity-id').value = data.id;
+                document.getElementById('modal-entity-site').value = data.site;
+                document.getElementById('modal-entity-phone').value = data.phone;
+                document.getElementById('modal-entity-address').value = data.address;
+                document.getElementById('modal-entity-no').checked = !data.wifi;
+                document.getElementById('modal-entity-yes').checked = data.wifi;
+                document.getElementById('modal-entity-detail').value = data.detail;
+                document.getElementById('modal-entity-latitude').value = data.latitude;
+                document.getElementById('modal-entity-longitude').value = data.longitude;
+                document.getElementById('modal-entity-id-city').value = data.idCity;
                                 
                 showImage(data.imagePath);
                 
@@ -311,79 +370,21 @@ angular.module('guideAppApp')
             
             
             getEntityError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
-            },
-        
-            getCategoriesSuccess = function (data) {
-                console.log("success");
-                console.log(data);
-                
-                $scope.categories = data.items;                
-                $scope.$apply();
-                
-                $("#modal-entity-id-category").val(mIdCategory).removeAttr("disabled");
-                
-                //getSubCategoriesByIdCategory(mIdCategory);
             },
             
-            getCategoriesError = function (data) {
-                console.log("error");
-                console.log(data);
-            },
-        
-            getCitiesSuccess = function (data) {
-                console.log("success");
-                console.log(data);
-                
-                $scope.cities = data.items;
-                $scope.selectCity = mIdCity;
-                
-                $scope.$apply();
-                
-                document.getElementById("modal-entity-id-city").removeAttribute("disabled");
-            },
-            
-            getCitiesError = function (data) {
-                console.log("error");
-                console.log(data);
-            },
-        
             getSubCategoriesSuccess = function (data) {
-                console.log("ok");
+                console.log('ok');
                 console.log(data);
 
                 mSubCategories = data;
-                
                 getSubCategoriesByIdCategory(mIdCategory);
             },
 
             getSubCategoriesError = function (data) {
-                console.log("error");
+                console.log('error');
                 console.log(data);
-            },
-            
-            getSubCategoriesByIdCategory = function (idCategories, change) {
-                var subCategories = [];
-                $scope.subCategories = []; 
-
-                if (mSubCategories && mSubCategories.items && idCategories) {
-                    mSubCategories.items.forEach(function (element, index) {
-                        if (element.idCategory === idCategories) {
-                            subCategories.push(element);
-                        }
-                    });
-                    
-                    $scope.subCategories = subCategories; 
-                    
-                    if (!change){
-                        $scope.$apply();
-                    }
-                    
-                    $("#modal-entity-id-sub-category").removeAttr("disabled").val(mIdSubCategory);
-                    
-                    mIdSubCategory = "";
-                }
             };
         
         
@@ -409,31 +410,31 @@ angular.module('guideAppApp')
         
         $scope.init = function () {
             if (mId) {
-                $rootScope.getLocal(mId, getEntitySuccess, getEntityError);
+                $dataFactory.getLocal(mId, getEntitySuccess, getEntityError);
             }
             
-            $rootScope.getSubCategories(getSubCategoriesSuccess, getSubCategoriesError);
-            $rootScope.getCities(getCitiesSuccess, getCitiesError);
-            $rootScope.getCategories(getCategoriesSuccess, getCategoriesError);
+            $dataFactory.getSubCategories(getSubCategoriesSuccess, getSubCategoriesError);
+            $dataFactory.getCities(getCitiesSuccess, getCitiesError);
+            $dataFactory.getCategories(getCategoriesSuccess, getCategoriesError);
         };
         
         $scope.initPage = function () {
             hideAlertRegistration();
             initializeMap();
             
-            $("#file").change(sendFileToCloud);
+            $('#file').change(sendFileToCloud);
             
             mId = $routeParams.id;
             
             if (mId) {
-                $scope.pageDescription = "Atualizar Local";
-                $scope.page = "Atualizar";
+                $scope.pageDescription = 'Atualizar Local';
+                $scope.page = 'Atualizar';
             } else {
-                $scope.pageDescription = "Cadastro de Local";
-                $scope.page = "Nova";
+                $scope.pageDescription = 'Cadastro de Local';
+                $scope.page = 'Nova';
             }
             
-            $(".form-registration").find("input,textarea").jqBootstrapValidation({
+            $('.form-registration').find('input,textarea').jqBootstrapValidation({
                 preventSubmit: true,
 
                 submitSuccess: function () {

@@ -1,5 +1,5 @@
 {
-  "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "requireCamelCaseOrUpperCaseIdentifiers": null,
   "requireCapitalizedConstructors": true,
   "requireParenthesesAroundIIFE": true,
   "validateQuoteMarks": "'"

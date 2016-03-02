@@ -7,6 +7,8 @@
  * # AboutCtrl
  * Controller of the guideAppApp
  */
+
+/*global angular */
 angular.module('guideAppApp')
     .controller('AboutCtrl', function () {
         'use strict';
