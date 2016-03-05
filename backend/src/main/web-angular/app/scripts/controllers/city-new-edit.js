@@ -39,8 +39,8 @@ angular.module('guideAppApp')
                 
                 mMarkersArray.push(marker);
 
-                document.getElementById('modal-entity-latitude').value = lat;
-                document.getElementById('modal-entity-longitude').value = lng;
+                $i('modal-entity-latitude').value = lat;
+                $i('modal-entity-longitude').value = lng;
             },
             
             
@@ -79,21 +79,21 @@ angular.module('guideAppApp')
             
             
             cleanEntity = function () {
-                document.getElementById('modal-city-name').value = '';
-                document.getElementById('modal-city-uf').value = '';
-                document.getElementById('modal-city-id').value = '';
-                document.getElementById('modal-entity-latitude').value = '';
-                document.getElementById('modal-entity-longitude').value = '';
+                $i('modal-city-name').value = '';
+                $i('modal-city-uf').value = '';
+                $i('modal-city-id').value = '';
+                $i('modal-entity-latitude').value = '';
+                $i('modal-entity-longitude').value = '';
             },
             
             
             getEntity = function () {
-                var name = document.getElementById('modal-city-name').value,
-                    e = document.getElementById('modal-city-uf'),
+                var name = $i('modal-city-name').value,
+                    e = $i('modal-city-uf'),
                     uf = e.options[e.selectedIndex].value,
-                    id = document.getElementById('modal-city-id').value,
-                    latitude = document.getElementById('modal-entity-latitude').value,
-                    longitude = document.getElementById('modal-entity-longitude').value;
+                    id = $i('modal-city-id').value,
+                    latitude = $i('modal-entity-latitude').value,
+                    longitude = $i('modal-entity-longitude').value;
 
                 return new City(id, name, uf, latitude, longitude);
             },
@@ -118,8 +118,8 @@ angular.module('guideAppApp')
                 console.log('success');
                 console.log(data);
                 
-                var latitude = document.getElementById('modal-entity-latitude').value,
-                    longitude = document.getElementById('modal-entity-longitude').value;
+                var latitude = $i('modal-entity-latitude').value,
+                    longitude = $i('modal-entity-longitude').value;
                 
                 mPosition = {latitude: latitude, longitude: longitude};
                 initPositionMap();
@@ -151,7 +151,7 @@ angular.module('guideAppApp')
                     zoom: mZoom
                 };
 
-                mMap = new google.maps.Map(document.getElementById('map-canvas'), mapProp);
+                mMap = new google.maps.Map($i('map-canvas'), mapProp);
 
                 google.maps.event.addListener(mMap, 'click', function (event) {
                     addMarker(mMap, event.latLng.lat(), event.latLng.lng());
@@ -161,11 +161,11 @@ angular.module('guideAppApp')
             
             
             getEntitySuccess = function (data) {
-                document.getElementById('modal-city-name').value = data.name;
-                document.getElementById('modal-city-uf').value = data.uf;
-                document.getElementById('modal-city-id').value = data.id;
-                document.getElementById('modal-entity-latitude').value = data.latitude;
-                document.getElementById('modal-entity-longitude').value = data.longitude;
+                $i('modal-city-name').value = data.name;
+                $i('modal-city-uf').value = data.uf;
+                $i('modal-city-id').value = data.id;
+                $i('modal-entity-latitude').value = data.latitude;
+                $i('modal-entity-longitude').value = data.longitude;
                 clearTextErrors();
                 mPosition = {latitude: data.latitude, longitude: data.longitude};
                 initPositionMap();

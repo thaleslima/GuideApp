@@ -6,10 +6,12 @@
  * Controller of the guideAppApp
  */
 
-/*global angular, $ */
+/*global angular, $i, removeClass */
 angular.module('guideAppApp')
     .controller('LoginCtrl', ['$scope', function () {
         'use strict';
-        document.getElementById('nav-bar').style.display = 'none';
-        $('.g-signin-center').removeClass('hide');
+        
+        $i('nav-bar').style.display = 'none';
+        removeClass($i('g-signin-center'), 'hide');
+        
     }]);

@@ -9,7 +9,7 @@
  */
 
 /*jslint devel: true */
-/*global angular */
+/*global angular, $i */
 angular.module('guideAppApp')
     .controller('LocalsCtrl', ['$scope', '$location', '$rootScope', '$dataFactory', function ($scope, $location, $rootScope, $dataFactory) {
         'use strict';
@@ -46,7 +46,7 @@ angular.module('guideAppApp')
                 $scope.cities = data.items;
                 $scope.$apply();
                 
-                document.getElementById('search-id-city').removeAttribute('disabled');
+                $i('search-id-city').removeAttribute('disabled');
             },
 
         
@@ -62,7 +62,7 @@ angular.module('guideAppApp')
                 $scope.categories = data.items;
                 $scope.$apply();
                 
-                document.getElementById('search-id-category').removeAttribute('disabled');
+                $i('search-id-category').removeAttribute('disabled');
             },
 
             getCategoriesError = function (data) {
@@ -72,8 +72,8 @@ angular.module('guideAppApp')
         
         
         $scope.searchEntity = function () {
-            var idCategory = document.getElementById('search-id-category').value,
-                idCity = document.getElementById('search-id-city').value;
+            var idCategory = $i('search-id-category').value,
+                idCity = $i('search-id-city').value;
 
             if (idCategory && idCity) {
                 $dataFactory.getLocalsByIdCategory(idCity, idCategory, getEntitiesSuccess, getEntitiesError);

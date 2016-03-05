@@ -31,16 +31,17 @@ angular.module('guideAppApp')
             
             
             cleanEntity = function () {
-                document.getElementById('modal-entity-description').value = '';
-                document.getElementById('modal-entity-id').value = '';
-                document.getElementById('modal-entity-id-category').value = '';
+                $i('modal-entity-description').value = '';
+                $i('modal-entity-id').value = '';
+                
+                $scope.selectCategory = '';
             },
             
             
             getEntity = function () {
-                var description = document.getElementById('modal-entity-description').value,
-                    id = document.getElementById('modal-entity-id').value,
-                    idCategory = document.getElementById('modal-entity-id-category').value;
+                var description = $i('modal-entity-description').value,
+                    id = $i('modal-entity-id').value,
+                    idCategory = $i('modal-entity-id-category').value;
 
                 return new SubCategory(id, description, idCategory);
             },
@@ -86,9 +87,9 @@ angular.module('guideAppApp')
             
             getEntitySuccess = function (data) {
                 mIdCategory = data.idCategory;
-                document.getElementById('modal-entity-description').value = data.description;
-                document.getElementById('modal-entity-id').value = data.id;
-                document.getElementById('modal-entity-id-category').value = data.idCategory;
+                $i('modal-entity-description').value = data.description;
+                $i('modal-entity-id').value = data.id;
+                $i('modal-entity-id-category').value = data.idCategory;
                 
                 clearTextErrors();
             },
@@ -108,7 +109,7 @@ angular.module('guideAppApp')
                 
                 $scope.$apply();
                 
-                document.getElementById('modal-entity-id-category').removeAttribute('disabled');
+                $i('modal-entity-id-category').removeAttribute('disabled');
             },
             
             getCategoriesError = function (data) {

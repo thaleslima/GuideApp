@@ -28,14 +28,14 @@ angular.module('guideAppApp')
             
             
             cleanEntity = function () {
-                document.getElementById('modal-entity-description').value = '';
-                document.getElementById('modal-entity-id').value = '';
+                $i('modal-entity-description').value = '';
+                $i('modal-entity-id').value = '';
             },
             
             
             getEntity = function () {
-                var description = document.getElementById('modal-entity-description').value,
-                    id = document.getElementById('modal-entity-id').value;
+                var description = $i('modal-entity-description').value,
+                    id = $i('modal-entity-id').value;
 
                 return new Category(id, description);
             },
@@ -80,8 +80,8 @@ angular.module('guideAppApp')
             
             
             getEntitySuccess = function (data) {
-                document.getElementById('modal-entity-description').value = data.description;
-                document.getElementById('modal-entity-id').value = data.id;
+                $i('modal-entity-description').value = data.description;
+                $i('modal-entity-id').value = data.id;
                 
                 clearTextErrors();
             },

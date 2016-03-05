@@ -125,7 +125,7 @@ angular
         var isLocalHost = function () {
             if (window.location.hostname === 'localhost' ||
                     window.location.hostname === '127.0.0.1' ||
-                    ((window.location.port !== "") && (window.location.port > 1023))) {
+                    ((window.location.port !== '') && (window.location.port > 1023))) {
 
                 return true;
             }
@@ -169,7 +169,7 @@ angular
                 var auth2 = gapi.auth2.getAuthInstance();
             
                 if (auth2 && !auth2.isSignedIn.get()) {
-                    window.location.href = "#/login";
+                    window.location.href = '#/login';
                 }
             };
     
@@ -341,6 +341,54 @@ function removeClass(ele, cls) {
         ele.className = ele.className.replace(reg, ' ');
     }
 }
+
+function getSelectedOptions(sel) {
+    var opts = [],
+        opt,
+        len = sel.options.length,
+        i;
+    
+    for (i = 0; i < len; i++) {
+        opt = sel.options[i];
+
+        if (opt.selected) {
+            opts.push(opt.value);
+        }
+    }
+    
+    return opts;
+}
+
+function setSelectedOptions(sel, values) {
+    
+    if (!sel || !values) {
+        return;
+    }
+    
+    var opts = [],
+        opt,
+        len = sel.options.length,
+        lenValues = values.length,
+        i,
+        y;
+    
+    for (y = 0; y < len; y++) {
+        opt = sel.options[y];
+        opt.selected = false;
+    }
+    
+    for (i = 0; i < lenValues; i++) {
+        for (y = 0; y < len; y++) {
+            opt = sel.options[y];
+            
+            if (opt.value === values[i]) {
+                opt.selected = true;
+                break;
+            }
+        }
+    }
+}
+
 
 function initAuth() {
     gapi.load('auth2', function () {

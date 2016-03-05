@@ -8,7 +8,7 @@
  */
 
 /*jslint plusplus: true, devel: true */
-/*global $, angular, $i, $t, google, uploadFileToCloud, Local */
+/*global angular, $i, $t, google, uploadFileToCloud, Local, addClass, removeClass, getSelectedOptions, setSelectedOptions*/
 angular.module('guideAppApp')
     .controller('LocalNewEditCtrl', ['$scope', '$location', '$rootScope', '$routeParams', '$dataFactory', function ($scope, $location, $rootScope, $routeParams, $dataFactory) {
         
@@ -27,52 +27,67 @@ angular.module('guideAppApp')
             mSubCategories,
             
             hideMessageRegistration = function () {
-                document.getElementById('alert-registration').style.display = 'none';
+                $i('alert-registration').style.display = 'none';
             },
             
             showMessageRegistration = function (message) {
-                document.getElementById('alert-registration').style.display = 'block';
-                document.getElementById('alert-registration-message').innerHTML = message;
+                $i('alert-registration').style.display = 'block';
+                $i('alert-registration-message').innerHTML = message;
             },
             
             showImage = function (data) {
-                var imageLocal = $('#image-local');
-                imageLocal.attr('src', data);
-                imageLocal.removeClass('hide');
-
-                $('#modal-entity-image-path').val(data);
-                $('#file').val('');
-
-                $('.image').removeClass('empty');
-                $('.image-legend').addClass('hide');
-                $('.image-loading').addClass('hide');
+                var imageLocal = $i('image-local');
+                imageLocal.src = data;
+                
+                removeClass(imageLocal, 'hide');
+                removeClass($i('image-group'), 'empty');
+                
+                $i('modal-entity-image-path').value = data;
+                $i('file').value = '';
+                
+                $t('.image-legend').forEach(function (element) {
+                    addClass(element, 'hide');
+                });
+                
+                addClass($i('image-loading'), 'hide');
             },
             
             
             hideImage = function () {
-                var imageLocal = $('#image-local');
-                imageLocal.attr('src', '');
-                imageLocal.addClass('hide');
-
-                $('#modal-entity-image-path').val('');
-                $('#file').val('');
-
-                $('.image').addClass('empty');
-                $('.image-legend').removeClass('hide');
+                var imageLocal = $i('image-local');
+                imageLocal.src = '';
+                
+                addClass(imageLocal, 'hide');
+                addClass($i('image-group'), 'empty');
+                
+                $i('modal-entity-image-path').value = '';
+                $i('file').value = '';
+                
+                $t('.image-legend').forEach(function (element) {
+                    removeClass(element, 'hide');
+                });
             },
 
             
             showImageLoading = function () {
-                $('.image-loading').removeClass('hide');
-                $('.image-legend').addClass('hide');
-                $('#image-local').addClass('hide');
+                removeClass($i('image-loading'), 'hide');
+                
+                $t('.image-legend').forEach(function (element) {
+                    addClass(element, 'hide');
+                });
+                
+                addClass($i('image-local'), 'hide');
             },
 
 
             hideImageLoading = function () {
-                $('.image-loading').addClass('hide');
-                $('.image-legend').removeClass('hide');
-                $('#image-local').addClass('hide');
+                addClass($i('image-loading'), 'hide');
+                
+                $t('.image-legend').forEach(function (element) {
+                    removeClass(element, 'hide');
+                });
+                
+                addClass($i('image-local'), 'hide');
             },
             
             
@@ -95,7 +110,7 @@ angular.module('guideAppApp')
             
             sendFileToCloud = function () {
                 hideMessageRegistration();
-                var fileInput = document.getElementById('file');
+                var fileInput = $i('file');
 
                 if (fileInput.files.length > 0) {
                     showImageLoading();
@@ -121,8 +136,8 @@ angular.module('guideAppApp')
                 
                 mMarkersArray.push(marker);
 
-                document.getElementById('modal-entity-latitude').value = lat;
-                document.getElementById('modal-entity-longitude').value = lng;
+                $i('modal-entity-latitude').value = lat;
+                $i('modal-entity-longitude').value = lng;
             },
             
             
@@ -161,42 +176,41 @@ angular.module('guideAppApp')
             
             
             cleanEntity = function () {
-                document.getElementById('modal-entity-id').value = '';
-                document.getElementById('modal-entity-description').value = '';
-                document.getElementById('modal-entity-site').value = '';
-                document.getElementById('modal-entity-phone').value = '';
-                document.getElementById('modal-entity-address').value = '';
-                document.getElementById('modal-entity-no').checked = true;
-                document.getElementById('modal-entity-detail').value = '';
-                document.getElementById('modal-entity-latitude').value = '';
-                document.getElementById('modal-entity-longitude').value = '';
-                document.getElementById('modal-entity-id-city').value = '';
-
-                document.getElementById('modal-entity-id-category').value = '';
+                $i('modal-entity-id').value = '';
+                $i('modal-entity-description').value = '';
+                $i('modal-entity-site').value = '';
+                $i('modal-entity-phone').value = '';
+                $i('modal-entity-address').value = '';
+                $i('modal-entity-no').checked = true;
+                $i('modal-entity-detail').value = '';
+                $i('modal-entity-latitude').value = '';
+                $i('modal-entity-longitude').value = '';
+                                
+                $scope.selectCity = '';
+                $scope.selectCategoy = '';
                 
-                var subCategory = document.getElementById('modal-entity-id-sub-category');
-                subCategory.innerHTML = '';
-                subCategory.value = '';
+                $scope.subCategories = [];
+                $scope.$apply();
                 
                 hideImage();
             },
             
             
             getEntity = function () {
-                var id = document.getElementById('modal-entity-id').value,
-                    description = document.getElementById('modal-entity-description').value,
-                    site = document.getElementById('modal-entity-site').value,
-                    phone = document.getElementById('modal-entity-phone').value,
-                    address = document.getElementById('modal-entity-address').value,
+                var id = $i('modal-entity-id').value,
+                    description = $i('modal-entity-description').value,
+                    site = $i('modal-entity-site').value,
+                    phone = $i('modal-entity-phone').value,
+                    address = $i('modal-entity-address').value,
                     wifi = document.querySelector('input[name=\'wifi\']:checked').value,
-                    detail = document.getElementById('modal-entity-detail').value,
-                    latitude = document.getElementById('modal-entity-latitude').value,
-                    longitude = document.getElementById('modal-entity-longitude').value,
-                    imagePath = document.getElementById('modal-entity-image-path').value,
-                    idCategory = document.getElementById('modal-entity-id-category').value,
-                    idCity = document.getElementById('modal-entity-id-city').value,
+                    detail = $i('modal-entity-detail').value,
+                    latitude = $i('modal-entity-latitude').value,
+                    longitude = $i('modal-entity-longitude').value,
+                    imagePath = $i('modal-entity-image-path').value,
+                    idCategory = $i('modal-entity-id-category').value,
+                    idCity = $i('modal-entity-id-city').value,
                     idCategories = [idCategory],
-                    idSubCategories = $('#modal-entity-id-sub-category').val();
+                    idSubCategories = getSelectedOptions($i('modal-entity-id-sub-category'));
 
                 if (wifi === 'no') {
                     wifi = false;
@@ -205,18 +219,18 @@ angular.module('guideAppApp')
                 }
                 
                 return new Local(id,
-                                       description,
-                                       site,
-                                       phone,
-                                       address,
-                                       wifi,
-                                       detail,
-                                       latitude,
-                                       longitude,
-                                       imagePath,
-                                       idCity,
-                                       idCategories,
-                                       idSubCategories);
+                               description,
+                               site,
+                               phone,
+                               address,
+                               wifi,
+                               detail,
+                               latitude,
+                               longitude,
+                               imagePath,
+                               idCity,
+                               idCategories,
+                               idSubCategories);
             },
             
             
@@ -241,8 +255,8 @@ angular.module('guideAppApp')
                 console.log('success');
                 console.log(data);
                 
-                var latitude = document.getElementById('modal-entity-latitude').value,
-                    longitude = document.getElementById('modal-entity-longitude').value;
+                var latitude = $i('modal-entity-latitude').value,
+                    longitude = $i('modal-entity-longitude').value;
                 
                 mPosition = {latitude: latitude, longitude: longitude};
                 initPositionMap();
@@ -274,7 +288,7 @@ angular.module('guideAppApp')
                     zoom: mZoom
                 };
 
-                mMap = new google.maps.Map(document.getElementById('map-canvas'), mapProp);
+                mMap = new google.maps.Map($i('map-canvas'), mapProp);
 
                 google.maps.event.addListener(mMap, 'click', function (event) {
                     addMarker(mMap, event.latLng.lat(), event.latLng.lng());
@@ -289,7 +303,9 @@ angular.module('guideAppApp')
                 $scope.categories = data.items;
                 $scope.$apply();
                 
-                $('#modal-entity-id-category').val(mIdCategory).removeAttr('disabled');
+                var entityIdCategory = $i('modal-entity-id-category');
+                entityIdCategory.value = mIdCategory;
+                entityIdCategory.removeAttribute('disabled');
             },
             
             getCategoriesError = function (data) {
@@ -305,7 +321,7 @@ angular.module('guideAppApp')
                 $scope.selectCity = mIdCity;
                 $scope.$apply();
                 
-                document.getElementById('modal-entity-id-city').removeAttribute('disabled');
+                $i('modal-entity-id-city').removeAttribute('disabled');
             },
             
             getCitiesError = function (data) {
@@ -316,7 +332,8 @@ angular.module('guideAppApp')
             
             
             getSubCategoriesByIdCategory = function (idCategories, change) {
-                var subCategories = [];
+                var subCategories = [],
+                    comboSubCategory = $i('modal-entity-id-sub-category');
                 $scope.subCategories = [];
 
                 if (mSubCategories && mSubCategories.items && idCategories) {
@@ -331,35 +348,35 @@ angular.module('guideAppApp')
                     if (!change) {
                         $scope.$apply();
                     }
+                        
                     
-                    $('#modal-entity-id-sub-category').removeAttr('disabled').val(mIdSubCategory);
-                    
+                    setSelectedOptions(comboSubCategory, mIdSubCategory);
+                    comboSubCategory.removeAttribute('disabled');
+                                        
                     mIdSubCategory = '';
                 }
             },
-            
             
             getEntitySuccess = function (data) {
                 mIdCategory = data.idCategories[0];
                 getSubCategoriesByIdCategory(mIdCategory);
 
-                
                 mIdCity = data.idCity;
                 mIdSubCategory = data.idSubCategories;
                 
-                $('#modal-entity-id-category').val(mIdCategory);
-                $('#modal-entity-id-sub-category').val(data.idSubCategories);
-                document.getElementById('modal-entity-description').value = data.description;
-                document.getElementById('modal-entity-id').value = data.id;
-                document.getElementById('modal-entity-site').value = data.site;
-                document.getElementById('modal-entity-phone').value = data.phone;
-                document.getElementById('modal-entity-address').value = data.address;
-                document.getElementById('modal-entity-no').checked = !data.wifi;
-                document.getElementById('modal-entity-yes').checked = data.wifi;
-                document.getElementById('modal-entity-detail').value = data.detail;
-                document.getElementById('modal-entity-latitude').value = data.latitude;
-                document.getElementById('modal-entity-longitude').value = data.longitude;
-                document.getElementById('modal-entity-id-city').value = data.idCity;
+                $i('modal-entity-id-category').value = mIdCategory;
+                setSelectedOptions($i('modal-entity-id-sub-category'), mIdSubCategory);
+                $i('modal-entity-description').value = data.description;
+                $i('modal-entity-id').value = data.id;
+                $i('modal-entity-site').value = data.site;
+                $i('modal-entity-phone').value = data.phone;
+                $i('modal-entity-address').value = data.address;
+                $i('modal-entity-no').checked = !data.wifi;
+                $i('modal-entity-yes').checked = data.wifi;
+                $i('modal-entity-detail').value = data.detail;
+                $i('modal-entity-latitude').value = data.latitude;
+                $i('modal-entity-longitude').value = data.longitude;
+                $i('modal-entity-id-city').value = data.idCity;
                                 
                 showImage(data.imagePath);
                 
@@ -388,11 +405,15 @@ angular.module('guideAppApp')
             };
         
         
-        $scope.selectCityChange = function () {
+        $scope.selectCityChange = function (e) {
 	        console.log($scope.selectCity);
 	       
-            var latitude = $('#modal-entity-id-city').find(':selected').data('latitude'),
-                longitude = $('#modal-entity-id-city').find(':selected').data('longitude'),
+            console.log(this);
+            console.log(e);
+            
+            var entityIdCity = $i('modal-entity-id-city'),
+                latitude = entityIdCity.options[entityIdCity.selectedIndex].dataset.latitude,
+                longitude = entityIdCity.options[entityIdCity.selectedIndex].dataset.longitude,
                 position = new google.maps.LatLng(latitude, longitude);
             
             mMap.setZoom(mZoomCity);
@@ -402,7 +423,7 @@ angular.module('guideAppApp')
         $scope.selectCategoryChange = function () {
 	        console.log($scope.selectCategory);
 	        
-            var values = $('#modal-entity-id-category').val();
+            var values = $i('modal-entity-id-category').value;
             console.log(values);
             
             getSubCategoriesByIdCategory(values, true);
@@ -422,7 +443,7 @@ angular.module('guideAppApp')
             hideAlertRegistration();
             initializeMap();
             
-            $('#file').change(sendFileToCloud);
+            $i('file').addEventListener('change', sendFileToCloud, false);
             
             mId = $routeParams.id;
             
