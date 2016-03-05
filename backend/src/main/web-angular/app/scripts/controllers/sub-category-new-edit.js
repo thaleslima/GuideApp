@@ -130,10 +130,10 @@ angular.module('guideAppApp')
             mId = $routeParams.id;
             
             if (mId) {
-                $scope.pageDescription = 'Atualizar sub-categoria';
+                $scope.pageDescription = 'Sub-Categorias';
                 $scope.page = 'Atualizar';
             } else {
-                $scope.pageDescription = 'Cadastro de sub-categoria';
+                $scope.pageDescription = 'Sub-Categorias';
                 $scope.page = 'Nova';
             }
             

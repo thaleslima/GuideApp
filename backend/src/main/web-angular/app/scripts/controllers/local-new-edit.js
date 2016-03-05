@@ -8,7 +8,7 @@
  */
 
 /*jslint plusplus: true, devel: true */
-/*global angular, $i, $t, google, uploadFileToCloud, Local, addClass, removeClass, getSelectedOptions, setSelectedOptions*/
+/*global angular, $, $i, $t, google, uploadFileToCloud, Local, addClass, removeClass, getSelectedOptions, setSelectedOptions*/
 angular.module('guideAppApp')
     .controller('LocalNewEditCtrl', ['$scope', '$location', '$rootScope', '$routeParams', '$dataFactory', function ($scope, $location, $rootScope, $routeParams, $dataFactory) {
         
@@ -448,10 +448,10 @@ angular.module('guideAppApp')
             mId = $routeParams.id;
             
             if (mId) {
-                $scope.pageDescription = 'Atualizar Local';
+                $scope.pageDescription = 'Locais';
                 $scope.page = 'Atualizar';
             } else {
-                $scope.pageDescription = 'Cadastro de Local';
+                $scope.pageDescription = 'Locais';
                 $scope.page = 'Nova';
             }
             

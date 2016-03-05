@@ -191,10 +191,10 @@ angular.module('guideAppApp')
             mId = $routeParams.id;
             
             if (mId) {
-                $scope.pageDescription = 'Atualizar cidade';
+                $scope.pageDescription = 'Cidades';
                 $scope.page = 'Atualizar';
             } else {
-                $scope.pageDescription = 'Cadastro de cidade';
+                $scope.pageDescription = 'Cidades';
                 $scope.page = 'Nova';
             }
             
