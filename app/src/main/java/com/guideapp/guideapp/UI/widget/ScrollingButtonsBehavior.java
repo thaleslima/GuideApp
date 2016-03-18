@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.widget;
+package com.guideapp.guideapp.ui.widget;
 
 import android.content.Context;
 import android.support.design.widget.AppBarLayout;
@@ -6,7 +6,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-import com.guideapp.guideapp.UI.infrastructure.CommonUtils;
+import com.guideapp.guideapp.ui.infrastructure.CommonUtils;
 
 public class ScrollingButtonsBehavior extends CoordinatorLayout.Behavior<LinearLayout> {
     private int toolbarHeight;

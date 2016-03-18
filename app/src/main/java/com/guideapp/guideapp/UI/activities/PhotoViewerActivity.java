@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.activities;
+package com.guideapp.guideapp.ui.activities;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -11,7 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.fragments.PhotoViewerPageFragment;
+import com.guideapp.guideapp.ui.fragments.PhotoViewerPageFragment;
 
 public class PhotoViewerActivity extends BaseActivity {
     private static final int NUM_PAGES = 10;

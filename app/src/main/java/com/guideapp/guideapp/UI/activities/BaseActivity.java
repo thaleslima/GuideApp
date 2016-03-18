@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.activities;
+package com.guideapp.guideapp.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

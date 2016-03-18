@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.login;
+package com.guideapp.guideapp.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.register.RegisterActivity;
+import com.guideapp.guideapp.ui.register.RegisterActivity;
 
 public class LoginFragment extends Fragment {
 

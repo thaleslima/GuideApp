@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.adapters;
+package com.guideapp.guideapp.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
+import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.model.ViewModel;
 import com.squareup.picasso.Picasso;
 

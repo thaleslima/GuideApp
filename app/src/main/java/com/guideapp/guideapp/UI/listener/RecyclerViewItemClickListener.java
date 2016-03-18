@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.listener;
+package com.guideapp.guideapp.ui.listener;
 
 import android.view.View;
 

@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0-beta5'
+        classpath 'com.android.tools.build:gradle:2.1.0-alpha3'
         //classpath 'com.f2prateek.checkstyle:checkstyle:1.0.1'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -36,7 +36,7 @@ ext {
     minSdkVersion = 16
     targetSdkVersion = 22
     compileSdkVersion = 23
-    buildToolsVersion = '23.0.2'
+    buildToolsVersion = '24.0.0-rc1'
 
     // App dependencies
     supportLibraryVersion = '23.1.1'
@@ -47,4 +47,5 @@ ext {
     mapsUtilsVersion = '0.3.4'
     imageZoomVersion = '1.0.5'
     butterKnifeVersion = '7.0.1'
+    retrofitVersion = '2.0.0'
 }

@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.activities;
+package com.guideapp.guideapp.ui.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -12,10 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.fragments.FavoriteFragment;
-import com.guideapp.guideapp.UI.fragments.MainActivityFragment;
-import com.guideapp.guideapp.UI.fragments.UserFragment;
-import com.guideapp.guideapp.UI.fragments.WhatsHotFragment;
+import com.guideapp.guideapp.ui.fragments.FavoriteFragment;
+import com.guideapp.guideapp.ui.fragments.MainActivityFragment;
+import com.guideapp.guideapp.ui.fragments.UserFragment;
+import com.guideapp.guideapp.ui.fragments.WhatsHotFragment;
 
 public class MainActivity extends BaseActivity {
     private TabLayout mTabLayout;

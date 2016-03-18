@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.guideapp.guideapp.UI.widget;
+package com.guideapp.guideapp.ui.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

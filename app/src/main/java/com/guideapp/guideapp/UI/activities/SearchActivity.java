@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.activities;
+package com.guideapp.guideapp.ui.activities;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -18,8 +18,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.fragments.SearchFragment;
-import com.guideapp.guideapp.UI.fragments.SearchFragment.Callbacks;
+import com.guideapp.guideapp.ui.fragments.SearchFragment;
+import com.guideapp.guideapp.ui.fragments.SearchFragment.Callbacks;
 
 
 /**

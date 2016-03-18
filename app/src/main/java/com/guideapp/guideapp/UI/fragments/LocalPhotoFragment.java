@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.fragments;
+package com.guideapp.guideapp.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.activities.PhotoViewerActivity;
-import com.guideapp.guideapp.UI.adapters.PhotoAdapter;
-import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
-import com.guideapp.guideapp.UI.widget.GridSpacingItemDecoration;
+import com.guideapp.guideapp.ui.activities.PhotoViewerActivity;
+import com.guideapp.guideapp.ui.adapters.PhotoAdapter;
+import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
+import com.guideapp.guideapp.ui.widget.GridSpacingItemDecoration;
 import com.guideapp.guideapp.model.ViewModel;
 
 import java.util.ArrayList;

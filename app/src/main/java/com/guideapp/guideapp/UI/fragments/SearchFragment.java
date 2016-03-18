@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.fragments;
+package com.guideapp.guideapp.ui.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.adapters.LocalAdapter;
-import com.guideapp.guideapp.UI.adapters.SearchAdapter;
-import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
-import com.guideapp.guideapp.UI.widget.DividerItemDecoration;
+import com.guideapp.guideapp.ui.adapters.LocalAdapter;
+import com.guideapp.guideapp.ui.adapters.SearchAdapter;
+import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
+import com.guideapp.guideapp.ui.widget.DividerItemDecoration;
 import com.guideapp.guideapp.model.Local;
 import com.guideapp.guideapp.model.ViewModel;
 
@@ -114,7 +114,7 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
         mDataSetResult.add(new Local("Cachoeira da gruta", "Complexo do claro"));
         mDataSetResult.add(new Local("Cachoeira da gruta", "Complexo do claro"));
 
-        mAdapterResult = new LocalAdapter(this.getActivity(), this, mDataSetResult);
+        mAdapterResult = new LocalAdapter(this.getActivity(), null);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapterResult);
         mRecyclerView.addItemDecoration(mDividerItemDecoration);

@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.register;
+package com.guideapp.guideapp.ui.register;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.widget;
+package com.guideapp.guideapp.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

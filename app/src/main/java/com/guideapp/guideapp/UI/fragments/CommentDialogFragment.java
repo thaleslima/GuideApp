@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.fragments;
+package com.guideapp.guideapp.ui.fragments;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

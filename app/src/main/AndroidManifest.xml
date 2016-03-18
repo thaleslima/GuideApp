@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme2" >
         <activity
-            android:name=".UI.activities.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,44 +19,48 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.activities.local.LocalActivity"
+            android:name=".ui.activities.local.LocalActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppThemeLocal" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".ui.activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".UI.activities.MapActivity"
+            android:name=".ui.activities.MapActivity"
             android:label="@string/app_name"
             android:theme="@style/AppThemeMap" >
         </activity>
         <activity
-            android:name=".UI.activities.SearchActivity"
+            android:name=".ui.activities.SearchActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/AppThemeSearch"
             android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
-            android:name=".UI.activities.LocalPhotoActivity"
+            android:name=".ui.activities.LocalPhotoActivity"
             android:label="@string/app_name"
             android:theme="@style/AppThemePhoto" >
         </activity>
         <activity
-            android:name=".UI.activities.LocalDetailActivity"
+            android:name=".ui.activities.LocalDetailActivity"
             android:label="@string/app_name"
             android:theme="@style/AppThemeLocalDetail" >
         </activity>
         <activity
-            android:name=".UI.activities.PhotoViewerActivity"
+            android:name=".ui.activities.PhotoViewerActivity"
             android:label="@string/app_name"
             android:theme="@style/AppThemeGallery" >
         </activity>
 
         <activity
-            android:name=".UI.login.LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
 
         <activity
-            android:name=".UI.register.RegisterActivity"
+            android:name=".ui.register.RegisterActivity"
             android:label="@string/title_activity_register" />
 
         <meta-data

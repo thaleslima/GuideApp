@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.adapters;
+package com.guideapp.guideapp.ui.adapters;
 
 import android.app.DialogFragment;
 import android.graphics.PorterDuff;
@@ -19,9 +19,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.activities.BaseActivity;
-import com.guideapp.guideapp.UI.fragments.CommentDialogFragment;
-import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
+import com.guideapp.guideapp.ui.activities.BaseActivity;
+import com.guideapp.guideapp.ui.fragments.CommentDialogFragment;
+import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.model.LocalDetail;
 
 import java.util.List;

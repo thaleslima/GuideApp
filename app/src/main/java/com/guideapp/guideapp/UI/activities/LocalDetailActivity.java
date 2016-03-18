@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.activities;
+package com.guideapp.guideapp.ui.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,8 +19,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.adapters.LocalDetailAdapter;
-import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
+import com.guideapp.guideapp.ui.adapters.LocalDetailAdapter;
+import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.model.LocalDetail;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;

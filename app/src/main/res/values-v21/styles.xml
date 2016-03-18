@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="BaseTheme">
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="AppTheme2" parent="BaseTheme">
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:colorControlHighlight">@color/accent_translucent</item> 
         <item name="android:windowSharedElementsUseOverlay">true</item>

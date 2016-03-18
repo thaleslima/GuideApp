@@ -1,9 +1,5 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.f2prateek.checkstyle'
-
-//apply from: '../config/quality.gradle'
-
-//check.dependsOn 'checkstyle', 'findbugs', 'pmd'
+apply from: '../config/quality-app.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -22,10 +18,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    lintOptions {
-        abortOnError false
-    }
 }
 
 dependencies {
@@ -41,6 +33,9 @@ dependencies {
     compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+
     compile "com.google.android.gms:play-services-location:$rootProject.playServicesVersion"
     compile "com.google.android.gms:play-services-maps:$rootProject.playServicesVersion"
 
@@ -51,43 +46,3 @@ dependencies {
 
     compile project(path: ':backend', configuration: 'android-endpoints')
 }
-
-//task findbugs(type: FindBugs, dependsOn: assembleDebug) {
-//    ignoreFailures = false
-//    effort = 'max'
-//    reportLevel = 'high'
-//    excludeFilter = new File("${project.rootDir}/app/config/findbugs-filter.xml")
-//    classes = files("${project.rootDir}/app/build/intermediates/classes")
-//
-//    source 'src'
-//    include '**/*.java'
-//    exclude '**/gen/**'
-//
-//    reports {
-//        xml.enabled = false
-//        html.enabled = true
-//        html {
-//            destination "$project.buildDir/gradle/reports/findbugs/findbugs.html"
-//        }
-//    }
-//
-//    classpath = files()
-//}
-
-//task pmd(type: Pmd) {
-//    ignoreFailures = false
-//    ruleSetFiles = files("${project.rootDir}/app/config/pmd-ruleset.xml")
-//    ruleSets = []
-//
-//    source 'src'
-//    include '**/*.java'
-//    exclude '**/gen/**'
-//
-//    reports {
-//        xml.enabled = false
-//        html.enabled = true
-//        html {
-//            destination "$project.buildDir/gradle/reports/findbugs/findbugs.html"
-//        }
-//    }
-//}

@@ -1,10 +1,9 @@
-package com.guideapp.guideapp.UI.adapters;
+package com.guideapp.guideapp.ui.adapters;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,14 +17,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.model.Local;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.Bind;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by thales on 6/13/15.
@@ -35,79 +30,27 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
     private RecyclerViewItemClickListener mListener;
     private List<Local> mDataSet;
 
-    public LocalAdapter(Context context, RecyclerViewItemClickListener mListener,
-                        List<Local> dataSet) {
-        mContext = context;
-        this.mListener = mListener;
-        this.mDataSet = dataSet;
+    /**
+     * Interface definition for a callback to be invoked when a recycler view is clicked.
+     */
+    public interface RecyclerViewItemClickListener {
+
+        /**
+         * Called when a view has been clicked.
+         * @param item A Local object representing data's inputs.
+         */
+        void onItemClick(Local item);
     }
 
-    class LocalViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @Bind(R.id.local_picture) ImageView photoView;
-        @Bind(R.id.local_text) TextView descriptionView;
-        @Bind(R.id.local_address) TextView addressView;
-        @Bind(R.id.local_favorite) ImageView favoriteView;
-        @Bind(R.id.ratingBar) RatingBar ratingView;
-
-        public LocalViewHolder(View view) {
-            super(view);
-            view.setOnClickListener(this);
-            favoriteView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showFilterPopup(v);
-                }
-            });
-        }
-
-        private void showFilterPopup(View v) {
-            PopupMenu popup = new PopupMenu(mContext, v);
-            popup.getMenuInflater().inflate(R.menu.menu_local, popup.getMenu());
-
-
-            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                public boolean onMenuItemClick(MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.action_remove:
-                            Toast.makeText(mContext, "action_add", Toast.LENGTH_SHORT).show();
-                            return true;
-                        default:
-                            return false;
-                    }
-                }
-            });
-            popup.show();
-        }
-
-        public void populate(Local data) {
-            descriptionView.setText(data.getDescription());
-            addressView.setText(data.getAddress());
-
-            ratingView.setRating(4.3f);
-
-            LayerDrawable stars = (LayerDrawable) ratingView.getProgressDrawable();
-            stars.getDrawable(2).setColorFilter(
-                    mContext.getResources().getColor(
-                            R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
-            stars.getDrawable(1).setColorFilter(
-                    mContext.getResources().getColor(
-                            R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
-            stars.getDrawable(0).setColorFilter(
-                    mContext.getResources().getColor(
-                            R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
-        }
-
-        @Override
-        public void onClick(final View view) {
-            if (mListener != null) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mListener.onItemClick(view, getLayoutPosition());
-                    }
-                }, 200);
-            }
-        }
+    /**
+     * Simple constructor to use when creating a view from code.
+     * @param context The Context the view is running in
+     * @param mListener The callback that will run
+     */
+    public LocalAdapter(Context context, RecyclerViewItemClickListener mListener) {
+        this.mDataSet = new ArrayList<>();
+        this.mContext = context;
+        this.mListener = mListener;
     }
 
     @Override
@@ -127,12 +70,115 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         return mDataSet.size();
     }
 
+    /**
+     * Set items in a dataSet and after update de recycler view
+     * @param dataSet A Local list
+     */
     public void replaceData(List<Local> dataSet) {
         setList(dataSet);
         notifyDataSetChanged();
     }
 
+    /**
+     * Set items in a dataSet
+     * @param dataSet A Local list
+     */
     private void setList(List<Local> dataSet) {
-        mDataSet = checkNotNull(dataSet);
+        mDataSet.clear();
+        mDataSet.addAll(dataSet);
+    }
+
+
+    /**
+     * Inner Class for a recycler view
+     */
+    class LocalViewHolder extends RecyclerView.ViewHolder {
+        private final View mView;
+        private final ImageView mPhotoView;
+        private final TextView mDescriptionView;
+        private final TextView mAddressView;
+        private final ImageView mFavoriteView;
+        private final RatingBar mRatingView;
+        private Local mItem;
+
+        /**
+         * Simple constructor to use when creating a view from code.
+         * @param view Recycle view item
+         */
+        public LocalViewHolder(View view) {
+            super(view);
+            mView = view;
+            mPhotoView = (ImageView) view.findViewById(R.id.local_picture);
+            mDescriptionView = (TextView) view.findViewById(R.id.local_text);
+            mAddressView = (TextView) view.findViewById(R.id.local_address);
+            mFavoriteView = (ImageView) view.findViewById(R.id.local_favorite);
+            mRatingView = (RatingBar) view.findViewById(R.id.ratingBar);
+
+            mFavoriteView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showFilterPopup(v);
+                }
+            });
+
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onItemClick(mItem);
+                }
+            });
+        }
+
+        /**
+         * Show a popup in a particular view
+         * @param v View object
+         */
+        private void showFilterPopup(View v) {
+            PopupMenu popup = new PopupMenu(mContext, v);
+            popup.getMenuInflater().inflate(R.menu.menu_local, popup.getMenu());
+
+
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.action_remove:
+                            Toast.makeText(mContext, "action_add", Toast.LENGTH_SHORT).show();
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+            });
+            popup.show();
+        }
+
+        /**
+         * Populate the data in a recycle view item
+         * @param data Local object
+         */
+        public void populate(Local data) {
+            mItem = data;
+            mDescriptionView.setText(data.getDescription());
+            mAddressView.setText(data.getAddress());
+            mRatingView.setRating(4.3f);
+
+            LayerDrawable stars = (LayerDrawable) mRatingView.getProgressDrawable();
+
+            stars.getDrawable(2).setColorFilter(
+                    ContextCompat.getColor(mContext, R.color.primary_star),
+                    PorterDuff.Mode.SRC_ATOP);
+
+            stars.getDrawable(1).setColorFilter(
+                    ContextCompat.getColor(mContext, R.color.secondary_star),
+                    PorterDuff.Mode.SRC_ATOP);
+
+            stars.getDrawable(0).setColorFilter(
+                    ContextCompat.getColor(mContext, R.color.secondary_star),
+                    PorterDuff.Mode.SRC_ATOP);
+
+            Glide.with(mContext)
+                    .load(data.getImagePath())
+                    .into(mPhotoView);
+        }
     }
 }

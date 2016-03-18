@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.guideapp.guideapp.UI.adapters;
+package com.guideapp.guideapp.ui.adapters;
 
 import android.content.Context;
 import android.graphics.PorterDuff;

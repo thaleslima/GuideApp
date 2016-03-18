@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.fragments;
+package com.guideapp.guideapp.ui.fragments;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -20,7 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.infrastructure.CommonUtils;
+import com.guideapp.guideapp.ui.infrastructure.CommonUtils;
 
 import java.util.HashMap;
 

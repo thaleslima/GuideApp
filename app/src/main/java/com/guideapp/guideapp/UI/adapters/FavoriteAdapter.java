@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.adapters;
+package com.guideapp.guideapp.ui.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.listener.RecyclerViewItemClickListener;
+import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.model.Local;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.widget;
+package com.guideapp.guideapp.ui.widget;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

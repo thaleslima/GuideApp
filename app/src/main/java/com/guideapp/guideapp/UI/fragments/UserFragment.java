@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.UI.fragments;
+package com.guideapp.guideapp.ui.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.UI.adapters.UserAdapter;
-import com.guideapp.guideapp.UI.login.LoginActivity;
+import com.guideapp.guideapp.ui.adapters.UserAdapter;
+import com.guideapp.guideapp.ui.login.LoginActivity;
 import com.guideapp.guideapp.model.MenuUser;
 
 /**
