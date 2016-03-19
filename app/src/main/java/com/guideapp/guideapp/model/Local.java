@@ -1,11 +1,15 @@
 package com.guideapp.guideapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by thales on 6/13/15.
  */
-public class Local {
+public class Local implements Parcelable {
     private Long id;
     private String description;
     private String site;
@@ -137,4 +141,59 @@ public class Local {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.description);
+        dest.writeString(this.site);
+        dest.writeString(this.phone);
+        dest.writeString(this.address);
+        dest.writeByte(wifi ? (byte) 1 : (byte) 0);
+        dest.writeString(this.detail);
+        dest.writeDouble(this.latitude);
+        dest.writeDouble(this.longitude);
+        dest.writeString(this.imagePath);
+        dest.writeValue(this.idCity);
+        dest.writeList(this.idCategories);
+        dest.writeList(this.idSubCategories);
+        dest.writeLong(this.timestamp);
+    }
+
+    protected Local(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.description = in.readString();
+        this.site = in.readString();
+        this.phone = in.readString();
+        this.address = in.readString();
+        this.wifi = in.readByte() != 0;
+        this.detail = in.readString();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
+        this.imagePath = in.readString();
+        this.idCity = (Long) in.readValue(Long.class.getClassLoader());
+        this.idCategories = new ArrayList<Long>();
+        in.readList(this.idCategories, Long.class.getClassLoader());
+        this.idSubCategories = new ArrayList<Long>();
+        in.readList(this.idSubCategories, Long.class.getClassLoader());
+        this.timestamp = in.readLong();
+    }
+
+    public static final Parcelable.Creator<Local> CREATOR = new Parcelable.Creator<Local>() {
+        @Override
+        public Local createFromParcel(Parcel source) {
+            return new Local(source);
+        }
+
+        @Override
+        public Local[] newArray(int size) {
+            return new Local[size];
+        }
+    };
 }

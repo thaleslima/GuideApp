@@ -38,8 +38,9 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         /**
          * Called when a view has been clicked.
          * @param item A Local object representing data's inputs.
+         * @param view Transition image
          */
-        void onItemClick(Local item);
+        void onItemClick(Local item, ImageView view);
     }
 
     /**
@@ -124,7 +125,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
             mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemClick(mItem);
+                    mListener.onItemClick(mItem, mPhotoView);
                 }
             });
         }

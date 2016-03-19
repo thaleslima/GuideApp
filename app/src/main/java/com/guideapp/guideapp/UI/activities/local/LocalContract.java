@@ -1,6 +1,7 @@
 package com.guideapp.guideapp.ui.activities.local;
 
 import android.support.annotation.NonNull;
+import android.widget.ImageView;
 
 import com.guideapp.guideapp.model.Local;
 import java.util.List;
@@ -22,8 +23,19 @@ public interface LocalContract {
         /**
          * Show local detail
          * @param local Local object
+         * @param view Transition image
          */
-        void showLocalDetailUi(Local local);
+        void showLocalDetailUi(Local local, ImageView view);
+
+        /**
+         * Show progress bar
+         */
+        void showProgressBar();
+
+        /**
+         * Hide progress bar
+         */
+        void hideProgressBar();
     }
 
     /**
@@ -40,7 +52,13 @@ public interface LocalContract {
         /**
          * Open local details
          * @param local Local object
+         * @param view Transition image
          */
-        void openLocalDetails(@NonNull Local local);
+        void openLocalDetails(@NonNull Local local, ImageView view);
+
+        /**
+         * Unsubscribe RX
+         */
+        void unsubscribe();
     }
 }

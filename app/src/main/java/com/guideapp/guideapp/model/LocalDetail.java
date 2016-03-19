@@ -9,12 +9,26 @@ public class LocalDetail {
     private String text;
     private boolean divider;
     private int viewType;
+    private double latitude;
+    private double longitude;
 
     public LocalDetail(int ico, String text, boolean divider, int viewType) {
         this.ico = ico;
         this.text = text;
         this.divider = divider;
         this.viewType = viewType;
+    }
+
+    public LocalDetail(boolean divider, int viewType) {
+        this.divider = divider;
+        this.viewType = viewType;
+    }
+
+    public LocalDetail(boolean divider, int viewType, double latitude, double longitude) {
+        this.divider = divider;
+        this.viewType = viewType;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getId() {
@@ -55,5 +69,22 @@ public class LocalDetail {
 
     public void setViewType(int viewType) {
         this.viewType = viewType;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

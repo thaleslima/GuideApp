@@ -35,6 +35,10 @@ dependencies {
 
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
+
+    compile "io.reactivex:rxandroid:$rootProject.rxjavaVersion"
+    compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"
 
     compile "com.google.android.gms:play-services-location:$rootProject.playServicesVersion"
     compile "com.google.android.gms:play-services-maps:$rootProject.playServicesVersion"

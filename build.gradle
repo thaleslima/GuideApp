@@ -48,4 +48,5 @@ ext {
     imageZoomVersion = '1.0.5'
     butterKnifeVersion = '7.0.1'
     retrofitVersion = '2.0.0'
+    rxjavaVersion = '1.1.0'
 }

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.ui.activities.LocalDetailActivity;
+import com.guideapp.guideapp.ui.activities.localdetail.LocalDetailActivity;
 import com.guideapp.guideapp.ui.adapters.FavoriteAdapter;
 import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.ui.widget.DividerItemDecoration;

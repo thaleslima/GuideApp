@@ -3,6 +3,8 @@ package com.guideapp.guideapp.ui.adapters;
 import android.app.DialogFragment;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +32,7 @@ import java.util.List;
  * Created by thales on 6/13/15.
  */
 public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalViewHolder> {
-    private BaseActivity mContext;
+    private FragmentActivity mContext;
     private RecyclerViewItemClickListener mListener;
     private List<LocalDetail> mDataSet;
 
@@ -39,10 +41,11 @@ public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.
     public static final int LOCAL_DETAIL_TITLE_OPINION = 3;
     public static final int LOCAL_DETAIL_OPINION = 4;
 
-    public LocalDetailAdapter(BaseActivity context, RecyclerViewItemClickListener mListener) {
+    public LocalDetailAdapter(FragmentActivity context, List<LocalDetail> dataSet) {
         mContext = context;
-        this.mListener = mListener;
+        this.mDataSet = dataSet;
     }
+
 
     public LocalDetailAdapter(BaseActivity context, RecyclerViewItemClickListener mListener,
                               List<LocalDetail> dataSet) {
@@ -58,6 +61,7 @@ public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.
         public final View dividerView;
         public final MapView map;
         public RatingBar ratingView;
+        private LocalDetail mItem;
 
         public LocalViewHolder(View view) {
             super(view);
@@ -77,6 +81,8 @@ public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.
 
 
         public void populate(LocalDetail data) {
+            mItem = data;
+
             if (data.getViewType() == LOCAL_DETAIL) {
                 icoView.setImageResource(data.getIco());
                 textView.setText(data.getText());
@@ -89,24 +95,27 @@ public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.
 
             if (data.getViewType() == LOCAL_DETAIL_OPINION) {
                 LayerDrawable stars = (LayerDrawable) ratingView.getProgressDrawable();
-                stars.getDrawable(2).setColorFilter(mContext.getResources()
-                        .getColor(R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
-                stars.getDrawable(1).setColorFilter(mContext.getResources()
-                        .getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
-                stars.getDrawable(0).setColorFilter(mContext.getResources()
-                        .getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+                stars.getDrawable(2).setColorFilter(
+                        ContextCompat.getColor(mContext, R.color.primary_star),
+                        PorterDuff.Mode.SRC_ATOP);
+                stars.getDrawable(1).setColorFilter(
+                        ContextCompat.getColor(mContext, R.color.secondary_star),
+                        PorterDuff.Mode.SRC_ATOP);
+                stars.getDrawable(0).setColorFilter(
+                        ContextCompat.getColor(mContext, R.color.secondary_star),
+                        PorterDuff.Mode.SRC_ATOP);
 
                 ratingView.setRating(4.5f);
             }
 
             if (data.getViewType() == LOCAL_DETAIL_TITLE_OPINION) {
                 LayerDrawable stars = (LayerDrawable) ratingView.getProgressDrawable();
-                stars.getDrawable(2).setColorFilter(mContext.getResources()
-                        .getColor(R.color.primary_star), PorterDuff.Mode.SRC_ATOP);
-                stars.getDrawable(1).setColorFilter(mContext.getResources()
-                        .getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
-                //stars.getDrawable(0).setColorFilter(mContext.getResources()
-                // .getColor(R.color.secondary_star), PorterDuff.Mode.SRC_ATOP);
+                stars.getDrawable(2).setColorFilter(
+                        ContextCompat.getColor(mContext, R.color.primary_star),
+                        PorterDuff.Mode.SRC_ATOP);
+                stars.getDrawable(1).setColorFilter(
+                        ContextCompat.getColor(mContext, R.color.secondary_star),
+                        PorterDuff.Mode.SRC_ATOP);
 
                 ratingView.setRating(4.5f);
 
@@ -130,13 +139,11 @@ public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng latLng = new LatLng(-22.8161511, -47.0455066);
+            LatLng latLng = new LatLng(mItem.getLatitude(), mItem.getLongitude());
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
             MarkerOptions mMarker = new MarkerOptions().position(
                     new LatLng(latLng.latitude, latLng.longitude))
-                    .title("Modelo: " + "AAA-9090"
-                            + "\n Cor: " + "Preto")
                     .anchor(0.0f, 1.0f)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
@@ -185,5 +192,23 @@ public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.
     @Override
     public int getItemCount() {
         return mDataSet.size();
+    }
+
+    /**
+     * Set items in a dataSet and after update de recycler view
+     * @param dataSet A Local Detail list
+     */
+    public void replaceData(List<LocalDetail> dataSet) {
+        setList(dataSet);
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Set items in a dataSet
+     * @param dataSet A Local Detail list
+     */
+    private void setList(List<LocalDetail> dataSet) {
+        mDataSet.clear();
+        mDataSet.addAll(dataSet);
     }
 }

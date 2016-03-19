@@ -1,4 +1,4 @@
-package com.guideapp.guideapp.model;
+package com.guideapp.guideapp.model.wrapper;
 
 import java.util.List;
 

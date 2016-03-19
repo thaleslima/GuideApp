@@ -7,6 +7,15 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
+    <style name="AppThemeLocalDetail" parent="AppTheme.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorPrimaryDark">@color/accent_translucent</item> 
+    </style>
+
+
+
+
+
     <style name="AppTheme2" parent="BaseTheme">
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:colorControlHighlight">@color/accent_translucent</item> 
@@ -19,11 +28,6 @@
 
     <style name="AppThemeMap" parent="BaseTheme">
         <item name="android:windowTranslucentStatus">true</item>
-    </style>
-
-    <style name="AppThemeLocalDetail" parent="BaseTheme">
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="colorPrimaryDark">@color/accent_translucent</item> 
     </style>
 
     <style name="AppThemeSearch" parent="Theme.AppCompat.Light.NoActionBar">
