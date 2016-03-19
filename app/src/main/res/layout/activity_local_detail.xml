@@ -32,14 +32,12 @@
                 android:src="@null"
                 app:layout_collapseMode="parallax" />
 
-            <ImageView
+            <View
                 android:contentDescription="@string/app_name"
                 android:id="@+id/image2"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
-                android:src="@null"
                 android:background="@drawable/action_background_bottom"
                 app:layout_collapseMode="parallax" />
 
