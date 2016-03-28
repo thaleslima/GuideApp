@@ -1,5 +1,5 @@
 # GuideApp
-:thumbsup: [Android] [Google App Engine] Application that displays the major tourist cities services. (Restaurants, hotels, attractions, etc.)
+:thumbsup: [Android] [Google App Engine] Application that displays the cities services. (Restaurants, hotels, attractions, etc.)
 
 Developed By
 ------------
