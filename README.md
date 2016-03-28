@@ -10,10 +10,11 @@ Developed By
 Libraries used on the app project
 ------------------------------------
 
-* [Glide][1]
+* [RxJava][1]
 * [Retrofit 2][2]
+* [Glide][3]
 * [Butterknife][3]
-* [Rxjava][4]
+
 
 
 Services used on the backend
@@ -60,12 +61,14 @@ License
     limitations under the License.
 
 
-[1]: https://github.com/bumptech/glide/
+[1]: https://github.com/ReactiveX/RxJava/
 [2]: http://square.github.io/retrofit/
-[3]: https://github.com/JakeWharton/butterknife/
-[4]: https://github.com/ReactiveX/RxJava/
+[3]: https://github.com/bumptech/glide/
+[4]: https://github.com/JakeWharton/butterknife/
+
 [10]: https://cloud.google.com/appengine/
 [11]: https://cloud.google.com/endpoints/
 [12]: https://cloud.google.com/storage/
 [13]: https://cloud.google.com/datastore/
+
 [20]: https://angularjs.org/
