@@ -6,6 +6,7 @@ Developed By
 
 * Thales Reis Machado Lima - <thalesml@gmail.com>
 
+
 Libraries used on the app project
 ------------------------------------
 
@@ -28,6 +29,17 @@ Libraries used on the web backend
 ------------------------------------
 
 * [Angular JS 1.5][20]
+
+
+Quality
+------------------------------------
+
+You will find under the directory /config the base configuration to run quality test on the project.
+The followings tools are used :
+ - Checkstyle.
+ - Findbugs.
+ - PMD.
+ - Lint.
 
 
 License
