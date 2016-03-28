@@ -30,7 +30,7 @@ Libraries used on the web backend
 ------------------------------------
 
 * [Angular JS 1.5][20]
-
+* [Bootstrap][21]
 
 Quality
 ------------------------------------
@@ -72,3 +72,4 @@ License
 [13]: https://cloud.google.com/datastore/
 
 [20]: https://angularjs.org/
+[21]: http://getbootstrap.com/
