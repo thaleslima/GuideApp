@@ -42,6 +42,13 @@ The followings tools are used :
  - PMD.
  - Lint.
 
+Screenshots
+------------------------------------
+
+![](/../master/screenshots/screenshot_01.png?raw=true "GuiaApp")
+![](/../master/screenshots/screenshot_02.png?raw=true "GuiaApp")
+![](/../master/screenshots/screenshot_03.png?raw=true "GuiaApp")
+
 
 License
 -------
