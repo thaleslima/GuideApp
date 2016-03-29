@@ -23,16 +23,16 @@ public class MainActivity extends BaseActivity {
     private ViewPager mViewPager;
     private AppBarLayout mAppBarLayout;
 
-    private int[] mIconTabBlack = {
+    private static final int[] mIconTabBlack = {
             R.drawable.ic_apps_black_24dp,
-            R.drawable.ic_favorite_black_24dp,
+            R.drawable.ic_bookmark_black_24dp,
             R.drawable.ic_whatshot_black_24dp,
             R.drawable.ic_person_black_24dp
     };
 
-    private int[] mIconTabWhite = {
+    private static final int[] mIconTabWhite = {
             R.drawable.ic_apps_white_24dp,
-            R.drawable.ic_favorite_white_24dp,
+            R.drawable.ic_bookmark_white_24dp,
             R.drawable.ic_whatshot_white_24dp,
             R.drawable.ic_person_white_24dp
     };
