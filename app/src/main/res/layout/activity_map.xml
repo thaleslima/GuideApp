@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/list"
-        android:name="com.guideapp.guideapp.ui.fragments.MapFragment"
+        android:name="com.guideapp.guideapp.ui.views.map.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

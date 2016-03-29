@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.ui.fragments.UserFragment;
+import com.guideapp.guideapp.ui.views.user.UserFragment;
 import com.guideapp.guideapp.model.MenuUser;
 
 import java.util.List;

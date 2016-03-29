@@ -21,8 +21,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.ui.activities.BaseActivity;
-import com.guideapp.guideapp.ui.fragments.CommentDialogFragment;
+import com.guideapp.guideapp.ui.views.BaseActivity;
+import com.guideapp.guideapp.ui.dialog.CommentDialogFragment;
 import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.model.LocalDetail;
 

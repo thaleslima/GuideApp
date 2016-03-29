@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.guideapp.guideapp.ui.register.RegisterActivity">
+    tools:context=".ui.views.register.RegisterActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -26,6 +26,6 @@
         android:layout_width="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_height="match_parent"
-        class="com.guideapp.guideapp.ui.register.RegisterFragment" />
+        class="com.guideapp.guideapp.ui.views.register.RegisterFragment" />
 
 </android.support.design.widget.CoordinatorLayout>

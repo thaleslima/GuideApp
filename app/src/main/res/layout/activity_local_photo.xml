@@ -17,7 +17,7 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.guideapp.guideapp.ui.fragments.LocalPhotoFragment" />
+        class="com.guideapp.guideapp.ui.views.localphoto.LocalPhotoFragment" />
 
 </LinearLayout>
 
