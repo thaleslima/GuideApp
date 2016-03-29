@@ -14,7 +14,6 @@ import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.model.Local;
 import com.guideapp.guideapp.model.LocalDetail;
 import com.guideapp.guideapp.ui.adapters.LocalDetailAdapter;
-import com.guideapp.guideapp.ui.widget.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +30,11 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
 
     private static final String EXTRA_LOCAL = "local";
 
+    /**
+     *  Create new instance
+     * @param local Local object
+     * @return Return LocalDetailFragment instance
+     */
     public static Fragment newInstance(Local local) {
         Fragment fragment = new LocalDetailFragment();
         Bundle bundle = new Bundle();
@@ -54,8 +58,11 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
         return layoutView;
     }
 
-    private void initExtra(){
-        if(getArguments() != null) {
+    /**
+     * Initialize extras parameters
+     */
+    private void initExtra() {
+        if (getArguments() != null) {
             mLocal = getArguments().getParcelable(EXTRA_LOCAL);
         }
     }

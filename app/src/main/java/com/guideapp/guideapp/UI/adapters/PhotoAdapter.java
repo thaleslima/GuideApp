@@ -9,18 +9,18 @@ import android.widget.ImageView;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
-import com.guideapp.guideapp.model.ViewModel;
+import com.guideapp.guideapp.model.MainMenu;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
-    private List<ViewModel> items;
+    private List<MainMenu> items;
     private RecyclerViewItemClickListener mListener;
     private Context mContext;
 
-    public PhotoAdapter(Context context, List<ViewModel> items) {
+    public PhotoAdapter(Context context, List<MainMenu> items) {
         this.items = items;
         this.mContext = context;
     }
@@ -38,7 +38,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ViewModel item = items.get(position);
+        MainMenu item = items.get(position);
         Picasso.with(mContext)
                 .load(item.getText())
                 .placeholder(R.color.black_light)

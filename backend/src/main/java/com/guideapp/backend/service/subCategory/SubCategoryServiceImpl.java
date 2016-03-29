@@ -2,13 +2,22 @@ package com.guideapp.backend.service.subcategory;
 
 import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
+import com.google.appengine.api.memcache.ErrorHandlers;
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import com.google.appengine.repackaged.com.google.api.client.util.ArrayMap;
 import com.guideapp.backend.dao.subcategory.SubCategoryDAO;
 import com.guideapp.backend.dao.subcategory.SubCategoryDAOImpl;
 import com.guideapp.backend.entity.SubCategory;
+import com.guideapp.backend.util.MemcacheUtil;
 import com.guideapp.backend.util.ValidationUtil;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.logging.Level;
 
 /**
  * Created by thales on 1/24/16.
@@ -16,6 +25,7 @@ import java.util.List;
 public class SubCategoryServiceImpl implements SubCategoryService {
 
     private final SubCategoryDAO mSubCategoryDAO;
+    private static final String KEY_MAP = "map-sub-category";
 
     /**
      * Configure the sub-category service.
@@ -100,5 +110,40 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         }
 
         mSubCategoryDAO.delete(s);
+    }
+
+    @Override
+    public Map<Long, SubCategory> getMap() {
+        List<SubCategory> list = getMapInMemCache();
+        if (list == null) {
+            list = list();
+            putMapInMemCache(list);
+        }
+
+        int size = list.size();
+        Map<Long, SubCategory> map = new HashMap<>();
+
+        for (int i = 0; i < size; i++) {
+            map.put(list.get(i).getId(), list.get(i));
+        }
+
+        return map;
+    }
+
+    /**
+     * Insert map in memory cache
+     */
+    private void putMapInMemCache(List<SubCategory> list){
+        MemcacheService syncCache = MemcacheUtil.getMemcacheService();
+        syncCache.put(KEY_MAP, list);
+    }
+
+    /**
+     * Get map in memory cache
+     * @return SubCategory map
+     */
+    private List<SubCategory> getMapInMemCache(){
+        MemcacheService syncCache = MemcacheUtil.getMemcacheService();
+        return (List<SubCategory>) syncCache.get(KEY_MAP);
     }
 }

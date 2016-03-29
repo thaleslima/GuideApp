@@ -22,7 +22,7 @@ public class LocalDetailPresenter implements LocalDetailContract.UserActionsList
     /**
      * Simple constructor to use when creating a view from code.
      *
-     * @param localView View
+     * @param localView ViewFragment
      */
     public LocalDetailPresenter(LocalDetailContract.View localView) {
         this.mLocalView = localView;
@@ -51,29 +51,34 @@ public class LocalDetailPresenter implements LocalDetailContract.UserActionsList
         });
     }
 
+    /**
+     * Create items of the recycle view
+     * @param local Local Object
+     * @return Return item of the list
+     */
     private static List<LocalDetail> createListLocalDetail(Local local) {
         List<LocalDetail> list = new ArrayList<>();
 
 
         list.add(new LocalDetail(R.drawable.ic_info_grey_72_24dp,
-                "Restarautante Urbano", true, LocalDetailAdapter.LOCAL_DETAIL));
+                local.getDescriptionSubCategories(), true, LocalDetailAdapter.LOCAL_DETAIL));
 
-        if(!ValidationUtil.nullOrEmpty(local.getSite())) {
+        if (!ValidationUtil.nullOrEmpty(local.getSite())) {
             list.add(new LocalDetail(R.drawable.ic_language_grey_72_24dp,
                     local.getSite(), true, LocalDetailAdapter.LOCAL_DETAIL));
         }
 
-        if(!ValidationUtil.nullOrEmpty(local.getPhone())) {
+        if (!ValidationUtil.nullOrEmpty(local.getPhone())) {
             list.add(new LocalDetail(R.drawable.ic_call_grey_72_24dp,
                     local.getPhone(), true, LocalDetailAdapter.LOCAL_DETAIL));
         }
 
-        if(!ValidationUtil.nullOrEmpty(local.getDetail())) {
+        if (!ValidationUtil.nullOrEmpty(local.getDetail())) {
             list.add(new LocalDetail(R.drawable.ic_apps_grey_72_24dp,
                     local.getDetail(), true, LocalDetailAdapter.LOCAL_DETAIL));
         }
 
-        if(!ValidationUtil.nullOrEmpty(local.getAddress())) {
+        if (!ValidationUtil.nullOrEmpty(local.getAddress())) {
             list.add(new LocalDetail(R.drawable.ic_location_on_grey_72_24dp,
                     local.getAddress(), false,
                     LocalDetailAdapter.LOCAL_DETAIL));
@@ -92,6 +97,4 @@ public class LocalDetailPresenter implements LocalDetailContract.UserActionsList
     public void unsubscribe() {
         mCompositeSubscription.unsubscribe();
     }
-
-
 }

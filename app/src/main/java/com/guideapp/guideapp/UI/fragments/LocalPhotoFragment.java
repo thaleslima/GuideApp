@@ -14,7 +14,7 @@ import com.guideapp.guideapp.ui.activities.PhotoViewerActivity;
 import com.guideapp.guideapp.ui.adapters.PhotoAdapter;
 import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.ui.widget.GridSpacingItemDecoration;
-import com.guideapp.guideapp.model.ViewModel;
+import com.guideapp.guideapp.model.MainMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.List;
 public class LocalPhotoFragment extends Fragment implements RecyclerViewItemClickListener {
     private RecyclerView mRecyclerView;
     private PhotoAdapter mAdapter;
-    private List<ViewModel> mDataSet;
+    private List<MainMenu> mDataSet;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -41,7 +41,7 @@ public class LocalPhotoFragment extends Fragment implements RecyclerViewItemClic
         mDataSet = new ArrayList<>();
 
         for (int i = 1; i <= 10; i++) {
-            mDataSet.add(new ViewModel(i, "http://lorempixel.com/500/500/animals/" + i));
+            mDataSet.add(new MainMenu(i, "http://lorempixel.com/500/500/animals/" + i));
         }
 
         mAdapter = new PhotoAdapter(this.getActivity(), mDataSet);

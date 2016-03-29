@@ -16,4 +16,7 @@
         android:id="@+id/progressBar"
         android:visibility="gone"
         android:layout_gravity="center" />
+
+
+
 </FrameLayout>

@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.model.ViewModel;
+import com.guideapp.guideapp.model.MainMenu;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -21,12 +21,12 @@ public class PhotoViewerPageFragment extends Fragment {
 
     private int mPageNumber;
 
-    private static  List<ViewModel> mDataSet = new ArrayList<>();
+    private static  List<MainMenu> mDataSet = new ArrayList<>();
 
     static
     {
         for (int i = 1; i <= 10; i++) {
-            mDataSet.add(new ViewModel(i, "http://lorempixel.com/500/500/animals/" + i));
+            mDataSet.add(new MainMenu(i, "http://lorempixel.com/500/500/animals/" + i));
         }
     }
 

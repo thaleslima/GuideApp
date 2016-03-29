@@ -3,6 +3,7 @@ package com.guideapp.backend.service.local;
 import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
 import com.guideapp.backend.entity.Local;
+import com.guideapp.backend.entity.SubCategory;
 
 import java.util.List;
 
@@ -15,9 +16,10 @@ public interface LocalService {
      * Returns a locals list by filters
      * @param idCity the id of the city
      * @param idCategory the id of the category.
+     * @param subCategories the list of sub category id.
      * @return the local list
      */
-    List<Local> list(Long idCity, Long idCategory);
+    List<Local> list(Long idCity, Long idCategory, Long[] subCategories) throws ConflictException;
 
     /**
      * Returns a locals list by filters

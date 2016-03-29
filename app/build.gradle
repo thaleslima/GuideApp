@@ -1,5 +1,21 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
 apply plugin: 'com.android.application'
 apply from: '../config/quality-app.gradle'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -17,6 +33,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -36,6 +57,8 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
+
+    compile "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
 
     compile "io.reactivex:rxandroid:$rootProject.rxjavaVersion"
     compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"

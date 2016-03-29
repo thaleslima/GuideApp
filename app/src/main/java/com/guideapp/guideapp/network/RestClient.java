@@ -1,10 +1,14 @@
 package com.guideapp.guideapp.network;
 
-import java.io.IOException;
+import android.content.Context;
+import android.support.annotation.Nullable;
 
-import okhttp3.Interceptor;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,16 +20,14 @@ public class RestClient {
     private static GuideApi mGuideApi;
     private static String baseUrl = "https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/" ;
 
-    public static GuideApi getClient() {
+    private final static long HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 10 * 1024 * 1024;
+    private final static long CONNECTION_TIMEOUT = 5;
+
+    public static GuideApi getClient(Context context) {
         if (mGuideApi == null) {
-
-            OkHttpClient okClient = new OkHttpClient();
-
-
-
             Retrofit client = new Retrofit.Builder()
                     .baseUrl(baseUrl)
-                    .client(okClient)
+                    .client(getOkHttpClient(context))
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
@@ -34,5 +36,23 @@ public class RestClient {
         }
 
         return mGuideApi;
+    }
+
+
+    private static OkHttpClient getOkHttpClient(Context context) {
+        OkHttpClient.Builder okClientBuilder = new OkHttpClient.Builder();
+
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel( HttpLoggingInterceptor.Level.BASIC);
+        okClientBuilder.addInterceptor(httpLoggingInterceptor);
+        File baseDir = context.getCacheDir();
+        if (baseDir != null) {
+            final File cacheDir = new File(baseDir, "HttpResponseCache");
+            okClientBuilder.cache(new Cache(cacheDir, HTTP_RESPONSE_DISK_CACHE_MAX_SIZE));
+        }
+        okClientBuilder.connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS);
+        okClientBuilder.readTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS);
+        okClientBuilder.writeTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS);
+        return okClientBuilder.build();
     }
 }

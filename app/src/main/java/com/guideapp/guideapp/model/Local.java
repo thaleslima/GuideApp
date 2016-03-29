@@ -24,6 +24,7 @@ public class Local implements Parcelable {
     private List<Long> idCategories;
     private List<Long> idSubCategories;
     private long timestamp;
+    private List<SubCategory> subCategories;
 
     public Local(String description, String address) {
         this.description = description;
@@ -142,6 +143,24 @@ public class Local implements Parcelable {
         this.timestamp = timestamp;
     }
 
+    public String getDescriptionSubCategories() {
+        if(subCategories != null) {
+            int size = subCategories.size();
+            String description = "";
+
+            for (int i = 0; i < size; i++) {
+                if(i > 0){
+                    description += " | ";
+                }
+                description += subCategories.get(i).getDescription();
+            }
+
+            return description;
+        }
+
+        return "";
+    }
+
 
     @Override
     public int describeContents() {
@@ -164,6 +183,7 @@ public class Local implements Parcelable {
         dest.writeList(this.idCategories);
         dest.writeList(this.idSubCategories);
         dest.writeLong(this.timestamp);
+        dest.writeTypedList(subCategories);
     }
 
     protected Local(Parcel in) {
@@ -183,9 +203,10 @@ public class Local implements Parcelable {
         this.idSubCategories = new ArrayList<Long>();
         in.readList(this.idSubCategories, Long.class.getClassLoader());
         this.timestamp = in.readLong();
+        this.subCategories = in.createTypedArrayList(SubCategory.CREATOR);
     }
 
-    public static final Parcelable.Creator<Local> CREATOR = new Parcelable.Creator<Local>() {
+    public static final Creator<Local> CREATOR = new Creator<Local>() {
         @Override
         public Local createFromParcel(Parcel source) {
             return new Local(source);

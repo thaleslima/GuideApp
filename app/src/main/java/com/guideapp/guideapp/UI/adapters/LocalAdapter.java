@@ -7,7 +7,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -98,6 +97,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
         private final ImageView mPhotoView;
         private final TextView mDescriptionView;
         private final TextView mAddressView;
+        private final TextView mDescriptionsSubCategory;
         private final ImageView mFavoriteView;
         private final RatingBar mRatingView;
         private Local mItem;
@@ -114,40 +114,28 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
             mAddressView = (TextView) view.findViewById(R.id.local_address);
             mFavoriteView = (ImageView) view.findViewById(R.id.local_favorite);
             mRatingView = (RatingBar) view.findViewById(R.id.ratingBar);
+            mDescriptionsSubCategory =  (TextView) view.findViewById(R.id.descriptions_sub_category);
+            mFavoriteView.setOnClickListener(this::showFilterPopup);
 
-            mFavoriteView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showFilterPopup(v);
-                }
-            });
-
-            mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onItemClick(mItem, mPhotoView);
-                }
-            });
+            mView.setOnClickListener(v -> mListener.onItemClick(mItem, mPhotoView));
         }
 
         /**
          * Show a popup in a particular view
-         * @param v View object
+         * @param v ViewFragment object
          */
         private void showFilterPopup(View v) {
             PopupMenu popup = new PopupMenu(mContext, v);
             popup.getMenuInflater().inflate(R.menu.menu_local, popup.getMenu());
 
 
-            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                public boolean onMenuItemClick(MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.action_remove:
-                            Toast.makeText(mContext, "action_add", Toast.LENGTH_SHORT).show();
-                            return true;
-                        default:
-                            return false;
-                    }
+            popup.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.action_remove:
+                        Toast.makeText(mContext, "action_add", Toast.LENGTH_SHORT).show();
+                        return true;
+                    default:
+                        return false;
                 }
             });
             popup.show();
@@ -162,7 +150,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHol
             mDescriptionView.setText(data.getDescription());
             mAddressView.setText(data.getAddress());
             mRatingView.setRating(4.3f);
-
+            mDescriptionsSubCategory.setText(data.getDescriptionSubCategories());
             LayerDrawable stars = (LayerDrawable) mRatingView.getProgressDrawable();
 
             stars.getDrawable(2).setColorFilter(

@@ -13,9 +13,6 @@
     </style>
 
 
-
-
-
     <style name="AppTheme2" parent="BaseTheme">
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:colorControlHighlight">@color/accent_translucent</item> 

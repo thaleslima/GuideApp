@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.model.ViewModel;
+import com.guideapp.guideapp.model.MainMenu;
 
 import java.util.List;
 
@@ -32,11 +32,11 @@ import java.util.List;
 public class SearchAdapter
         extends RecyclerView.Adapter<SearchAdapter.ViewHolder>
         implements View.OnClickListener {
-    private List<ViewModel> items;
+    private List<MainMenu> items;
     private OnItemClickListener onItemClickListener;
     private Context mContext;
 
-    public SearchAdapter(Context context, List<ViewModel> items) {
+    public SearchAdapter(Context context, List<MainMenu> items) {
         this.items = items;
         this.mContext = context;
     }
@@ -53,7 +53,7 @@ public class SearchAdapter
     }
 
     @Override public void onBindViewHolder(ViewHolder holder, int position) {
-        ViewModel item = items.get(position);
+        MainMenu item = items.get(position);
 
         holder.text.setText(item.getText());
 
@@ -65,7 +65,7 @@ public class SearchAdapter
     }
 
     @Override public void onClick(final View v) {
-        onItemClickListener.onItemClick(v, (ViewModel) v.getTag());
+        onItemClickListener.onItemClick(v, (MainMenu) v.getTag());
     }
 
     protected static class ViewHolder extends RecyclerView.ViewHolder {
@@ -78,6 +78,6 @@ public class SearchAdapter
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view, ViewModel viewModel);
+        void onItemClick(View view, MainMenu mainMenu);
     }
 }

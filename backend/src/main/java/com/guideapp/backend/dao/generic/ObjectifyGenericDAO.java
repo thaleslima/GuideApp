@@ -91,6 +91,8 @@ public class ObjectifyGenericDAO<T> implements IGenericDAO<T> {
                         entry.getValue()));
             }
 
+
+
             com.google.appengine.api.datastore.Query.Filter filter
                     = com.google.appengine.api.datastore.Query.CompositeFilterOperator.and(filters1);
 
@@ -102,6 +104,4 @@ public class ObjectifyGenericDAO<T> implements IGenericDAO<T> {
 
         return null;
     }
-
-
 }

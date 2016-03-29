@@ -16,27 +16,46 @@
 
 package com.guideapp.guideapp.model;
 
-public class ViewModel {
-    private int id;
+public class MainMenu {
+    private long id;
     private int idText;
     private String text;
     private int image;
     private int color;
+    private int colorDark;
+    private int theme;
 
     public int getIdText() {
         return idText;
     }
 
-    public ViewModel(int id, String text) {
+    public MainMenu(int id, String text) {
         this.id = id;
         this.text = text;
     }
 
-    public ViewModel(int id, int idText, int image, int color) {
+    public MainMenu(long id, int idText, int image, int color) {
         this.id = id;
         this.idText = idText;
         this.image = image;
         this.color = color;
+    }
+
+    public MainMenu(long id, int idText, int image, int color, int theme) {
+        this.id = id;
+        this.idText = idText;
+        this.image = image;
+        this.color = color;
+        this.theme = theme;
+    }
+
+    public MainMenu(long id, int idText, int image, int color, int colorDark, int theme) {
+        this.id = id;
+        this.idText = idText;
+        this.image = image;
+        this.color = color;
+        this.colorDark = colorDark;
+        this.theme = theme;
     }
 
     public void setIdText(int idText) {
@@ -52,11 +71,11 @@ public class ViewModel {
     }
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -74,5 +93,21 @@ public class ViewModel {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getTheme() {
+        return theme;
+    }
+
+    public void setTheme(int theme) {
+        this.theme = theme;
+    }
+
+    public int getColorDark() {
+        return colorDark;
+    }
+
+    public void setColorDark(int colorDark) {
+        this.colorDark = colorDark;
     }
 }

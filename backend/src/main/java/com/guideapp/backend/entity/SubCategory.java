@@ -5,11 +5,13 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.guideapp.backend.util.StringUtil;
 
+import java.io.Serializable;
+
 /**
  * Created by thales on 1/24/16.
  */
 @Entity
-public class SubCategory {
+public class SubCategory implements Serializable {
 
     @Id
     private Long id;

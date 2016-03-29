@@ -4,7 +4,11 @@ import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
 import com.guideapp.backend.dao.local.LocalDAO;
 import com.guideapp.backend.dao.local.LocalDAOImpl;
+import com.guideapp.backend.dao.subcategory.SubCategoryDAO;
 import com.guideapp.backend.entity.Local;
+import com.guideapp.backend.entity.SubCategory;
+import com.guideapp.backend.service.subcategory.SubCategoryService;
+import com.guideapp.backend.service.subcategory.SubCategoryServiceImpl;
 import com.guideapp.backend.util.ValidationUtil;
 
 import java.util.Date;
@@ -26,22 +30,31 @@ public class LocalServiceImpl implements LocalService {
     }
 
     @Override
-    public List<Local> list(Long idCity, Long idCategory) {
-        Map<String, Object> filter = new TreeMap<>();
+    public List<Local> list(Long idCity, Long idCategory, Long[] subCategories) throws ConflictException {
+        SubCategoryService subCategoryService = new SubCategoryServiceImpl();
 
-        if (idCity != null) {
-            filter.put("idCity", idCity);
+        if(idCity == null) {
+            throw new ConflictException("IdCity parameter not found");
         }
 
-        if (idCategory != null) {
-            filter.put("idCategories", idCategory);
+        List<Local> list = mLocalDAO.listByFilters(idCity, idCategory, subCategories);
+
+        Map<Long, SubCategory> map = subCategoryService.getMap();
+        if(map != null) {
+            int size = list.size();
+            int sizeSubCat;
+            for (int i = 0; i < size; i++) {
+                List<Long> idSubCategories = list.get(i).getIdSubCategories();
+
+                sizeSubCat = idSubCategories.size();
+
+                for (int y = 0; y < sizeSubCat; y++) {
+                    list.get(i).getSubCategories().add(map.get(idSubCategories.get(y)));
+                }
+            }
         }
 
-        if (!filter.isEmpty()) {
-            return mLocalDAO.listByProperties(filter);
-        }
-
-        return mLocalDAO.listAll();
+        return list;
     }
 
     @Override

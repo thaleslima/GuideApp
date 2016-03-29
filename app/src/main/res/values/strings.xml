@@ -53,5 +53,7 @@
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_register">Cadastrar</string>
 
+    <string name="title_filter">Filtro</string>
+
 
 </resources>

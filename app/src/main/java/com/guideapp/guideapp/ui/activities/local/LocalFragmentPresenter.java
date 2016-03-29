@@ -1,6 +1,8 @@
 package com.guideapp.guideapp.ui.activities.local;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.guideapp.guideapp.model.wrapper.ListResponse;
@@ -16,28 +18,30 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by thales on 1/25/16.
  */
-public class LocalPresenter implements LocalContract.UserActionsListener {
-    private static final String TAG = LocalPresenter.class.getName();
-    private final LocalContract.View mLocalView;
+public class LocalFragmentPresenter implements LocalContract.UserActionsFragmentListener {
+    private static final String TAG = LocalFragmentPresenter.class.getName();
+    private final LocalContract.ViewFragment mLocalViewFragment;
     private CompositeSubscription mCompositeSubscription;
+    private Context mContext;
 
     /**
      * Simple constructor to use when creating a view from code.
      *
-     * @param localView View
+     * @param localViewFragment ViewFragment
+     * @param context The Context the view is running in
      */
-    public LocalPresenter(LocalContract.View localView) {
-        this.mLocalView = localView;
+    public LocalFragmentPresenter(LocalContract.ViewFragment localViewFragment, Context context) {
+        this.mLocalViewFragment = localViewFragment;
         this.mCompositeSubscription = new CompositeSubscription();
+        this.mContext = context;
     }
 
     @Override
-    public void loadLocals(boolean forceUpdate) {
-        mLocalView.showProgressBar();
+    public void loadLocals(long idCity, long idCategory, long[] idSubCategory) {
+        mLocalViewFragment.showProgressBar();
+        GuideApi service = RestClient.getClient(mContext);
 
-        GuideApi service = RestClient.getClient();
-
-        mCompositeSubscription.add(service.getLocals(5737664527466496L)
+        mCompositeSubscription.add(service.getLocals(idCity, idCategory, idSubCategory)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ListResponse<Local>>() {
@@ -48,13 +52,13 @@ public class LocalPresenter implements LocalContract.UserActionsListener {
 
                                @Override
                                public void onError(Throwable e) {
-
+                                   Log.i(TAG, e.getMessage());
                                }
 
                                @Override
                                public void onNext(ListResponse<Local> listResponse) {
-                                   mLocalView.showLocals(listResponse.getItems());
-                                   mLocalView.hideProgressBar();
+                                   mLocalViewFragment.showLocals(listResponse.getItems());
+                                   mLocalViewFragment.hideProgressBar();
                                }
                            }
                 )
@@ -77,8 +81,8 @@ public class LocalPresenter implements LocalContract.UserActionsListener {
 
                     @Override
                     public void onNext(List<Local> locals) {
-                        mLocalView.showLocals(locals);
-                        mLocalView.hideProgressBar();
+                        mLocalViewFragment.showLocals(locals);
+                        mLocalViewFragment.hideProgressBar();
                     }
                 })
         );
@@ -100,8 +104,8 @@ public class LocalPresenter implements LocalContract.UserActionsListener {
 
                                @Override
                                public void onNext(ListResponse<Local> listResponse) {
-                                   mLocalView.showLocals(listResponse.getItems());
-                                   mLocalView.hideProgressBar();
+                                   mLocalViewFragment.showLocals(listResponse.getItems());
+                                   mLocalViewFragment.hideProgressBar();
                                }
                            }
                 )
@@ -137,7 +141,7 @@ public class LocalPresenter implements LocalContract.UserActionsListener {
         call.enqueue(new Callback<ListResponse<Local>>() {
             @Override
             public void onResponse(Call<ListResponse<Local>> call, Response<ListResponse<Local>> response) {
-                mLocalView.showLocals(response.body().getItems());
+                mLocalViewFragment.showLocals(response.body().getItems());
             }
 
             @Override
@@ -151,7 +155,7 @@ public class LocalPresenter implements LocalContract.UserActionsListener {
 
     @Override
     public void openLocalDetails(@NonNull Local local, ImageView view) {
-        mLocalView.showLocalDetailUi(local, view);
+        mLocalViewFragment.showLocalDetailUi(local, view);
     }
 
     @Override

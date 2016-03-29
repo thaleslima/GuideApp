@@ -2,9 +2,11 @@ package com.guideapp.backend.entity;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 import com.guideapp.backend.util.StringUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,9 +34,13 @@ public class Local {
     @Index
     private List<Long> idCategories;
 
+    @Index
     private List<Long> idSubCategories;
 
     private long timestamp;
+
+    @Ignore
+    private List<SubCategory> subCategories;
 
     public Long getId() {
         return id;
@@ -147,5 +153,13 @@ public class Local {
 
     public void setIdSubCategories(List<Long> idSubCategories) {
         this.idSubCategories = idSubCategories;
+    }
+
+    public List<SubCategory> getSubCategories() {
+        if(subCategories == null) {
+            subCategories = new ArrayList<>();
+        }
+
+        return subCategories;
     }
 }

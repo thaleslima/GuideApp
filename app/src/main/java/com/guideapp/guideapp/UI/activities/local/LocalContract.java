@@ -4,16 +4,50 @@ import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.guideapp.guideapp.model.Local;
+import com.guideapp.guideapp.model.SubCategory;
+
 import java.util.List;
 
 /**
  * This specifies the contract between the view and the presenter.
  */
 public interface LocalContract {
+
     /**
-     * Interface View
+     * Interface ViewFragment
      */
-    interface View {
+    interface ViewActivity {
+        /**
+         * Show filters
+         * @param subCategories Sub categories list
+         */
+        void showFilter(List<SubCategory> subCategories);
+    }
+
+    /**
+     * Interface UserActionsFragmentListener
+     */
+    interface UserActionsActivityListener {
+        /**
+         * Load filters
+         * @param idCategory Id category
+         */
+        void loadFilters(long idCategory);
+
+        /**
+         * Unsubscribe RX
+         */
+        void unsubscribe();
+    }
+
+
+
+
+
+    /**
+     * Interface ViewFragment
+     */
+    interface ViewFragment {
         /**
          * Show locals
          * @param locals Local list
@@ -39,15 +73,17 @@ public interface LocalContract {
     }
 
     /**
-     * Interface UserActionsListener
+     * Interface UserActionsFragmentListener
      */
-    interface UserActionsListener {
+    interface UserActionsFragmentListener {
 
         /**
          * Load locals
-         * @param forceUpdate Force update data
+         * @param idCity Id city
+         * @param idCategory Id category
+         * @param idSubCategory Id Sub categories
          */
-        void loadLocals(boolean forceUpdate);
+        void loadLocals(long idCity, long idCategory, long[] idSubCategory);
 
         /**
          * Open local details

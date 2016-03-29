@@ -119,13 +119,9 @@ public class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.
 
                 ratingView.setRating(4.5f);
 
-                ratingView.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                    @Override
-                    public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-
-                        DialogFragment newFragment = new CommentDialogFragment();
-                        newFragment.show(mContext.getFragmentManager(), "missiles");
-                    }
+                ratingView.setOnRatingBarChangeListener((ratingBar, v, b) -> {
+                    DialogFragment newFragment = new CommentDialogFragment();
+                    newFragment.show(mContext.getFragmentManager(), "missiles");
                 });
             }
         }

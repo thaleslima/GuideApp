@@ -69,9 +69,11 @@ public class GuideAppEndpoint {
     @ApiMethod(name = "getLocals", path = "local", httpMethod = ApiMethod.HttpMethod.GET)
     public List<Local> getLocals(@Nullable @Named("search") String search,
                                  @Nullable @Named("idCity") Long idCity,
-                                 @Nullable @Named("idCategory") Long idCategory) {
+                                 @Nullable @Named("idCategory") Long idCategory,
+                                 @Nullable @Named("idSubCategory") Long[] subCategories)
+            throws ConflictException {
 
-        return mLocalService.list(idCity, idCategory);
+        return mLocalService.list(idCity, idCategory, subCategories);
     }
 
 

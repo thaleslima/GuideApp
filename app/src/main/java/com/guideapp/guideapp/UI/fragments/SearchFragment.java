@@ -18,7 +18,7 @@ import com.guideapp.guideapp.ui.adapters.SearchAdapter;
 import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.ui.widget.DividerItemDecoration;
 import com.guideapp.guideapp.model.Local;
-import com.guideapp.guideapp.model.ViewModel;
+import com.guideapp.guideapp.model.MainMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
         RecyclerViewItemClickListener {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
-    private List<ViewModel> mDataSet;
+    private List<MainMenu> mDataSet;
     private String mQuery = "";
     private List<Local> mDataSetResult;
     private LocalAdapter mAdapterResult;
@@ -93,10 +93,10 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
 
     private void initSearchDataSet() {
         mDataSet.clear();
-        mDataSet.add(new ViewModel(1, "Complexo do claro " + mQuery));
-        mDataSet.add(new ViewModel(2, "gruta " + mQuery));
-        mDataSet.add(new ViewModel(3, "pousada " + mQuery));
-        mDataSet.add(new ViewModel(4, "restaurante " + mQuery));
+        mDataSet.add(new MainMenu(1, "Complexo do claro " + mQuery));
+        mDataSet.add(new MainMenu(2, "gruta " + mQuery));
+        mDataSet.add(new MainMenu(3, "pousada " + mQuery));
+        mDataSet.add(new MainMenu(4, "restaurante " + mQuery));
 
         mAdapter = new SearchAdapter(this.getActivity(), mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -128,8 +128,8 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
     }
 
     @Override
-    public void onItemClick(View view, ViewModel viewModel) {
-        showResult(viewModel.getText());
+    public void onItemClick(View view, MainMenu mainMenu) {
+        showResult(mainMenu.getText());
     }
 
     public void showSearchRecent() {

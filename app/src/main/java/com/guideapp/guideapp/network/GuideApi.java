@@ -1,5 +1,6 @@
 package com.guideapp.guideapp.network;
 
+import com.guideapp.guideapp.model.SubCategory;
 import com.guideapp.guideapp.model.wrapper.ListResponse;
 import com.guideapp.guideapp.model.Local;
 import retrofit2.http.GET;
@@ -12,7 +13,12 @@ import rx.Observable;
  */
 public interface GuideApi {
 
-    @Headers("Cache-Control: max-age=114400")
     @GET("local")
-    Observable<ListResponse<Local>> getLocals(@Query("idCity") Long idCity);
+    Observable<ListResponse<Local>> getLocals(
+            @Query("idCity") long idCity,
+            @Query("idCategory") long idCategory,
+            @Query("idSubCategories") long[] idSubCategory);
+
+    @GET("subcategory")
+    Observable<ListResponse<SubCategory>> getSubCategories(@Query("idCategory") long idCategory);
 }

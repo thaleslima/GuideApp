@@ -2,9 +2,11 @@ package com.guideapp.backend.service.subcategory;
 
 import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
+import com.guideapp.backend.entity.Local;
 import com.guideapp.backend.entity.SubCategory;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by thales on 1/24/16.
@@ -55,4 +57,9 @@ public interface SubCategoryService {
      * @throws NotFoundException when there is a error in SubCategory object
      */
     void remove(Long id) throws NotFoundException;
+
+    /**
+     * Get map representing the sub category list
+     */
+    Map<Long, SubCategory> getMap();
 }

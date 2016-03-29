@@ -10,12 +10,12 @@ import java.util.List;
  */
 public interface LocalDetailContract {
     /**
-     * Interface View
+     * Interface ViewFragment
      */
     interface View {
         /**
          * Show local
-         * @param local Local list
+         * @param localDetails Local list
          */
         void showLocalDetail(List<LocalDetail> localDetails);
 
@@ -31,7 +31,7 @@ public interface LocalDetailContract {
     }
 
     /**
-     * Interface UserActionsListener
+     * Interface UserActionsFragmentListener
      */
     interface UserActionsListener {
 

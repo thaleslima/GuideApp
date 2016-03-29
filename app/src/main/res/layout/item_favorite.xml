@@ -51,8 +51,8 @@
         android:id="@+id/local_address"
         android:fontFamily="sans-serif-light"
         android:layout_below="@+id/local_text"
-        android:layout_alignLeft="@+id/textView7"
-        android:layout_alignStart="@+id/textView7"
+        android:layout_alignLeft="@+id/descriptions_sub_category"
+        android:layout_alignStart="@+id/descriptions_sub_category"
         android:layout_marginTop="5dp"/>
 
 
@@ -63,7 +63,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Complexo do claro"
         android:textColor="@color/secondary_text"
-        android:id="@+id/textView7"
+        android:id="@+id/descriptions_sub_category"
         android:fontFamily="sans-serif-light"
         android:layout_below="@+id/local_address"
         android:layout_toRightOf="@+id/local_picture"

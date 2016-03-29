@@ -21,10 +21,36 @@ import java.util.List;
 /**
  * Created by thales on 6/13/15.
  */
-public class LocalFragment extends Fragment implements LocalAdapter.RecyclerViewItemClickListener, LocalContract.View {
+public class LocalFragment extends Fragment
+        implements LocalAdapter.RecyclerViewItemClickListener, LocalContract.ViewFragment {
     private LocalAdapter mAdapter;
-    private LocalContract.UserActionsListener mActionsListener;
+    private LocalContract.UserActionsFragmentListener mActionsListener;
     private ProgressBar mProgressBar;
+
+    private static final String EXTRA_CITY = "id-city";
+    private static final String EXTRA_CATEGORY = "id-category";
+    private static final String EXTRA_SUB_CATEGORY = "id-sub-category";
+
+    private long mIdCity;
+    private long mIdCategory;
+    private long[] mIdSubCategories;
+
+    /**
+     * Create new instance
+     * @param idCity Id city
+     * @param idCategory Id Category
+     * @param idSubCategories Id Sub category
+     * @return Return LocalFragment instance
+     */
+    public static Fragment newInstance(long idCity, long idCategory, long[] idSubCategories) {
+        Fragment fragment = new LocalFragment();
+        Bundle bundle = new Bundle();
+        bundle.putLong(EXTRA_CITY, idCity);
+        bundle.putLong(EXTRA_CATEGORY, idCategory);
+        bundle.putLongArray(EXTRA_SUB_CATEGORY, idSubCategories);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -34,10 +60,24 @@ public class LocalFragment extends Fragment implements LocalAdapter.RecyclerView
 
         setFindViewById(layoutView);
         initRecyclerView(layoutView);
+        initExtra();
 
-        mActionsListener = new LocalPresenter(this);
+        mActionsListener = new LocalFragmentPresenter(this, getContext());
 
         return layoutView;
+    }
+
+    /**
+     * Initialize extras parameters
+     */
+    private void initExtra() {
+        Bundle bundle = getArguments();
+
+        if (bundle != null) {
+            mIdCity = bundle.getLong(EXTRA_CITY, 0);
+            mIdCategory = bundle.getLong(EXTRA_CATEGORY, 0);
+            mIdSubCategories = bundle.getLongArray(EXTRA_SUB_CATEGORY);
+        }
     }
 
     /**
@@ -69,7 +109,7 @@ public class LocalFragment extends Fragment implements LocalAdapter.RecyclerView
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mActionsListener.loadLocals(false);
+        mActionsListener.loadLocals(mIdCity, mIdCategory, mIdSubCategories);
     }
 
     @Override
@@ -102,6 +142,4 @@ public class LocalFragment extends Fragment implements LocalAdapter.RecyclerView
     public void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
     }
-
-
 }

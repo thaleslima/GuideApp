@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by thales on 3/19/16.
  */
-public class ValidationUtil {
+public final class ValidationUtil {
     /**
      * Constructor
      */

@@ -23,7 +23,7 @@ public class CommonUtils {
     }
 
     public static void showViewLayout(Context context, View view) {
-        //if (view.getVisibility() == View.GONE) {
+        //if (view.getVisibility() == ViewFragment.GONE) {
 
             Animation animation = AnimationUtils.loadAnimation(
                     context, R.anim.abc_slide_out_bottom);

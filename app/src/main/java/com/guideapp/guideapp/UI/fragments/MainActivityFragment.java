@@ -10,18 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
+import com.guideapp.guideapp.infrastructure.Constants;
 import com.guideapp.guideapp.ui.activities.local.LocalActivity;
 import com.guideapp.guideapp.ui.activities.MapActivity;
 import com.guideapp.guideapp.ui.adapters.RecyclerViewAdapter;
 import com.guideapp.guideapp.ui.widget.GridSpacingItemDecoration;
-import com.guideapp.guideapp.model.ViewModel;
+import com.guideapp.guideapp.model.MainMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivityFragment extends Fragment
         implements RecyclerViewAdapter.OnItemClickListener {
-    private static List<ViewModel> items;
+    private static List<MainMenu> items;
 
     public MainActivityFragment() {
     }
@@ -51,27 +52,46 @@ public class MainActivityFragment extends Fragment
     private void initMenu() {
         if (items == null) {
             items = new ArrayList<>();
-            items.add(new ViewModel(1, R.string.menu_local, R.drawable.ic_map_white_36dp,
+            items.add(new MainMenu(
+                    1,
+                    R.string.menu_local,
+                    R.drawable.ic_map_white_36dp,
                     R.color.green_500));
-            items.add(
-                    new ViewModel(
-                            2, R.string.menu_alimentation, R.drawable.ic_local_dining_white_36dp,
-                    R.color.blue_500));
-            items.add(new ViewModel(3, R.string.menu_attractive, R.drawable.ic_terrain_white_36dp,
-                    R.color.cyan_500));
-            items.add(
-                    new ViewModel(
-                            4, R.string.menu_accommodation, R.drawable.ic_local_hotel_white_36dp,
-                            R.color.purple_500));
+            items.add(new MainMenu(
+                    Constants.Menu.ALIMENTATION,
+                    R.string.menu_alimentation,
+                    R.drawable.ic_local_dining_white_36dp,
+                    R.color.blue_500,
+                    R.color.blue_700,
+                    R.style.AppThemeBlue));
+            items.add(new MainMenu(
+                    Constants.Menu.ATTRACTIVE,
+                    R.string.menu_attractive,
+                    R.drawable.ic_terrain_white_36dp,
+                    R.color.cyan_500,
+                    R.color.cyan_700,
+                    R.style.AppThemeCyan));
+            items.add(new MainMenu(
+                    Constants.Menu.ACCOMMODATION,
+                    R.string.menu_accommodation,
+                    R.drawable.ic_local_hotel_white_36dp,
+                    R.color.purple_500,
+                    R.color.purple_700,
+                    R.style.AppThemePurple));
         }
     }
 
     @Override
-    public void onItemClick(View view, ViewModel viewModel) {
-        if (viewModel.getId() == 1) {
+    public void onItemClick(View view, MainMenu mainMenu) {
+        if (mainMenu.getId() == 1) {
             MapActivity.navigate(this.getActivity());
         } else {
-            LocalActivity.navigate(this.getActivity());
+            LocalActivity.navigate(this.getActivity(),
+                    Constants.City.ID,
+                    mainMenu.getId(),
+                    mainMenu.getIdText(),
+                    mainMenu.getTheme(),
+                    mainMenu.getColorDark());
         }
     }
 }
