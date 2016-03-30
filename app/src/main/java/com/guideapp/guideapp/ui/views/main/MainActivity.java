@@ -18,26 +18,27 @@ import com.guideapp.guideapp.ui.views.whatshot.WhatsHotFragment;
 import com.guideapp.guideapp.ui.views.BaseActivity;
 import com.guideapp.guideapp.ui.views.search.SearchActivity;
 
+/**
+ * Main activity
+ */
 public class MainActivity extends BaseActivity {
-    private TabLayout mTabLayout;
-    private ViewPager mViewPager;
-    private AppBarLayout mAppBarLayout;
-
-    private static final int[] mIconTabBlack = {
+    private static final int[] ICONS_TAB_BLACK = {
             R.drawable.ic_apps_black_24dp,
             R.drawable.ic_bookmark_black_24dp,
             R.drawable.ic_whatshot_black_24dp,
             R.drawable.ic_person_black_24dp
     };
 
-    private static final int[] mIconTabWhite = {
+    private static final int[] ICONS_TAB_WHITE = {
             R.drawable.ic_apps_white_24dp,
             R.drawable.ic_bookmark_white_24dp,
             R.drawable.ic_whatshot_white_24dp,
             R.drawable.ic_person_white_24dp
     };
 
-    private int mTotalTabs = 4;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
+    private AppBarLayout mAppBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,22 +47,25 @@ public class MainActivity extends BaseActivity {
 
         initToolbar();
         setFindViewById();
+        initViewPager();
         setViewProperties();
-        setListener();
     }
 
-    private void setListener() {
+    /**
+     * Initialize view's listener
+     */
+    private void setViewProperties() {
         mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition(), true);
-                tab.setIcon(mIconTabWhite[tab.getPosition()]);
+                tab.setIcon(ICONS_TAB_WHITE[tab.getPosition()]);
                 mAppBarLayout.setExpanded(true);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                tab.setIcon(mIconTabBlack[tab.getPosition()]);
+                tab.setIcon(ICONS_TAB_BLACK[tab.getPosition()]);
             }
 
             @Override
@@ -70,17 +74,24 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    /**
+     * Initialize Toolbar
+     */
     private void initToolbar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    private void setViewProperties() {
-        for (int i = 0; i < mTotalTabs; i++) {
-            if (i == 0)
-                mTabLayout.addTab(mTabLayout.newTab().setIcon(mIconTabWhite[i]));
-            else
-                mTabLayout.addTab(mTabLayout.newTab().setIcon(mIconTabBlack[i]));
+    /**
+     * Initialize extras parameters
+     */
+    private void initViewPager() {
+        for (int i = 0; i < ICONS_TAB_BLACK.length; i++) {
+            if (i == 0) {
+                mTabLayout.addTab(mTabLayout.newTab().setIcon(ICONS_TAB_WHITE[i]));
+            } else {
+                mTabLayout.addTab(mTabLayout.newTab().setIcon(ICONS_TAB_BLACK[i]));
+            }
         }
 
         mViewPager.setAdapter(new SectionsAdapter(getSupportFragmentManager()));
@@ -106,12 +117,18 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Get Views by id
+     */
     private void setFindViewById() {
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
     }
 
+    /**
+     * Sections of the view pager
+     */
     private class SectionsAdapter extends FragmentPagerAdapter {
         public SectionsAdapter(FragmentManager fm) {
             super(fm);
@@ -141,7 +158,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public int getCount() {
-            return 4;
+            return ICONS_TAB_BLACK.length;
         }
     }
 }

@@ -11,21 +11,22 @@ import android.view.ViewGroup;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.infrastructure.Constants;
+import com.guideapp.guideapp.model.MainMenu;
 import com.guideapp.guideapp.ui.views.local.LocalActivity;
 import com.guideapp.guideapp.ui.views.map.MapActivity;
-import com.guideapp.guideapp.ui.adapters.RecyclerViewAdapter;
+import com.guideapp.guideapp.ui.adapters.MenuAdapter;
 import com.guideapp.guideapp.ui.widget.GridSpacingItemDecoration;
-import com.guideapp.guideapp.model.MainMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Main Fragment
+ */
 public class MainFragment extends Fragment
-        implements RecyclerViewAdapter.OnItemClickListener {
-    private static List<MainMenu> items;
+        implements MenuAdapter.RecyclerViewItemClickListener {
+    private static List<MainMenu> mItems;
 
-    public MainFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,41 +38,45 @@ public class MainFragment extends Fragment
         return view;
     }
 
+    /**
+     * Initialize recycler view
+     */
     private void initRecyclerView(View view) {
-        initMenu();
+        initItemsRecyclerView();
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new GridLayoutManager(this.getActivity(), 2));
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this.getActivity(), items);
-        adapter.setOnItemClickListener(this);
+        MenuAdapter adapter = new MenuAdapter(mItems, this);
         recyclerView.setAdapter(adapter);
-
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, 16, true));
     }
 
-    private void initMenu() {
-        if (items == null) {
-            items = new ArrayList<>();
-            items.add(new MainMenu(
+    /**
+     * Initialize recycler view's items
+     */
+    private void initItemsRecyclerView() {
+        if (mItems == null) {
+            mItems = new ArrayList<>();
+            mItems.add(new MainMenu(
                     1,
                     R.string.menu_local,
                     R.drawable.ic_map_white_36dp,
                     R.color.green_500));
-            items.add(new MainMenu(
+            mItems.add(new MainMenu(
                     Constants.Menu.ALIMENTATION,
                     R.string.menu_alimentation,
                     R.drawable.ic_local_dining_white_36dp,
                     R.color.blue_500,
                     R.color.blue_700,
                     R.style.AppThemeBlue));
-            items.add(new MainMenu(
+            mItems.add(new MainMenu(
                     Constants.Menu.ATTRACTIVE,
                     R.string.menu_attractive,
                     R.drawable.ic_terrain_white_36dp,
                     R.color.cyan_500,
                     R.color.cyan_700,
                     R.style.AppThemeCyan));
-            items.add(new MainMenu(
+            mItems.add(new MainMenu(
                     Constants.Menu.ACCOMMODATION,
                     R.string.menu_accommodation,
                     R.drawable.ic_local_hotel_white_36dp,
@@ -82,16 +87,17 @@ public class MainFragment extends Fragment
     }
 
     @Override
-    public void onItemClick(View view, MainMenu mainMenu) {
-        if (mainMenu.getId() == 1) {
+    public void onItemClick(MainMenu item) {
+        if (item.getId() == 1) {
             MapActivity.navigate(this.getActivity());
-        } else {
-            LocalActivity.navigate(this.getActivity(),
-                    Constants.City.ID,
-                    mainMenu.getId(),
-                    mainMenu.getIdText(),
-                    mainMenu.getTheme(),
-                    mainMenu.getColorDark());
+            return;
         }
+
+        LocalActivity.navigate(this.getActivity(),
+                Constants.City.ID,
+                item.getId(),
+                item.getIdTitle(),
+                item.getIdTheme(),
+                item.getIdColorPrimaryDark());
     }
 }

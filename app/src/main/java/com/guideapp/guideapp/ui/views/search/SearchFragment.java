@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.guideapp.guideapp.R;
+import com.guideapp.guideapp.model.MainMenuTemp;
 import com.guideapp.guideapp.ui.adapters.LocalAdapter;
 import com.guideapp.guideapp.ui.adapters.SearchAdapter;
 import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
 import com.guideapp.guideapp.ui.widget.DividerItemDecoration;
 import com.guideapp.guideapp.model.Local;
-import com.guideapp.guideapp.model.MainMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
         RecyclerViewItemClickListener {
     private RecyclerView mRecyclerView;
     private SearchAdapter mAdapter;
-    private List<MainMenu> mDataSet;
+    private List<MainMenuTemp> mDataSet;
     private String mQuery = "";
     private List<Local> mDataSetResult;
     private LocalAdapter mAdapterResult;
@@ -93,10 +93,10 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
 
     private void initSearchDataSet() {
         mDataSet.clear();
-        mDataSet.add(new MainMenu(1, "Complexo do claro " + mQuery));
-        mDataSet.add(new MainMenu(2, "gruta " + mQuery));
-        mDataSet.add(new MainMenu(3, "pousada " + mQuery));
-        mDataSet.add(new MainMenu(4, "restaurante " + mQuery));
+        mDataSet.add(new MainMenuTemp(1, "Complexo do claro " + mQuery));
+        mDataSet.add(new MainMenuTemp(2, "gruta " + mQuery));
+        mDataSet.add(new MainMenuTemp(3, "pousada " + mQuery));
+        mDataSet.add(new MainMenuTemp(4, "restaurante " + mQuery));
 
         mAdapter = new SearchAdapter(this.getActivity(), mDataSet);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -128,7 +128,7 @@ public class SearchFragment extends Fragment implements SearchAdapter.OnItemClic
     }
 
     @Override
-    public void onItemClick(View view, MainMenu mainMenu) {
+    public void onItemClick(View view, MainMenuTemp mainMenu) {
         showResult(mainMenu.getText());
     }
 
