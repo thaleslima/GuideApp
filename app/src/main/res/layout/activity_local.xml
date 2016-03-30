@@ -40,7 +40,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/imageButton"
+            android:id="@+id/map_button"
             android:clickable="true"
             android:layout_weight="1"
             android:src="@drawable/button_map"
@@ -57,7 +57,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/button_filter"
+            android:id="@+id/filter_button"
             android:layout_weight="1"
             android:clickable="true"
             android:src="@drawable/button_filter_list"

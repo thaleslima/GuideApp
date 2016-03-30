@@ -1,5 +1,5 @@
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,16 +7,15 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <RelativeLayout
+        android:id="@+id/local_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
         android:background="@color/white"
-        android:visibility="gone"
-        android:id="@+id/local_view">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/local_picture"
@@ -27,43 +26,43 @@
             android:layout_alignParentTop="true"
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/gruta" />
+            tools:src="@drawable/gruta" />
 
         <TextView
-            android:id="@+id/local_text"
+            android:id="@+id/local_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/local_picture"
             android:layout_toEndOf="@+id/local_picture"
             android:layout_toRightOf="@+id/local_picture"
             android:fontFamily="sans-serif"
-            android:text="Cachoeira da Gruta"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/primary_text"
-            android:typeface="sans" />
+            android:typeface="sans"
+            tools:text="Cachoeira da Gruta" />
 
         <RatingBar
             android:id="@+id/ratingBar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/local_text"
-            android:layout_alignLeft="@+id/local_text"
-            android:layout_alignStart="@+id/local_text"
+            android:layout_alignLeft="@+id/local_description"
+            android:layout_alignStart="@+id/local_description"
+            android:layout_below="@+id/local_description"
             android:layout_marginTop="5dp" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/local_total_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ratingBar"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/ratingBar"
+            android:layout_toRightOf="@+id/ratingBar"
             android:fontFamily="sans-serif-light"
-            android:text="5 Opiniões"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/secondary_text_light"
-            android:layout_alignBottom="@+id/ratingBar"
-            android:layout_toRightOf="@+id/ratingBar"
-            android:layout_toEndOf="@+id/ratingBar"
-            android:layout_marginLeft="5dp" />
+            tools:text="5 Opiniões" />
     </RelativeLayout>
-
 </FrameLayout>

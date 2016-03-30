@@ -3,13 +3,11 @@
     android:layout_height="match_parent"
     android:elevation="@dimen/elevation">
 
-    <fragment
-        android:id="@+id/list"
-        android:name="com.guideapp.guideapp.ui.views.map.MapFragment"
+    <FrameLayout
+        android:id="@+id/contentFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <include layout="@layout/toolbar_transparent" />
-
 </FrameLayout>
 

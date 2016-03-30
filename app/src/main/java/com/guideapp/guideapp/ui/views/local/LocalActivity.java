@@ -13,6 +13,7 @@ import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.model.SubCategory;
 import com.guideapp.guideapp.ui.views.BaseActivity;
 import com.guideapp.guideapp.ui.dialog.FilterDialogFragment;
+import com.guideapp.guideapp.ui.views.map.MapActivity;
 
 import java.util.List;
 
@@ -25,14 +26,18 @@ import butterknife.ButterKnife;
 public class LocalActivity extends BaseActivity
         implements LocalContract.ViewActivity, FilterDialogFragment.FilterDialogPositiveListener {
     @Bind(R.id.toolbar) Toolbar mToolbar;
-    @Bind(R.id.button_filter) ImageView mButtonFilter;
-    private LocalContract.UserActionsActivityListener mActionsListener;
+    @Bind(R.id.filter_button) ImageView mButtonFilter;
+    @Bind(R.id.map_button) ImageView mButtonMap;
+
+
     private long mIdCity;
     private long mIdCategory;
     private int mIdTitle;
     private int mIdTheme;
     private int mIdColorStatusBar;
     private long[] mIdSubCategories;
+
+    private LocalContract.UserActionsActivityListener mActionsListener;
 
     private static final String EXTRA_CITY = "id-city";
     private static final String EXTRA_CATEGORY = "id-category";
@@ -122,6 +127,7 @@ public class LocalActivity extends BaseActivity
      */
     private void setViewProperties() {
         mButtonFilter.setOnClickListener(v -> mActionsListener.loadFilters(mIdCategory));
+        mButtonMap.setOnClickListener(v -> mActionsListener.loadMap());
     }
 
     @Override
@@ -129,6 +135,11 @@ public class LocalActivity extends BaseActivity
         FilterDialogFragment newFragment =
                 FilterDialogFragment.newInstance(subCategories, mIdSubCategories);
         newFragment.show(getFragmentManager(), "missiles", this);
+    }
+
+    @Override
+    public void showMap() {
+        MapActivity.navigate(this, mIdCity, mIdCategory, mIdSubCategories, mIdTitle);
     }
 
     @Override

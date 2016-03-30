@@ -89,7 +89,9 @@ public class MainFragment extends Fragment
     @Override
     public void onItemClick(MainMenu item) {
         if (item.getId() == 1) {
-            MapActivity.navigate(this.getActivity());
+            MapActivity.navigate(
+                    this.getActivity(),
+                    Constants.City.ID);
             return;
         }
 

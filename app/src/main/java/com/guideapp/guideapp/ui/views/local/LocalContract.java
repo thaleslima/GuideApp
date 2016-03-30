@@ -22,6 +22,8 @@ public interface LocalContract {
          * @param subCategories Sub categories list
          */
         void showFilter(List<SubCategory> subCategories);
+
+        void showMap();
     }
 
     /**
@@ -33,6 +35,8 @@ public interface LocalContract {
          * @param idCategory Id category
          */
         void loadFilters(long idCategory);
+
+        void loadMap();
 
         /**
          * Unsubscribe RX

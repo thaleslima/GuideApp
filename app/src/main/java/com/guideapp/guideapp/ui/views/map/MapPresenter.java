@@ -1,11 +1,12 @@
-package com.guideapp.guideapp.ui.views.local;
+package com.guideapp.guideapp.ui.views.map;
 
 import android.content.Context;
-import com.guideapp.guideapp.model.SubCategory;
+import android.util.Log;
+
+import com.guideapp.guideapp.model.Local;
 import com.guideapp.guideapp.model.wrapper.ListResponse;
 import com.guideapp.guideapp.network.GuideApi;
 import com.guideapp.guideapp.network.RestClient;
-
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -14,33 +15,32 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by thales on 1/25/16.
  */
-public class LocalActivityPresenter implements LocalContract.UserActionsActivityListener {
-    private static final String TAG = LocalActivityPresenter.class.getName();
-    private final LocalContract.ViewActivity mLocalViewActivity;
+public class MapPresenter implements MapContract.UserActionsListener {
+    private static final String TAG = MapPresenter.class.getName();
+    private final MapContract.View mView;
     private CompositeSubscription mCompositeSubscription;
     private Context mContext;
-
     /**
      * Simple constructor to use when creating a view from code.
      *
-     * @param localViewActivity ViewActivity
-     * @param context The Context the view is running in
+     * @param view ViewFragment
      */
-    public LocalActivityPresenter(LocalContract.ViewActivity localViewActivity, Context context) {
-        this.mLocalViewActivity = localViewActivity;
-        this.mCompositeSubscription = new CompositeSubscription();
+    public MapPresenter(MapContract.View view, Context context) {
         this.mContext = context;
+        this.mView = view;
+        this.mCompositeSubscription = new CompositeSubscription();
     }
 
-
     @Override
-    public void loadFilters(long idCategory) {
+    public void loadLocals(long idCity, long idCategory, long[] idSubCategory) {
         GuideApi service = RestClient.getClient(mContext);
 
-        mCompositeSubscription.add(service.getSubCategories(idCategory)
+        Long idCategoryAux = idCategory == 0 ? null : idCategory;
+
+        mCompositeSubscription.add(service.getLocals(idCity, idCategoryAux, idSubCategory)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ListResponse<SubCategory>>() {
+                .subscribe(new Subscriber<ListResponse<Local>>() {
                                @Override
                                public void onCompleted() {
 
@@ -48,12 +48,12 @@ public class LocalActivityPresenter implements LocalContract.UserActionsActivity
 
                                @Override
                                public void onError(Throwable e) {
-
+                                   Log.i(TAG, e.getMessage());
                                }
 
                                @Override
-                               public void onNext(ListResponse<SubCategory> listResponse) {
-                                   mLocalViewActivity.showFilter(listResponse.getItems());
+                               public void onNext(ListResponse<Local> listResponse) {
+                                   mView.showLocals(listResponse.getItems());
                                }
                            }
                 )
@@ -61,8 +61,13 @@ public class LocalActivityPresenter implements LocalContract.UserActionsActivity
     }
 
     @Override
-    public void loadMap() {
-        mLocalViewActivity.showMap();
+    public void loadLocalSummary(Local local) {
+        mView.showLocalSummary(local);
+    }
+
+    @Override
+    public void loadLocal(Local local) {
+        mView.showLocal(local);
     }
 
     @Override

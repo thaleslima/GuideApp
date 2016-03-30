@@ -15,8 +15,8 @@ public interface GuideApi {
 
     @GET("local")
     Observable<ListResponse<Local>> getLocals(
-            @Query("idCity") long idCity,
-            @Query("idCategory") long idCategory,
+            @Query("idCity") Long idCity,
+            @Query("idCategory") Long idCategory,
             @Query("idSubCategories") long[] idSubCategory);
 
     @GET("subcategory")
