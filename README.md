@@ -6,6 +6,12 @@ Developed By
 
 * Thales Reis Machado Lima - <thalesml@gmail.com>
 
+Architecture app project
+------------------------------------
+
+It showcases a simple implementation of the Model-View-Presenter pattern with no architectural frameworks
+![](/../master/screenshots/mvp.png?raw=true "GuiaApp")
+
 
 Libraries used on the app project
 ------------------------------------
