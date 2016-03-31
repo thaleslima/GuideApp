@@ -23,7 +23,7 @@ bower install
 ```
 
 
-Distribute
+Distribute and build
 ```bash
 grunt
 ```
