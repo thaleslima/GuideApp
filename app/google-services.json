@@ -1,0 +1,138 @@
+{
+  "project_info": {
+    "project_id": "default-demo-app-d7c7c",
+    "project_number": "214102998644",
+    "name": "Default Demo App"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "",
+        "client_id": "android:gcm.play.android.samples.com.gcmquickstart",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "gcm.play.android.samples.com.gcmquickstart",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214102998644-rerrn1vr0kao4oh56bk5gej5hfefpev6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214102998644:android:27d689d63f1b7a06",
+        "client_id": "android:com.google.samples.quickstart.signin",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.google.samples.quickstart.signin",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214102998644-m4v8rf2582de23acpineh0tgrelf5p05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.google.samples.quickstart.signin",
+            "certificate_hash": "EFDD527BD0202A5699AE509EDB28C3AF3BFD41DD"
+          }
+        },
+        {
+          "client_id": "214102998644-rerrn1vr0kao4oh56bk5gej5hfefpev6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214102998644:android:4b811888b633aa66",
+        "client_id": "android:com.guideapp.guideapp",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.guideapp.guideapp",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214102998644-4icth6ea2fq95khi2tuj760mbrhjd9cr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guideapp.guideapp",
+            "certificate_hash": "EFDD527BD0202A5699AE509EDB28C3AF3BFD41DD"
+          }
+        },
+        {
+          "client_id": "214102998644-rerrn1vr0kao4oh56bk5gej5hfefpev6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

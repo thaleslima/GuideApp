@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/button"
+            android:id="@+id/login_google_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="6dp"
@@ -29,7 +29,7 @@
             android:src="@drawable/ic_google_plus_24dp" />
 
         <ImageView
-            android:id="@+id/button2"
+            android:id="@+id/login_facebook_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
