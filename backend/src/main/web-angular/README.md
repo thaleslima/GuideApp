@@ -29,26 +29,25 @@ grunt
 ```
 
 
-**3\.** Serve local
+**4\.** Serve local
 ```bash
 grunt serve
 ```
 
 
-**3\.** Add route
+**5\.** Add route
 ```bash
 yo angular:route myroute
 ```
 
 
-**4\.** Add components bower
+**6\.** Add components bower
 ```bash
 bower install bootstrap
 ```
 
 
-**5\.** Testing
+**7\.** Testing
 ```bash
 grunt test
 ```
-
