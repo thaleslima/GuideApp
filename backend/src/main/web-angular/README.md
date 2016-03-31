@@ -16,6 +16,7 @@ Install all modules and needed tools
 ```bash
 npm install -g npm
 npm install -g yo
+npm install -g grunt
 npm install -g grunt-cli
 npm install -g bower
 npm install
