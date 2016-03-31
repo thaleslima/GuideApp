@@ -55,7 +55,7 @@ The followings tools are used :
  - Lint.
 
 
-Screenshots
+Screenshots app project
 ------------------------------------
 
 ![](/../master/images/screenshot_00.png?raw=true "GuiaApp")
