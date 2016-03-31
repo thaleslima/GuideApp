@@ -6,11 +6,19 @@ Developed By
 
 * Thales Reis Machado Lima - <thalesml@gmail.com>
 
+
 Architecture app project
 ------------------------------------
 
 It showcases a simple implementation of the Model-View-Presenter pattern.
-![](/../master/screenshots/mvp.png?raw=true "GuiaApp")
+![](/../master/images/mvp.png?raw=true "GuiaApp")
+
+
+Architecture app project
+------------------------------------
+
+It showcases a simple implementation of the Model-View-Presenter pattern.
+![](/../master/images/backend.png?raw=true "GuiaApp")
 
 
 Libraries used on the app project
@@ -20,7 +28,6 @@ Libraries used on the app project
 * [Retrofit 2][2]
 * [Glide][3]
 * [Butterknife][3]
-
 
 
 Services used on the backend
@@ -52,7 +59,7 @@ The followings tools are used :
 Screenshots
 ------------------------------------
 
-![](/../master/screenshots/screenshot_00.png?raw=true "GuiaApp")
+![](/../master/images/screenshot_00.png?raw=true "GuiaApp")
 
 
 License
