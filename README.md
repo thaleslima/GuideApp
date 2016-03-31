@@ -14,10 +14,9 @@ It showcases a simple implementation of the Model-View-Presenter pattern.
 ![](/../master/images/mvp.png?raw=true "GuiaApp")
 
 
-Architecture app project
+Architecture backend services
 ------------------------------------
 
-It showcases a simple implementation of the Model-View-Presenter pattern.
 ![](/../master/images/backend.png?raw=true "GuiaApp")
 
 
@@ -30,7 +29,7 @@ Libraries used on the app project
 * [Butterknife][3]
 
 
-Services used on the backend
+Services used on the backend services
 ------------------------------------
 
 * [Google App Angine][10]
@@ -39,7 +38,7 @@ Services used on the backend
 * [Google Cloud Datastore][13]
 
 
-Libraries used on the web backend
+Libraries used on the backend web
 ------------------------------------
 
 * [Angular JS 1.5][20]
