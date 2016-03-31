@@ -1,12 +1,54 @@
-# guide-app
+## Web Angular
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+To get started:
 
-## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+**1\.** Clone the repository and its submodules:
 
-## Testing
+```bash
+git clone https://github.com/thaleslima/GuideApp.git
+cd backend/src/main/web-angular/
+```
 
-Running `grunt test` will run the unit tests with karma.
+
+**2\.** Install all modules and needed tools
+
+```bash
+npm install
+npm install -g npm
+npm install -g yo
+npm install -g grunt-cli
+npm install -g bower
+bower install
+```
+
+
+**3\.** Build
+```bash
+grunt
+```
+
+
+**3\.** Serve local
+```bash
+grunt serve
+```
+
+
+**3\.** Add route
+```bash
+yo angular:route myroute
+```
+
+
+**4\.** Add components bower
+```bash
+bower install bootstrap
+```
+
+
+**5\.** Testing
+```bash
+grunt test
+```
+
