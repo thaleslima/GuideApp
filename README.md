@@ -9,7 +9,7 @@ Developed By
 Architecture app project
 ------------------------------------
 
-It showcases a simple implementation of the Model-View-Presenter pattern with no architectural frameworks
+It showcases a simple implementation of the Model-View-Presenter pattern.
 ![](/../master/screenshots/mvp.png?raw=true "GuiaApp")
 
 
