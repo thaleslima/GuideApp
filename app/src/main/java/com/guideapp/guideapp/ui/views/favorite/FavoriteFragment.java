@@ -8,56 +8,64 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.ui.views.localdetail.LocalDetailActivity;
-import com.guideapp.guideapp.ui.adapters.FavoriteAdapter;
-import com.guideapp.guideapp.ui.listener.RecyclerViewItemClickListener;
-import com.guideapp.guideapp.ui.widget.DividerItemDecoration;
 import com.guideapp.guideapp.model.Local;
+import com.guideapp.guideapp.ui.views.localdetail.LocalDetailActivity;
+import com.guideapp.guideapp.ui.widget.DividerItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by thales on 6/13/15.
- */
-public class FavoriteFragment extends Fragment implements RecyclerViewItemClickListener {
-    private RecyclerView mRecyclerView;
+public class FavoriteFragment extends Fragment implements FavoriteContract.View, FavoriteAdapter.ItemClickListener {
     private FavoriteAdapter mAdapter;
-    private List<Local> mDataSet;
+    private FavoriteContract.Presenter mPresenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View layoutView = inflater.inflate(R.layout.fragment_favorite, container, false);
-        initRecyclerView(layoutView);
-        return layoutView;
-    }
-
-    private void initRecyclerView(View layoutView) {
-        mRecyclerView = (RecyclerView) layoutView.findViewById(R.id.local_list);
-
-        mDataSet = new ArrayList<>();
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-        mDataSet.add(new Local("Cachoeira da gruta", "Complexo do claro"));
-
-        mAdapter = new FavoriteAdapter(this.getActivity(), this, mDataSet);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this.getActivity(),
-                DividerItemDecoration.VERTICAL_LIST, 310));
+        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
+        setupRecyclerView(view);
+        return view;
     }
 
     @Override
-    public void onItemClick(View view, int position) {
-        //LocalDetailActivity.navigate(this.getActivity(), view.findViewById(R.id.local_picture));
-        LocalDetailActivity.navigate(this.getActivity());
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        mPresenter = new FavoritePresenter(this);
+        mPresenter.loadLocals(getActivity().getSupportLoaderManager());
+    }
+
+    private void setupRecyclerView(View view) {
+        mAdapter = new FavoriteAdapter(getContext(), this);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mPresenter.onResume(getActivity().getSupportLoaderManager());
+    }
+
+    @Override
+    public void onItemClick(Local item, ImageView view) {
+        mPresenter.openLocalDetails(item, view);
+    }
+
+    @Override
+    public void showLocals(List<Local> locals) {
+        mAdapter.replaceData(locals);
+    }
+
+    @Override
+    public void showLocalDetailUi(Local local, ImageView view) {
+        LocalDetailActivity.navigate(getActivity(), view, local.getId());
     }
 }

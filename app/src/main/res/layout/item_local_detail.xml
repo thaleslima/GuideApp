@@ -34,7 +34,7 @@
     <View
         android:id="@+id/local_divider"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="1dp"
         android:layout_alignLeft="@+id/local_text"
         android:layout_alignStart="@+id/local_text"
         android:layout_below="@+id/local_text"

@@ -13,56 +13,23 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/contentFrame"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_gravity="end|bottom"
-        android:id="@+id/linearLayout2"
-        android:layout_height="50dp"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        app:layout_behavior="com.guideapp.guideapp.ui.widget.ScrollingButtonsBehavior"
-        android:background="@drawable/border_top">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/map_button"
-            android:clickable="true"
-            android:layout_weight="1"
-            android:src="@drawable/button_map"
-            android:layout_gravity="center_vertical"
-            android:scaleType="center" />
-
-        <View
-            android:layout_width="1dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginBottom="14dp"
-            android:layout_height="match_parent"
-            android:background="?android:listDivider"/>
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/filter_button"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:src="@drawable/button_filter_list"
-            android:layout_gravity="center_vertical"
-            android:scaleType="center"/>
-    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 </android.support.design.widget.CoordinatorLayout>
 

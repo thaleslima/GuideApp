@@ -2,10 +2,7 @@ package com.guideapp.backend.service.subcategory;
 
 import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
-import com.google.appengine.api.memcache.ErrorHandlers;
 import com.google.appengine.api.memcache.MemcacheService;
-import com.google.appengine.api.memcache.MemcacheServiceFactory;
-import com.google.appengine.repackaged.com.google.api.client.util.ArrayMap;
 import com.guideapp.backend.dao.subcategory.SubCategoryDAO;
 import com.guideapp.backend.dao.subcategory.SubCategoryDAOImpl;
 import com.guideapp.backend.entity.SubCategory;
@@ -16,20 +13,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.logging.Level;
 
-/**
- * Created by thales on 1/24/16.
- */
 public class SubCategoryServiceImpl implements SubCategoryService {
 
     private final SubCategoryDAO mSubCategoryDAO;
     private static final String KEY_MAP = "map-sub-category";
 
-    /**
-     * Configure the sub-category service.
-     */
     public SubCategoryServiceImpl() {
         this.mSubCategoryDAO = new SubCategoryDAOImpl();
     }
@@ -71,6 +60,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
         subCategory.setTimestamp(new Date().getTime());
         mSubCategoryDAO.insert(subCategory);
+        putMapInMemCache(null);
     }
 
     @Override
@@ -99,6 +89,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
         subCategory.setTimestamp(new Date().getTime());
         mSubCategoryDAO.insert(subCategory);
+        putMapInMemCache(null);
     }
 
     @Override
@@ -110,12 +101,13 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         }
 
         mSubCategoryDAO.delete(s);
+        putMapInMemCache(null);
     }
 
     @Override
     public Map<Long, SubCategory> getMap() {
         List<SubCategory> list = getMapInMemCache();
-        if (list == null) {
+        if (list == null || list.size() == 0) {
             list = list();
             putMapInMemCache(list);
         }
@@ -133,16 +125,15 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     /**
      * Insert map in memory cache
      */
-    private void putMapInMemCache(List<SubCategory> list){
+    private void putMapInMemCache(List<SubCategory> list) {
         MemcacheService syncCache = MemcacheUtil.getMemcacheService();
         syncCache.put(KEY_MAP, list);
     }
 
     /**
      * Get map in memory cache
-     * @return SubCategory map
      */
-    private List<SubCategory> getMapInMemCache(){
+    private List<SubCategory> getMapInMemCache() {
         MemcacheService syncCache = MemcacheUtil.getMemcacheService();
         return (List<SubCategory>) syncCache.get(KEY_MAP);
     }

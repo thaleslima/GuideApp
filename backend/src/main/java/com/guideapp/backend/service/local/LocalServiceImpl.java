@@ -4,7 +4,6 @@ import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
 import com.guideapp.backend.dao.local.LocalDAO;
 import com.guideapp.backend.dao.local.LocalDAOImpl;
-import com.guideapp.backend.dao.subcategory.SubCategoryDAO;
 import com.guideapp.backend.entity.Local;
 import com.guideapp.backend.entity.SubCategory;
 import com.guideapp.backend.service.subcategory.SubCategoryService;
@@ -14,33 +13,26 @@ import com.guideapp.backend.util.ValidationUtil;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
-/**
- * Created by thales on 1/24/16.
- */
 public class LocalServiceImpl implements LocalService {
     private LocalDAO mLocalDAO;
+    private SubCategoryService subCategoryService;
 
-    /**
-     * Configure the local service.
-     */
     public LocalServiceImpl() {
         this.mLocalDAO = new LocalDAOImpl();
+        subCategoryService = new SubCategoryServiceImpl();
     }
 
     @Override
     public List<Local> list(Long idCity, Long idCategory, Long[] subCategories) throws ConflictException {
-        SubCategoryService subCategoryService = new SubCategoryServiceImpl();
-
-        if(idCity == null) {
+        if (idCity == null) {
             throw new ConflictException("IdCity parameter not found");
         }
 
         List<Local> list = mLocalDAO.listByFilters(idCity, idCategory, subCategories);
 
         Map<Long, SubCategory> map = subCategoryService.getMap();
-        if(map != null) {
+        if (map != null) {
             int size = list.size();
             int sizeSubCat;
             for (int i = 0; i < size; i++) {

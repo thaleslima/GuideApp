@@ -1,8 +1,5 @@
 package com.guideapp.guideapp.model;
 
-/**
- * Created by thales on 6/13/15.
- */
 public class LocalDetail {
     private int id;
     private int ico;

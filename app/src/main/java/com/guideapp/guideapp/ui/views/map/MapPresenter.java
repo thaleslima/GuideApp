@@ -1,77 +1,67 @@
 package com.guideapp.guideapp.ui.views.map;
 
-import android.content.Context;
-import android.util.Log;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.widget.ImageView;
 
+import com.guideapp.guideapp.data.local.GuideContract;
 import com.guideapp.guideapp.model.Local;
-import com.guideapp.guideapp.model.wrapper.ListResponse;
-import com.guideapp.guideapp.network.GuideApi;
-import com.guideapp.guideapp.network.RestClient;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import com.guideapp.guideapp.utilities.DataUtil;
 
-/**
- * Created by thales on 1/25/16.
- */
-public class MapPresenter implements MapContract.UserActionsListener {
+import java.util.ArrayList;
+
+public class MapPresenter implements MapContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = MapPresenter.class.getName();
+    private static final int ID_LOADER = 256;
     private final MapContract.View mView;
-    private CompositeSubscription mCompositeSubscription;
-    private Context mContext;
-    /**
-     * Simple constructor to use when creating a view from code.
-     *
-     * @param view ViewFragment
-     */
-    public MapPresenter(MapContract.View view, Context context) {
-        this.mContext = context;
+
+    public MapPresenter(MapContract.View view) {
         this.mView = view;
-        this.mCompositeSubscription = new CompositeSubscription();
     }
 
     @Override
-    public void loadLocals(long idCity, long idCategory, long[] idSubCategory) {
-        GuideApi service = RestClient.getClient(mContext);
-
-        Long idCategoryAux = idCategory == 0 ? null : idCategory;
-
-        mCompositeSubscription.add(service.getLocals(idCity, idCategoryAux, idSubCategory)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ListResponse<Local>>() {
-                               @Override
-                               public void onCompleted() {
-
-                               }
-
-                               @Override
-                               public void onError(Throwable e) {
-                                   Log.i(TAG, e.getMessage());
-                               }
-
-                               @Override
-                               public void onNext(ListResponse<Local> listResponse) {
-                                   mView.showLocals(listResponse.getItems());
-                               }
-                           }
-                )
-        );
+    public void loadLocals(LoaderManager loaderManager) {
+        loaderManager.initLoader(ID_LOADER, null, this);
     }
 
     @Override
-    public void loadLocalSummary(Local local) {
+    public void openLocalSummary(Local local) {
         mView.showLocalSummary(local);
     }
 
     @Override
-    public void loadLocal(Local local) {
-        mView.showLocal(local);
+    public void openLocalDetails(@NonNull Local local, ImageView view) {
+        mView.showLocalDetailUi(local, view);
     }
 
     @Override
-    public void unsubscribe() {
-        mCompositeSubscription.unsubscribe();
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+
+            case ID_LOADER:
+                return new CursorLoader(mView.getContext(),
+                        GuideContract.LocalEntry.CONTENT_URI,
+                        null,
+                        null,
+                        null,
+                        null);
+
+            default:
+                throw new RuntimeException("Loader Not Implemented: " + id);
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mView.showLocals(DataUtil.getLocalsFromCursor(data));
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mView.showLocals(new ArrayList<>());
     }
 }

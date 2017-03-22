@@ -8,14 +8,7 @@ import com.guideapp.backend.entity.City;
 import com.guideapp.backend.entity.Local;
 import com.guideapp.backend.entity.SubCategory;
 
-/**
- * Created by thales on 1/24/16.
- */
 public final class OfyService {
-
-    /**
-     * Constructor
-     */
     private OfyService() {
     }
 
@@ -26,18 +19,10 @@ public final class OfyService {
         ObjectifyService.register(Local.class);
     }
 
-    /**
-     * Return a Objectify object
-     * @return a Objectify object
-     */
     public static Objectify ofy() {
         return ObjectifyService.ofy();
     }
 
-    /**
-     * Return a ObjectifyFactory object
-     * @return a ObjectifyFactory object
-     */
     public static ObjectifyFactory factory() {
         return ObjectifyService.factory();
     }

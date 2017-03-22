@@ -56,6 +56,9 @@
         <item name="android:textColorSecondary">@android:color/white</item>
     </style>
 
+    <style name="toolbarThemeMap" parent="Theme.AppCompat.Light.DarkActionBar">
+    </style>
+
     <style name="toolbarThemeDark" parent="Theme.AppCompat.Light">
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColorSecondary">@android:color/black</item>

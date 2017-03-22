@@ -1,39 +1,38 @@
 package com.guideapp.guideapp.ui.views.main;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
 
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.ui.views.favorite.FavoriteFragment;
-import com.guideapp.guideapp.ui.views.user.UserFragment;
-import com.guideapp.guideapp.ui.views.whatshot.WhatsHotFragment;
+import com.guideapp.guideapp.data.local.GuideContract;
+import com.guideapp.guideapp.sync.GuideSyncUtils;
 import com.guideapp.guideapp.ui.views.BaseActivity;
-import com.guideapp.guideapp.ui.views.search.SearchActivity;
+import com.guideapp.guideapp.ui.views.favorite.FavoriteFragment;
+import com.guideapp.guideapp.ui.views.menu.MenuFragment;
 
-/**
- * Main activity
- */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final int ID_LOADER = 456;
+
     private static final int[] ICONS_TAB_BLACK = {
             R.drawable.ic_apps_black_24dp,
-            R.drawable.ic_bookmark_black_24dp,
-            R.drawable.ic_whatshot_black_24dp,
-            R.drawable.ic_person_black_24dp
+            R.drawable.ic_bookmark_black_24dp
     };
 
     private static final int[] ICONS_TAB_WHITE = {
             R.drawable.ic_apps_white_24dp,
-            R.drawable.ic_bookmark_white_24dp,
-            R.drawable.ic_whatshot_white_24dp,
-            R.drawable.ic_person_white_24dp
+            R.drawable.ic_bookmark_white_24dp
     };
 
     private TabLayout mTabLayout;
@@ -49,13 +48,13 @@ public class MainActivity extends BaseActivity {
         setFindViewById();
         initViewPager();
         setViewProperties();
+
+        getSupportLoaderManager().initLoader(ID_LOADER, null, this);
+        GuideSyncUtils.initialize(this);
     }
 
-    /**
-     * Initialize view's listener
-     */
     private void setViewProperties() {
-        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition(), true);
@@ -74,17 +73,15 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    /**
-     * Initialize Toolbar
-     */
     private void initToolbar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(R.string.app_name_city);
+        }
     }
 
-    /**
-     * Initialize extras parameters
-     */
     private void initViewPager() {
         for (int i = 0; i < ICONS_TAB_BLACK.length; i++) {
             if (i == 0) {
@@ -99,38 +96,41 @@ public class MainActivity extends BaseActivity {
         mViewPager.setPageMargin(16);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_search) {
-            SearchActivity.navigate(this);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Get Views by id
-     */
     private void setFindViewById() {
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
     }
 
-    /**
-     * Sections of the view pager
-     */
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+
+            case ID_LOADER:
+                return new CursorLoader(this,
+                        GuideContract.LocalEntry.CONTENT_URI,
+                        null,
+                        null,
+                        null,
+                        null);
+
+            default:
+                throw new RuntimeException("Loader Not Implemented: " + id);
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        Log.d(TAG, "onLoadFinished: " + data.getCount());
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
     private class SectionsAdapter extends FragmentPagerAdapter {
-        public SectionsAdapter(FragmentManager fm) {
+        SectionsAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -140,16 +140,10 @@ public class MainActivity extends BaseActivity {
 
             switch (position) {
                 case 0:
-                    fragment = new MainFragment();
-                    break;
-                case 1:
-                    fragment = new FavoriteFragment();
-                    break;
-                case 2:
-                    fragment = new WhatsHotFragment();
+                    fragment = new MenuFragment();
                     break;
                 default:
-                    fragment = new UserFragment();
+                    fragment = new FavoriteFragment();
                     break;
             }
 

@@ -1,49 +1,31 @@
 package com.guideapp.guideapp.ui.views.map;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v4.app.LoaderManager;
+import android.widget.ImageView;
+
 import com.guideapp.guideapp.model.Local;
+
 import java.util.List;
 
-/**
- * This specifies the contract between the view and the presenter.
- */
-public interface MapContract {
-    /**
-     * Interface ViewFragment
-     */
-    interface View {
-        /**
-         * Show locals
-         * @param locals Local list
-         */
-        void showLocals(List<Local> locals);
 
+public interface MapContract {
+    interface View {
+        void showLocals(List<Local> locals);
 
         void showLocalSummary(Local local);
 
-        void showLocal(Local local);
+        void showLocalDetailUi(Local local, ImageView view);
+
+        Context getContext();
     }
 
-    /**
-     * Interface UserActionsFragmentListener
-     */
-    interface UserActionsListener {
+    interface Presenter {
+        void loadLocals(LoaderManager loaderManager);
 
-        /**
-         * Load locals
-         * @param idCity Id city
-         * @param idCategory Id category
-         * @param idSubCategory Id Sub categories
-         */
-        void loadLocals(long idCity, long idCategory, long[] idSubCategory);
+        void openLocalSummary(Local local);
 
-
-        void loadLocalSummary(Local local);
-
-
-        void loadLocal(Local local);
-        /**
-         * Unsubscribe RX
-         */
-        void unsubscribe();
+        void openLocalDetails(@NonNull Local local, ImageView view);
     }
 }

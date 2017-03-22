@@ -1,49 +1,34 @@
 package com.guideapp.guideapp.ui.views.localdetail;
 
-import com.guideapp.guideapp.model.Local;
+import android.content.Context;
+import android.support.v4.app.LoaderManager;
+
 import com.guideapp.guideapp.model.LocalDetail;
 
 import java.util.List;
 
-/**
- * This specifies the contract between the view and the presenter.
- */
-public interface LocalDetailContract {
-    /**
-     * Interface ViewFragment
-     */
+interface LocalDetailContract {
     interface View {
-        /**
-         * Show local
-         * @param localDetails Local list
-         */
+        void showFavoriteYes();
+
+        void showFavoriteNo();
+
+        void showSnackbarRemoveFavorite();
+
+        void showSnackbarSaveFavorite();
+
         void showLocalDetail(List<LocalDetail> localDetails);
 
-        /**
-         * Show progress bar
-         */
-        void showProgressBar();
+        Context getContext();
 
-        /**
-         * Hide progress bar
-         */
-        void hideProgressBar();
+        void showTitle(String description);
+
+        void showImage(String imagePath);
     }
 
-    /**
-     * Interface UserActionsFragmentListener
-     */
-    interface UserActionsListener {
+    interface Presenter {
+        void loadLocal(LoaderManager loaderManager);
 
-        /**
-         * Load local
-         * @param local Local list
-         */
-        void loadLocal(Local local);
-
-        /**
-         * Unsubscribe RX
-         */
-        void unsubscribe();
+        void saveOrRemoveFavorite();
     }
 }

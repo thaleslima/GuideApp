@@ -3,9 +3,6 @@ package com.guideapp.guideapp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by thales on 3/25/16.
- */
 public class SubCategory implements Parcelable {
     private Long id;
     private String description;

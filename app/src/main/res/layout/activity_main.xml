@@ -12,22 +12,21 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary"
-            app:popupTheme="@style/AppTheme2.PopupOverlay"
-            app:theme="@style/toolbarThemeDark"
             android:elevation="@dimen/elevation"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme2.PopupOverlay"
+            app:theme="@style/toolbarThemeDark" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary"
-            app:tabIndicatorColor="@android:color/white"
-            android:elevation="@dimen/elevation" />
+            android:elevation="@dimen/elevation"
+            app:tabIndicatorColor="@android:color/white" />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
@@ -35,6 +34,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </android.support.design.widget.CoordinatorLayout>
 

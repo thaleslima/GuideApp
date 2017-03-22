@@ -1,67 +1,110 @@
 package com.guideapp.guideapp.ui.views.localdetail;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+
 import com.guideapp.guideapp.R;
-import com.guideapp.guideapp.infrastructure.ValidationUtil;
+import com.guideapp.guideapp.data.local.GuideContract;
+import com.guideapp.guideapp.utilities.DataUtil;
+import com.guideapp.guideapp.utilities.ValidationUtil;
 import com.guideapp.guideapp.model.Local;
 import com.guideapp.guideapp.model.LocalDetail;
-import com.guideapp.guideapp.ui.adapters.LocalDetailAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
-import rx.Observable;
-import rx.Observer;
-import rx.subscriptions.CompositeSubscription;
 
-/**
- * Created by thales on 1/25/16.
- */
-public class LocalDetailPresenter implements LocalDetailContract.UserActionsListener {
+class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = LocalDetailPresenter.class.getName();
-    private final LocalDetailContract.View mLocalView;
-    private CompositeSubscription mCompositeSubscription;
+    private static final int ID_LOADER = 301;
 
-    /**
-     * Simple constructor to use when creating a view from code.
-     *
-     * @param localView ViewFragment
-     */
-    public LocalDetailPresenter(LocalDetailContract.View localView) {
-        this.mLocalView = localView;
-        this.mCompositeSubscription = new CompositeSubscription();
+    private final LocalDetailContract.View mView;
+    private long mIdLocal;
+    private boolean mIsFavorite;
+
+    LocalDetailPresenter(LocalDetailContract.View localView, long idLocal) {
+        this.mView = localView;
+        this.mIdLocal = idLocal;
     }
 
     @Override
-    public void loadLocal(Local local) {
-        Observable<List<LocalDetail>> listObservable = Observable.just(createListLocalDetail(local));
-        listObservable.subscribe(new Observer<List<LocalDetail>>() {
-
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(List<LocalDetail> localDetails) {
-                mLocalView.showLocalDetail(localDetails);
-            }
-        });
+    public void loadLocal(LoaderManager loaderManager) {
+        loaderManager.initLoader(ID_LOADER, null, this);
     }
 
-    /**
-     * Create items of the recycle view
-     * @param local Local Object
-     * @return Return item of the list
-     */
+    @Override
+    public void saveOrRemoveFavorite() {
+        updateFavorite(!mIsFavorite);
+
+        if (mIsFavorite) {
+            mView.showFavoriteYes();
+            mView.showSnackbarSaveFavorite();
+        } else {
+            mView.showFavoriteNo();
+            mView.showSnackbarRemoveFavorite();
+        }
+    }
+
+    private void updateFavorite(boolean isFavorite) {
+        ContentValues values = new ContentValues();
+        values.put(GuideContract.LocalEntry.COLUMN_FAVORITE, isFavorite);
+        mView.getContext().getContentResolver().update(GuideContract.LocalEntry.buildLocalUriWithId(mIdLocal), values, null, null);
+
+        mIsFavorite = isFavorite;
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+
+            case ID_LOADER:
+                return new CursorLoader(mView.getContext(),
+                        GuideContract.LocalEntry.buildLocalUriWithId(mIdLocal),
+                        null,
+                        null,
+                        null,
+                        null);
+
+            default:
+                throw new RuntimeException("Loader Not Implemented: " + id);
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        List<Local> locals = DataUtil.getLocalsFromCursor(data);
+
+        if (locals.size() > 0) {
+            mView.showTitle(locals.get(0).getDescription());
+            mView.showImage(locals.get(0).getImagePath());
+
+            mIsFavorite = locals.get(0).isFavorite();
+
+            if (mIsFavorite) {
+                mView.showFavoriteYes();
+            } else {
+                mView.showFavoriteNo();
+            }
+
+            mView.showLocalDetail(createListLocalDetail(locals.get(0)));
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
     private static List<LocalDetail> createListLocalDetail(Local local) {
         List<LocalDetail> list = new ArrayList<>();
 
-
-        list.add(new LocalDetail(R.drawable.ic_info_grey_72_24dp,
-                local.getDescriptionSubCategories(), true, LocalDetailAdapter.LOCAL_DETAIL));
+        if (!ValidationUtil.nullOrEmpty(local.getDescriptionSubCategories())) {
+            list.add(new LocalDetail(R.drawable.ic_info_grey_72_24dp,
+                    local.getDescriptionSubCategories(), true, LocalDetailAdapter.LOCAL_DETAIL));
+        }
 
         if (!ValidationUtil.nullOrEmpty(local.getSite())) {
             list.add(new LocalDetail(R.drawable.ic_language_grey_72_24dp,
@@ -88,13 +131,6 @@ public class LocalDetailPresenter implements LocalDetailContract.UserActionsList
                 local.getLatitude(), local.getLongitude()));
 
 
-        list.add(new LocalDetail(true, LocalDetailAdapter.LOCAL_DETAIL_TITLE_OPINION));
-
         return list;
-    }
-
-    @Override
-    public void unsubscribe() {
-        mCompositeSubscription.unsubscribe();
     }
 }

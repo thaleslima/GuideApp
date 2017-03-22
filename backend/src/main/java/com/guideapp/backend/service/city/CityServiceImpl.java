@@ -10,16 +10,9 @@ import com.guideapp.backend.util.ValidationUtil;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by thales on 1/24/16.
- */
 public class CityServiceImpl implements CityService {
-
     private final CityDAO mCityDAO;
 
-    /**
-     * Configure the local service.
-     */
     public CityServiceImpl() {
         this.mCityDAO = new CityDAOImpl();
     }

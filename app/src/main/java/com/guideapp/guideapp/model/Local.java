@@ -6,10 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by thales on 6/13/15.
- */
-public class Local implements Parcelable {
+public class Local {
     private Long id;
     private String description;
     private String site;
@@ -25,6 +22,12 @@ public class Local implements Parcelable {
     private List<Long> idSubCategories;
     private long timestamp;
     private List<SubCategory> subCategories;
+    private String descriptionSubCategories;
+    private boolean favorite;
+
+    public Local() {
+
+    }
 
     public Local(String description, String address) {
         this.description = description;
@@ -144,77 +147,26 @@ public class Local implements Parcelable {
     }
 
     public String getDescriptionSubCategories() {
-        if(subCategories != null) {
-            int size = subCategories.size();
-            String description = "";
-
-            for (int i = 0; i < size; i++) {
-                if(i > 0){
-                    description += " | ";
-                }
-                description += subCategories.get(i).getDescription();
-            }
-
-            return description;
-        }
-
-        return "";
+        return this.descriptionSubCategories;
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public List<SubCategory> getSubCategories() {
+        return subCategories;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.id);
-        dest.writeString(this.description);
-        dest.writeString(this.site);
-        dest.writeString(this.phone);
-        dest.writeString(this.address);
-        dest.writeByte(wifi ? (byte) 1 : (byte) 0);
-        dest.writeString(this.detail);
-        dest.writeDouble(this.latitude);
-        dest.writeDouble(this.longitude);
-        dest.writeString(this.imagePath);
-        dest.writeValue(this.idCity);
-        dest.writeList(this.idCategories);
-        dest.writeList(this.idSubCategories);
-        dest.writeLong(this.timestamp);
-        dest.writeTypedList(subCategories);
+    public void setSubCategories(List<SubCategory> subCategories) {
+        this.subCategories = subCategories;
     }
 
-    protected Local(Parcel in) {
-        this.id = (Long) in.readValue(Long.class.getClassLoader());
-        this.description = in.readString();
-        this.site = in.readString();
-        this.phone = in.readString();
-        this.address = in.readString();
-        this.wifi = in.readByte() != 0;
-        this.detail = in.readString();
-        this.latitude = in.readDouble();
-        this.longitude = in.readDouble();
-        this.imagePath = in.readString();
-        this.idCity = (Long) in.readValue(Long.class.getClassLoader());
-        this.idCategories = new ArrayList<Long>();
-        in.readList(this.idCategories, Long.class.getClassLoader());
-        this.idSubCategories = new ArrayList<Long>();
-        in.readList(this.idSubCategories, Long.class.getClassLoader());
-        this.timestamp = in.readLong();
-        this.subCategories = in.createTypedArrayList(SubCategory.CREATOR);
+    public void setDescriptionSubCategories(String descriptionSubCategories) {
+        this.descriptionSubCategories = descriptionSubCategories;
     }
 
-    public static final Creator<Local> CREATOR = new Creator<Local>() {
-        @Override
-        public Local createFromParcel(Parcel source) {
-            return new Local(source);
-        }
+    public boolean isFavorite() {
+        return favorite;
+    }
 
-        @Override
-        public Local[] newArray(int size) {
-            return new Local[size];
-        }
-    };
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
 }

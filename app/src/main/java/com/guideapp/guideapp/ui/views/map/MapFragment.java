@@ -25,43 +25,32 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.model.Local;
-import com.guideapp.guideapp.ui.infrastructure.CommonUtils;
-import com.guideapp.guideapp.ui.views.local.LocalContract;
-import com.guideapp.guideapp.ui.views.local.LocalFragmentPresenter;
+import com.guideapp.guideapp.utilities.Constants;
+import com.guideapp.guideapp.utilities.ViewUtil;
 import com.guideapp.guideapp.ui.views.localdetail.LocalDetailActivity;
 
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by thales on 7/28/15.
- */
-public class MapFragment
-        extends Fragment
+public class MapFragment extends Fragment
         implements OnMapReadyCallback, MapContract.View {
+    private static final String EXTRA_CITY = "id-city";
+    private static final String EXTRA_CATEGORY = "id-category";
+    private static final String EXTRA_SUB_CATEGORY = "id-sub-category";
 
     private SupportMapFragment mSupportMapFragment;
     private RatingBar mRatingBar;
     private RelativeLayout mLocalView;
     private GoogleMap mMap;
-    private MapContract.UserActionsListener mActionsListener;
-
-    private static final String EXTRA_CITY = "id-city";
-    private static final String EXTRA_CATEGORY = "id-category";
-    private static final String EXTRA_SUB_CATEGORY = "id-sub-category";
+    private MapContract.Presenter mPresenter;
+    private TextView mDescriptionView;
+    private ImageView mPhotoView;
 
     private long mIdCity;
     private long mIdCategory;
     private long[] mIdSubCategories;
     private HashMap<String, Local> mMarkersId;
 
-    /**
-     * Create new instance
-     * @param idCity Id city
-     * @param idCategory Id Category
-     * @param idSubCategories Id Sub category
-     * @return Return LocalFragment instance
-     */
     public static Fragment newInstance(long idCity, long idCategory, long[] idSubCategories) {
         Fragment fragment = new MapFragment();
         Bundle bundle = new Bundle();
@@ -84,7 +73,7 @@ public class MapFragment
         initExtra();
 
         mMarkersId = new HashMap<>();
-        mActionsListener = new MapPresenter(this, getContext());
+        mPresenter = new MapPresenter(this);
         return view;
     }
 
@@ -95,9 +84,6 @@ public class MapFragment
         setUpMapIfNeeded();
     }
 
-    /**
-     * Initialize extras parameters
-     */
     private void initExtra() {
         Bundle bundle = getArguments();
 
@@ -107,9 +93,6 @@ public class MapFragment
             mIdSubCategories = bundle.getLongArray(EXTRA_SUB_CATEGORY);
         }
     }
-
-    private TextView mDescriptionView;
-    private ImageView mPhotoView;
 
     private void setFindViewById(View view) {
         mLocalView = (RelativeLayout) view.findViewById(R.id.local_view);
@@ -133,7 +116,7 @@ public class MapFragment
                 ContextCompat.getColor(this.getContext(), R.color.secondary_star),
                 PorterDuff.Mode.SRC_ATOP);
 
-        mLocalView.setOnClickListener(v -> mActionsListener.loadLocal((Local) v.getTag()));
+        mLocalView.setOnClickListener(v -> mPresenter.openLocalDetails((Local) v.getTag(), mPhotoView));
     }
 
     private void setUpMapIfNeeded() {
@@ -147,16 +130,16 @@ public class MapFragment
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-        LatLng center = new LatLng(-20.3449802, -46.8551188);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 15));
+        LatLng center = new LatLng(Constants.City.LATITUDE, Constants.City.LONGITUDE);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 12));
 
         map.setOnMarkerClickListener(marker -> {
-            mActionsListener.loadLocalSummary(mMarkersId.get(marker.getId()));
+            mPresenter.openLocalSummary(mMarkersId.get(marker.getId()));
 
             return false;
         });
 
-        mActionsListener.loadLocals(mIdCity, mIdCategory, mIdSubCategories);
+        mPresenter.loadLocals(getActivity().getSupportLoaderManager());
     }
 
     @Override
@@ -181,22 +164,15 @@ public class MapFragment
         mDescriptionView.setText(local.getDescription());
         mRatingBar.setRating(4.3f);
 
-        Glide.with(this.getContext())
-                .load(local.getImagePath())
-                .into(mPhotoView);
+        Glide.with(this.getContext()).load(local.getImagePath()).into(mPhotoView);
 
-        CommonUtils.showViewLayout(getContext(), mLocalView);
+        ViewUtil.showViewLayout(getContext(), mLocalView);
         mLocalView.setTag(local);
     }
 
     @Override
-    public void showLocal(Local local) {
-        LocalDetailActivity.navigate(this.getActivity(), local);
+    public void showLocalDetailUi(Local local, ImageView view) {
+        LocalDetailActivity.navigate(this.getActivity(), view, local.getId());
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mActionsListener.unsubscribe();
-    }
 }

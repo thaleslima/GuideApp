@@ -9,7 +9,9 @@
 
     <style name="AppThemeLocalDetail" parent="AppTheme.NoActionBar">
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="colorPrimaryDark">@color/accent_translucent</item> 
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/details_window_enter_transition</item>
+        <item name="android:windowReturnTransition">@transition/details_window_return_transition</item>
     </style>
 
 

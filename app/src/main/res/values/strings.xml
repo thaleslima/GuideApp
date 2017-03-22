@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">Guide App</string>
+    <string name="app_name_city">Delfinópolis (Brasil)</string>
+
+    <string name="content_authority">com.guideapp.guideapp</string>
+
 
     <string name="menu_local">Lugares no mapa</string>
     <string name="menu_alimentation">Alimentação</string>
     <string name="menu_attractive">Atrativos</string>
     <string name="menu_accommodation">hospedagem</string>
+
+    <string name="title_save_favorite">Added to favorites</string>
+    <string name="title_remove_favorite">Removed from favorites</string>
 
 
     <string name="hello_world">Hello world!</string>
@@ -54,6 +61,6 @@
     <string name="title_activity_register">Cadastrar</string>
 
     <string name="title_filter">Filtro</string>
-
+    <string name="detail_icon_transition_name" translatable="false">TN_DetailIcon</string>
 
 </resources>

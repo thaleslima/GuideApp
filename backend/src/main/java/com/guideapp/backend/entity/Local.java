@@ -9,9 +9,6 @@ import com.guideapp.backend.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by thales on 1/24/16.
- */
 @Entity
 public class Local {
 
@@ -156,7 +153,7 @@ public class Local {
     }
 
     public List<SubCategory> getSubCategories() {
-        if(subCategories == null) {
+        if (subCategories == null) {
             subCategories = new ArrayList<>();
         }
 

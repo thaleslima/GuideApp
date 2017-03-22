@@ -12,16 +12,9 @@ import java.util.Map;
 import static com.guideapp.backend.util.OfyService.ofy;
 
 
-/**
- * Class generic for access dataStore
- * @param <T> the T represents a entity of dataStore
- */
 public class ObjectifyGenericDAO<T> implements IGenericDAO<T> {
     protected final Class<T> mClazz;
 
-    /**
-     * Constructor
-     */
     @SuppressWarnings("unchecked")
     public ObjectifyGenericDAO() {
         mClazz = ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
@@ -90,7 +83,6 @@ public class ObjectifyGenericDAO<T> implements IGenericDAO<T> {
                         com.google.appengine.api.datastore.Query.FilterOperator.EQUAL,
                         entry.getValue()));
             }
-
 
 
             com.google.appengine.api.datastore.Query.Filter filter

@@ -10,6 +10,7 @@
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
     <color name="secondary_text_light">#CCCCCC</color>
+    <color name="icon">#212121</color>
 
     <color name="divider">#F5F5F5</color>
     <color name="divider_dark">#E0E0E0</color>
