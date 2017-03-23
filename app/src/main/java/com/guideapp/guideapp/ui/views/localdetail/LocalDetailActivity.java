@@ -16,7 +16,7 @@ import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.ui.views.BaseActivity;
 
 public class LocalDetailActivity extends BaseActivity {
-    private static final String EXTRA_LOCAL_ID = "local_id";
+    public static final String EXTRA_LOCAL_ID = "local_id";
 
     public static void navigate(Activity activity, View transitionImage, long id) {
         Intent intent = new Intent(activity, LocalDetailActivity.class);

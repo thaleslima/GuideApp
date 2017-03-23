@@ -14,7 +14,7 @@ import com.guideapp.guideapp.utilities.Constants;
 import com.guideapp.guideapp.model.MainMenu;
 import com.guideapp.guideapp.ui.views.local.LocalActivity;
 import com.guideapp.guideapp.ui.views.map.MapActivity;
-import com.guideapp.guideapp.ui.widget.GridSpacingItemDecoration;
+import com.guideapp.guideapp.ui.views.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;

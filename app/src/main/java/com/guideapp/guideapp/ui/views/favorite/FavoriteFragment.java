@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.model.Local;
 import com.guideapp.guideapp.ui.views.localdetail.LocalDetailActivity;
-import com.guideapp.guideapp.ui.widget.DividerItemDecoration;
+import com.guideapp.guideapp.ui.views.DividerItemDecoration;
 
 import java.util.List;
 

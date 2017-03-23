@@ -13,7 +13,6 @@
     <string name="title_save_favorite">Added to favorites</string>
     <string name="title_remove_favorite">Removed from favorites</string>
 
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_search">Pesquisar</string>
@@ -54,13 +53,16 @@
     <string name="register_phone">Celular</string>
 
 
-
-
-
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_register">Cadastrar</string>
 
     <string name="title_filter">Filtro</string>
     <string name="detail_icon_transition_name" translatable="false">TN_DetailIcon</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+    <string name="empty_service_list">No Services Information Available</string>
+    <string name="title_widget_detail">Locals</string>
+
 
 </resources>

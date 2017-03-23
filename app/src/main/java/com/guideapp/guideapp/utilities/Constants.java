@@ -4,6 +4,9 @@ public final class Constants {
     private Constants() {
     }
 
+    public static final String ACTION_DATA_UPDATED = "com.guideapp.guideapp.ACTION_DATA_UPDATED";
+
+
     public interface City {
         long ID = 5659118702428160L;
         double LATITUDE = -20.3449802;

@@ -10,6 +10,7 @@ import android.support.v4.content.Loader;
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.data.local.GuideContract;
 import com.guideapp.guideapp.utilities.DataUtil;
+import com.guideapp.guideapp.utilities.Utility;
 import com.guideapp.guideapp.utilities.ValidationUtil;
 import com.guideapp.guideapp.model.Local;
 import com.guideapp.guideapp.model.LocalDetail;
@@ -54,6 +55,8 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
         mView.getContext().getContentResolver().update(GuideContract.LocalEntry.buildLocalUriWithId(mIdLocal), values, null, null);
 
         mIsFavorite = isFavorite;
+
+        Utility.updateWidgets(mView.getContext());
     }
 
     @Override

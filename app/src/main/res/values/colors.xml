@@ -19,6 +19,7 @@
     <color name="secondary_star">#FAFAFA</color>
 
     <color name="background_title_opinion">#FAFAFA</color>
+    <color name="background">#FFFFFF</color>
 
     <color name="button_white_pressed">#CCCCCC</color>
     <color name="button_black_pressed">#212121</color>
