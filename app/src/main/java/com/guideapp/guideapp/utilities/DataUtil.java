@@ -73,8 +73,6 @@ public final class DataUtil {
             } while (cursor.moveToNext());
         }
 
-        cursor.close();
-
         return locals;
     }
 

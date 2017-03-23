@@ -22,7 +22,7 @@ ext {
     buildToolsVersion = '25.0.2'
 
     // App dependencies
-    supportLibraryVersion = '25.2.0'
+    supportLibraryVersion = '25.3.0'
     glideVersion = '3.7.0'
     circleImageVersion = '2.0.0'
     picassoVersion = '2.4.0'

@@ -75,6 +75,7 @@ public class MapActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(R.string.app_name_city);
         }
 
