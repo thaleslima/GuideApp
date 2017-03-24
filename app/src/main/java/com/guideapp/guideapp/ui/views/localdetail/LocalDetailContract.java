@@ -17,6 +17,8 @@ interface LocalDetailContract {
 
         void showSnackbarSaveFavorite();
 
+        void shareText(String textToShare);
+
         void showLocalDetail(List<LocalDetail> localDetails);
 
         Context getContext();
@@ -30,5 +32,7 @@ interface LocalDetailContract {
         void loadLocal(LoaderManager loaderManager);
 
         void saveOrRemoveFavorite();
+
+        void shareLocal();
     }
 }

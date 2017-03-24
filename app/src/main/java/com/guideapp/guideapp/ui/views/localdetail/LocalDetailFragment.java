@@ -7,11 +7,15 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -42,6 +46,12 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_local, container, false);
@@ -50,6 +60,24 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
         setupViews();
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_detail, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_share:
+                mPresenter.shareLocal();
+                break;
+        }
+
+        return true;
     }
 
     private void setupViews() {
@@ -104,6 +132,17 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
             mPresenter = new LocalDetailPresenter(this, id);
             mPresenter.loadLocal(getActivity().getSupportLoaderManager());
         }
+    }
+
+    @Override
+    public void shareText(String textToShare) {
+        String mimeType = "text/plain";
+        ShareCompat.IntentBuilder
+                .from(this.getActivity())
+                .setType(mimeType)
+                .setChooserTitle(R.string.app_name)
+                .setText(textToShare)
+                .startChooser();
     }
 
     @Override

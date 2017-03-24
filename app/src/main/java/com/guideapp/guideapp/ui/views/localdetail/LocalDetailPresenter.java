@@ -23,6 +23,7 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
 
     private final LocalDetailContract.View mView;
     private final long mIdLocal;
+    private String mTextToShare;
     private boolean mIsFavorite;
 
     LocalDetailPresenter(LocalDetailContract.View localView, long idLocal) {
@@ -45,6 +46,13 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
         } else {
             mView.showFavoriteNo();
             mView.showSnackbarRemoveFavorite();
+        }
+    }
+
+    @Override
+    public void shareLocal() {
+        if (mTextToShare != null) {
+            mView.shareText(mTextToShare);
         }
     }
 
@@ -92,6 +100,7 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
             }
 
             mView.showLocalDetail(createListLocalDetail(locals.get(0)));
+            mTextToShare = Utility.getTextToShare(mView.getContext(), locals.get(0));
         }
     }
 

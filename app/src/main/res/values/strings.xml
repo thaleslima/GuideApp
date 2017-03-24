@@ -6,15 +6,19 @@
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="content_authority" translatable="false">com.guideapp.guideapp</string>
 
+
     <!--Menu Items-->
     <string name="menu_local">Lugares no mapa</string>
     <string name="menu_alimentation">Alimentação</string>
     <string name="menu_attractive">Atrativos</string>
     <string name="menu_accommodation">hospedagem</string>
 
+
     <!--Local Detail-->
     <string name="title_save_favorite">Added to favorites</string>
     <string name="title_remove_favorite">Removed from favorites</string>
+    <string name="action_share">Compartilhar local</string>
+    <string name="share_text">Local: %1$s\nEndereço: %2$s\nTipo: %3$s\n\n%4$s</string>
 
 
     <!--My locals-->

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.guideapp.guideapp.R;
+import com.guideapp.guideapp.model.Local;
 import com.guideapp.guideapp.model.MainMenu;
 
 import java.util.ArrayList;
@@ -17,6 +18,14 @@ public final class Utility {
         Intent dataUpdatedIntent = new Intent(Constants.ACTION_DATA_UPDATED)
                 .setPackage(context.getPackageName());
         context.sendBroadcast(dataUpdatedIntent);
+    }
+
+    public static String getTextToShare(Context context, Local local) {
+        return context.getString(R.string.share_text,
+                local.getDescription(),
+                local.getAddress(),
+                local.getDescriptionSubCategories(),
+                "http://maps.google.com/maps?saddr=" + local.getLatitude() + "," + local.getLongitude());
     }
 
 
