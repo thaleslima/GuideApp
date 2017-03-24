@@ -183,6 +183,7 @@ public class TestGuideContentProvider {
                 null);
 
         int expectedTotal = 1;
+        assert cursor != null;
         int total = cursor.getCount();
         String insertProviderFailed = "Unable to insert item through Provider";
         assertEquals(insertProviderFailed, total, expectedTotal);
@@ -266,6 +267,7 @@ public class TestGuideContentProvider {
                 null);
 
         int expectedTotal = contentValuesArr.length;
+        assert cursor != null;
         int total = cursor.getCount();
         String insertProviderFailed = "Unable to insert item through Provider";
         assertEquals(insertProviderFailed, total, expectedTotal);

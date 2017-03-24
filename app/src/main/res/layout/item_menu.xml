@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:background="@color/blue_500">
 
-
         <ImageView
             android:id="@+id/menu_image"
             android:layout_width="50dp"
@@ -23,6 +22,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="36dp"
             android:layout_marginTop="36dp"
+            android:contentDescription="@null"
             android:src="@drawable/ic_local_dining_white_24dp" />
 
         <TextView

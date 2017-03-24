@@ -20,4 +20,7 @@
     <string name="empty_service_list">No Services Information Available</string>
     <string name="title_widget_detail">Locals</string>
 
+
+    <!--Map-->
+    <string name="image_description">Imagem do local</string>
 </resources>

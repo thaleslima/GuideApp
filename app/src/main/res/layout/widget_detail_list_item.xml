@@ -9,6 +9,7 @@
     android:padding="@dimen/default_padding">
 
     <ImageView
+        android:contentDescription="@string/image_description"
         android:id="@+id/local_picture"
         android:layout_width="50dp"
         android:layout_height="36dp"

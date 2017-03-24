@@ -23,8 +23,7 @@ public class MapActivity extends BaseActivity {
     private static final String EXTRA_ID_TITLE = "id-title";
 
 
-    public static void navigate(Context context,
-                                Long idCity) {
+    public static void navigate(Context context, Long idCity) {
         Intent intent = new Intent(context, MapActivity.class);
         intent.putExtra(EXTRA_CITY, idCity);
 

@@ -64,7 +64,7 @@ public class GuideProvider extends ContentProvider {
                     db.endTransaction();
                 }
 
-                if (rowsInserted > 0) {
+                if (rowsInserted > 0 && getContext() != null) {
                     getContext().getContentResolver().notifyChange(uri, null);
                     Log.d(TAG, "notifyChange: " + uri);
                 }
@@ -112,7 +112,9 @@ public class GuideProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        if (getContext() != null) {
+            cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        }
 
         return cursor;
     }
@@ -149,7 +151,7 @@ public class GuideProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
 
-        if (numRowsDeleted != 0) {
+        if (numRowsDeleted != 0 && getContext() != null) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
 

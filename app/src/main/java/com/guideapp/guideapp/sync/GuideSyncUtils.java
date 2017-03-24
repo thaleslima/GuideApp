@@ -68,7 +68,9 @@ public class GuideSyncUtils {
                     startImmediateSync(context);
                 }
 
-                cursor.close();
+                if (null != cursor) {
+                    cursor.close();
+                }
             }
         });
 

@@ -18,7 +18,7 @@ import com.guideapp.guideapp.ui.views.localdetail.LocalDetailActivity;
 import java.util.concurrent.ExecutionException;
 
 public class LocalFavoriteWidgetRemoteViewsService extends RemoteViewsService {
-    public final String TAG = LocalFavoriteWidgetRemoteViewsService.class.getSimpleName();
+    private final String TAG = LocalFavoriteWidgetRemoteViewsService.class.getSimpleName();
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
