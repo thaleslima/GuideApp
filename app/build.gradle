@@ -32,6 +32,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "ENDPOINT_URL", "\"https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/\"")
+        }
+
+        debug {
+            buildConfigField("String", "ENDPOINT_URL", "\"https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/\"")
         }
     }
 
@@ -44,8 +49,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "de.hdodenhof:circleimageview:$rootProject.circleImageVersion"
-
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:palette-v7:$rootProject.supportLibraryVersion"
@@ -56,17 +59,14 @@ dependencies {
 
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
-    compile "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingInterceptorVersion"
 
-    compile 'com.firebase:firebase-jobdispatcher:0.5.0'
+    compile "com.google.guava:guava:$rootProject.guavaVersion"
+    compile "com.firebase:firebase-jobdispatcher:$rootProject.jobdispatcherVersion"
 
-    compile "com.google.android.gms:play-services-location:$rootProject.playServicesVersion"
     compile "com.google.android.gms:play-services-maps:$rootProject.playServicesVersion"
-
-    compile "com.google.maps.android:android-maps-utils:$rootProject.mapsUtilsVersion"
-    compile 'com.facebook.stetho:stetho:1.4.2'
-    compile project(path: ':backend', configuration: 'android-endpoints')
+    compile "com.google.firebase:firebase-ads:$rootProject.playServicesVersion"
+    compile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
 
     //Testing
     testCompile 'junit:junit:4.12'

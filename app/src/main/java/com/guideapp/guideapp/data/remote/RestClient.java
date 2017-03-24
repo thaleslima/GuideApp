@@ -1,21 +1,20 @@
 package com.guideapp.guideapp.data.remote;
 
+import com.guideapp.guideapp.BuildConfig;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestClient {
     private static GuideApi mGuideApi;
-    private static final String URL = "https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/";
 
     public static GuideApi getClient() {
         if (mGuideApi == null) {
             Retrofit client = new Retrofit.Builder()
-                    .baseUrl(URL)
+                    .baseUrl(BuildConfig.ENDPOINT_URL)
                     .client(getOkHttpClient())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 

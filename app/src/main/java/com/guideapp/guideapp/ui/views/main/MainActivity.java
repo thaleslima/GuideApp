@@ -14,6 +14,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.data.local.GuideContract;
 import com.guideapp.guideapp.sync.GuideSyncUtils;
@@ -48,9 +50,18 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
         setFindViewById();
         initViewPager();
         setViewProperties();
+        initAd();
 
         getSupportLoaderManager().initLoader(ID_LOADER, null, this);
         GuideSyncUtils.initialize(this);
+    }
+
+    private void initAd() {
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mAdView.loadAd(adRequest);
     }
 
     private void setViewProperties() {
