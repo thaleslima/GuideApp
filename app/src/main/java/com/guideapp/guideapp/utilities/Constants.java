@@ -13,7 +13,7 @@ public final class Constants {
         double LONGITUDE = -46.8551188;
     }
 
-    public interface Menu {
+    interface Menu {
         long ALIMENTATION = 5684666375864320L;
         long ATTRACTIVE = 5651124426113024L;
         long ACCOMMODATION  = 5679413765079040L;
