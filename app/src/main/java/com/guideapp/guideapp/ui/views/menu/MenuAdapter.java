@@ -58,9 +58,12 @@ class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
             mImage = (ImageView) view.findViewById(R.id.menu_image);
             mTitle = (TextView) view.findViewById(R.id.menu_title);
 
-            mView.setOnClickListener(v -> {
-                if (mListener != null) {
-                    mListener.onItemClick(mItem);
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.onItemClick(mItem);
+                    }
                 }
             });
         }

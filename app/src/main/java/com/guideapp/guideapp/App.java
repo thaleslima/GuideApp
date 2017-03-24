@@ -1,10 +1,10 @@
 package com.guideapp.guideapp;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.facebook.stetho.Stetho;
 
-public class App extends Application {
+public class App extends MultiDexApplication {
 
     public void onCreate() {
         super.onCreate();

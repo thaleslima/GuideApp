@@ -61,6 +61,6 @@ class MapPresenter implements MapContract.Presenter, LoaderManager.LoaderCallbac
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        mView.showLocals(new ArrayList<>());
+        mView.showLocals(new ArrayList<Local>());
     }
 }

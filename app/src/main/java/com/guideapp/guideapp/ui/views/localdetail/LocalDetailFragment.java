@@ -126,7 +126,12 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
                         super.onResourceReady(resource, glideAnimation);
                         mImage.setBackgroundResource(R.drawable.action_background_bottom);
-                        Palette.from(resource).generate(palette -> applyPalette(palette));
+                        Palette.from(resource).generate(new Palette.PaletteAsyncListener() {
+                            @Override
+                            public void onGenerated(Palette palette) {
+                                applyPalette(palette);
+                            }
+                        });
                     }
                 });
     }

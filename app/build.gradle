@@ -14,7 +14,7 @@ repositories {
 
 apply plugin: 'com.android.application'
 apply from: '../config/quality/quality.gradle'
-apply plugin: 'me.tatarka.retrolambda'
+
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -28,21 +28,28 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        config {
+            storeFile file("../key/app.jks")
+            storePassword "12345678"
+            keyAlias "guide"
+            keyPassword "12345678"
+        }
+    }
+
     buildTypes {
         release {
+            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "ENDPOINT_URL", "\"https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/\"")
+            signingConfig signingConfigs.config
         }
 
         debug {
             buildConfigField("String", "ENDPOINT_URL", "\"https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/\"")
         }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -67,6 +74,8 @@ dependencies {
     compile "com.google.android.gms:play-services-maps:$rootProject.playServicesVersion"
     compile "com.google.firebase:firebase-ads:$rootProject.playServicesVersion"
     compile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
+
+    compile 'com.android.support:multidex:1.0.1'
 
     //Testing
     testCompile 'junit:junit:4.12'

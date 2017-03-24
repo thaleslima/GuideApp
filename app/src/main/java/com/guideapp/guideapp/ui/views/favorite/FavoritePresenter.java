@@ -61,6 +61,6 @@ class FavoritePresenter implements FavoriteContract.Presenter, LoaderManager.Loa
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        view.showLocals(new ArrayList<>());
+        view.showLocals(new ArrayList<Local>());
     }
 }

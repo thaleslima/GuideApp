@@ -72,7 +72,12 @@ class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHolder> {
             mAddressView = (TextView) view.findViewById(R.id.local_address);
             mDescriptionsSubCategory = (TextView) view.findViewById(R.id.descriptions_sub_category);
 
-            mView.setOnClickListener(v -> mListener.onItemClick(mItem, mPhotoView));
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onItemClick(mItem, mPhotoView);
+                }
+            });
         }
 
         void populate(Local data) {

@@ -85,7 +85,12 @@ public class MapFragment extends Fragment
     }
 
     private void setViewProperties() {
-        mLocalView.setOnClickListener(v -> mPresenter.openLocalDetails((Local) v.getTag(), mPhotoView));
+        mLocalView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.openLocalDetails((Local) v.getTag(), mPhotoView);
+            }
+        });
     }
 
     private void setUpMapIfNeeded() {
@@ -102,10 +107,12 @@ public class MapFragment extends Fragment
         LatLng center = new LatLng(Constants.City.LATITUDE, Constants.City.LONGITUDE);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 12));
 
-        map.setOnMarkerClickListener(marker -> {
-            mPresenter.openLocalSummary(mMarkersId.get(marker.getId()));
-
-            return false;
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                mPresenter.openLocalSummary(mMarkersId.get(marker.getId()));
+                return false;
+            }
         });
 
         mPresenter.loadLocals(getActivity().getSupportLoaderManager());
