@@ -18,7 +18,7 @@ class LocalPresenter implements LocalContract.Presenter, LoaderManager.LoaderCal
     private static final int ID_LOADER = 356;
 
     private final LocalContract.View view;
-    private final long idCategory;
+    private long idCategory;
 
     LocalPresenter(LocalContract.View localView, long idCategory) {
         this.view = localView;
@@ -29,6 +29,15 @@ class LocalPresenter implements LocalContract.Presenter, LoaderManager.LoaderCal
     public void loadLocals(LoaderManager loaderManager) {
         view.showProgressBar();
         loaderManager.initLoader(ID_LOADER, null, this);
+    }
+
+    @Override
+    public void restartLoadLocals(LoaderManager loaderManager, long idCategory) {
+        if (this.idCategory == 0) {
+            loaderManager.destroyLoader(ID_LOADER);
+            this.idCategory = idCategory;
+            loadLocals(loaderManager);
+        }
     }
 
     @Override

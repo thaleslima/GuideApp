@@ -14,12 +14,11 @@ import com.guideapp.guideapp.utilities.DataUtil;
 
 import java.util.ArrayList;
 
-public class MapPresenter implements MapContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String TAG = MapPresenter.class.getName();
+class MapPresenter implements MapContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
     private static final int ID_LOADER = 256;
     private final MapContract.View mView;
 
-    public MapPresenter(MapContract.View view) {
+    MapPresenter(MapContract.View view) {
         this.mView = view;
     }
 

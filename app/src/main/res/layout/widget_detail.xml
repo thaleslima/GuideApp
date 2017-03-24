@@ -5,22 +5,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/widget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/widget_margin"
         android:background="@color/primary">
 
         <TextView
-            style="@style/Base.TextAppearance.AppCompat.Large"
+            style="@style/Base.TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:padding="@dimen/default_padding"
-            android:text="@string/app_name"
-            android:textColor="@color/primary_text" />
-    </FrameLayout>
+            android:text="@string/my_local"
+            android:textColor="@color/white" />
+
+        <TextView
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/app_name_city"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -6,7 +6,6 @@ import android.support.v4.app.LoaderManager;
 import android.widget.ImageView;
 
 import com.guideapp.guideapp.model.Local;
-import com.guideapp.guideapp.model.SubCategory;
 
 import java.util.List;
 
@@ -21,6 +20,9 @@ interface LocalContract {
 
     interface Presenter {
         void loadLocals(LoaderManager loaderManager);
+
+        void restartLoadLocals(LoaderManager loaderManager, long idCategory);
+
         void openLocalDetails(@NonNull Local local, ImageView view);
     }
 }

@@ -2,7 +2,6 @@ package com.guideapp.backend.service.subcategory;
 
 import com.google.api.server.spi.response.ConflictException;
 import com.google.api.server.spi.response.NotFoundException;
-import com.guideapp.backend.entity.Local;
 import com.guideapp.backend.entity.SubCategory;
 
 import java.util.List;

@@ -8,6 +8,7 @@ public class LocalDetail {
     private int viewType;
     private double latitude;
     private double longitude;
+    private int idImageMarker;
 
     public LocalDetail(int ico, String text, boolean divider, int viewType) {
         this.ico = ico;
@@ -26,6 +27,14 @@ public class LocalDetail {
         this.viewType = viewType;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public LocalDetail(boolean divider, int viewType, double latitude, double longitude, int idImageMarker) {
+        this.divider = divider;
+        this.viewType = viewType;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.idImageMarker = idImageMarker;
     }
 
     public int getId() {
@@ -76,12 +85,19 @@ public class LocalDetail {
         this.latitude = latitude;
     }
 
-
     public double getLongitude() {
         return longitude;
     }
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public int getIdImageMarker() {
+        return idImageMarker;
+    }
+
+    public void setIdImageMarker(int idImageMarker) {
+        this.idImageMarker = idImageMarker;
     }
 }

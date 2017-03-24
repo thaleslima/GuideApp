@@ -15,10 +15,7 @@ import com.guideapp.guideapp.utilities.DataUtil;
 import java.util.ArrayList;
 
 class FavoritePresenter implements FavoriteContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String TAG = FavoritePresenter.class.getName();
-
     private static final int ID_LOADER = 333;
-
     private final FavoriteContract.View view;
 
     FavoritePresenter(FavoriteContract.View localView) {
@@ -28,7 +25,6 @@ class FavoritePresenter implements FavoriteContract.Presenter, LoaderManager.Loa
     @Override
     public void loadLocals(LoaderManager loaderManager) {
         loaderManager.initLoader(ID_LOADER, null, this);
-
     }
 
     @Override

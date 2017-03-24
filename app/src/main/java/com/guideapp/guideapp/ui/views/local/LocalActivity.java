@@ -18,8 +18,8 @@ import com.guideapp.guideapp.ui.views.DividerItemDecoration;
 import java.util.List;
 
 public class LocalActivity extends BaseActivity implements LocalContract.View, LocalAdapter.ItemClickListener {
-    private static final String EXTRA_CATEGORY = "id-category";
-    private static final String EXTRA_ID_TITLE = "id-title";
+    public static final String EXTRA_CATEGORY = "id-category";
+    public static final String EXTRA_ID_TITLE = "id-title";
 
     private ProgressBar mProgressBar;
 
@@ -35,6 +35,19 @@ public class LocalActivity extends BaseActivity implements LocalContract.View, L
         intent.putExtra(EXTRA_ID_TITLE, idTitle);
 
         context.startActivity(intent);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (intent.hasExtra(EXTRA_CATEGORY) && intent.hasExtra(EXTRA_CATEGORY)) {
+            setIntent(intent);
+            initExtra();
+            setupToolbar();
+
+            mActionsListener.restartLoadLocals(getSupportLoaderManager(), mIdCategory);
+        }
     }
 
     @Override

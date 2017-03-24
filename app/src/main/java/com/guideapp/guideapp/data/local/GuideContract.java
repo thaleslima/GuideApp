@@ -6,11 +6,10 @@ import android.provider.BaseColumns;
 import com.google.common.collect.ImmutableList;
 
 public class GuideContract {
-    public static final String CONTENT_AUTHORITY = "com.guideapp.guideapp";
-    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    static final String CONTENT_AUTHORITY = "com.guideapp.guideapp";
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
-    public static final String PATH_LOCAL = "local";
-    public static final String PATH_LOCAL_FAVORITES = "localFavorites";
+    static final String PATH_LOCAL = "local";
 
     public static final class LocalEntry implements BaseColumns {
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon()

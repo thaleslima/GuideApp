@@ -6,35 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.model.MainMenu;
+
 import java.util.List;
 
-/**
- * Menu adapter
- */
-public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
-    private List<MainMenu> mDataSet;
-    private RecyclerViewItemClickListener mListener;
+class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
+    private final List<MainMenu> mDataSet;
+    private final RecyclerViewItemClickListener mListener;
 
-    /**
-     * Interface definition for a callback to be invoked when a recycler view is clicked.
-     */
-    public interface RecyclerViewItemClickListener {
-
-        /**
-         * Called when a view has been clicked.
-         * @param item A MainMenuTemp object representing data's inputs.
-         */
+    interface RecyclerViewItemClickListener {
         void onItemClick(MainMenu item);
     }
 
-    /**
-     * Simple constructor to use when creating a view from code.
-     * @param dataSet The dataSet
-     * @param mListener The callback that will run
-     */
-    public MenuAdapter(List<MainMenu> dataSet, RecyclerViewItemClickListener mListener) {
+    MenuAdapter(List<MainMenu> dataSet, RecyclerViewItemClickListener mListener) {
         this.mDataSet = dataSet;
         this.mListener = mListener;
 
@@ -57,9 +43,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         return mDataSet.size();
     }
 
-    /**
-     * Inner Class for a recycler view
-     */
     class ViewHolder extends RecyclerView.ViewHolder {
         private final View mContainer;
         private final ImageView mImage;
@@ -67,12 +50,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
         private final View mView;
         private MainMenu mItem;
 
-
-        /**
-         * Simple constructor to use when creating a view from code.
-         * @param view Recycle view item
-         */
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
 
             mView = view;
@@ -87,11 +65,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.ViewHolder> {
             });
         }
 
-        /**
-         * Populate the data in a recycle view item
-         * @param data Menu object
-         */
-        public void populate(MainMenu data) {
+        void populate(MainMenu data) {
             mItem = data;
 
             mContainer.setBackgroundResource(mItem.getIdColorPrimary());

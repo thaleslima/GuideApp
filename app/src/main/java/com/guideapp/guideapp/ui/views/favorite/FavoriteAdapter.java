@@ -15,16 +15,16 @@ import com.guideapp.guideapp.model.Local;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.LocalViewHolder> {
-    private Context mContext;
-    private FavoriteAdapter.ItemClickListener mListener;
-    private List<Local> mDataSet;
+class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.LocalViewHolder> {
+    private final Context mContext;
+    private final FavoriteAdapter.ItemClickListener mListener;
+    private final List<Local> mDataSet;
 
     interface ItemClickListener {
         void onItemClick(Local item, ImageView view);
     }
 
-    public FavoriteAdapter(Context context, FavoriteAdapter.ItemClickListener mListener) {
+    FavoriteAdapter(Context context, FavoriteAdapter.ItemClickListener mListener) {
         this.mDataSet = new ArrayList<>();
         this.mContext = context;
         this.mListener = mListener;

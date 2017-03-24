@@ -9,8 +9,7 @@ import com.guideapp.guideapp.model.Local;
 
 import java.util.List;
 
-
-public interface MapContract {
+interface MapContract {
     interface View {
         void showLocals(List<Local> locals);
 

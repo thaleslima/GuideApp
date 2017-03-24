@@ -1,5 +1,6 @@
 package com.guideapp.guideapp.ui.views.localdetail;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,11 +8,14 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,6 +25,8 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.model.LocalDetail;
+import com.guideapp.guideapp.ui.views.local.LocalActivity;
+import com.guideapp.guideapp.utilities.Utility;
 
 import java.util.List;
 
@@ -32,6 +38,7 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
     private FloatingActionButton mFab;
     private ImageView mImage;
     private LocalDetailContract.Presenter mPresenter;
+    private long mIdCategory;
 
     public static Fragment newInstance(long id) {
         Fragment fragment = new LocalDetailFragment();
@@ -48,6 +55,8 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
 
         setupRecyclerView(view);
         setupViews();
+
+        setHasOptionsMenu(true);
 
         return view;
     }
@@ -136,4 +145,34 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
         mCollapsing.setContentScrimColor(palette.getVibrantColor(primary));
         mCollapsing.setStatusBarScrimColor(palette.getVibrantColor(primary));
     }
+
+    @Override
+    public void setIdCategory(long mIdCategory) {
+        this.mIdCategory = mIdCategory;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+                Intent upIntent = NavUtils.getParentActivityIntent(getActivity());
+                upIntent.putExtra(LocalActivity.EXTRA_CATEGORY, mIdCategory);
+                upIntent.putExtra(LocalActivity.EXTRA_ID_TITLE, Utility.getIdDescriptionCategory(mIdCategory));
+
+                if (NavUtils.shouldUpRecreateTask(getActivity(), upIntent)) {
+
+                    TaskStackBuilder.create(getActivity())
+                            .addNextIntentWithParentStack(upIntent)
+                            .startActivities();
+
+                } else {
+                    NavUtils.navigateUpTo(getActivity(), upIntent);
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

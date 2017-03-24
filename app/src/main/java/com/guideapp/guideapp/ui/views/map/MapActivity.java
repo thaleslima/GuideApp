@@ -31,20 +31,6 @@ public class MapActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    public static void navigate(Context context,
-                                Long idCity,
-                                Long idCategory,
-                                long[] idSubCategories,
-                                int idTitle) {
-        Intent intent = new Intent(context, MapActivity.class);
-        intent.putExtra(EXTRA_CITY, idCity);
-        intent.putExtra(EXTRA_CATEGORY, idCategory);
-        intent.putExtra(EXTRA_SUB_CATEGORY, idSubCategories);
-        intent.putExtra(EXTRA_ID_TITLE, idTitle);
-
-        context.startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

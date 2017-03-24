@@ -15,9 +15,9 @@ import com.guideapp.guideapp.utilities.DataUtil;
 
 import java.util.Set;
 
-public class GuideSyncTask {
+class GuideSyncTask {
 
-    synchronized public static void syncGuide(Context context) {
+    synchronized static void syncGuide(Context context) {
         try {
             GuideApi service = RestClient.getClient();
             ListResponse<Local> locals = service.getLocals(Constants.City.ID).execute().body();

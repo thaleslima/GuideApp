@@ -1,18 +1,12 @@
 package com.guideapp.guideapp.ui.views.local;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.guideapp.guideapp.R;
@@ -21,16 +15,16 @@ import com.guideapp.guideapp.model.Local;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHolder> {
-    private Context mContext;
-    private ItemClickListener mListener;
-    private List<Local> mDataSet;
+class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.LocalViewHolder> {
+    private final Context mContext;
+    private final ItemClickListener mListener;
+    private final List<Local> mDataSet;
 
     interface ItemClickListener {
         void onItemClick(Local item, ImageView view);
     }
 
-    public LocalAdapter(Context context, ItemClickListener mListener) {
+    LocalAdapter(Context context, ItemClickListener mListener) {
         this.mDataSet = new ArrayList<>();
         this.mContext = context;
         this.mListener = mListener;

@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestClient {
     private static GuideApi mGuideApi;
-    private static final String URL = "https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/" ;
+    private static final String URL = "https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/";
 
     public static GuideApi getClient() {
         if (mGuideApi == null) {
@@ -30,7 +30,7 @@ public class RestClient {
         OkHttpClient.Builder okClientBuilder = new OkHttpClient.Builder();
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel( HttpLoggingInterceptor.Level.BASIC);
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
         okClientBuilder.addInterceptor(httpLoggingInterceptor);
         return okClientBuilder.build();
     }

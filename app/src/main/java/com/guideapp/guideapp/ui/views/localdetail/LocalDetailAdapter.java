@@ -69,12 +69,16 @@ class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalVi
             LatLng latLng = new LatLng(mItem.getLatitude(), mItem.getLongitude());
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 
-            MarkerOptions mMarker = new MarkerOptions().position(
-                    new LatLng(latLng.latitude, latLng.longitude)).anchor(0.0f, 1.0f)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .position(latLng)
+                    .icon(BitmapDescriptorFactory.fromResource(mItem.getIdImageMarker()));
+
+//            MarkerOptions mMarker = new MarkerOptions().position(
+//                    new LatLng(latLng.latitude, latLng.longitude)).anchor(0.0f, 1.0f)
+//                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
 
             googleMap.clear();
-            googleMap.addMarker(mMarker);
+            googleMap.addMarker(markerOptions);
         }
     }
 

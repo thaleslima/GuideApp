@@ -10,43 +10,34 @@
 
     <ImageView
         android:id="@+id/local_picture"
-        android:layout_width="70dp"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/gruta" />
+        android:layout_width="50dp"
+        android:layout_height="36dp"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/local_text"
-            style="@style/TextAppearance.AppCompat.Subhead"
+            style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/primary_text"
             android:typeface="sans"
-            tools:text="Cachoeira da Gruta" />
-
-        <TextView
-            android:id="@+id/local_address"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/secondary_text"
-            tools:text="Complexo do claro" />
+            tools:text="local_text" />
 
         <TextView
             android:id="@+id/descriptions_sub_category"
-            style="@style/TextAppearance.AppCompat.Body1"
+            style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="Cachoeira"
-            android:textColor="@color/secondary_text" />
+            android:textColor="@color/secondary_text"
+            android:textSize="12sp"
+            tools:text="descriptions_sub_category" />
     </LinearLayout>
 </LinearLayout>

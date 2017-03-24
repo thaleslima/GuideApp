@@ -25,7 +25,7 @@ public class GuideSyncUtils {
     private static boolean sInitialized;
     private static final String SUNSHINE_SYNC_TAG = "sunshine-sync";
 
-    static void scheduleFirebaseJobDispatcherSync(@NonNull final Context context) {
+    private static void scheduleFirebaseJobDispatcherSync(@NonNull final Context context) {
 
         Driver driver = new GooglePlayDriver(context);
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
@@ -75,7 +75,7 @@ public class GuideSyncUtils {
         checkForEmpty.start();
     }
 
-    public static void startImmediateSync(@NonNull final Context context) {
+    private static void startImmediateSync(@NonNull final Context context) {
         Intent intentToSyncImmediately = new Intent(context, GuideSyncIntentService.class);
         context.startService(intentToSyncImmediately);
     }

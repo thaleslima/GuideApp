@@ -1,10 +1,10 @@
 package com.guideapp.guideapp.model;
 
 public class MainMenu {
-    private long id;
-    private int idTitle;
-    private int idImage;
-    private int idColorPrimary;
+    private final long id;
+    private final int idTitle;
+    private final int idImage;
+    private final int idColorPrimary;
 
     public MainMenu(long id,
                     int idTitle,

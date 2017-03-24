@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LocalServiceImpl implements LocalService {
-    private LocalDAO mLocalDAO;
-    private SubCategoryService subCategoryService;
+    private final LocalDAO mLocalDAO;
+    private final SubCategoryService subCategoryService;
 
     public LocalServiceImpl() {
         this.mLocalDAO = new LocalDAOImpl();

@@ -24,6 +24,8 @@ interface LocalDetailContract {
         void showTitle(String description);
 
         void showImage(String imagePath);
+
+        void setIdCategory(long mIdCategory);
     }
 
     interface Presenter {

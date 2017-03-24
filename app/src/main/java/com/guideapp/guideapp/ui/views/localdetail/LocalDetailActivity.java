@@ -28,12 +28,6 @@ public class LocalDetailActivity extends BaseActivity {
         ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
-    public static void navigate(Context context, long id) {
-        Intent intent = new Intent(context, LocalDetailActivity.class);
-        intent.putExtra(EXTRA_LOCAL_ID, id);
-        context.startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

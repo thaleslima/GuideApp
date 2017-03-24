@@ -12,7 +12,7 @@ public class GuideFirebaseJobService extends JobService {
     @Override
     public boolean onStartJob(final JobParameters jobParameters) {
 
-        mFetchGuideTask = new AsyncTask<Void, Void, Void>(){
+        mFetchGuideTask = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 Context context = getApplicationContext();

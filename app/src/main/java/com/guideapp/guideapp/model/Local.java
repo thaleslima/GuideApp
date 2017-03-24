@@ -14,6 +14,7 @@ public class Local {
     private double longitude;
     private String imagePath;
     private Long idCity;
+    private long idCategory;
     private List<Long> idCategories;
     private List<Long> idSubCategories;
     private long timestamp;
@@ -132,6 +133,14 @@ public class Local {
 
     public void setIdSubCategories(List<Long> idSubCategories) {
         this.idSubCategories = idSubCategories;
+    }
+
+    public long getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(long idCategory) {
+        this.idCategory = idCategory;
     }
 
     public long getTimestamp() {

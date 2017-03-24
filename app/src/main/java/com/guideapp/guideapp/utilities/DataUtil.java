@@ -47,6 +47,7 @@ public final class DataUtil {
             int columnLatitude = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_LATITUDE);
             int columnLongitude = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_LONGITUDE);
             int columnImagePath = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_IMAGE_PATH);
+            int columnIdCategory = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_ID_CATEGORY);
             int columnIndexIdCity = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_ID_CITY);
             int columnIndexTimestamp = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_TIMESTAMP);
             int columnIndexDescriptionSubCategory = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_DESCRIPTION_SUB_CATEGORY);
@@ -64,6 +65,7 @@ public final class DataUtil {
                 local.setLatitude(cursor.getDouble(columnLatitude));
                 local.setLongitude(cursor.getDouble(columnLongitude));
                 local.setImagePath(cursor.getString(columnImagePath));
+                local.setIdCategory(cursor.getLong(columnIdCategory));
                 local.setIdCity(cursor.getLong(columnIndexIdCity));
                 local.setTimestamp(cursor.getLong(columnIndexTimestamp));
                 local.setDescriptionSubCategories(cursor.getString(columnIndexDescriptionSubCategory));

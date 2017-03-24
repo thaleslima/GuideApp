@@ -6,24 +6,23 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.data.local.GuideContract;
-import com.guideapp.guideapp.utilities.DataUtil;
-import com.guideapp.guideapp.utilities.Utility;
-import com.guideapp.guideapp.utilities.ValidationUtil;
 import com.guideapp.guideapp.model.Local;
 import com.guideapp.guideapp.model.LocalDetail;
+import com.guideapp.guideapp.utilities.DataUtil;
+import com.guideapp.guideapp.utilities.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String TAG = LocalDetailPresenter.class.getName();
     private static final int ID_LOADER = 301;
 
     private final LocalDetailContract.View mView;
-    private long mIdLocal;
+    private final long mIdLocal;
     private boolean mIsFavorite;
 
     LocalDetailPresenter(LocalDetailContract.View localView, long idLocal) {
@@ -81,6 +80,7 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
         List<Local> locals = DataUtil.getLocalsFromCursor(data);
 
         if (locals.size() > 0) {
+            mView.setIdCategory(locals.get(0).getIdCategory());
             mView.showTitle(locals.get(0).getDescription());
             mView.showImage(locals.get(0).getImagePath());
 
@@ -104,34 +104,34 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
     private static List<LocalDetail> createListLocalDetail(Local local) {
         List<LocalDetail> list = new ArrayList<>();
 
-        if (!ValidationUtil.nullOrEmpty(local.getDescriptionSubCategories())) {
+        if (!TextUtils.isEmpty(local.getDescriptionSubCategories())) {
             list.add(new LocalDetail(R.drawable.ic_info_grey_72_24dp,
                     local.getDescriptionSubCategories(), true, LocalDetailAdapter.LOCAL_DETAIL));
         }
 
-        if (!ValidationUtil.nullOrEmpty(local.getSite())) {
+        if (!TextUtils.isEmpty(local.getSite())) {
             list.add(new LocalDetail(R.drawable.ic_language_grey_72_24dp,
                     local.getSite(), true, LocalDetailAdapter.LOCAL_DETAIL));
         }
 
-        if (!ValidationUtil.nullOrEmpty(local.getPhone())) {
+        if (!TextUtils.isEmpty(local.getPhone())) {
             list.add(new LocalDetail(R.drawable.ic_call_grey_72_24dp,
                     local.getPhone(), true, LocalDetailAdapter.LOCAL_DETAIL));
         }
 
-        if (!ValidationUtil.nullOrEmpty(local.getDetail())) {
+        if (!TextUtils.isEmpty(local.getDetail())) {
             list.add(new LocalDetail(R.drawable.ic_apps_grey_72_24dp,
                     local.getDetail(), true, LocalDetailAdapter.LOCAL_DETAIL));
         }
 
-        if (!ValidationUtil.nullOrEmpty(local.getAddress())) {
+        if (!TextUtils.isEmpty(local.getAddress())) {
             list.add(new LocalDetail(R.drawable.ic_location_on_grey_72_24dp,
                     local.getAddress(), false,
                     LocalDetailAdapter.LOCAL_DETAIL));
         }
 
         list.add(new LocalDetail(true, LocalDetailAdapter.LOCAL_DETAIL_MAP,
-                local.getLatitude(), local.getLongitude()));
+                local.getLatitude(), local.getLongitude(), Utility.getIdImageCategory(local.getIdCategory())));
 
 
         return list;
