@@ -66,6 +66,6 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.View,
 
     @Override
     public void showLocalDetailUi(Local local, ImageView view) {
-        LocalDetailActivity.navigate(getActivity(), view, local.getId());
+        LocalDetailActivity.navigate(getActivity(), view, local.getId(), local.getIdCategory());
     }
 }

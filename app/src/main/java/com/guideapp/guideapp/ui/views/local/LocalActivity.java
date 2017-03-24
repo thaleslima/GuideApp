@@ -99,7 +99,7 @@ public class LocalActivity extends BaseActivity implements LocalContract.View, L
 
     @Override
     public void showLocalDetailUi(Local local, ImageView view) {
-        LocalDetailActivity.navigate(this, view, local.getId());
+        LocalDetailActivity.navigate(this, view, local.getId(), local.getIdCategory());
     }
 
     @Override

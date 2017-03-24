@@ -75,6 +75,8 @@ public class LocalFavoriteWidgetRemoteViewsService extends RemoteViewsService {
 
                 final Intent fillInIntent = new Intent();
                 fillInIntent.putExtra(LocalDetailActivity.EXTRA_LOCAL_ID, getItemId(position));
+                fillInIntent.putExtra(LocalDetailActivity.EXTRA_CATEGORY_ID, data.getLong(GuideContract.LocalEntry.POSITION_ID_CATEGORY));
+
                 views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
 
                 Bitmap image = null;

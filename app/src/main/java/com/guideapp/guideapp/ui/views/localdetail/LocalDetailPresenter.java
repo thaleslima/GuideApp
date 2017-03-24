@@ -80,7 +80,6 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
         List<Local> locals = DataUtil.getLocalsFromCursor(data);
 
         if (locals.size() > 0) {
-            mView.setIdCategory(locals.get(0).getIdCategory());
             mView.showTitle(locals.get(0).getDescription());
             mView.showImage(locals.get(0).getImagePath());
 

@@ -146,7 +146,7 @@ public class MapFragment extends Fragment
 
     @Override
     public void showLocalDetailUi(Local local, ImageView view) {
-        LocalDetailActivity.navigate(this.getActivity(), view, local.getId());
+        LocalDetailActivity.navigate(this.getActivity(), view, local.getId(), local.getIdCategory());
     }
 
 }
