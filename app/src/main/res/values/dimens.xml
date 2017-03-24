@@ -5,14 +5,25 @@
     <dimen name="default_margin">16dp</dimen>
     <dimen name="default_padding">16dp</dimen>
 
-
     <dimen name="elevation">4dp</dimen>
     <dimen name="app_bar_height">250dp</dimen>
 
     <dimen name="widget_margin">8dp</dimen>
-
     <dimen name="widget_detail_default_width">250dp</dimen>
     <dimen name="widget_detail_default_height">180dp</dimen>
     <dimen name="widget_detail_min_resize_width">220dp</dimen>
     <dimen name="widget_detail_min_resize_height">@dimen/widget_detail_default_height</dimen>
+
+    <dimen name="height_divider">1dp</dimen>
+    <dimen name="height_map">180dp</dimen>
+    <dimen name="height_divider_top_map">0.5dp</dimen>
+    <dimen name="height_divider_bottom_map">1.5dp</dimen>
+
+
+    <!--Menu-->
+    <dimen name="elevation_menu">2dp</dimen>
+    <dimen name="image_menu">50dp</dimen>
+    <dimen name="image_margin_menu">36dp</dimen>
+    <dimen name="title_menu">50dp</dimen>
+
 </resources>

@@ -9,10 +9,10 @@
     android:padding="@dimen/default_padding">
 
     <ImageView
-        android:contentDescription="@string/image_description"
         android:id="@+id/local_picture"
         android:layout_width="50dp"
         android:layout_height="36dp"
+        android:contentDescription="@string/image_description"
         android:scaleType="centerCrop" />
 
     <LinearLayout
@@ -38,7 +38,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:textColor="@color/secondary_text"
-            android:textSize="12sp"
             tools:text="descriptions_sub_category" />
     </LinearLayout>
 </LinearLayout>

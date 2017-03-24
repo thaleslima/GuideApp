@@ -7,20 +7,20 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="@dimen/height_divider_top_map"
         android:background="@color/divider_dark" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapImageView"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/height_map"
         map:cameraZoom="15"
         map:liteMode="true"
         map:mapType="normal" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1.5dp"
+        android:layout_height="@dimen/height_divider_bottom_map"
         android:background="@color/divider_dark" />
 </LinearLayout>

@@ -6,6 +6,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/action_background"
     android:fitsSystemWindows="true"
-    app:popupTheme="@style/popupTheme"
-    app:theme="@style/toolbarThemeMap" />
+    app:popupTheme="@style/AppTheme.PopupOverlay"
+    app:theme="@style/AppTheme.PopupOverlay" />
 

@@ -12,9 +12,8 @@ repositories {
     mavenCentral()
 }
 
-
 apply plugin: 'com.android.application'
-apply from: '../config/quality-app.gradle'
+apply from: '../config/quality/quality.gradle'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
