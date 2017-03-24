@@ -260,7 +260,7 @@ public class TestGuideContentProvider {
 
         database.close();
         Cursor cursor = mContext.getContentResolver().query(
-                GuideContract.LocalEntry.buildLocalUriWithCategory(10),
+                null,
                 null,
                 null,
                 null,
