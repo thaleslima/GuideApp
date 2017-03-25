@@ -30,7 +30,7 @@
     <!--My locals-->
     <string name="my_local">Meus lugares</string>
     <string name="empty_service_list">No Services Information Available</string>
-    <string name="title_widget_detail">Locals</string>
+    <string name="title_widget_detail">Meus lugares</string>
 
 
     <!--Map-->

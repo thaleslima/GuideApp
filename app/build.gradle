@@ -75,7 +75,7 @@ dependencies {
     compile "com.google.firebase:firebase-ads:$rootProject.playServicesVersion"
     compile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
 
-    compile 'com.android.support:multidex:1.0.1'
+    compile "com.android.support:multidex:$rootProject.multidexVersion"
 
     //Testing
     testCompile 'junit:junit:4.12'
