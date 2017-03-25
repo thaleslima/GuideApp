@@ -77,7 +77,7 @@ public class GuideSyncUtils {
         checkForEmpty.start();
     }
 
-    private static void startImmediateSync(@NonNull final Context context) {
+    public static void startImmediateSync(@NonNull final Context context) {
         Intent intentToSyncImmediately = new Intent(context, GuideSyncIntentService.class);
         context.startService(intentToSyncImmediately);
     }

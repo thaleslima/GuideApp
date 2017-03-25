@@ -2,6 +2,8 @@ package com.guideapp.guideapp.utilities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.model.Local;
@@ -14,8 +16,17 @@ public final class Utility {
     private Utility() {
     }
 
+    public static boolean isNetworkAvailable(Context c) {
+        ConnectivityManager cm =
+                (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+    }
+
     public static void updateWidgets(Context context) {
-        Intent dataUpdatedIntent = new Intent(Constants.ACTION_DATA_UPDATED)
+        Intent dataUpdatedIntent = new Intent(Constants.ACTION_DATA_SYNC_ERROR)
                 .setPackage(context.getPackageName());
         context.sendBroadcast(dataUpdatedIntent);
     }

@@ -5,7 +5,7 @@ public final class Constants {
     }
 
     public static final String ACTION_DATA_UPDATED = "com.guideapp.guideapp.ACTION_DATA_UPDATED";
-
+    public static final String ACTION_DATA_SYNC_ERROR = "com.guideapp.guideapp.ACTION_DATA_SYNC_ERROR";
 
     public interface City {
         long ID = 5659118702428160L;

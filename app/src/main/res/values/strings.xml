@@ -5,6 +5,12 @@
     <string name="detail_icon_transition_name" translatable="false">TN_DetailIcon</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="content_authority" translatable="false">com.guideapp.guideapp</string>
+    <string name="pref_location_status_key" translatable="false">loc-status</string>
+
+    <string name="empty_list">Nenhuma informação disponível</string>
+    <string name="empty_list_no_network">Verifique sua conexão e tente novamente</string>
+    <string name="empty_list_server_down">Tivemos um problema ao\ncarregar os dados</string>
+    <string name="retry">Tentar novamente</string>
 
 
     <!--Menu Items-->

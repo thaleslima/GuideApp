@@ -26,6 +26,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -40,7 +41,6 @@ android {
 
     buildTypes {
         release {
-            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "ENDPOINT_URL", "\"https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/\"")
