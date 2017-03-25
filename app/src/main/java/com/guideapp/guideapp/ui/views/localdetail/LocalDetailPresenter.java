@@ -124,12 +124,12 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
 
         if (!TextUtils.isEmpty(local.getSite())) {
             list.add(new LocalDetail(R.drawable.ic_language_grey_72_24dp,
-                    local.getSite(), true, LocalDetailAdapter.LOCAL_DETAIL));
+                    local.getSite(), true, LocalDetailAdapter.LOCAL_SITE));
         }
 
         if (!TextUtils.isEmpty(local.getPhone())) {
             list.add(new LocalDetail(R.drawable.ic_call_grey_72_24dp,
-                    local.getPhone(), true, LocalDetailAdapter.LOCAL_DETAIL));
+                    local.getPhone(), true, LocalDetailAdapter.LOCAL_PHONE));
         }
 
         if (!TextUtils.isEmpty(local.getDetail())) {

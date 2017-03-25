@@ -1,5 +1,7 @@
 package com.guideapp.guideapp.ui.views.localdetail;
 
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,20 +26,35 @@ class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalVi
     private final List<LocalDetail> mDataSet = new ArrayList<>();
 
     static final int LOCAL_DETAIL = 1;
-    static final int LOCAL_DETAIL_MAP = 2;
+    static final int LOCAL_PHONE = 2;
+    static final int LOCAL_SITE = 3;
+    static final int LOCAL_DETAIL_MAP = 4;
 
-    LocalDetailAdapter() {
+    @NonNull
+    private final ClickListener mClickListener;
+
+    interface ClickListener {
+        void dialPhoneNumber(String number);
+
+        void openPage(String url);
+    }
+
+    LocalDetailAdapter(@NonNull ClickListener clickListener) {
+        this.mClickListener = clickListener;
     }
 
     class LocalViewHolder extends RecyclerView.ViewHolder implements OnMapReadyCallback {
-        final ImageView icoView;
-        final TextView textView;
-        final View dividerView;
-        final MapView map;
-        LocalDetail mItem;
+        private final ImageView icoView;
+        private final TextView textView;
+        private final View dividerView;
+        private final MapView map;
+        private LocalDetail mItem;
+        private View mView;
 
         LocalViewHolder(View view) {
             super(view);
+            mView = view;
+
             icoView = (ImageView) view.findViewById(R.id.local_picture);
             textView = (TextView) view.findViewById(R.id.local_text);
             dividerView = view.findViewById(R.id.local_divider);
@@ -53,14 +70,35 @@ class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalVi
         void populate(LocalDetail data) {
             mItem = data;
 
-            if (data.getViewType() == LOCAL_DETAIL) {
+            if (data.getViewType() == LOCAL_DETAIL_MAP && map != null) {
+                map.getMapAsync(this);
+            } else {
+                mView.setOnClickListener(null);
+                mView.setClickable(false);
+                textView.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.primary_text));
                 icoView.setImageResource(data.getIco());
                 textView.setText(data.getText());
                 dividerView.setVisibility(data.isDivider() ? View.VISIBLE : View.GONE);
             }
 
-            if (data.getViewType() == LOCAL_DETAIL_MAP && map != null) {
-                map.getMapAsync(this);
+            if (data.getViewType() == LOCAL_PHONE) {
+                mView.setTag(data.getText());
+                mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mClickListener.dialPhoneNumber((String) v.getTag());
+                    }
+                });
+
+            } else if (data.getViewType() == LOCAL_SITE) {
+                textView.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.accent));
+                mView.setTag(data.getText());
+                mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mClickListener.openPage((String) v.getTag());
+                    }
+                });
             }
         }
 

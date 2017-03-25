@@ -1,6 +1,8 @@
 package com.guideapp.guideapp.ui.views.localdetail;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -28,7 +30,7 @@ import com.guideapp.guideapp.model.LocalDetail;
 
 import java.util.List;
 
-public class LocalDetailFragment extends Fragment implements LocalDetailContract.View {
+public class LocalDetailFragment extends Fragment implements LocalDetailContract.View, LocalDetailAdapter.ClickListener {
     private static final String EXTRA_LOCAL_ID = "local_id";
 
     private LocalDetailAdapter mAdapter;
@@ -64,7 +66,7 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_detail, menu);
     }
 
@@ -128,7 +130,7 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
 
     private void setupRecyclerView(View view) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
-        mAdapter = new LocalDetailAdapter();
+        mAdapter = new LocalDetailAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(mAdapter);
     }
@@ -190,5 +192,23 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
         int primary = ContextCompat.getColor(getContext(), R.color.primary);
         mCollapsing.setContentScrimColor(palette.getVibrantColor(primary));
         mCollapsing.setStatusBarScrimColor(palette.getVibrantColor(primary));
+    }
+
+    @Override
+    public void dialPhoneNumber(String number) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + number));
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void openPage(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }
