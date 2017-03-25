@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.guideapp.R;
 import com.guideapp.model.Local;
 
@@ -85,7 +86,12 @@ class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.LocalViewHold
             mDescriptionView.setText(data.getDescription());
             mAddressView.setText(data.getAddress());
             mDescriptionsSubCategory.setText(data.getDescriptionSubCategories());
-            Glide.with(mContext).load(data.getImagePath()).into(mPhotoView);
+
+            Glide.with(mContext)
+                    .load(data.getImagePath())
+                    .placeholder(R.color.placeholder)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(mPhotoView);
         }
     }
 }

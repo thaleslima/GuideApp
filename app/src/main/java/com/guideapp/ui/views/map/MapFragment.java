@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -145,7 +146,11 @@ public class MapFragment extends Fragment
         mDescriptionView.setText(local.getDescription());
         mDescriptionSubCategoryView.setText(local.getDescriptionSubCategories());
 
-        Glide.with(this.getContext()).load(local.getImagePath()).into(mPhotoView);
+        Glide.with(this.getContext())
+                .load(local.getImagePath())
+                .placeholder(R.color.placeholder)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(mPhotoView);
 
         ViewUtil.showViewLayout(getContext(), mLocalView);
         mLocalView.setTag(local);

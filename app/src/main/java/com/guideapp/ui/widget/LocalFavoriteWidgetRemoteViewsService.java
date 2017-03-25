@@ -10,6 +10,7 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.Target;
 import com.guideapp.R;
 import com.guideapp.data.local.GuideContract;
@@ -84,10 +85,13 @@ public class LocalFavoriteWidgetRemoteViewsService extends RemoteViewsService {
                 Bitmap image = null;
                 String urlImage = mData.getString(GuideContract.LocalEntry.POSITION_IMAGE_PATH);
 
+                views.setImageViewResource(R.id.local_picture, R.color.placeholder);
+
                 try {
                     image = Glide.with(LocalFavoriteWidgetRemoteViewsService.this)
                             .load(urlImage)
                             .asBitmap()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get();
                 } catch (InterruptedException | ExecutionException e) {
                     Log.e(TAG, "Error retrieving large icon from " + urlImage, e);
@@ -96,7 +100,7 @@ public class LocalFavoriteWidgetRemoteViewsService extends RemoteViewsService {
                 if (image != null) {
                     views.setImageViewBitmap(R.id.local_picture, image);
                 } else {
-                    //views.setImageViewResource(R.id.widget_icon, weatherArtResourceId);
+                    views.setImageViewResource(R.id.local_picture, R.color.placeholder);
                 }
 
                 return views;

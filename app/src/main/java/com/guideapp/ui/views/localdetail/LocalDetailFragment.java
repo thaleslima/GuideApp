@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.guideapp.R;
@@ -176,7 +177,10 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
 
     @Override
     public void showImage(String imagePath) {
-        Glide.with(this).load(imagePath).asBitmap()
+        Glide.with(this)
+                .load(imagePath)
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(new BitmapImageViewTarget(mImage) {
                     @Override
                     public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
