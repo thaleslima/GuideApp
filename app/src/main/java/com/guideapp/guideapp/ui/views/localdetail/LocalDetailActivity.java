@@ -52,7 +52,7 @@ public class LocalDetailActivity extends BaseActivity {
     private void initFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.contentFrame, fragment);
+        transaction.replace(R.id.contentFrame, fragment);
         transaction.commit();
     }
 

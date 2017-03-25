@@ -36,9 +36,9 @@ public class MapActivity extends BaseActivity {
         setContentView(R.layout.activity_map);
 
         initExtra();
-        initToolbar();
+        setupToolbar();
 
-        initFragment(MapFragment.newInstance(mIdCity, mIdCategory, mIdSubCategories));
+        setupFragment(MapFragment.newInstance(mIdCity, mIdCategory, mIdSubCategories));
     }
 
     private void initExtra() {
@@ -48,14 +48,14 @@ public class MapActivity extends BaseActivity {
         mIdSubCategories = getIntent().getLongArrayExtra(EXTRA_SUB_CATEGORY);
     }
 
-    private void initFragment(Fragment fragment) {
+    private void setupFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.contentFrame, fragment);
         transaction.commit();
     }
 
-    private void initToolbar() {
+    private void setupToolbar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

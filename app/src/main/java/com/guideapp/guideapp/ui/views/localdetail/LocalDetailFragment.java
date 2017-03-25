@@ -64,6 +64,7 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu,inflater);
         inflater.inflate(R.menu.menu_detail, menu);
     }
 
@@ -93,6 +94,16 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
                 }
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mPresenter != null) {
+            mPresenter.destroy(getActivity().getSupportLoaderManager());
+            mPresenter = null;
+        }
     }
 
     @Override

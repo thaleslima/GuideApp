@@ -24,12 +24,12 @@ public class MenuFragment extends Fragment implements MenuAdapter.RecyclerViewIt
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        initRecyclerView(view);
+        setupRecyclerView(view);
 
         return view;
     }
 
-    private void initRecyclerView(View view) {
+    private void setupRecyclerView(View view) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new GridLayoutManager(this.getActivity(), 2));
         MenuAdapter adapter = new MenuAdapter(Utility.getMenus(), this);

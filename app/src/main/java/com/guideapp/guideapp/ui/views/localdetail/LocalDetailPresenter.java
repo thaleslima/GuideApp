@@ -37,6 +37,11 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
     }
 
     @Override
+    public void destroy(LoaderManager loaderManager) {
+        loaderManager.destroyLoader(ID_LOADER);
+    }
+
+    @Override
     public void saveOrRemoveFavorite() {
         updateFavorite(!mIsFavorite);
 

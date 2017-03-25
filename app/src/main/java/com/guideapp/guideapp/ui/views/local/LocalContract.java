@@ -12,9 +12,13 @@ import java.util.List;
 interface LocalContract {
     interface View {
         void showLocals(List<Local> locals);
+
         void showLocalDetailUi(Local local, ImageView view);
+
         void showProgressBar();
+
         void hideProgressBar();
+
         Context getContext();
     }
 

@@ -31,6 +31,8 @@ interface LocalDetailContract {
     interface Presenter {
         void loadLocal(LoaderManager loaderManager);
 
+        void destroy(LoaderManager loaderManager);
+
         void saveOrRemoveFavorite();
 
         void shareLocal();

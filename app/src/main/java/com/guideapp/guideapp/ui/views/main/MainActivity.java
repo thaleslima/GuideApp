@@ -59,10 +59,10 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initToolbar();
-        setFindViewById();
-        initViewPager();
-        setViewProperties();
+        setupToolbar();
+        setupViews();
+        setupViewPager();
+        setupViewProperties();
 
         getSupportLoaderManager().initLoader(ID_LOADER, null, this);
 
@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
         mAdView.loadAd(adRequest);
     }
 
-    private void setViewProperties() {
+    private void setupViewProperties() {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -98,7 +98,7 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
         });
     }
 
-    private void initToolbar() {
+    private void setupToolbar() {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -107,7 +107,7 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
         }
     }
 
-    private void initViewPager() {
+    private void setupViewPager() {
         for (int i = 0; i < ICONS_TAB_BLACK.length; i++) {
             if (i == 0) {
                 mTabLayout.addTab(mTabLayout.newTab().setIcon(ICONS_TAB_WHITE[i]));
@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
         mViewPager.setPageMargin(16);
     }
 
-    private void setFindViewById() {
+    private void setupViews() {
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mAppBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);

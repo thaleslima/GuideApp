@@ -62,8 +62,8 @@ public class MapFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        setFindViewById(view);
-        setViewProperties();
+        setupViews(view);
+        setupViewProperties();
 
         mMarkersId = new HashMap<>();
         mPresenter = new MapPresenter(this);
@@ -77,14 +77,14 @@ public class MapFragment extends Fragment
         setUpMapIfNeeded();
     }
 
-    private void setFindViewById(View view) {
+    private void setupViews(View view) {
         mLocalView = (RelativeLayout) view.findViewById(R.id.local_view);
         mDescriptionSubCategoryView = (TextView) mLocalView.findViewById(R.id.descriptions_sub_category);
         mDescriptionView = (TextView) mLocalView.findViewById(R.id.local_description);
         mPhotoView = (ImageView) mLocalView.findViewById(R.id.local_picture);
     }
 
-    private void setViewProperties() {
+    private void setupViewProperties() {
         mLocalView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
