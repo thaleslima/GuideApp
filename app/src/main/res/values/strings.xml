@@ -11,6 +11,7 @@
     <string name="empty_list_no_network">Verifique sua conexão e tente novamente</string>
     <string name="empty_list_server_down">Tivemos um problema ao\ncarregar os dados</string>
     <string name="retry">Tentar novamente</string>
+    <string name="empty_list_favorites">Você ainda não salvou nenhum local em seus favoritos</string>
 
 
     <!--Menu Items-->
@@ -21,15 +22,15 @@
 
 
     <!--Local Detail-->
-    <string name="title_save_favorite">Added to favorites</string>
-    <string name="title_remove_favorite">Removed from favorites</string>
+    <string name="title_save_favorite">Local salvo em favoritos</string>
+    <string name="title_remove_favorite">Local removido em favoritos</string>
     <string name="action_share">Compartilhar local</string>
     <string name="share_text">Local: %1$s\nEndereço: %2$s\nTipo: %3$s\n\n%4$s</string>
 
 
     <!--My locals-->
     <string name="my_local">Meus lugares</string>
-    <string name="empty_service_list">No Services Information Available</string>
+    <string name="empty_service_list">Você ainda não salvou nenhum local em seus favoritos</string>
     <string name="title_widget_detail">Meus lugares</string>
 
 

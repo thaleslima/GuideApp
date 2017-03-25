@@ -11,14 +11,22 @@ import java.util.List;
 
 interface FavoriteContract {
     interface View {
+        void showNoItemsMessage();
+
+        void hideNoItemsMessage();
+
         void showLocals(List<Local> locals);
+
         void showLocalDetailUi(Local local, ImageView view);
+
         Context getContext();
     }
 
     interface Presenter {
         void loadLocals(LoaderManager loaderManager);
+
         void onResume(LoaderManager loaderManager);
+
         void openLocalDetails(@NonNull Local local, ImageView view);
     }
 }

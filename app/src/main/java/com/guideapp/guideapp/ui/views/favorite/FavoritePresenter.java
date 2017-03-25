@@ -16,10 +16,10 @@ import java.util.ArrayList;
 
 class FavoritePresenter implements FavoriteContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
     private static final int ID_LOADER = 333;
-    private final FavoriteContract.View view;
+    private final FavoriteContract.View mView;
 
     FavoritePresenter(FavoriteContract.View localView) {
-        this.view = localView;
+        this.mView = localView;
     }
 
     @Override
@@ -34,7 +34,7 @@ class FavoritePresenter implements FavoriteContract.Presenter, LoaderManager.Loa
 
     @Override
     public void openLocalDetails(@NonNull Local local, ImageView view) {
-        this.view.showLocalDetailUi(local, view);
+        this.mView.showLocalDetailUi(local, view);
     }
 
     @Override
@@ -42,7 +42,7 @@ class FavoritePresenter implements FavoriteContract.Presenter, LoaderManager.Loa
         switch (id) {
 
             case ID_LOADER:
-                return new CursorLoader(view.getContext(),
+                return new CursorLoader(mView.getContext(),
                         GuideContract.LocalEntry.CONTENT_URI,
                         null,
                         GuideContract.LocalEntry.getSqlSelectForFavorites(),
@@ -56,11 +56,17 @@ class FavoritePresenter implements FavoriteContract.Presenter, LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        view.showLocals(DataUtil.getLocalsFromCursor(data));
+        if (data.getCount() > 0) {
+            mView.showLocals(DataUtil.getLocalsFromCursor(data));
+            mView.hideNoItemsMessage();
+        } else {
+            mView.showLocals(new ArrayList<Local>());
+            mView.showNoItemsMessage();
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        view.showLocals(new ArrayList<Local>());
+        mView.showLocals(new ArrayList<Local>());
     }
 }

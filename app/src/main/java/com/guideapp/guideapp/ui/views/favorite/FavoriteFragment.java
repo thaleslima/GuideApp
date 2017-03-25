@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.model.Local;
@@ -20,6 +21,7 @@ import java.util.List;
 public class FavoriteFragment extends Fragment implements FavoriteContract.View, FavoriteAdapter.ItemClickListener {
     private FavoriteAdapter mAdapter;
     private FavoriteContract.Presenter mPresenter;
+    private TextView mMessageView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -27,7 +29,12 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.View,
 
         View view = inflater.inflate(R.layout.fragment_favorite, container, false);
         setupRecyclerView(view);
+        setupViews(view);
         return view;
+    }
+
+    private void setupViews(View view) {
+        mMessageView = (TextView) view.findViewById(R.id.message_view);
     }
 
     @Override
@@ -52,6 +59,16 @@ public class FavoriteFragment extends Fragment implements FavoriteContract.View,
         super.onResume();
 
         mPresenter.onResume(getActivity().getSupportLoaderManager());
+    }
+
+    @Override
+    public void showNoItemsMessage() {
+        mMessageView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideNoItemsMessage() {
+        mMessageView.setVisibility(View.GONE);
     }
 
     @Override
