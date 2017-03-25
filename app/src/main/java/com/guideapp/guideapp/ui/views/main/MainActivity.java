@@ -175,6 +175,7 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
 
             case GuideSyncTask.LOCATION_STATUS_OK:
             default:
+                showProgressBar();
                 return;
         }
 

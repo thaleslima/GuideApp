@@ -54,9 +54,10 @@ public class GuideSyncTask {
             ContentValues[] values = DataUtil.getGuideContentValuesFromList(locals.getItems(), favorites);
             if (values != null && values.length != 0) {
                 contentResolver.bulkInsert(GuideContract.LocalEntry.CONTENT_URI, values);
+                setLocationStatus(context, LOCATION_STATUS_OK);
+            } else {
+                setLocationStatus(context, LOCATION_STATUS_SERVER_DOWN);
             }
-
-            setLocationStatus(context, LOCATION_STATUS_OK);
 
         } catch (Exception e) {
             setLocationStatus(context, LOCATION_STATUS_SERVER_DOWN);

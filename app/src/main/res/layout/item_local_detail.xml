@@ -21,11 +21,15 @@
         android:id="@+id/local_text"
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_toEndOf="@+id/local_picture"
         android:fontFamily="sans-serif"
         android:gravity="center|start"
+        android:paddingBottom="@dimen/default_padding"
+        android:paddingEnd="@dimen/default_padding"
+        android:paddingTop="@dimen/default_padding"
         android:textColor="@color/primary_text"
         tools:text="local_text" />
 
