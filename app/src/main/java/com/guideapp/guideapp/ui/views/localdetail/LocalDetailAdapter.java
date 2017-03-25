@@ -23,12 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalViewHolder> {
-    private final List<LocalDetail> mDataSet = new ArrayList<>();
-
     static final int LOCAL_DETAIL = 1;
     static final int LOCAL_PHONE = 2;
     static final int LOCAL_SITE = 3;
     static final int LOCAL_DETAIL_MAP = 4;
+
+    private final List<LocalDetail> mDataSet = new ArrayList<>();
 
     @NonNull
     private final ClickListener mClickListener;
@@ -44,10 +44,10 @@ class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalVi
     }
 
     class LocalViewHolder extends RecyclerView.ViewHolder implements OnMapReadyCallback {
-        private final ImageView icoView;
-        private final TextView textView;
-        private final View dividerView;
-        private final MapView map;
+        private final ImageView mIcoView;
+        private final TextView mTextView;
+        private final View mDividerView;
+        private final MapView mMap;
         private LocalDetail mItem;
         private View mView;
 
@@ -55,14 +55,14 @@ class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalVi
             super(view);
             mView = view;
 
-            icoView = (ImageView) view.findViewById(R.id.local_picture);
-            textView = (TextView) view.findViewById(R.id.local_text);
-            dividerView = view.findViewById(R.id.local_divider);
-            map = (MapView) view.findViewById(R.id.mapImageView);
+            mIcoView = (ImageView) view.findViewById(R.id.local_picture);
+            mTextView = (TextView) view.findViewById(R.id.local_text);
+            mDividerView = view.findViewById(R.id.local_divider);
+            mMap = (MapView) view.findViewById(R.id.mapImageView);
 
-            if (map != null) {
-                map.onCreate(null);
-                map.onResume();
+            if (mMap != null) {
+                mMap.onCreate(null);
+                mMap.onResume();
             }
         }
 
@@ -70,15 +70,15 @@ class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalVi
         void populate(LocalDetail data) {
             mItem = data;
 
-            if (data.getViewType() == LOCAL_DETAIL_MAP && map != null) {
-                map.getMapAsync(this);
+            if (data.getViewType() == LOCAL_DETAIL_MAP && mMap != null) {
+                mMap.getMapAsync(this);
             } else {
                 mView.setOnClickListener(null);
                 mView.setClickable(false);
-                textView.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.primary_text));
-                icoView.setImageResource(data.getIco());
-                textView.setText(data.getText());
-                dividerView.setVisibility(data.isDivider() ? View.VISIBLE : View.GONE);
+                mTextView.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.primary_text));
+                mIcoView.setImageResource(data.getIco());
+                mTextView.setText(data.getText());
+                mDividerView.setVisibility(data.isDivider() ? View.VISIBLE : View.GONE);
             }
 
             if (data.getViewType() == LOCAL_PHONE) {
@@ -91,7 +91,7 @@ class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalVi
                 });
 
             } else if (data.getViewType() == LOCAL_SITE) {
-                textView.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.accent));
+                mTextView.setTextColor(ContextCompat.getColor(mView.getContext(), R.color.accent));
                 mView.setTag(data.getText());
                 mView.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -46,7 +46,7 @@ public class GuideSyncUtils {
         dispatcher.schedule(syncSunshineJob);
     }
 
-    synchronized public static void initialize(@NonNull final Context context) {
+    public static synchronized void initialize(@NonNull final Context context) {
         if (sInitialized) return;
 
         sInitialized = true;

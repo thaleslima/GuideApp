@@ -30,7 +30,8 @@ import com.guideapp.guideapp.model.LocalDetail;
 
 import java.util.List;
 
-public class LocalDetailFragment extends Fragment implements LocalDetailContract.View, LocalDetailAdapter.ClickListener {
+public class LocalDetailFragment extends Fragment implements LocalDetailContract.View,
+        LocalDetailAdapter.ClickListener {
     private static final String EXTRA_LOCAL_ID = "local_id";
 
     private LocalDetailAdapter mAdapter;
@@ -78,9 +79,12 @@ public class LocalDetailFragment extends Fragment implements LocalDetailContract
             case R.id.action_share:
                 mPresenter.shareLocal();
                 break;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupViews() {

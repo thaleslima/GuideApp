@@ -14,29 +14,28 @@ public class GuideDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String SQL_CREATE_LOCAL_TABLE =
-                "CREATE TABLE " + GuideContract.LocalEntry.TABLE_NAME + " (" +
+        final String sqlCreateLocalTable
+                = "CREATE TABLE " + GuideContract.LocalEntry.TABLE_NAME + " ("
+                        + GuideContract.LocalEntry._ID + " INTEGER PRIMARY KEY, "
+                        + GuideContract.LocalEntry.COLUMN_DESCRIPTION + " TEXT, "
+                        + GuideContract.LocalEntry.COLUMN_SITE + " TEXT, "
+                        + GuideContract.LocalEntry.COLUMN_PHONE + " TEXT, "
+                        + GuideContract.LocalEntry.COLUMN_ADDRESS + " TEXT, "
+                        + GuideContract.LocalEntry.COLUMN_WIFI + " INTEGER, "
+                        + GuideContract.LocalEntry.COLUMN_DETAIL + " TEXT, "
+                        + GuideContract.LocalEntry.COLUMN_LATITUDE + " REAL, "
+                        + GuideContract.LocalEntry.COLUMN_LONGITUDE + " REAL, "
+                        + GuideContract.LocalEntry.COLUMN_IMAGE_PATH + " TEXT, "
+                        + GuideContract.LocalEntry.COLUMN_ID_CITY + " INTEGER, "
+                        + GuideContract.LocalEntry.COLUMN_ID_CATEGORY + " INTEGER, "
+                        + GuideContract.LocalEntry.COLUMN_ID_SUB_CATEGORY + " TEXT, "
+                        + GuideContract.LocalEntry.COLUMN_TIMESTAMP + " INTEGER, "
+                        + GuideContract.LocalEntry.COLUMN_DESCRIPTION_SUB_CATEGORY + " TEXT, "
+                        + GuideContract.LocalEntry.COLUMN_FAVORITE + " INTEGER "
 
-                        GuideContract.LocalEntry._ID + " INTEGER PRIMARY KEY, " +
-                        GuideContract.LocalEntry.COLUMN_DESCRIPTION + " TEXT, " +
-                        GuideContract.LocalEntry.COLUMN_SITE + " TEXT, " +
-                        GuideContract.LocalEntry.COLUMN_PHONE + " TEXT, " +
-                        GuideContract.LocalEntry.COLUMN_ADDRESS + " TEXT, " +
-                        GuideContract.LocalEntry.COLUMN_WIFI + " INTEGER, " +
-                        GuideContract.LocalEntry.COLUMN_DETAIL + " TEXT, " +
-                        GuideContract.LocalEntry.COLUMN_LATITUDE + " REAL, " +
-                        GuideContract.LocalEntry.COLUMN_LONGITUDE + " REAL, " +
-                        GuideContract.LocalEntry.COLUMN_IMAGE_PATH + " TEXT, " +
-                        GuideContract.LocalEntry.COLUMN_ID_CITY + " INTEGER, " +
-                        GuideContract.LocalEntry.COLUMN_ID_CATEGORY + " INTEGER, " +
-                        GuideContract.LocalEntry.COLUMN_ID_SUB_CATEGORY + " TEXT, " +
-                        GuideContract.LocalEntry.COLUMN_TIMESTAMP + " INTEGER, " +
-                        GuideContract.LocalEntry.COLUMN_DESCRIPTION_SUB_CATEGORY + " TEXT, " +
-                        GuideContract.LocalEntry.COLUMN_FAVORITE + " INTEGER " +
+                        + " )";
 
-                        " )";
-
-        db.execSQL(SQL_CREATE_LOCAL_TABLE);
+        db.execSQL(sqlCreateLocalTable);
     }
 
     @Override

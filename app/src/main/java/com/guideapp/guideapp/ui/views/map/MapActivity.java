@@ -12,16 +12,15 @@ import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.ui.views.BaseActivity;
 
 public class MapActivity extends BaseActivity {
-    private long mIdCity;
-    private long mIdCategory;
-    private int mIdTitle;
-    private long[] mIdSubCategories;
-
     private static final String EXTRA_CITY = "id-city";
     private static final String EXTRA_CATEGORY = "id-category";
     private static final String EXTRA_SUB_CATEGORY = "id-sub-category";
     private static final String EXTRA_ID_TITLE = "id-title";
 
+    private long mIdCity;
+    private long mIdCategory;
+    private int mIdTitle;
+    private long[] mIdSubCategories;
 
     public static void navigate(Context context, Long idCity) {
         Intent intent = new Intent(context, MapActivity.class);

@@ -30,7 +30,7 @@ import static junit.framework.Assert.fail;
 
 @RunWith(AndroidJUnit4.class)
 public class TestGuideContentProvider {
-
+    private static final Uri TEST_MOVIES = GuideContract.LocalEntry.CONTENT_URI;
     private final Context mContext = InstrumentationRegistry.getTargetContext();
 
     @Before
@@ -61,16 +61,16 @@ public class TestGuideContentProvider {
             String expectedAuthority = packageName;
 
             /* Make sure that the registered authority matches the authority from the Contract */
-            String incorrectAuthority =
-                    "Error: MovieProvider registered with authority: " + actualAuthority +
-                            " instead of expected authority: " + expectedAuthority;
+            String incorrectAuthority
+                    = "Error: MovieProvider registered with authority: " + actualAuthority
+                            + " instead of expected authority: " + expectedAuthority;
             assertEquals(incorrectAuthority,
                     actualAuthority,
                     expectedAuthority);
 
         } catch (PackageManager.NameNotFoundException e) {
-            String providerNotRegisteredAtAll =
-                    "Error: MovieProvider not registered at " + mContext.getPackageName();
+            String providerNotRegisteredAtAll
+                    = "Error: MovieProvider not registered at " + mContext.getPackageName();
             /*
              * This exception is thrown if the ContentProvider hasn't been registered with the
              * manifest at all. If this is the case, you need to double check your
@@ -80,7 +80,6 @@ public class TestGuideContentProvider {
         }
     }
 
-    private static final Uri TEST_MOVIES = GuideContract.LocalEntry.CONTENT_URI;
 
     @Test
     public void testUriMatcher() {

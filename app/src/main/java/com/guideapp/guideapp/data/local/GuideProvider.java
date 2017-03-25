@@ -12,12 +12,12 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 public class GuideProvider extends ContentProvider {
-    private static final String TAG = GuideProvider.class.getName();
-
     public static final int CODE_LOCAL = 100;
     public static final int CODE_LOCAL_WITH_ID = 101;
 
-    private static final UriMatcher sUriMatcher = buildUriMatcher();
+    private static final String TAG = GuideProvider.class.getName();
+
+    private static final UriMatcher URI_MATCHER = buildUriMatcher();
     private GuideDbHelper mOpenHelper;
 
     public static UriMatcher buildUriMatcher() {
@@ -42,7 +42,7 @@ public class GuideProvider extends ContentProvider {
         final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
         Log.d(TAG, "bulkInsert: " + uri);
 
-        switch (sUriMatcher.match(uri)) {
+        switch (URI_MATCHER.match(uri)) {
             case CODE_LOCAL:
                 db.beginTransaction();
                 int rowsInserted = 0;
@@ -51,9 +51,9 @@ public class GuideProvider extends ContentProvider {
                     db.delete(GuideContract.LocalEntry.TABLE_NAME, null, null);
 
                     for (ContentValues value : values) {
-                        long _id = db.insert(GuideContract.LocalEntry.TABLE_NAME, null, value);
+                        long id = db.insert(GuideContract.LocalEntry.TABLE_NAME, null, value);
 
-                        if (_id != -1) {
+                        if (id != -1) {
                             rowsInserted++;
                         }
                     }
@@ -77,11 +77,12 @@ public class GuideProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
+                        @Nullable String[] selectionArgs, @Nullable String sortOrder) {
         Log.d(TAG, "query: " + uri);
         Cursor cursor;
 
-        switch (sUriMatcher.match(uri)) {
+        switch (URI_MATCHER.match(uri)) {
             case CODE_LOCAL: {
                 cursor = mOpenHelper.getReadableDatabase().query(
                         GuideContract.LocalEntry.TABLE_NAME,
@@ -137,7 +138,7 @@ public class GuideProvider extends ContentProvider {
 
         if (null == selection) selection = "1";
 
-        switch (sUriMatcher.match(uri)) {
+        switch (URI_MATCHER.match(uri)) {
 
             case CODE_LOCAL:
                 numRowsDeleted = mOpenHelper.getWritableDatabase().delete(
@@ -159,10 +160,11 @@ public class GuideProvider extends ContentProvider {
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
+                      @Nullable String[] selectionArgs) {
         int numRowsDeleted;
 
-        switch (sUriMatcher.match(uri)) {
+        switch (URI_MATCHER.match(uri)) {
 
             case CODE_LOCAL_WITH_ID:
                 String id = uri.getPathSegments().get(1);

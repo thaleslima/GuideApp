@@ -18,13 +18,13 @@ import com.guideapp.guideapp.ui.views.localdetail.LocalDetailActivity;
 import java.util.concurrent.ExecutionException;
 
 public class LocalFavoriteWidgetRemoteViewsService extends RemoteViewsService {
-    private final String TAG = LocalFavoriteWidgetRemoteViewsService.class.getSimpleName();
+    private static final String TAG = LocalFavoriteWidgetRemoteViewsService.class.getSimpleName();
 
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
 
         return new RemoteViewsFactory() {
-            private Cursor data =   null;
+            private Cursor mData =   null;
 
             @Override
             public void onCreate() {
@@ -33,11 +33,11 @@ public class LocalFavoriteWidgetRemoteViewsService extends RemoteViewsService {
 
             @Override
             public void onDataSetChanged() {
-                if (data != null) {
-                    data.close();
+                if (mData != null) {
+                    mData.close();
                 }
                 final long identityToken = Binder.clearCallingIdentity();
-                data = getContentResolver().query(GuideContract.LocalEntry.CONTENT_URI,
+                mData = getContentResolver().query(GuideContract.LocalEntry.CONTENT_URI,
                         GuideContract.LocalEntry.COLUMNS.toArray(new String[]{}),
                         GuideContract.LocalEntry.getSqlSelectForFavorites(),
                         null,
@@ -48,39 +48,41 @@ public class LocalFavoriteWidgetRemoteViewsService extends RemoteViewsService {
 
             @Override
             public void onDestroy() {
-                if (data != null) {
-                    data.close();
-                    data = null;
+                if (mData != null) {
+                    mData.close();
+                    mData = null;
                 }
             }
 
             @Override
             public int getCount() {
-                return data == null ? 0 : data.getCount();
+                return mData == null ? 0 : mData.getCount();
             }
 
             @Override
             public RemoteViews getViewAt(int position) {
-                if (position == AdapterView.INVALID_POSITION ||
-                        data == null || !data.moveToPosition(position)) {
+                if (position == AdapterView.INVALID_POSITION || mData == null
+                        || !mData.moveToPosition(position)) {
                     return null;
                 }
 
                 RemoteViews views = new RemoteViews(getPackageName(),
                         R.layout.widget_detail_list_item);
 
-                views.setTextViewText(R.id.local_text, data.getString(GuideContract.LocalEntry.POSITION_DESCRIPTION));
+                views.setTextViewText(R.id.local_text, mData.getString(GuideContract.LocalEntry.POSITION_DESCRIPTION));
                 //views.setTextViewText(R.id.local_address, data.getString(GuideContract.LocalEntry.POSITION_ADDRESS));
-                views.setTextViewText(R.id.descriptions_sub_category, data.getString(GuideContract.LocalEntry.POSITION_DESCRIPTION_SUB_CATEGORY));
+                views.setTextViewText(R.id.descriptions_sub_category,
+                        mData.getString(GuideContract.LocalEntry.POSITION_DESCRIPTION_SUB_CATEGORY));
 
                 final Intent fillInIntent = new Intent();
                 fillInIntent.putExtra(LocalDetailActivity.EXTRA_LOCAL_ID, getItemId(position));
-                fillInIntent.putExtra(LocalDetailActivity.EXTRA_CATEGORY_ID, data.getLong(GuideContract.LocalEntry.POSITION_ID_CATEGORY));
+                fillInIntent.putExtra(LocalDetailActivity.EXTRA_CATEGORY_ID,
+                        mData.getLong(GuideContract.LocalEntry.POSITION_ID_CATEGORY));
 
                 views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
 
                 Bitmap image = null;
-                String urlImage = data.getString(GuideContract.LocalEntry.POSITION_IMAGE_PATH);
+                String urlImage = mData.getString(GuideContract.LocalEntry.POSITION_IMAGE_PATH);
 
                 try {
                     image = Glide.with(LocalFavoriteWidgetRemoteViewsService.this)
@@ -112,8 +114,8 @@ public class LocalFavoriteWidgetRemoteViewsService extends RemoteViewsService {
 
             @Override
             public long getItemId(int position) {
-                if (data.moveToPosition(position))
-                    return data.getLong(GuideContract.LocalEntry.POSITION_ID);
+                if (mData.moveToPosition(position))
+                    return mData.getLong(GuideContract.LocalEntry.POSITION_ID);
                 return position;
             }
 

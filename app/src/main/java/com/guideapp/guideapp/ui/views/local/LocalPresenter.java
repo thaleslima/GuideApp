@@ -17,32 +17,32 @@ import java.util.ArrayList;
 class LocalPresenter implements LocalContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
     private static final int ID_LOADER = 356;
 
-    private final LocalContract.View view;
-    private long idCategory;
+    private final LocalContract.View mView;
+    private long mIdCategory;
 
     LocalPresenter(LocalContract.View localView, long idCategory) {
-        this.view = localView;
-        this.idCategory = idCategory;
+        this.mView = localView;
+        this.mIdCategory = idCategory;
     }
 
     @Override
     public void loadLocals(LoaderManager loaderManager) {
-        view.showProgressBar();
+        mView.showProgressBar();
         loaderManager.initLoader(ID_LOADER, null, this);
     }
 
     @Override
     public void restartLoadLocals(LoaderManager loaderManager, long idCategory) {
-        if (this.idCategory == 0) {
+        if (this.mIdCategory == 0) {
             loaderManager.destroyLoader(ID_LOADER);
-            this.idCategory = idCategory;
+            this.mIdCategory = idCategory;
             loadLocals(loaderManager);
         }
     }
 
     @Override
     public void openLocalDetails(@NonNull Local local, ImageView view) {
-        this.view.showLocalDetailUi(local, view);
+        this.mView.showLocalDetailUi(local, view);
     }
 
     @Override
@@ -50,10 +50,10 @@ class LocalPresenter implements LocalContract.Presenter, LoaderManager.LoaderCal
         switch (id) {
 
             case ID_LOADER:
-                return new CursorLoader(view.getContext(),
+                return new CursorLoader(mView.getContext(),
                         GuideContract.LocalEntry.CONTENT_URI,
                         null,
-                        GuideContract.LocalEntry.getSqlSelectForIdCategory(idCategory),
+                        GuideContract.LocalEntry.getSqlSelectForIdCategory(mIdCategory),
                         null,
                         null);
 
@@ -64,13 +64,13 @@ class LocalPresenter implements LocalContract.Presenter, LoaderManager.LoaderCal
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        view.hideProgressBar();
-        view.showLocals(DataUtil.getLocalsFromCursor(data));
+        mView.hideProgressBar();
+        mView.showLocals(DataUtil.getLocalsFromCursor(data));
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        view.showLocals(new ArrayList<Local>());
-        view.hideProgressBar();
+        mView.showLocals(new ArrayList<Local>());
+        mView.hideProgressBar();
     }
 }

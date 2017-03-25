@@ -25,7 +25,8 @@ public final class DataUtil {
 
             do {
                 longSet.add(cursor.getLong(columnIndex));
-            } while (cursor.moveToNext());
+            }
+            while (cursor.moveToNext());
         }
 
         cursor.close();
@@ -50,7 +51,8 @@ public final class DataUtil {
             int columnIdCategory = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_ID_CATEGORY);
             int columnIndexIdCity = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_ID_CITY);
             int columnIndexTimestamp = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_TIMESTAMP);
-            int columnIndexDescriptionSubCategory = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_DESCRIPTION_SUB_CATEGORY);
+            int columnIndexDescriptionSubCategory
+                    = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_DESCRIPTION_SUB_CATEGORY);
             int columnIndexFavorite = cursor.getColumnIndex(GuideContract.LocalEntry.COLUMN_FAVORITE);
 
             do {
@@ -72,7 +74,8 @@ public final class DataUtil {
                 local.setFavorite(cursor.getInt(columnIndexFavorite) == 1);
 
                 locals.add(local);
-            } while (cursor.moveToNext());
+            }
+            while (cursor.moveToNext());
         }
 
         return locals;
@@ -97,7 +100,8 @@ public final class DataUtil {
             testValues.put(GuideContract.LocalEntry.COLUMN_ID_CITY, local.getIdCity());
             testValues.put(GuideContract.LocalEntry.COLUMN_ID_CATEGORY, local.getIdCategories().get(0));
             testValues.put(GuideContract.LocalEntry.COLUMN_TIMESTAMP, local.getTimestamp());
-            testValues.put(GuideContract.LocalEntry.COLUMN_DESCRIPTION_SUB_CATEGORY, getDescriptionFromSubCategories(local.getSubCategories()));
+            testValues.put(GuideContract.LocalEntry.COLUMN_DESCRIPTION_SUB_CATEGORY,
+                    getDescriptionFromSubCategories(local.getSubCategories()));
             testValues.put(GuideContract.LocalEntry.COLUMN_FAVORITE, favorites.contains(local.getId()));
 
             contentValues.add(testValues);
@@ -110,12 +114,12 @@ public final class DataUtil {
     }
 
     private static String getDescriptionFromSubCategories(List<SubCategory> subCategories) {
-        if(subCategories != null) {
+        if (subCategories != null) {
             int size = subCategories.size();
             String description = "";
 
             for (int i = 0; i < size; i++) {
-                if(i > 0){
+                if (i > 0) {
                     description += " | ";
                 }
                 description += subCategories.get(i).getDescription();

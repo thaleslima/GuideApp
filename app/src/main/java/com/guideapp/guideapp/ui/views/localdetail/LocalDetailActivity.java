@@ -70,9 +70,10 @@ public class LocalDetailActivity extends BaseActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
-        }
 
-        return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

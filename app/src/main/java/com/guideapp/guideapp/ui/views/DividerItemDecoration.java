@@ -12,25 +12,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
-    private static final int[] ATTRS = new int[]{
-            android.R.attr.listDivider
-    };
-
     public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
 
     public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
 
+    private static final int[] ATTRS = new int[]{
+            android.R.attr.listDivider
+    };
+
     private final Drawable mDivider;
     private int mOrientation;
-    private int dividerColor;
-    private DividerStyle dividerStyle = DividerStyle.Dark;
-    private int dividerHeight;
+    private int mDividerColor;
+    private DividerStyle mDividerStyle = DividerStyle.Dark;
+    private int mDividerHeight;
     private int mMarginLeft;
 
     public DividerItemDecoration(Context context, int orientation, DividerStyle dividerStyle) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
-        this.dividerStyle = dividerStyle;
+        this.mDividerStyle = dividerStyle;
         a.recycle();
         setOrientation(orientation);
     }
@@ -38,7 +38,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public DividerItemDecoration(Context context, int orientation) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
-        this.dividerStyle = DividerStyle.Dark;
+        this.mDividerStyle = DividerStyle.Dark;
         a.recycle();
         setOrientation(orientation);
     }
@@ -56,16 +56,16 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     public void setDeviderColor(String color) {
-        dividerColor = Color.parseColor(color);
+        mDividerColor = Color.parseColor(color);
     }
 
 
     public void setDeviderColor(int color) {
-        dividerColor = color;
+        mDividerColor = color;
     }
 
     public void setDividerHeight(int height) {
-        dividerHeight = height;
+        mDividerHeight = height;
 
     }
 
@@ -90,28 +90,27 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         final int left = parent.getPaddingLeft() + mMarginLeft;
         final int right = parent.getWidth() - parent.getPaddingRight();
 
-        if (dividerStyle != DividerStyle.Default) {
-            switch (dividerStyle) {
+        if (mDividerStyle != DividerStyle.Default) {
+            switch (mDividerStyle) {
                 case Dark:
-                    dividerColor = Color.argb(13, 0, 0, 0);
+                    mDividerColor = Color.argb(13, 0, 0, 0);
                     break;
                 case Light:
-                    dividerColor = Color.WHITE;
+                    mDividerColor = Color.WHITE;
                     break;
                 case NoneColor:
-                    dividerColor = Color.TRANSPARENT;
+                    mDividerColor = Color.TRANSPARENT;
                     break;
                 default:
-                    dividerColor = Color.TRANSPARENT;
+                    mDividerColor = Color.TRANSPARENT;
             }
-            mDivider.setColorFilter(dividerColor, PorterDuff.Mode.SRC_OUT);
+            mDivider.setColorFilter(mDividerColor, PorterDuff.Mode.SRC_OUT);
         }
 
         final int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             final View child = parent.getChildAt(i);
-            android.support.v7.widget.RecyclerView v =
-                    new android.support.v7.widget.RecyclerView(parent.getContext());
+            RecyclerView v = new RecyclerView(parent.getContext());
             final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
                     .getLayoutParams();
             final int top = child.getBottom() + params.bottomMargin;
@@ -141,7 +140,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
                                RecyclerView.State state) {
         if (mOrientation == VERTICAL_LIST) {
-            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight() + dividerHeight);
+            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight() + mDividerHeight);
         } else {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
         }

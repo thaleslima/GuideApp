@@ -64,7 +64,8 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
     private void updateFavorite(boolean isFavorite) {
         ContentValues values = new ContentValues();
         values.put(GuideContract.LocalEntry.COLUMN_FAVORITE, isFavorite);
-        mView.getContext().getContentResolver().update(GuideContract.LocalEntry.buildLocalUriWithId(mIdLocal), values, null, null);
+        mView.getContext().getContentResolver().update(GuideContract.LocalEntry.buildLocalUriWithId(mIdLocal),
+                values, null, null);
 
         mIsFavorite = isFavorite;
 

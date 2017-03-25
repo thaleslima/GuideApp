@@ -1,11 +1,11 @@
 package com.guideapp.guideapp.utilities;
 
 public final class Constants {
-    private Constants() {
-    }
-
     public static final String ACTION_DATA_UPDATED = "com.guideapp.guideapp.ACTION_DATA_UPDATED";
     public static final String ACTION_DATA_SYNC_ERROR = "com.guideapp.guideapp.ACTION_DATA_SYNC_ERROR";
+
+    private Constants() {
+    }
 
     public interface City {
         long ID = 5659118702428160L;

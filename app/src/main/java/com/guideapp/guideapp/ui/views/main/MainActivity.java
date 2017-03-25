@@ -174,6 +174,7 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
                 break;
 
             case GuideSyncTask.LOCATION_STATUS_OK:
+            default:
                 return;
         }
 

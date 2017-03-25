@@ -7,9 +7,9 @@ import com.google.common.collect.ImmutableList;
 
 public class GuideContract {
     static final String CONTENT_AUTHORITY = "com.guideapp.guideapp";
-    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
-
     static final String PATH_LOCAL = "local";
+
+    private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final class LocalEntry implements BaseColumns {
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon()

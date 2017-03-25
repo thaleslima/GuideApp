@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.preference.PreferenceManager;
 import android.support.annotation.IntDef;
+import android.util.Log;
 
 import com.guideapp.guideapp.R;
 import com.guideapp.guideapp.data.local.GuideContract;
@@ -24,17 +25,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Set;
 
 public class GuideSyncTask {
+    public static final int LOCATION_STATUS_OK = 0;
+    public static final int LOCATION_STATUS_SERVER_DOWN = 1;
+    public static final int LOCATION_STATUS_NO_CONNECTION = 2;
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({LOCATION_STATUS_OK, LOCATION_STATUS_SERVER_DOWN, LOCATION_STATUS_NO_CONNECTION})
     public @interface SyncStatus {
     }
 
-    public static final int LOCATION_STATUS_OK = 0;
-    public static final int LOCATION_STATUS_SERVER_DOWN = 1;
-    public static final int LOCATION_STATUS_NO_CONNECTION = 2;
+    private static final String TAG = GuideSyncTask.class.getName();
 
-    synchronized static void syncGuide(Context context) {
+    static synchronized void syncGuide(Context context) {
         try {
 
             if (!Utility.isNetworkAvailable(context)) {
@@ -59,7 +61,7 @@ public class GuideSyncTask {
         } catch (Exception e) {
             setLocationStatus(context, LOCATION_STATUS_SERVER_DOWN);
             notifySync(context);
-            e.printStackTrace();
+            Log.e(TAG, e.getLocalizedMessage());
         }
     }
 
@@ -70,9 +72,7 @@ public class GuideSyncTask {
     }
 
     @SuppressWarnings("ResourceType")
-    public static
-    @GuideSyncTask.SyncStatus
-    int getSyncStatus(Context c) {
+    public static @GuideSyncTask.SyncStatus int getSyncStatus(Context c) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(c);
         return sp.getInt(c.getString(R.string.pref_location_status_key), GuideSyncTask.LOCATION_STATUS_OK);
     }
