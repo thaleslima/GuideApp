@@ -4,7 +4,7 @@
     <string name="app_name" translatable="false">Guide App</string>
     <string name="detail_icon_transition_name" translatable="false">TN_DetailIcon</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="content_authority" translatable="false">com.guideapp.guideapp</string>
+    <string name="content_authority" translatable="false">com.guideapp</string>
     <string name="pref_location_status_key" translatable="false">loc-status</string>
 
     <string name="empty_list">Nenhuma informação disponível</string>

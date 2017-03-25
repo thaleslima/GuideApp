@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.guideapp.guideapp">
+    package="com.guideapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.Manifest.permission.RECEIVE_BOOT_COMPLETED" />
@@ -81,7 +81,7 @@
             android:label="@string/title_widget_detail">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.guideapp.guideapp.ACTION_DATA_UPDATED" />
+                <action android:name="com.guideapp.ACTION_DATA_UPDATED" />
             </intent-filter>
 
             <meta-data
