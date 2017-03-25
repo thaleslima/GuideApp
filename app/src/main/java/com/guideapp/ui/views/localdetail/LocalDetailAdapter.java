@@ -48,8 +48,8 @@ class LocalDetailAdapter extends RecyclerView.Adapter<LocalDetailAdapter.LocalVi
         private final TextView mTextView;
         private final View mDividerView;
         private final MapView mMap;
+        private final View mView;
         private LocalDetail mItem;
-        private View mView;
 
         LocalViewHolder(View view) {
             super(view);
