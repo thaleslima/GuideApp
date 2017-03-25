@@ -24,7 +24,7 @@ public final class Utility {
     }
 
     public static void updateWidgets(Context context) {
-        Intent dataUpdatedIntent = new Intent(Constants.ACTION_DATA_SYNC_ERROR)
+        Intent dataUpdatedIntent = new Intent(Constants.ACTION_DATA_UPDATED)
                 .setPackage(context.getPackageName());
         context.sendBroadcast(dataUpdatedIntent);
     }
