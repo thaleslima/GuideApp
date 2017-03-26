@@ -23,10 +23,8 @@ Architecture backend services
 Libraries used on the app project
 ------------------------------------
 
-* [RxJava][1]
 * [Retrofit 2][2]
 * [Glide][3]
-* [Butterknife][3]
 
 
 Services used on the backend services
@@ -64,7 +62,7 @@ Screenshots app project
 License
 -------
 
-    Copyright 2016 Thales Reis Machado Lima
+    Copyright 2017 Thales Reis Machado Lima
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -79,10 +77,8 @@ License
     limitations under the License.
 
 
-[1]: https://github.com/ReactiveX/RxJava/
 [2]: http://square.github.io/retrofit/
 [3]: https://github.com/bumptech/glide/
-[4]: https://github.com/JakeWharton/butterknife/
 
 [10]: https://cloud.google.com/appengine/
 [11]: https://cloud.google.com/endpoints/
