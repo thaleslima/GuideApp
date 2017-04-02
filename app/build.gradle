@@ -12,32 +12,44 @@ repositories {
     mavenCentral()
 }
 
-
 apply plugin: 'com.android.application'
-apply from: '../config/quality-app.gradle'
-apply plugin: 'me.tatarka.retrolambda'
+apply from: '../config/quality/quality.gradle'
+
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.guideapp.guideapp"
+        applicationId "com.guideapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        config {
+            storeFile file("../key/app.jks")
+            storePassword "12345678"
+            keyAlias "guide"
+            keyPassword "12345678"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "ENDPOINT_URL", "\"https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/\"")
+            signingConfig signingConfigs.config
         }
-    }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        debug {
+            buildConfigField("String", "ENDPOINT_URL", "\"https://guideapp-br.appspot.com/_ah/api/guideAppApi/v1/\"")
+        }
     }
 }
 
@@ -49,28 +61,26 @@ dependencies {
     compile "com.android.support:palette-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
     compile "com.android.support:support-v13:$rootProject.supportLibraryVersion"
-    compile "com.google.android.gms:play-services-auth:$rootProject.playServicesVersion"
 
-    compile "de.hdodenhof:circleimageview:$rootProject.circleImageVersion"
     compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
-    compile "com.squareup.picasso:picasso:$rootProject.picassoVersion"
 
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingInterceptorVersion"
 
-    compile "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
+    compile "com.google.guava:guava:$rootProject.guavaVersion"
+    compile "com.firebase:firebase-jobdispatcher:$rootProject.jobdispatcherVersion"
 
-    compile "io.reactivex:rxandroid:$rootProject.rxjavaVersion"
-    compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"
-
-    compile "com.google.android.gms:play-services-location:$rootProject.playServicesVersion"
     compile "com.google.android.gms:play-services-maps:$rootProject.playServicesVersion"
+    compile "com.google.firebase:firebase-ads:$rootProject.playServicesVersion"
+    compile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
 
-    compile "it.sephiroth.android.library.imagezoom:imagezoom:$rootProject.imageZoomVersion"
-    compile "com.google.maps.android:android-maps-utils:$rootProject.mapsUtilsVersion"
+    compile "com.android.support:multidex:$rootProject.multidexVersion"
 
-    compile "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
-
-    compile project(path: ':backend', configuration: 'android-endpoints')
+    //Testing
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
 }

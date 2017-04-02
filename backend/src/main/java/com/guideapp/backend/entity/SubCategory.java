@@ -7,9 +7,6 @@ import com.guideapp.backend.util.StringUtil;
 
 import java.io.Serializable;
 
-/**
- * Created by thales on 1/24/16.
- */
 @Entity
 public class SubCategory implements Serializable {
 

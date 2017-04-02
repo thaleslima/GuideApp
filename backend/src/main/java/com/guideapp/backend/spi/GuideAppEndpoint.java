@@ -33,8 +33,7 @@ import java.util.List;
         version = "v1",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.guideapp.com",
-                ownerName = "backend.guideapp.com",
-                packagePath = ""
+                ownerName = "backend.guideapp.com"
         ),
         scopes = {Constants.EMAIL_SCOPE},
         clientIds = {Constants.WEB_CLIENT_ID, Constants.ANDROID_CLIENT_ID, Constants.IOS_CLIENT_ID},

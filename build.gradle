@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:2.3.0'
     }
 }
 
@@ -16,21 +16,21 @@ allprojects {
 }
 
 ext {
-    minSdkVersion = 16
-    targetSdkVersion = 24
-    compileSdkVersion = 24
-    buildToolsVersion = '24.0.2'
+    minSdkVersion = 18
+    targetSdkVersion = 25
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.2'
 
     // App dependencies
-    supportLibraryVersion = '24.2.1'
-    glideVersion = '3.5.2'
-    circleImageVersion = '1.2.1'
-    picassoVersion = '2.4.0'
-    playServicesVersion = '9.4.0'
-    mapsUtilsVersion = '0.3.4'
+    supportLibraryVersion = '25.3.0'
+    glideVersion = '3.7.0'
+    playServicesVersion = '10.2.1'
     imageZoomVersion = '1.0.5'
-    butterKnifeVersion = '7.0.1'
-    retrofitVersion = '2.0.0'
-    rxjavaVersion = '1.1.0'
+    retrofitVersion = '2.0.1'
     loggingInterceptorVersion = '3.1.2'
+    guavaVersion = '20.0'
+    jobdispatcherVersion = '0.5.0'
+    stethoVersion = '1.4.2'
+    multidexVersion = '1.0.1'
+
 }

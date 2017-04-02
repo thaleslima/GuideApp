@@ -4,9 +4,6 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.guideapp.backend.util.StringUtil;
 
-/**
- * Created by thales on 1/24/16.
- */
 @Entity
 public class City {
 

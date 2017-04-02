@@ -10,16 +10,9 @@ import com.guideapp.backend.util.ValidationUtil;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by thales on 1/24/16.
- */
 public class CategoryServiceImpl implements CategoryService {
-
     private final CategoryDAO mCategoryDAO;
 
-    /**
-     * Constructor
-     */
     public CategoryServiceImpl() {
         this.mCategoryDAO = new CategoryDAOImpl();
     }

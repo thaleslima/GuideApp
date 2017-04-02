@@ -1,36 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    </style>
-
-    <style name="AppThemeLocalDetail" parent="AppTheme.NoActionBar">
+    <style name="AppThemeLocalDetail" parent="AppTheme">
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="colorPrimaryDark">@color/accent_translucent</item> 
-    </style>
-
-
-    <style name="AppTheme2" parent="BaseTheme">
-        <item name="android:windowTranslucentStatus">false</item>
-        <item name="android:colorControlHighlight">@color/accent_translucent</item> 
-        <item name="android:windowSharedElementsUseOverlay">true</item>
-    </style>
-
-    <style name="AppThemeLocal" parent="BaseTheme">
-        <item name="android:windowTranslucentStatus">false</item>
-    </style>
-
-    <style name="AppThemeMap" parent="BaseTheme">
-        <item name="android:windowTranslucentStatus">true</item>
-    </style>
-
-    <style name="AppThemeSearch" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/details_window_enter_transition</item>
+        <item name="android:windowReturnTransition">@transition/details_window_return_transition</item>
+    </style>
 
-        <item name="android:windowEnterTransition">@android:transition/fade</item>
-        <item name="android:windowExitTransition">@android:transition/fade</item>
+    <style name="AppThemeMap" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>
