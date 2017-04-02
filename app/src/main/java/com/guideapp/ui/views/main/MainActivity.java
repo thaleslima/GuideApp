@@ -22,8 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.guideapp.R;
 import com.guideapp.data.local.GuideContract;
 import com.guideapp.sync.GuideSyncTask;
@@ -68,14 +66,6 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
 
         showProgressBar();
         GuideSyncUtils.initialize(this);
-    }
-
-    private void initAd() {
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        mAdView.loadAd(adRequest);
     }
 
     private void setupViewProperties() {
@@ -156,14 +146,13 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
             updateEmptyView();
         } else {
             showMenu();
-            initAd();
         }
     }
 
     private void updateEmptyView() {
         @GuideSyncTask.SyncStatus int status = GuideSyncTask.getSyncStatus(this);
 
-        int message = R.string.empty_list;
+        int message;
         switch (status) {
             case GuideSyncTask.LOCATION_STATUS_SERVER_DOWN:
                 message = R.string.empty_list_server_down;
@@ -175,6 +164,7 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
 
             case GuideSyncTask.LOCATION_STATUS_OK:
             default:
+                registerReceiver();
                 showProgressBar();
                 return;
         }
@@ -214,17 +204,19 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
     }
 
     private void registerReceiver() {
-        IntentFilter intentFilter = new IntentFilter(Constants.ACTION_DATA_SYNC_ERROR);
-        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
+        if (mBroadcastReceiver == null) {
+            IntentFilter intentFilter = new IntentFilter(Constants.ACTION_DATA_SYNC_ERROR);
+            intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
 
-        mBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                updateEmptyView();
-            }
-        };
+            mBroadcastReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    updateEmptyView();
+                }
+            };
 
-        registerReceiver(mBroadcastReceiver, intentFilter);
+            registerReceiver(mBroadcastReceiver, intentFilter);
+        }
     }
 
     private void unregisterReceiver() {

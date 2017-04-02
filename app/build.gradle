@@ -1,18 +1,22 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
     }
 
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
 
 repositories {
     mavenCentral()
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply from: '../config/quality/quality.gradle'
 
 
@@ -72,7 +76,6 @@ dependencies {
     compile "com.firebase:firebase-jobdispatcher:$rootProject.jobdispatcherVersion"
 
     compile "com.google.android.gms:play-services-maps:$rootProject.playServicesVersion"
-    compile "com.google.firebase:firebase-ads:$rootProject.playServicesVersion"
     compile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
 
     compile "com.android.support:multidex:$rootProject.multidexVersion"
@@ -83,4 +86,7 @@ dependencies {
     androidTestCompile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
+        transitive = true;
+    }
 }

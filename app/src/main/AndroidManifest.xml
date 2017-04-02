@@ -94,6 +94,9 @@
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4bba6e1559f29b94c9136bacee36cb86ede23056" />
     </application>
 
 </manifest>

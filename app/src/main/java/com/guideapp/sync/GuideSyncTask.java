@@ -57,6 +57,7 @@ public class GuideSyncTask {
                 setLocationStatus(context, LOCATION_STATUS_OK);
             } else {
                 setLocationStatus(context, LOCATION_STATUS_SERVER_DOWN);
+                notifySync(context);
             }
 
         } catch (Exception e) {
