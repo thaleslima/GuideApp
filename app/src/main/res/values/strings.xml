@@ -26,6 +26,9 @@
     <string name="title_remove_favorite">Local removido em favoritos</string>
     <string name="action_share">Compartilhar local</string>
     <string name="share_text">Local: %1$s\nEndereço: %2$s\nTipo: %3$s\n\n%4$s</string>
+    <string name="action_direction">Ir</string>
+    <string name="action_call">Ligar</string>
+    <string name="action_website">WebSite</string>
 
 
     <!--My locals-->

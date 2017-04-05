@@ -3,10 +3,6 @@ package com.guideapp.ui.views.localdetail;
 import android.content.Context;
 import android.support.v4.app.LoaderManager;
 
-import com.guideapp.model.LocalDetail;
-
-import java.util.List;
-
 interface LocalDetailContract {
     interface View {
         void showFavoriteYes();
@@ -19,13 +15,33 @@ interface LocalDetailContract {
 
         void shareText(String textToShare);
 
-        void showLocalDetail(List<LocalDetail> localDetails);
-
         Context getContext();
 
         void showTitle(String description);
 
         void showImage(String imagePath);
+
+        void showCategory(String text);
+
+        void showWebSiteAction();
+
+        void showDirectionAction();
+
+        void showCallAction();
+
+        void showCall(String phone);
+
+        void showDetail(String description);
+
+        void showAddress(String address);
+
+        void showMap(double latitude, double longitude, int idImageMarker);
+
+        void dialPhoneNumber(String number);
+
+        void openPage(String url);
+
+        void openDirection(String description, String latLng);
     }
 
     interface Presenter {
@@ -36,5 +52,11 @@ interface LocalDetailContract {
         void saveOrRemoveFavorite();
 
         void shareLocal();
+
+        void loadWebsite();
+
+        void loadCall();
+
+        void loadDirection();
     }
 }

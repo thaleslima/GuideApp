@@ -33,7 +33,7 @@ class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.LocalViewHold
 
     @Override
     public FavoriteAdapter.LocalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_local, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_local_favorite, parent, false);
         return new FavoriteAdapter.LocalViewHolder(v);
     }
 

@@ -27,6 +27,8 @@
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@color/primary_text"
             android:typeface="sans"
             tools:text="local_text" />
@@ -36,8 +38,12 @@
             style="@style/TextAppearance.AppCompat.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/secondary_text"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-condensed"
+            android:maxLines="1"
+            android:textAllCaps="true"
+            android:textColor="@color/primary_text_accent"
+            android:textStyle="bold"
             tools:text="descriptions_sub_category" />
     </LinearLayout>
 </LinearLayout>

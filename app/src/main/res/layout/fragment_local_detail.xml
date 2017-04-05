@@ -1,0 +1,144 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/detail_local"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sub_category_text"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center|start"
+            android:padding="@dimen/default_padding"
+            android:textAllCaps="true"
+            android:textColor="@color/primary_text_accent"
+            android:textStyle="bold"
+            tools:text="sub_category" />
+
+        <TextView
+            android:id="@+id/description_text"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_light"
+            android:fontFamily="sans-serif"
+            android:gravity="center|start"
+            android:padding="@dimen/default_padding"
+            android:textColor="@color/secondary_text"
+            android:visibility="gone"
+            tools:text="description_text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/direction_action"
+                style="@style/TextAppearance.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/activity_vertical_margin_medium"
+                android:drawableTop="@drawable/ic_directions_grey_72_24dp"
+                android:fontFamily="sans-serif-condensed"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="@dimen/default_padding"
+                android:text="@string/action_direction"
+                android:textAllCaps="true"
+                android:textColor="@color/secondary_text"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/call_action"
+                style="@style/TextAppearance.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/activity_vertical_margin_medium"
+                android:drawableTop="@drawable/ic_call_grey_72_24dp"
+                android:fontFamily="sans-serif-condensed"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="@dimen/default_padding"
+                android:text="@string/action_call"
+                android:textAllCaps="true"
+                android:textColor="@color/secondary_text"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/website_action"
+                style="@style/TextAppearance.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/activity_vertical_margin_medium"
+                android:drawableTop="@drawable/ic_public_grey_72_24dp"
+                android:fontFamily="sans-serif-condensed"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:padding="@dimen/default_padding"
+                android:text="@string/action_website"
+                android:textAllCaps="true"
+                android:textColor="@color/secondary_text"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_map"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            map:cameraZoom="15"
+            map:liteMode="true"
+            map:mapType="normal" />
+
+        <TextView
+            android:id="@+id/address_text"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:drawablePadding="@dimen/activity_vertical_margin"
+            android:drawableStart="@drawable/ic_location_on_grey_72_24dp"
+            android:fontFamily="sans-serif"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center|start"
+            android:paddingBottom="@dimen/default_padding"
+            android:paddingTop="@dimen/default_padding"
+            android:textColor="@color/primary_text"
+            android:visibility="gone"
+            tools:text="address_text" />
+
+        <TextView
+            android:id="@+id/phone_text"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:drawablePadding="@dimen/activity_vertical_margin"
+            android:drawableStart="@drawable/ic_call_grey_72_24dp"
+            android:fontFamily="sans-serif"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center|start"
+            android:paddingBottom="@dimen/default_padding"
+            android:paddingTop="@dimen/default_padding"
+            android:textColor="@color/primary_text"
+            android:visibility="gone"
+            tools:text="phone_text" />
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

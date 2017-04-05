@@ -32,7 +32,7 @@
 
     <slide android:slideEdge="bottom">
         <targets>
-            <target android:targetId="@id/recycler" />
+            <target android:targetId="@id/detail_local" />
         </targets>
     </slide>
 

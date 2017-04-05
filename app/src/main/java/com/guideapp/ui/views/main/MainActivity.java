@@ -40,9 +40,9 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
             R.drawable.ic_bookmark_black_24dp
     };
 
-    private static final int[] ICONS_TAB_WHITE = {
-            R.drawable.ic_apps_white_24dp,
-            R.drawable.ic_bookmark_white_24dp
+    private static final int[] ICONS_TAB_GREY = {
+            R.drawable.ic_apps_grey_400_24dp,
+            R.drawable.ic_bookmark_grey_400_24dp
     };
 
     private TabLayout mTabLayout;
@@ -73,13 +73,13 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mViewPager.setCurrentItem(tab.getPosition(), true);
-                tab.setIcon(ICONS_TAB_WHITE[tab.getPosition()]);
+                tab.setIcon(ICONS_TAB_BLACK[tab.getPosition()]);
                 mAppBarLayout.setExpanded(true);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                tab.setIcon(ICONS_TAB_BLACK[tab.getPosition()]);
+                tab.setIcon(ICONS_TAB_GREY[tab.getPosition()]);
             }
 
             @Override
@@ -100,9 +100,9 @@ public class MainActivity extends BaseActivity implements LoaderManager.LoaderCa
     private void setupViewPager() {
         for (int i = 0; i < ICONS_TAB_BLACK.length; i++) {
             if (i == 0) {
-                mTabLayout.addTab(mTabLayout.newTab().setIcon(ICONS_TAB_WHITE[i]));
-            } else {
                 mTabLayout.addTab(mTabLayout.newTab().setIcon(ICONS_TAB_BLACK[i]));
+            } else {
+                mTabLayout.addTab(mTabLayout.newTab().setIcon(ICONS_TAB_GREY[i]));
             }
         }
 

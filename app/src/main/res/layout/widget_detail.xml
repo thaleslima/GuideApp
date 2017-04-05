@@ -9,9 +9,10 @@
         android:id="@+id/widget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/green_500"
+        android:elevation="@dimen/elevation_menu"
         android:orientation="vertical"
-        android:padding="@dimen/widget_margin"
-        android:background="@color/primary">
+        android:padding="@dimen/widget_margin">
 
         <TextView
             style="@style/Base.TextAppearance.AppCompat.Title"

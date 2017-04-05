@@ -12,8 +12,8 @@ import android.widget.ProgressBar;
 import com.guideapp.R;
 import com.guideapp.model.Local;
 import com.guideapp.ui.views.BaseActivity;
+import com.guideapp.ui.views.GridSpacingItemDecoration;
 import com.guideapp.ui.views.localdetail.LocalDetailActivity;
-import com.guideapp.ui.views.DividerItemDecoration;
 
 import java.util.List;
 
@@ -89,7 +89,7 @@ public class LocalActivity extends BaseActivity implements LocalContract.View, L
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, 16, true));
     }
 
     @Override

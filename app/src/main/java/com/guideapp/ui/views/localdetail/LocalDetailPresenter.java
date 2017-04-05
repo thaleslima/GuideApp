@@ -8,14 +8,11 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
 
-import com.guideapp.R;
 import com.guideapp.data.local.GuideContract;
 import com.guideapp.model.Local;
-import com.guideapp.model.LocalDetail;
 import com.guideapp.utilities.DataUtil;
 import com.guideapp.utilities.Utility;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
@@ -23,7 +20,13 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
 
     private final LocalDetailContract.View mView;
     private final long mIdLocal;
+
     private String mTextToShare;
+    private String mPhoneToCall;
+    private String mLatLngToDirection;
+    private String mSiteToOpen;
+    private String mDescription;
+
     private boolean mIsFavorite;
 
     LocalDetailPresenter(LocalDetailContract.View localView, long idLocal) {
@@ -61,6 +64,27 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
         }
     }
 
+    @Override
+    public void loadWebsite() {
+        if (mSiteToOpen != null) {
+            mView.openPage(mSiteToOpen);
+        }
+    }
+
+    @Override
+    public void loadCall() {
+        if (mPhoneToCall != null) {
+            mView.dialPhoneNumber(mPhoneToCall);
+        }
+    }
+
+    @Override
+    public void loadDirection() {
+        if (mLatLngToDirection != null) {
+            mView.openDirection(mDescription, mLatLngToDirection);
+        }
+    }
+
     private void updateFavorite(boolean isFavorite) {
         ContentValues values = new ContentValues();
         values.put(GuideContract.LocalEntry.COLUMN_FAVORITE, isFavorite);
@@ -94,10 +118,11 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
         List<Local> locals = DataUtil.getLocalsFromCursor(data);
 
         if (locals.size() > 0) {
-            mView.showTitle(locals.get(0).getDescription());
-            mView.showImage(locals.get(0).getImagePath());
+            Local local = locals.get(0);
 
-            mIsFavorite = locals.get(0).isFavorite();
+            mView.showTitle(local.getDescription());
+            mView.showImage(local.getImagePath());
+            mIsFavorite = local.isFavorite();
 
             if (mIsFavorite) {
                 mView.showFavoriteYes();
@@ -105,49 +130,39 @@ class LocalDetailPresenter implements LocalDetailContract.Presenter, LoaderManag
                 mView.showFavoriteNo();
             }
 
-            mView.showLocalDetail(createListLocalDetail(locals.get(0)));
-            mTextToShare = Utility.getTextToShare(mView.getContext(), locals.get(0));
+            mView.showCategory(local.getDescriptionSubCategories());
+            mView.showDirectionAction();
+
+            if (!TextUtils.isEmpty(local.getDetail())) {
+                mView.showDetail(local.getDetail());
+            }
+
+            if (!TextUtils.isEmpty(local.getPhone())) {
+                mView.showCall(local.getPhone());
+                mView.showCallAction();
+            }
+
+            if (!TextUtils.isEmpty(local.getSite())) {
+                mView.showWebSiteAction();
+            }
+
+            if (!TextUtils.isEmpty(local.getAddress())) {
+                mView.showAddress(local.getAddress());
+            }
+
+            mPhoneToCall = local.getPhone();
+            mLatLngToDirection = local.getLatitude() + "," + local.getLongitude();
+            mDescription = local.getDescription();
+
+            mSiteToOpen = local.getSite();
+            mTextToShare = Utility.getTextToShare(mView.getContext(), local);
+
+            mView.showMap(local.getLatitude(), local.getLongitude(), Utility.getIdImageCategory(local.getIdCategory()));
         }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
-    }
-
-    private static List<LocalDetail> createListLocalDetail(Local local) {
-        List<LocalDetail> list = new ArrayList<>();
-
-        if (!TextUtils.isEmpty(local.getDescriptionSubCategories())) {
-            list.add(new LocalDetail(R.drawable.ic_info_grey_72_24dp,
-                    local.getDescriptionSubCategories(), true, LocalDetailAdapter.LOCAL_DETAIL));
-        }
-
-        if (!TextUtils.isEmpty(local.getSite())) {
-            list.add(new LocalDetail(R.drawable.ic_language_grey_72_24dp,
-                    local.getSite(), true, LocalDetailAdapter.LOCAL_SITE));
-        }
-
-        if (!TextUtils.isEmpty(local.getPhone())) {
-            list.add(new LocalDetail(R.drawable.ic_call_grey_72_24dp,
-                    local.getPhone(), true, LocalDetailAdapter.LOCAL_PHONE));
-        }
-
-        if (!TextUtils.isEmpty(local.getDetail())) {
-            list.add(new LocalDetail(R.drawable.ic_apps_grey_72_24dp,
-                    local.getDetail(), true, LocalDetailAdapter.LOCAL_DETAIL));
-        }
-
-        if (!TextUtils.isEmpty(local.getAddress())) {
-            list.add(new LocalDetail(R.drawable.ic_location_on_grey_72_24dp,
-                    local.getAddress(), false,
-                    LocalDetailAdapter.LOCAL_DETAIL));
-        }
-
-        list.add(new LocalDetail(true, LocalDetailAdapter.LOCAL_DETAIL_MAP,
-                local.getLatitude(), local.getLongitude(), Utility.getIdImageCategory(local.getIdCategory())));
-
-
-        return list;
     }
 }
