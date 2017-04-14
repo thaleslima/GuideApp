@@ -20,7 +20,5 @@ android:
     - android-sdk-license-.+
     - google-gdk-license-.+
 
-jdk: oraclejdk8
-
 script:
-  ./gradlew build
+  ./gradlew clean build
