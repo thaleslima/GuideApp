@@ -1,4 +1,5 @@
-# GuideApp
+# GuideApp [![Build Status](https://travis-ci.org/thaleslima/GuideApp.svg?branch=master)](https://travis-ci.org/thaleslima/GuideApp)
+
 :thumbsup: [Android] [Google App Engine] Application that displays the cities services. (Restaurants, hotels, attractions, etc.)
 
 Developed By
