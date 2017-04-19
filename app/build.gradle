@@ -78,6 +78,7 @@ dependencies {
     compile "com.facebook.stetho:stetho:$rootProject.stethoVersion"
 
     compile "com.android.support:multidex:$rootProject.multidexVersion"
+    compile "com.google.firebase:firebase-core:$rootProject.firebaseVersion"
 
     //Testing
     testCompile 'junit:junit:4.12'
@@ -89,3 +90,5 @@ dependencies {
         transitive = true;
     }
 }
+
+apply plugin: 'com.google.gms.google-services'

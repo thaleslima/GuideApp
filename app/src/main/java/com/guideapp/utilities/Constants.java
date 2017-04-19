@@ -18,4 +18,10 @@ public final class Constants {
         long ATTRACTIVE = 5651124426113024L;
         long ACCOMMODATION  = 5679413765079040L;
     }
+
+    public interface Analytics {
+        String SAVE_FAVORITE = "save_favorite";
+        String REMOVE_FAVORITE = "remove_favorite";
+        String SCREEN = "screen";
+    }
 }

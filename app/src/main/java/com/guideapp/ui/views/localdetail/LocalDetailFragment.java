@@ -34,7 +34,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.guideapp.R;
+import com.guideapp.utilities.Constants;
 
 public class LocalDetailFragment extends Fragment
         implements LocalDetailContract.View, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -58,6 +60,8 @@ public class LocalDetailFragment extends Fragment
     private TextView mPhoneView;
 
     private SupportMapFragment mSupportMapFragment;
+    private FirebaseAnalytics mFirebaseAnalytics;
+    private String mTitle;
 
     public static Fragment newInstance(long id) {
         Fragment fragment = new LocalDetailFragment();
@@ -71,6 +75,7 @@ public class LocalDetailFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
     }
 
     @Override
@@ -188,11 +193,25 @@ public class LocalDetailFragment extends Fragment
     @Override
     public void showSnackbarRemoveFavorite() {
         Snackbar.make(mCollapsing, R.string.title_remove_favorite, Snackbar.LENGTH_SHORT).show();
+        sendEventFavorite(Constants.Analytics.REMOVE_FAVORITE);
     }
 
     @Override
     public void showSnackbarSaveFavorite() {
         Snackbar.make(mCollapsing, R.string.title_save_favorite, Snackbar.LENGTH_SHORT).show();
+        sendEventFavorite(Constants.Analytics.SAVE_FAVORITE);
+    }
+
+    private void sendEventFavorite(String type) {
+        Bundle bundle = new Bundle();
+
+        if (getArguments() != null) {
+            long id = getArguments().getLong(EXTRA_LOCAL_ID);
+            bundle.putLong(FirebaseAnalytics.Param.ITEM_ID, id);
+            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, mTitle);
+            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, type);
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+        }
     }
 
     @Override
@@ -220,6 +239,7 @@ public class LocalDetailFragment extends Fragment
 
     @Override
     public void showTitle(String description) {
+        mTitle = description;
         mCollapsing.setTitle(description);
         mCollapsing.setExpandedTitleColor(ContextCompat.getColor(getContext(), R.color.white));
     }

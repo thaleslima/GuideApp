@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "463730165489",
+    "firebase_url": "https://guideapp-3081b.firebaseio.com",
+    "project_id": "guideapp-3081b",
+    "storage_bucket": "guideapp-3081b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463730165489:android:4154ffce295f504a",
+        "android_client_info": {
+          "package_name": "eco.guideapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "463730165489-js7ce7p8jrj3so0e6bgett52dkr529tg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eco.guideapp",
+            "certificate_hash": "efdd527bd0202a5699ae509edb28c3af3bfd41dd"
+          }
+        },
+        {
+          "client_id": "463730165489-gd7gcnatnbo1nt81becm7re22erippdc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZUObcLo1sbglzC8YBBmXUIT-0bskgTK0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463730165489-gd7gcnatnbo1nt81becm7re22erippdc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
