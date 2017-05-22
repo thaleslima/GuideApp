@@ -84,11 +84,11 @@ public class TestGuideContentProvider {
     @Test
     public void testUriMatcher() {
 
-        UriMatcher testMatcher = GuideProvider.buildUriMatcher();
+        UriMatcher testMatcher = GuideProvider.Companion.buildUriMatcher();
 
         String uriDoesNotMatch = "Error: The MOVIES URI was matched incorrectly.";
         int actualMatchCode = testMatcher.match(TEST_MOVIES);
-        int expectedMatchCode = GuideProvider.CODE_LOCAL;
+        int expectedMatchCode = GuideProvider.Companion.getCODE_LOCAL();
         assertEquals(uriDoesNotMatch,
                 actualMatchCode,
                 expectedMatchCode);

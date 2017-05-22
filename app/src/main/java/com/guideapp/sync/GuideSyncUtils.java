@@ -26,10 +26,8 @@ public class GuideSyncUtils {
     private static final String SUNSHINE_SYNC_TAG = "sunshine-sync";
 
     private static void scheduleFirebaseJobDispatcherSync(@NonNull final Context context) {
-
         Driver driver = new GooglePlayDriver(context);
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
-
         Job syncSunshineJob = dispatcher.newJobBuilder()
                 .setService(GuideFirebaseJobService.class)
                 .setTag(SUNSHINE_SYNC_TAG)
@@ -41,14 +39,11 @@ public class GuideSyncUtils {
                         SYNC_INTERVAL_SECONDS + SYNC_FLEXTIME_SECONDS))
                 .setReplaceCurrent(true)
                 .build();
-
-
         dispatcher.schedule(syncSunshineJob);
     }
 
     public static synchronized void initialize(@NonNull final Context context) {
         if (sInitialized) return;
-
         sInitialized = true;
         scheduleFirebaseJobDispatcherSync(context);
         Thread checkForEmpty = new Thread(new Runnable() {
@@ -73,7 +68,6 @@ public class GuideSyncUtils {
                 }
             }
         });
-
         checkForEmpty.start();
     }
 

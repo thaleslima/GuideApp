@@ -39,19 +39,19 @@ public class GuideSyncTask {
     static synchronized void syncGuide(Context context) {
         try {
 
-            if (!Utility.isNetworkAvailable(context)) {
+            if (!Utility.INSTANCE.isNetworkAvailable(context)) {
                 setLocationStatus(context, LOCATION_STATUS_NO_CONNECTION);
                 notifySync(context);
                 return;
             }
 
-            GuideApi service = RestClient.getClient();
+            GuideApi service = RestClient.INSTANCE.getClient();
             ListResponse<Local> locals = service.getLocals(Constants.City.ID).execute().body();
             ContentResolver contentResolver = context.getContentResolver();
             Cursor cursor = contentResolver.query(GuideContract.LocalEntry.CONTENT_URI, null,
                     GuideContract.LocalEntry.getSqlSelectForFavorites(), null, null);
-            Set<Long> favorites = DataUtil.getLocalsFavoritesFromCursor(cursor);
-            ContentValues[] values = DataUtil.getGuideContentValuesFromList(locals.getItems(), favorites);
+            Set<Long> favorites = DataUtil.INSTANCE.getLocalsFavoritesFromCursor(cursor);
+            ContentValues[] values = DataUtil.INSTANCE.getGuideContentValuesFromList(locals.getItems(), favorites);
             if (values != null && values.length != 0) {
                 contentResolver.bulkInsert(GuideContract.LocalEntry.CONTENT_URI, values);
                 setLocationStatus(context, LOCATION_STATUS_OK);
