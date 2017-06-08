@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.database.Cursor
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -14,14 +13,9 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.app.LoaderManager
 import android.support.v4.content.CursorLoader
 import android.support.v4.content.Loader
-import android.support.v4.view.ViewPager
-import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.ProgressBar
 import android.widget.TextView
-
 import com.guideapp.R
 import com.guideapp.data.local.GuideContract
 import com.guideapp.sync.GuideSyncTask
@@ -30,20 +24,15 @@ import com.guideapp.ui.views.BaseActivity
 import com.guideapp.ui.views.favorite.FavoriteFragment
 import com.guideapp.ui.views.menu.MenuFragment
 import com.guideapp.utilities.Constants
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
-    private var mTabLayout: TabLayout? = null
-    private var mViewError: LinearLayout? = null
-    private var mViewPager: ViewPager? = null
-    private var mAppBarLayout: AppBarLayout? = null
-    private var mProgressBar: ProgressBar? = null
     private var mBroadcastReceiver: BroadcastReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupToolbar()
-        setupViews()
         setupViewPager()
         setupViewProperties()
         showProgressBar()
@@ -53,11 +42,11 @@ class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun setupViewProperties() {
-        mTabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        tabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                mViewPager?.setCurrentItem(tab.position, true)
+                viewpager?.setCurrentItem(tab.position, true)
                 tab.setIcon(ICONS_TAB_BLACK[tab.position])
-                mAppBarLayout?.setExpanded(true)
+                appBarLayout?.setExpanded(true)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
@@ -69,7 +58,6 @@ class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun setupToolbar() {
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setTitle(R.string.app_name_city)
     }
@@ -77,26 +65,20 @@ class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
     private fun setupViewPager() {
         for (i in ICONS_TAB_BLACK.indices) {
             if (i == 0) {
-                mTabLayout?.newTab()?.setIcon(ICONS_TAB_BLACK[i])?.let { mTabLayout?.addTab(it) }
+                tabLayout?.newTab()?.setIcon(ICONS_TAB_BLACK[i])?.let { tabLayout?.addTab(it) }
             } else {
-                mTabLayout?.newTab()?.setIcon(ICONS_TAB_GREY[i])?.let { mTabLayout?.addTab(it) }
+                tabLayout?.newTab()?.setIcon(ICONS_TAB_GREY[i])?.let { tabLayout?.addTab(it) }
             }
         }
 
-        mViewPager?.let { viewPager ->
+        viewpager?.let { viewPager ->
             viewPager.adapter = SectionsAdapter(supportFragmentManager)
-            viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mTabLayout))
+            viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
             viewPager.pageMargin = 16
         }
     }
 
-    private fun setupViews() {
-        mTabLayout = findViewById(R.id.tabLayout) as TabLayout
-        mViewPager = findViewById(R.id.viewpager) as ViewPager
-        mAppBarLayout = findViewById(R.id.appBarLayout) as AppBarLayout
-        mViewError = findViewById(R.id.view_error) as LinearLayout
-        mProgressBar = findViewById(R.id.progressBar) as ProgressBar
-    }
+
 
     override fun onCreateLoader(id: Int, args: Bundle): Loader<Cursor> {
         when (id) {
@@ -143,7 +125,7 @@ class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun checkProgress() {
-        if (mProgressBar?.visibility == View.VISIBLE) {
+        if (progressBar?.visibility == View.VISIBLE) {
             updateEmptyView()
         }
     }
@@ -183,23 +165,23 @@ class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun showErrorMessage() {
-        mViewError?.visibility = View.VISIBLE
+        view_error?.visibility = View.VISIBLE
     }
 
     private fun hideErrorMessage() {
-        mViewError?.visibility = View.GONE
+        view_error?.visibility = View.GONE
     }
 
     private fun showMenu() {
-        mViewPager?.visibility = View.VISIBLE
+        viewpager?.visibility = View.VISIBLE
     }
 
     private fun showProgressBar() {
-        mProgressBar?.visibility = View.VISIBLE
+        progressBar?.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {
-        mProgressBar?.visibility = View.GONE
+        progressBar?.visibility = View.GONE
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {

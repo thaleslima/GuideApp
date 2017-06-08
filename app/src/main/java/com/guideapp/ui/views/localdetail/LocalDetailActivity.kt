@@ -6,17 +6,14 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v4.app.NavUtils
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
-
 import com.guideapp.R
 import com.guideapp.ui.views.BaseActivity
 import com.guideapp.ui.views.local.LocalActivity
 import com.guideapp.utilities.Utility
+import kotlinx.android.synthetic.main.activity_local_detail.*
 
 class LocalDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +35,6 @@ class LocalDetailActivity : BaseActivity() {
     }
 
     private fun setupToolbar() {
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

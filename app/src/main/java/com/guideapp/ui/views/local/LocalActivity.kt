@@ -4,19 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.widget.ImageView
-import android.widget.ProgressBar
-
 import com.guideapp.R
 import com.guideapp.model.Local
 import com.guideapp.ui.views.BaseActivity
 import com.guideapp.ui.views.GridSpacingItemDecoration
 import com.guideapp.ui.views.localdetail.LocalDetailActivity
+import kotlinx.android.synthetic.main.activity_local.*
 
 class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClickListener {
-    private var mProgressBar: ProgressBar? = null
     private var mIdCategory: Long = 0
     private var mIdTitle: Int = 0
     private var mAdapter: LocalAdapter? = null
@@ -29,7 +26,6 @@ class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClick
             setIntent(intent)
             initExtra()
             setupToolbar()
-
             mActionsListener?.restartLoadLocals(supportLoaderManager, mIdCategory)
         }
     }
@@ -39,7 +35,6 @@ class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClick
         setContentView(R.layout.activity_local)
 
         initExtra()
-        setupViews()
         setupToolbar()
         setupRecyclerView()
 
@@ -52,25 +47,18 @@ class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClick
         mIdTitle = intent.getIntExtra(EXTRA_ID_TITLE, 0)
     }
 
-    private fun setupViews() {
-        mProgressBar = findViewById(R.id.progressBar) as ProgressBar
-    }
-
     private fun setupToolbar() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        if (supportActionBar != null) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setTitle(mIdTitle)
-        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle(mIdTitle)
     }
 
     private fun setupRecyclerView() {
-        mAdapter = LocalAdapter(this, this)
-        val recyclerView = findViewById(R.id.recycler) as RecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = mAdapter
-        recyclerView.addItemDecoration(GridSpacingItemDecoration(1, 16, true))
+        mAdapter = LocalAdapter(this)
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = mAdapter
+        recycler.addItemDecoration(GridSpacingItemDecoration(1, 16, true))
     }
 
     override fun showLocals(locals: List<Local>) {
@@ -82,11 +70,11 @@ class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClick
     }
 
     override fun showProgressBar() {
-        mProgressBar?.visibility = android.view.View.VISIBLE
+        progressBar?.visibility = android.view.View.VISIBLE
     }
 
     override fun hideProgressBar() {
-        mProgressBar?.visibility = android.view.View.GONE
+        progressBar?.visibility = android.view.View.GONE
     }
 
     override fun getContext(): Context {
@@ -105,7 +93,6 @@ class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClick
             val intent = Intent(context, LocalActivity::class.java)
             intent.putExtra(EXTRA_CATEGORY, idCategory)
             intent.putExtra(EXTRA_ID_TITLE, idTitle)
-
             context.startActivity(intent)
         }
     }

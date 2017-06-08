@@ -25,9 +25,9 @@ ext {
     buildToolsVersion = '25.0.2'
 
     // App dependencies
-    supportLibraryVersion = '25.3.0'
+    supportLibraryVersion = '25.3.1'
     glideVersion = '3.7.0'
-    playServicesVersion = '10.2.1'
+    playServicesVersion = '10.2.6'
     imageZoomVersion = '1.0.5'
     retrofitVersion = '2.0.1'
     loggingInterceptorVersion = '3.1.2'

@@ -16,8 +16,7 @@ import com.guideapp.utilities.Constants
 
 class LocalFavoriteWidget : AppWidgetProvider() {
 
-    private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager,
-                                appWidgetId: Int) {
+    private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
         val views = RemoteViews(context.packageName, R.layout.widget_detail)
         val intent = Intent(context, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
@@ -32,8 +31,7 @@ class LocalFavoriteWidget : AppWidgetProvider() {
     }
 
     private fun setRemoteAdapter(context: Context, views: RemoteViews) {
-        views.setRemoteAdapter(R.id.widget_list,
-                Intent(context, LocalFavoriteWidgetRemoteViewsService::class.java))
+        views.setRemoteAdapter(R.id.widget_list, Intent(context, LocalFavoriteWidgetRemoteViewsService::class.java))
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
@@ -46,8 +44,7 @@ class LocalFavoriteWidget : AppWidgetProvider() {
         super.onReceive(context, intent)
         if (Constants.ACTION_DATA_UPDATED == intent.action) {
             val appWidgetManager = AppWidgetManager.getInstance(context)
-            val appWidgetIds = appWidgetManager.getAppWidgetIds(
-                    ComponentName(context, javaClass))
+            val appWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context, javaClass))
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list)
         }
     }

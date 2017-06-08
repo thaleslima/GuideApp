@@ -9,19 +9,11 @@ import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.app.ShareCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
-import android.widget.TextView
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.animation.GlideAnimation
@@ -37,9 +29,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.guideapp.R
 import com.guideapp.utilities.Constants
+import kotlinx.android.synthetic.main.fragment_local_detail.*
 
 class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-
     private var mLatitude: Double = 0.toDouble()
     private var mLongitude: Double = 0.toDouble()
     private var mIdImageMarker: Int = 0
@@ -48,14 +40,6 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
     private var mFab: FloatingActionButton? = null
     private var mImage: ImageView? = null
     private var mPresenter: LocalDetailContract.Presenter? = null
-
-    private var mSubCategoryView: TextView? = null
-    private var mDescriptionView: TextView? = null
-    private var mDirectionActionView: TextView? = null
-    private var mCallActionView: TextView? = null
-    private var mWebsiteActionView: TextView? = null
-    private var mAddressView: TextView? = null
-    private var mPhoneView: TextView? = null
 
     private var mSupportMapFragment: SupportMapFragment? = null
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
@@ -68,11 +52,15 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_local_detail, container, false)
-        setupViews(view)
+        setupViewActivity()
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupViews()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -82,40 +70,30 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item?.itemId
-
         when (id) {
             R.id.action_share -> mPresenter?.shareLocal()
             else -> return super.onOptionsItemSelected(item)
         }
-
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setupViews(view: View) {
+    private fun setupViewActivity() {
         mCollapsing = activity.findViewById(R.id.collapsingToolbarLayout) as CollapsingToolbarLayout
         mImage = activity.findViewById(R.id.image) as ImageView
         mFab = activity.findViewById(R.id.fab) as FloatingActionButton
-
-        mSubCategoryView = view.findViewById(R.id.sub_category_text) as TextView
-        mDescriptionView = view.findViewById(R.id.description_text) as TextView
-        mAddressView = view.findViewById(R.id.address_text) as TextView
-        mPhoneView = view.findViewById(R.id.phone_text) as TextView
-
-        mDirectionActionView = view.findViewById(R.id.direction_action) as TextView
-        mCallActionView = view.findViewById(R.id.call_action) as TextView
-        mWebsiteActionView = view.findViewById(R.id.website_action) as TextView
-
         mFab?.setOnClickListener { mPresenter?.saveOrRemoveFavorite() }
-        mAddressView?.setOnClickListener { mPresenter?.loadDirection() }
-        mDirectionActionView?.setOnClickListener { mPresenter?.loadDirection() }
-        mPhoneView?.setOnClickListener { mPresenter?.loadCall() }
-        mCallActionView?.setOnClickListener { mPresenter?.loadCall() }
-        mWebsiteActionView?.setOnClickListener { mPresenter?.loadWebsite() }
+    }
+
+    private fun setupViews() {
+        address_text?.setOnClickListener { mPresenter?.loadDirection() }
+        phone_text?.setOnClickListener { mPresenter?.loadCall() }
+        direction_action?.setOnClickListener { mPresenter?.loadDirection() }
+        call_action?.setOnClickListener { mPresenter?.loadCall() }
+        website_action?.setOnClickListener { mPresenter?.loadWebsite() }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
         mPresenter?.destroy(activity.supportLoaderManager)
         mPresenter = null
     }
@@ -144,7 +122,6 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
 
     private fun sendEventFavorite(type: String) {
         val bundle = Bundle()
-
         if (arguments != null) {
             val id = arguments.getLong(EXTRA_LOCAL_ID)
             bundle.putLong(FirebaseAnalytics.Param.ITEM_ID, id)
@@ -156,7 +133,6 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         arguments?.let { argument ->
             val id = argument.getLong(EXTRA_LOCAL_ID)
             mPresenter = LocalDetailPresenter(this, id)
@@ -195,34 +171,34 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
     }
 
     override fun showCategory(text: String) {
-        mSubCategoryView?.text = text
+        sub_category_text?.text = text
     }
 
     override fun showWebSiteAction() {
-        mWebsiteActionView?.visibility = View.VISIBLE
+        website_action?.visibility = View.VISIBLE
     }
 
     override fun showDirectionAction() {
-        mDirectionActionView?.visibility = View.VISIBLE
+        direction_action?.visibility = View.VISIBLE
     }
 
     override fun showCallAction() {
-        mCallActionView?.visibility = View.VISIBLE
+        call_action?.visibility = View.VISIBLE
     }
 
     override fun showCall(phone: String) {
-        mPhoneView?.visibility = View.VISIBLE
-        mPhoneView?.text = phone
+        phone_text?.visibility = View.VISIBLE
+        phone_text?.text = phone
     }
 
     override fun showDetail(description: String) {
-        mDescriptionView?.visibility = View.VISIBLE
-        mDescriptionView?.text = description
+        description_text?.visibility = View.VISIBLE
+        description_text?.text = description
     }
 
     override fun showAddress(address: String) {
-        mAddressView?.visibility = View.VISIBLE
-        mAddressView?.text = address
+        address_text?.visibility = View.VISIBLE
+        address_text?.text = address
     }
 
     override fun showMap(latitude: Double, longitude: Double, idImageMarker: Int) {
@@ -294,7 +270,6 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
 
     companion object {
         private val EXTRA_LOCAL_ID = "local_id"
-
         fun newInstance(id: Long): Fragment {
             val fragment = LocalDetailFragment()
             val bundle = Bundle()

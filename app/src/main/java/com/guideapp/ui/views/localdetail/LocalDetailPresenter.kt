@@ -7,9 +7,7 @@ import android.support.v4.app.LoaderManager
 import android.support.v4.content.CursorLoader
 import android.support.v4.content.Loader
 import android.text.TextUtils
-
 import com.guideapp.data.local.GuideContract
-import com.guideapp.model.Local
 import com.guideapp.utilities.DataUtil
 import com.guideapp.utilities.Utility
 
@@ -88,8 +86,7 @@ internal class LocalDetailPresenter(private val mView: LocalDetailContract.View,
 
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor) {
         val locals = DataUtil.getLocalsFromCursor(data)
-
-        if (locals.size > 0) {
+        if (locals.isNotEmpty()) {
             val local = locals[0]
 
             mView.showTitle(local.description!!)

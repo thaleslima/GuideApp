@@ -1,38 +1,29 @@
 package com.guideapp.ui.views.local
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.guideapp.R
 import com.guideapp.model.Local
+import com.guideapp.utilities.inflate
+import kotlinx.android.synthetic.main.item_local.view.*
+import java.util.*
 
-import java.util.ArrayList
-
-internal class LocalAdapter(private val mContext: Context, private val mListener: LocalAdapter.ItemClickListener) : RecyclerView.Adapter<LocalAdapter.LocalViewHolder>() {
-    private val mDataSet: MutableList<Local>
+internal class LocalAdapter(private val mListener: LocalAdapter.ItemClickListener) : RecyclerView.Adapter<LocalAdapter.LocalViewHolder>() {
+    private val mDataSet: MutableList<Local> = ArrayList()
 
     internal interface ItemClickListener {
         fun onItemClick(item: Local, view: ImageView)
     }
 
-    init {
-        this.mDataSet = ArrayList<Local>()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocalViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_local, parent, false)
-        return LocalViewHolder(v)
+        return LocalViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: LocalViewHolder, position: Int) {
-        holder.populate(mDataSet[position])
+        holder.bind(mDataSet[position])
     }
 
     override fun getItemCount(): Int {
@@ -49,28 +40,22 @@ internal class LocalAdapter(private val mContext: Context, private val mListener
         mDataSet.addAll(dataSet)
     }
 
-    internal inner class LocalViewHolder(private val mView: View) : RecyclerView.ViewHolder(mView) {
-        private val mPhotoView: ImageView = mView.findViewById(R.id.local_picture) as ImageView
-        private val mDescriptionView: TextView = mView.findViewById(R.id.local_text) as TextView
-        private val mAddressView: TextView = mView.findViewById(R.id.local_address) as TextView
-        private val mDescriptionsSubCategory: TextView = mView.findViewById(R.id.descriptions_sub_category) as TextView
+    internal inner class LocalViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_local)) {
         private var mItem: Local? = null
 
-        init {
-            mView.setOnClickListener { mItem?.let { it1 -> mListener.onItemClick(it1, mPhotoView) } }
-        }
+        fun bind(item: Local) = with(itemView) {
+            mItem = item
+            local_text.text = item.description
+            local_address.text = item.address
+            descriptions_sub_category.text = item.descriptionSubCategories
 
-        fun populate(data: Local) {
-            mItem = data
-            mDescriptionView.text = data.description
-            mAddressView.text = data.address
-            mDescriptionsSubCategory.text = data.descriptionSubCategories
-
-            Glide.with(mContext)
-                    .load(data.imagePath)
+            Glide.with(itemView.context)
+                    .load(item.imagePath)
                     .placeholder(R.color.placeholder)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(mPhotoView)
+                    .into(local_picture)
+
+            itemView.setOnClickListener { mItem?.let { it1 -> mListener.onItemClick(it1, local_picture) } }
         }
     }
 }

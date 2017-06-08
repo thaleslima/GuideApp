@@ -4,12 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.widget.Toolbar
-
 import com.guideapp.R
 import com.guideapp.ui.views.BaseActivity
+import kotlinx.android.synthetic.main.toolbar_transparent.*
+
 
 class MapActivity : BaseActivity() {
     private var mIdCity: Long = 0
@@ -40,9 +38,7 @@ class MapActivity : BaseActivity() {
     }
 
     private fun setupToolbar() {
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle(R.string.app_name_city)
 
