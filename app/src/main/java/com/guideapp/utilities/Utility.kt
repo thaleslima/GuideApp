@@ -19,8 +19,7 @@ object Utility {
     }
 
     fun updateWidgets(context: Context) {
-        val dataUpdatedIntent = Intent(Constants.ACTION_DATA_UPDATED)
-                .setPackage(context.packageName)
+        val dataUpdatedIntent = Intent(Constants.ACTION_DATA_UPDATED).setPackage(context.packageName)
         context.sendBroadcast(dataUpdatedIntent)
     }
 
@@ -68,15 +67,10 @@ object Utility {
     val menus: List<MainMenu>
         get() {
             val menus = ArrayList<MainMenu>()
-
             menus.add(MainMenu(1, R.string.menu_local, R.drawable.ic_map_white_36dp, R.color.green_500))
-            menus.add(MainMenu(Constants.Menu.ALIMENTATION, R.string.menu_alimentation,
-                    R.drawable.ic_local_dining_white_36dp, R.color.blue_500))
-            menus.add(MainMenu(Constants.Menu.ATTRACTIVE, R.string.menu_attractive,
-                    R.drawable.ic_terrain_white_36dp, R.color.cyan_500))
-            menus.add(MainMenu(Constants.Menu.ACCOMMODATION, R.string.menu_accommodation,
-                    R.drawable.ic_local_hotel_white_36dp, R.color.purple_500))
-
+            menus.add(MainMenu(Constants.Menu.ALIMENTATION, R.string.menu_alimentation, R.drawable.ic_local_dining_white_36dp, R.color.blue_500))
+            menus.add(MainMenu(Constants.Menu.ATTRACTIVE, R.string.menu_attractive, R.drawable.ic_terrain_white_36dp, R.color.cyan_500))
+            menus.add(MainMenu(Constants.Menu.ACCOMMODATION, R.string.menu_accommodation, R.drawable.ic_local_hotel_white_36dp, R.color.purple_500))
             return menus
         }
 }

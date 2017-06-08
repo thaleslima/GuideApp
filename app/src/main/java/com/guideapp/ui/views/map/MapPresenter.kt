@@ -19,7 +19,7 @@ internal class MapPresenter(private val mView: MapContract.View) : MapContract.P
     }
 
     override fun openLocalSummary(local: Local?) {
-        mView.showLocalSummary(local!!)
+        local?.let { mView.showLocalSummary(it) }
     }
 
     override fun openLocalDetails(local: Local, view: ImageView) {

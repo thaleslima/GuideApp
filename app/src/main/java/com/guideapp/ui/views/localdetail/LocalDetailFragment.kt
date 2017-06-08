@@ -77,15 +77,14 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater!!.inflate(R.menu.menu_detail, menu)
+        inflater?.inflate(R.menu.menu_detail, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val id = item!!.itemId
+        val id = item?.itemId
 
         when (id) {
-            R.id.action_share -> mPresenter!!.shareLocal()
-
+            R.id.action_share -> mPresenter?.shareLocal()
             else -> return super.onOptionsItemSelected(item)
         }
 
@@ -106,38 +105,40 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
         mCallActionView = view.findViewById(R.id.call_action) as TextView
         mWebsiteActionView = view.findViewById(R.id.website_action) as TextView
 
-        mFab!!.setOnClickListener { mPresenter!!.saveOrRemoveFavorite() }
-        mAddressView!!.setOnClickListener { mPresenter!!.loadDirection() }
-        mDirectionActionView!!.setOnClickListener { mPresenter!!.loadDirection() }
-        mPhoneView!!.setOnClickListener { mPresenter!!.loadCall() }
-        mCallActionView!!.setOnClickListener { mPresenter!!.loadCall() }
-        mWebsiteActionView!!.setOnClickListener { mPresenter!!.loadWebsite() }
+        mFab?.setOnClickListener { mPresenter?.saveOrRemoveFavorite() }
+        mAddressView?.setOnClickListener { mPresenter?.loadDirection() }
+        mDirectionActionView?.setOnClickListener { mPresenter?.loadDirection() }
+        mPhoneView?.setOnClickListener { mPresenter?.loadCall() }
+        mCallActionView?.setOnClickListener { mPresenter?.loadCall() }
+        mWebsiteActionView?.setOnClickListener { mPresenter?.loadWebsite() }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
 
-        if (mPresenter != null) {
-            mPresenter!!.destroy(activity.supportLoaderManager)
-            mPresenter = null
-        }
+        mPresenter?.destroy(activity.supportLoaderManager)
+        mPresenter = null
     }
 
     override fun showFavoriteYes() {
-        mFab!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_bookmark_white_24dp))
+        mFab?.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_bookmark_white_24dp))
     }
 
     override fun showFavoriteNo() {
-        mFab!!.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_bookmark_border_white_24dp))
+        mFab?.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_bookmark_border_white_24dp))
     }
 
     override fun showSnackbarRemoveFavorite() {
-        Snackbar.make(mCollapsing!!, R.string.title_remove_favorite, Snackbar.LENGTH_SHORT).show()
+        mCollapsing?.let { collapsing ->
+            Snackbar.make(collapsing, R.string.title_remove_favorite, Snackbar.LENGTH_SHORT).show()
+        }
         sendEventFavorite(Constants.Analytics.REMOVE_FAVORITE)
     }
 
     override fun showSnackbarSaveFavorite() {
-        Snackbar.make(mCollapsing!!, R.string.title_save_favorite, Snackbar.LENGTH_SHORT).show()
+        mCollapsing?.let { collapsing ->
+            Snackbar.make(collapsing, R.string.title_save_favorite, Snackbar.LENGTH_SHORT).show()
+        }
         sendEventFavorite(Constants.Analytics.SAVE_FAVORITE)
     }
 
@@ -149,18 +150,17 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
             bundle.putLong(FirebaseAnalytics.Param.ITEM_ID, id)
             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, mTitle)
             bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, type)
-            mFirebaseAnalytics!!.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+            mFirebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         }
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments != null) {
-            val id = arguments.getLong(EXTRA_LOCAL_ID)
-
+        arguments?.let { argument ->
+            val id = argument.getLong(EXTRA_LOCAL_ID)
             mPresenter = LocalDetailPresenter(this, id)
-            mPresenter!!.loadLocal(activity.supportLoaderManager)
+            mPresenter?.loadLocal(activity.supportLoaderManager)
         }
     }
 
@@ -176,8 +176,8 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
 
     override fun showTitle(description: String) {
         mTitle = description
-        mCollapsing!!.title = description
-        mCollapsing!!.setExpandedTitleColor(ContextCompat.getColor(context, R.color.white))
+        mCollapsing?.title = description
+        mCollapsing?.setExpandedTitleColor(ContextCompat.getColor(context, R.color.white))
     }
 
     override fun showImage(imagePath: String) {
@@ -185,44 +185,44 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
                 .load(imagePath)
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(object : BitmapImageViewTarget(mImage!!) {
+                .into(object : BitmapImageViewTarget(mImage) {
                     override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>?) {
                         super.onResourceReady(resource, glideAnimation)
-                        mImage!!.setBackgroundResource(R.drawable.action_background_bottom)
+                        mImage?.setBackgroundResource(R.drawable.action_background_bottom)
                         Palette.from(resource).generate { palette -> applyPalette(palette) }
                     }
                 })
     }
 
     override fun showCategory(text: String) {
-        mSubCategoryView!!.text = text
+        mSubCategoryView?.text = text
     }
 
     override fun showWebSiteAction() {
-        mWebsiteActionView!!.visibility = View.VISIBLE
+        mWebsiteActionView?.visibility = View.VISIBLE
     }
 
     override fun showDirectionAction() {
-        mDirectionActionView!!.visibility = View.VISIBLE
+        mDirectionActionView?.visibility = View.VISIBLE
     }
 
     override fun showCallAction() {
-        mCallActionView!!.visibility = View.VISIBLE
+        mCallActionView?.visibility = View.VISIBLE
     }
 
     override fun showCall(phone: String) {
-        mPhoneView!!.visibility = View.VISIBLE
-        mPhoneView!!.text = phone
+        mPhoneView?.visibility = View.VISIBLE
+        mPhoneView?.text = phone
     }
 
     override fun showDetail(description: String) {
-        mDescriptionView!!.visibility = View.VISIBLE
-        mDescriptionView!!.text = description
+        mDescriptionView?.visibility = View.VISIBLE
+        mDescriptionView?.text = description
     }
 
     override fun showAddress(address: String) {
-        mAddressView!!.visibility = View.VISIBLE
-        mAddressView!!.text = address
+        mAddressView?.visibility = View.VISIBLE
+        mAddressView?.text = address
     }
 
     override fun showMap(latitude: Double, longitude: Double, idImageMarker: Int) {
@@ -246,21 +246,21 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
         googleMap.uiSettings.isMapToolbarEnabled = false
 
         googleMap.setOnMarkerClickListener(this)
-        googleMap.setOnMapClickListener { mPresenter!!.loadDirection() }
+        googleMap.setOnMapClickListener { mPresenter?.loadDirection() }
     }
 
     private fun setUpMapIfNeeded() {
         if (mSupportMapFragment == null) {
             val fm = childFragmentManager
             mSupportMapFragment = fm.findFragmentById(R.id.map) as SupportMapFragment
-            mSupportMapFragment!!.getMapAsync(this)
+            mSupportMapFragment?.getMapAsync(this)
         }
     }
 
     private fun applyPalette(palette: Palette) {
         val primary = ContextCompat.getColor(context, R.color.blue_grey_500)
-        mCollapsing!!.setContentScrimColor(palette.getVibrantColor(primary))
-        mCollapsing!!.setStatusBarScrimColor(palette.getVibrantColor(primary))
+        mCollapsing?.setContentScrimColor(palette.getVibrantColor(primary))
+        mCollapsing?.setStatusBarScrimColor(palette.getVibrantColor(primary))
     }
 
     override fun dialPhoneNumber(number: String) {
@@ -288,7 +288,7 @@ class LocalDetailFragment : Fragment(), LocalDetailContract.View, OnMapReadyCall
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        mPresenter!!.loadDirection()
+        mPresenter?.loadDirection()
         return false
     }
 

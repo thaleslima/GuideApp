@@ -37,41 +37,40 @@ class FavoriteFragment : Fragment(), FavoriteContract.View, FavoriteAdapter.Item
         super.onViewCreated(view, savedInstanceState)
 
         mPresenter = FavoritePresenter(this)
-        mPresenter!!.loadLocals(activity.supportLoaderManager)
+        mPresenter?.loadLocals(activity.supportLoaderManager)
     }
 
     private fun setupRecyclerView(view: View) {
-        mAdapter = FavoriteAdapter(getContext(), this)
+        mAdapter = FavoriteAdapter(context, this)
         val recyclerView = view.findViewById(R.id.recycler) as RecyclerView
 
-        recyclerView.layoutManager = LinearLayoutManager(getContext())
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = mAdapter
-        recyclerView.addItemDecoration(DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST))
+        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL_LIST))
     }
 
     override fun onResume() {
         super.onResume()
-
-        mPresenter!!.onResume(activity.supportLoaderManager)
+        mPresenter?.onResume(activity.supportLoaderManager)
     }
 
     override fun showNoItemsMessage() {
-        mMessageView!!.visibility = View.VISIBLE
+        mMessageView?.visibility = View.VISIBLE
     }
 
     override fun hideNoItemsMessage() {
-        mMessageView!!.visibility = View.GONE
+        mMessageView?.visibility = View.GONE
     }
 
     override fun onItemClick(item: Local, view: ImageView) {
-        mPresenter!!.openLocalDetails(item, view)
+        mPresenter?.openLocalDetails(item, view)
     }
 
     override fun showLocals(locals: List<Local>) {
-        mAdapter!!.replaceData(locals)
+        mAdapter?.replaceData(locals)
     }
 
     override fun showLocalDetailUi(local: Local, view: ImageView) {
-        LocalDetailActivity.navigate(activity, view, local.id!!, local.idCategory)
+        local.id?.let { LocalDetailActivity.navigate(activity, view, it, local.idCategory) }
     }
 }

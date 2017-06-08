@@ -55,20 +55,20 @@ class MapFragment : Fragment(), OnMapReadyCallback, MapContract.View {
 
     private fun setupViews(view: View) {
         mLocalView = view.findViewById(R.id.local_view) as RelativeLayout
-        mDescriptionSubCategoryView = mLocalView!!.findViewById(R.id.descriptions_sub_category) as TextView
-        mDescriptionView = mLocalView!!.findViewById(R.id.local_description) as TextView
-        mPhotoView = mLocalView!!.findViewById(R.id.local_picture) as ImageView
+        mDescriptionSubCategoryView = mLocalView?.findViewById(R.id.descriptions_sub_category) as TextView
+        mDescriptionView = mLocalView?.findViewById(R.id.local_description) as TextView
+        mPhotoView = mLocalView?.findViewById(R.id.local_picture) as ImageView
     }
 
     private fun setupViewProperties() {
-        mLocalView!!.setOnClickListener { v -> mPresenter!!.openLocalDetails(v.tag as Local, mPhotoView!!) }
+        mLocalView?.setOnClickListener { v -> mPhotoView?.let { mPresenter?.openLocalDetails(v.tag as Local, it) } }
     }
 
     private fun setUpMapIfNeeded() {
         if (mSupportMapFragment == null) {
             val fm = childFragmentManager
             mSupportMapFragment = fm.findFragmentById(R.id.map) as SupportMapFragment
-            mSupportMapFragment!!.getMapAsync(this)
+            mSupportMapFragment?.getMapAsync(this)
         }
     }
 
@@ -77,43 +77,42 @@ class MapFragment : Fragment(), OnMapReadyCallback, MapContract.View {
         val center = LatLng(Constants.City.LATITUDE, Constants.City.LONGITUDE)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(center, 12f))
         map.setOnMarkerClickListener { marker ->
-            mPresenter!!.openLocalSummary(mMarkersId!![marker.id])
+            mPresenter?.openLocalSummary(mMarkersId?.get(marker.id))
             false
         }
 
-        mPresenter!!.loadLocals(activity.supportLoaderManager)
+        mPresenter?.loadLocals(activity.supportLoaderManager)
     }
 
     override fun showLocals(locals: List<Local>) {
         var latLng: LatLng
-        var marker: Marker
-        mMarkersId!!.clear()
+        var marker: Marker?
+        mMarkersId?.clear()
 
         for (local in locals) {
             latLng = LatLng(local.latitude, local.longitude)
 
-            val markerOptions = MarkerOptions()
-                    .position(latLng)
+            val markerOptions = MarkerOptions().position(latLng)
                     .icon(BitmapDescriptorFactory.fromResource(Utility.getIdImageCategory(local.idCategory)))
 
-            marker = mMap!!.addMarker(markerOptions)
-            mMarkersId!!.put(marker.id, local)
+            marker = mMap?.addMarker(markerOptions)
+            marker?.let { m -> mMarkersId?.put(m.id, local) }
         }
     }
 
     override fun showLocalSummary(local: Local) {
-        mMap!!.setPadding(0, 0, 0, 250)
-        mDescriptionView!!.text = local.description
-        mDescriptionSubCategoryView!!.text = local.descriptionSubCategories
+        mMap?.setPadding(0, 0, 0, 250)
+        mDescriptionView?.text = local.description
+        mDescriptionSubCategoryView?.text = local.descriptionSubCategories
 
         Glide.with(this.context)
                 .load(local.imagePath)
                 .placeholder(R.color.placeholder)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(mPhotoView!!)
+                .into(mPhotoView)
 
-        ViewUtil.showViewLayout(context, mLocalView!!)
-        mLocalView!!.tag = local
+        mLocalView?.let { ViewUtil.showViewLayout(context, it) }
+        mLocalView?.tag = local
     }
 
     override fun showLocalDetailUi(local: Local, view: ImageView) {

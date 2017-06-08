@@ -18,8 +18,7 @@ import com.guideapp.utilities.Constants
 import com.guideapp.utilities.Utility
 
 class MenuFragment : Fragment(), MenuAdapter.RecyclerViewItemClickListener {
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_menu, container, false)
         setupRecyclerView(view)
         return view

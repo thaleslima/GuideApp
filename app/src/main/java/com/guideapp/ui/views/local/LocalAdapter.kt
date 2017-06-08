@@ -57,7 +57,7 @@ internal class LocalAdapter(private val mContext: Context, private val mListener
         private var mItem: Local? = null
 
         init {
-            mView.setOnClickListener { mListener.onItemClick(mItem!!, mPhotoView) }
+            mView.setOnClickListener { mItem?.let { it1 -> mListener.onItemClick(it1, mPhotoView) } }
         }
 
         fun populate(data: Local) {

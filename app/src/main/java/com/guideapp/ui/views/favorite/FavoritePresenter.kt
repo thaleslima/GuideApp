@@ -28,7 +28,6 @@ internal class FavoritePresenter(private val mView: FavoriteContract.View) : Fav
 
     override fun onCreateLoader(id: Int, args: Bundle): Loader<Cursor> {
         when (id) {
-
             ID_LOADER -> return CursorLoader(mView.getContext(),
                     GuideContract.LocalEntry.CONTENT_URI, null,
                     GuideContract.LocalEntry.getSqlSelectForFavorites(), null, null)

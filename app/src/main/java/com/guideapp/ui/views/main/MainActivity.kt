@@ -53,11 +53,11 @@ class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun setupViewProperties() {
-        mTabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        mTabLayout?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                mViewPager!!.setCurrentItem(tab.position, true)
+                mViewPager?.setCurrentItem(tab.position, true)
                 tab.setIcon(ICONS_TAB_BLACK[tab.position])
-                mAppBarLayout!!.setExpanded(true)
+                mAppBarLayout?.setExpanded(true)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
@@ -71,24 +71,23 @@ class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
     private fun setupToolbar() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-
-        if (supportActionBar != null) {
-            supportActionBar!!.setTitle(R.string.app_name_city)
-        }
+        supportActionBar?.setTitle(R.string.app_name_city)
     }
 
     private fun setupViewPager() {
         for (i in ICONS_TAB_BLACK.indices) {
             if (i == 0) {
-                mTabLayout!!.addTab(mTabLayout!!.newTab().setIcon(ICONS_TAB_BLACK[i]))
+                mTabLayout?.newTab()?.setIcon(ICONS_TAB_BLACK[i])?.let { mTabLayout?.addTab(it) }
             } else {
-                mTabLayout!!.addTab(mTabLayout!!.newTab().setIcon(ICONS_TAB_GREY[i]))
+                mTabLayout?.newTab()?.setIcon(ICONS_TAB_GREY[i])?.let { mTabLayout?.addTab(it) }
             }
         }
 
-        mViewPager!!.adapter = SectionsAdapter(supportFragmentManager)
-        mViewPager!!.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mTabLayout))
-        mViewPager!!.pageMargin = 16
+        mViewPager?.let { viewPager ->
+            viewPager.adapter = SectionsAdapter(supportFragmentManager)
+            viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(mTabLayout))
+            viewPager.pageMargin = 16
+        }
     }
 
     private fun setupViews() {
@@ -144,7 +143,7 @@ class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun checkProgress() {
-        if (mProgressBar!!.visibility == View.VISIBLE) {
+        if (mProgressBar?.visibility == View.VISIBLE) {
             updateEmptyView()
         }
     }
@@ -184,23 +183,23 @@ class MainActivity : BaseActivity(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun showErrorMessage() {
-        mViewError!!.visibility = View.VISIBLE
+        mViewError?.visibility = View.VISIBLE
     }
 
     private fun hideErrorMessage() {
-        mViewError!!.visibility = View.GONE
+        mViewError?.visibility = View.GONE
     }
 
     private fun showMenu() {
-        mViewPager!!.visibility = View.VISIBLE
+        mViewPager?.visibility = View.VISIBLE
     }
 
     private fun showProgressBar() {
-        mProgressBar!!.visibility = View.VISIBLE
+        mProgressBar?.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {
-        mProgressBar!!.visibility = View.GONE
+        mProgressBar?.visibility = View.GONE
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {

@@ -19,9 +19,7 @@ import com.guideapp.ui.views.localdetail.LocalDetailActivity
 import java.util.concurrent.ExecutionException
 
 class LocalFavoriteWidgetRemoteViewsService : RemoteViewsService() {
-
     override fun onGetViewFactory(intent: Intent): RemoteViewsService.RemoteViewsFactory {
-
         return object : RemoteViewsService.RemoteViewsFactory {
             private var mData: Cursor? = null
 
@@ -30,9 +28,8 @@ class LocalFavoriteWidgetRemoteViewsService : RemoteViewsService() {
             }
 
             override fun onDataSetChanged() {
-                if (mData != null) {
-                    mData!!.close()
-                }
+                mData?.close()
+
                 val identityToken = Binder.clearCallingIdentity()
                 mData = contentResolver.query(GuideContract.LocalEntry.CONTENT_URI,
                         GuideContract.LocalEntry.COLUMNS.toTypedArray(),
@@ -41,14 +38,12 @@ class LocalFavoriteWidgetRemoteViewsService : RemoteViewsService() {
             }
 
             override fun onDestroy() {
-                if (mData != null) {
-                    mData!!.close()
-                    mData = null
-                }
+                mData?.close()
+                mData = null
             }
 
             override fun getCount(): Int {
-                return if (mData == null) 0 else mData!!.count
+                return mData?.count ?: 0
             }
 
             override fun getViewAt(position: Int): RemoteViews? {
@@ -57,15 +52,15 @@ class LocalFavoriteWidgetRemoteViewsService : RemoteViewsService() {
                 }
 
                 val views = RemoteViews(packageName, R.layout.widget_detail_list_item)
-                views.setTextViewText(R.id.local_text, mData!!.getString(GuideContract.LocalEntry.POSITION_DESCRIPTION))
-                views.setTextViewText(R.id.descriptions_sub_category, mData!!.getString(GuideContract.LocalEntry.POSITION_DESCRIPTION_SUB_CATEGORY))
+                views.setTextViewText(R.id.local_text, mData?.getString(GuideContract.LocalEntry.POSITION_DESCRIPTION))
+                views.setTextViewText(R.id.descriptions_sub_category, mData?.getString(GuideContract.LocalEntry.POSITION_DESCRIPTION_SUB_CATEGORY))
                 val fillInIntent = Intent()
                 fillInIntent.putExtra(LocalDetailActivity.EXTRA_LOCAL_ID, getItemId(position))
-                fillInIntent.putExtra(LocalDetailActivity.EXTRA_CATEGORY_ID, mData!!.getLong(GuideContract.LocalEntry.POSITION_ID_CATEGORY))
+                fillInIntent.putExtra(LocalDetailActivity.EXTRA_CATEGORY_ID, mData?.getLong(GuideContract.LocalEntry.POSITION_ID_CATEGORY))
                 views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent)
 
                 var image: Bitmap? = null
-                val urlImage = mData!!.getString(GuideContract.LocalEntry.POSITION_IMAGE_PATH)
+                val urlImage = mData?.getString(GuideContract.LocalEntry.POSITION_IMAGE_PATH)
                 views.setImageViewResource(R.id.local_picture, R.color.placeholder)
 
                 try {
@@ -98,8 +93,11 @@ class LocalFavoriteWidgetRemoteViewsService : RemoteViewsService() {
             }
 
             override fun getItemId(position: Int): Long {
-                if (mData!!.moveToPosition(position))
-                    return mData!!.getLong(GuideContract.LocalEntry.POSITION_ID)
+                mData?.let { data ->
+                    if (data.moveToPosition(position))
+                        return data.getLong(GuideContract.LocalEntry.POSITION_ID)
+
+                }
                 return position.toLong()
             }
 

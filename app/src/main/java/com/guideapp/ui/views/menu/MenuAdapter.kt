@@ -16,8 +16,7 @@ internal class MenuAdapter(private val mDataSet: List<MainMenu>, private val mLi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(
-                R.layout.item_menu, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
         return ViewHolder(v)
     }
 
@@ -37,15 +36,15 @@ internal class MenuAdapter(private val mDataSet: List<MainMenu>, private val mLi
 
         init {
             mView.setOnClickListener {
-                mListener?.onItemClick(mItem!!)
+                mItem?.let { it1 -> mListener?.onItemClick(it1) }
             }
         }
 
         fun populate(data: MainMenu) {
             mItem = data
-            mContainer.setBackgroundResource(mItem!!.idColorPrimary)
-            mTitle.setText(mItem!!.idTitle)
-            mImage.setImageResource(mItem!!.idImage)
+            mContainer.setBackgroundResource(data.idColorPrimary)
+            mTitle.setText(data.idTitle)
+            mImage.setImageResource(data.idImage)
         }
     }
 }

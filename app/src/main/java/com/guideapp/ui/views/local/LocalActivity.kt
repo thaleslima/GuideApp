@@ -30,7 +30,7 @@ class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClick
             initExtra()
             setupToolbar()
 
-            mActionsListener!!.restartLoadLocals(supportLoaderManager, mIdCategory)
+            mActionsListener?.restartLoadLocals(supportLoaderManager, mIdCategory)
         }
     }
 
@@ -44,7 +44,7 @@ class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClick
         setupRecyclerView()
 
         mActionsListener = LocalPresenter(this, mIdCategory)
-        mActionsListener!!.loadLocals(supportLoaderManager)
+        mActionsListener?.loadLocals(supportLoaderManager)
     }
 
     private fun initExtra() {
@@ -58,37 +58,35 @@ class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClick
 
     private fun setupToolbar() {
         val toolbar = findViewById(R.id.toolbar) as Toolbar
-
         setSupportActionBar(toolbar)
         if (supportActionBar != null) {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            supportActionBar!!.setTitle(mIdTitle)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setTitle(mIdTitle)
         }
     }
 
     private fun setupRecyclerView() {
         mAdapter = LocalAdapter(this, this)
         val recyclerView = findViewById(R.id.recycler) as RecyclerView
-
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = mAdapter
         recyclerView.addItemDecoration(GridSpacingItemDecoration(1, 16, true))
     }
 
     override fun showLocals(locals: List<Local>) {
-        mAdapter!!.replaceData(locals)
+        mAdapter?.replaceData(locals)
     }
 
     override fun showLocalDetailUi(local: Local, view: ImageView) {
-        LocalDetailActivity.navigate(this, view, local.id!!, local.idCategory)
+        local.id?.let { LocalDetailActivity.navigate(this, view, it, local.idCategory) }
     }
 
     override fun showProgressBar() {
-        mProgressBar!!.visibility = android.view.View.VISIBLE
+        mProgressBar?.visibility = android.view.View.VISIBLE
     }
 
     override fun hideProgressBar() {
-        mProgressBar!!.visibility = android.view.View.GONE
+        mProgressBar?.visibility = android.view.View.GONE
     }
 
     override fun getContext(): Context {
@@ -96,7 +94,7 @@ class LocalActivity : BaseActivity(), LocalContract.View, LocalAdapter.ItemClick
     }
 
     override fun onItemClick(item: Local, view: ImageView) {
-        mActionsListener!!.openLocalDetails(item, view)
+        mActionsListener?.openLocalDetails(item, view)
     }
 
     companion object {

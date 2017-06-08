@@ -5,7 +5,6 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
 import android.util.Log
 
@@ -13,47 +12,49 @@ class GuideProvider : ContentProvider() {
     private var mOpenHelper: GuideDbHelper? = null
 
     override fun onCreate(): Boolean {
-        mOpenHelper = GuideDbHelper(context!!)
+        mOpenHelper = GuideDbHelper(context)
         return true
     }
 
     override fun bulkInsert(uri: Uri, values: Array<ContentValues>): Int {
-        val db = mOpenHelper!!.writableDatabase
-        Log.d(TAG, "bulkInsert: " + uri)
-        when (URI_MATCHER.match(uri)) {
-            CODE_LOCAL -> {
-                db.beginTransaction()
-                var rowsInserted = 0
+        var rowsInserted = 0
 
-                try {
-                    db.delete(GuideContract.LocalEntry.TABLE_NAME, null, null)
-                    values
-                            .map { db.insert(GuideContract.LocalEntry.TABLE_NAME, null, it) }
-                            .filter { it != -1L }
-                            .forEach { rowsInserted++ }
-                    db.setTransactionSuccessful()
-                } finally {
-                    db.endTransaction()
-                }
+        mOpenHelper?.writableDatabase?.let { db ->
+            Log.d(TAG, "bulkInsert: " + uri)
+            when (URI_MATCHER.match(uri)) {
+                CODE_LOCAL -> {
+                    db.beginTransaction()
 
-                if (rowsInserted > 0 && context != null) {
-                    context!!.contentResolver.notifyChange(uri, null)
-                    Log.d(TAG, "notifyChange: " + uri)
+                    try {
+                        db.delete(GuideContract.LocalEntry.TABLE_NAME, null, null)
+                        values.map { db.insert(GuideContract.LocalEntry.TABLE_NAME, null, it) }.filter { it != -1L }.forEach { rowsInserted++ }
+                        db.setTransactionSuccessful()
+                    } finally {
+                        db.endTransaction()
+                    }
+
+                    if (rowsInserted > 0) {
+                        context?.contentResolver?.notifyChange(uri, null)
+                        Log.d(TAG, "notifyChange: " + uri)
+                    }
+                    return rowsInserted
                 }
-                return rowsInserted
+                else -> return super.bulkInsert(uri, values)
             }
-            else -> return super.bulkInsert(uri, values)
         }
+
+        return rowsInserted
     }
 
     override fun query(uri: Uri, projection: Array<String>?, selection: String?,
                        selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
+
         Log.d(TAG, "query: " + uri)
-        val cursor: Cursor
+        val cursor: Cursor?
 
         when (URI_MATCHER.match(uri)) {
             CODE_LOCAL -> {
-                cursor = mOpenHelper!!.readableDatabase.query(
+                cursor = mOpenHelper?.readableDatabase?.query(
                         GuideContract.LocalEntry.TABLE_NAME,
                         projection,
                         selection,
@@ -63,7 +64,7 @@ class GuideProvider : ContentProvider() {
 
             CODE_LOCAL_WITH_ID -> {
                 val id = uri.pathSegments[1]
-                cursor = mOpenHelper!!.readableDatabase.query(
+                cursor = mOpenHelper?.readableDatabase?.query(
                         GuideContract.LocalEntry.TABLE_NAME,
                         projection,
                         GuideContract.LocalEntry._ID + " = ?",
@@ -72,11 +73,7 @@ class GuideProvider : ContentProvider() {
 
             else -> throw UnsupportedOperationException("Unknown uri: " + uri)
         }
-
-        if (context != null) {
-            cursor.setNotificationUri(context!!.contentResolver, uri)
-        }
-
+        cursor?.setNotificationUri(context?.contentResolver, uri)
         return cursor
     }
 
@@ -90,28 +87,28 @@ class GuideProvider : ContentProvider() {
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
         var selection1 = selection
-        val numRowsDeleted: Int
+        val numRowsDeleted: Int?
         if (null == selection1) selection1 = "1"
+
         when (URI_MATCHER.match(uri)) {
-            CODE_LOCAL -> numRowsDeleted = mOpenHelper!!.writableDatabase.delete(
+            CODE_LOCAL -> numRowsDeleted = mOpenHelper?.writableDatabase?.delete(
                     GuideContract.LocalEntry.TABLE_NAME,
                     selection1,
                     selectionArgs)
             else -> throw UnsupportedOperationException("Unknown uri: " + uri)
         }
-        if (numRowsDeleted != 0 && context != null) {
-            context!!.contentResolver.notifyChange(uri, null)
-        }
-        return numRowsDeleted
+
+        context?.contentResolver?.notifyChange(uri, null)
+        return numRowsDeleted ?: 0
     }
 
-    override fun update(uri: Uri, values: ContentValues?, selection: String?,
-                        selectionArgs: Array<String>?): Int {
-        val numRowsDeleted: Int
+    override fun update(uri: Uri, values: ContentValues?, selection: String?, selectionArgs: Array<String>?): Int {
+        val numRowsDeleted: Int?
+
         when (URI_MATCHER.match(uri)) {
             CODE_LOCAL_WITH_ID -> {
                 val id = uri.pathSegments[1]
-                numRowsDeleted = mOpenHelper!!.writableDatabase.update(
+                numRowsDeleted = mOpenHelper?.writableDatabase?.update(
                         GuideContract.LocalEntry.TABLE_NAME,
                         values,
                         GuideContract.LocalEntry._ID + " = ?",
@@ -119,12 +116,13 @@ class GuideProvider : ContentProvider() {
             }
             else -> throw UnsupportedOperationException("Unknown uri: " + uri)
         }
-        return numRowsDeleted
+
+        return numRowsDeleted ?: 0
     }
 
     @TargetApi(11)
     override fun shutdown() {
-        mOpenHelper!!.close()
+        mOpenHelper?.close()
         super.shutdown()
     }
 
